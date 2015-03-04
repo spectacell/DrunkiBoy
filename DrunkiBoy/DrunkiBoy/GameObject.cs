@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DrunkiBoy
 {
-    class GameObject
+    abstract class GameObject
     {
         public Vector2 pos;
         public Texture2D tex;

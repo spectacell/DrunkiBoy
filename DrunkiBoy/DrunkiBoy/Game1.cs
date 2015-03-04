@@ -18,6 +18,7 @@ namespace DrunkiBoy
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public static int windowWidth, windowHeight;
 
         public Game1()
         {
@@ -46,6 +47,8 @@ namespace DrunkiBoy
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            windowHeight = Window.ClientBounds.Height;
+            windowWidth = Window.ClientBounds.Width;
 
             // TODO: use this.Content to load your game content here
         }
