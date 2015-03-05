@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <ContentProjectGUID>{B269CD7C-F33C-4F34-808C-27FAEE266BFC}</ContentProjectGUID>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>Reach</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoyContent\</RootDirectory>
+      <LoggerRootDirectory>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\</LoggerRootDirectory>
+      <IntermediateDirectory>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2014-10-19T17:32:36.521024+02:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>

@@ -1,0 +1,2 @@
+D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.csprojResolveAssemblyReference.cache
+D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
