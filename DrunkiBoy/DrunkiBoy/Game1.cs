@@ -50,7 +50,6 @@ namespace DrunkiBoy
 
         }
 
-
         protected override void Update(GameTime gameTime)
         {
             if (KeyMouseReader.KeyPressed(Keys.Escape))

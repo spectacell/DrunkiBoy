@@ -20,6 +20,7 @@ namespace DrunkiBoy
         public bool onShroom, teleporting;
         private bool playerDead;
         private double spawnTimer, spawnTimerDefault = 750;
+        private bool movingLeft;
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames)
             : base(pos, tex, srcRect, isActive, nrFrames)
@@ -29,6 +30,8 @@ namespace DrunkiBoy
         public override void Update(GameTime gameTime)
         {
             PlayerMovement(gameTime);
+            AddFriction(facing);
+
             //PlayerJumping();
             //CheckIfPlayerIsOnPlatform();
             //AnimateWhenInAir(gameTime);
@@ -38,22 +41,28 @@ namespace DrunkiBoy
 
         private void PlayerMovement(GameTime gameTime)
         {
-            if (ks.IsKeyDown(Keys.Left) && pos.X > -(Game1.windowWidth / 2) && !playerDead && !teleporting)
+            if (KeyMouseReader.keyState.IsKeyDown(Keys.Left) && pos.X > -(Game1.windowWidth / 2) && !playerDead && !teleporting)
             {
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 movement.X -= 1;
                 facing = 0;
-                AddFriction();
             }
-            if (ks.IsKeyDown(Keys.Right) && !playerDead && !teleporting)
+            if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !playerDead && !teleporting)
             {
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 movement.X += 1;
                 facing = 1;
-                AddFriction();
             }
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
+            Console.WriteLine(movement);
             //pos.X = MathHelper.Clamp(pos.X, -(Game1.windowWidth / 2), Level.currentLevel.levelLength - srcRect.Width);
+        }
+        private void AddFriction(int facing)
+        {
+            if (facing == 0) //Moving Left
+                movement.X += movement.X * 0.2f;
+            else
+                movement.X -= movement.X * 0.2f;
         }
 
         //private void PlayerJumping()
@@ -118,9 +127,6 @@ namespace DrunkiBoy
             }
         }
 
-        private void AddFriction()
-        {
-            movement.X -= movement.X * 0.2f;
-        }
+
     }
 }

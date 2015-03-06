@@ -35,7 +35,7 @@ namespace DrunkiBoy
             layers[1].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund2 });
             layers[2].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund3 });
             #endregion
-            player = new Player(new Vector2(100,100), TextureManager.player, new Rectangle(0,0,20,80), true, 1);
+            player = new Player(new Vector2(100,100), TextureManager.player, new Rectangle(0,0,100,180), true, 1);
         }
         
         public void Update(GameTime gameTime)
@@ -48,10 +48,7 @@ namespace DrunkiBoy
         
 
         public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Begin();
-            player.Draw(spriteBatch);
-            spriteBatch.End();
+        {        
             Vector2 parallax = new Vector2(1f);
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
             player.Draw(spriteBatch);

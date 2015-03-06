@@ -26,8 +26,10 @@ namespace DrunkiBoy
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if(isActive)
-                spriteBatch.Draw(tex, pos, srcRect, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, drawLayer);
+            if (isActive) 
+            { 
+                spriteBatch.Draw(tex, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
         }
         /// <summary>
         /// Returnerar en BB för hela objektet.
