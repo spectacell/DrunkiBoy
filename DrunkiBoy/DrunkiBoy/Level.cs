@@ -35,6 +35,7 @@ namespace DrunkiBoy
             layers[1].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund2 });
             layers[2].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund3 });
 #endregion
+            player = new Player(new Vector2(100,100), TextureManager.player, new Rectangle(0,0,20,80), true, 1);
         }
         
         public void Update(GameTime gameTime)
@@ -44,8 +45,17 @@ namespace DrunkiBoy
             // Riktar kameran mot spelaren...
             camera.LookAt(player.pos);
         }
+        
+
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+            player.Draw(spriteBatch);
+            spriteBatch.End();
+            Vector2 parallax = new Vector2(1f);
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
+            player.Draw(spriteBatch);
+            spriteBatch.End();
             foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
                 layer.Draw(spriteBatch);
         }

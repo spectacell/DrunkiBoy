@@ -1,2 +1,9 @@
 D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.csprojResolveAssemblyReference.cache
 D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.csprojResolveAssemblyReference.cache
+C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\DrunkiBoy.exe
+C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\DrunkiBoy.pdb
+C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.exe
+C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.pdb
+C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\player_spriteSheet.xnb

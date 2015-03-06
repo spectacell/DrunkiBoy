@@ -16,7 +16,7 @@ namespace DrunkiBoy
         public int facing = 1; //Vilket håll objektet är vänt åt. Rör man sig åt vänster sätts den till 0 och om man rör sig åt höger så 1.
 
         public Vector2 movement;
-        public Platform activePlatform; //plattformsklassen är ännu inte skapad
+        //public Platform activePlatform; //plattformsklassen är ännu inte skapad
         public bool isOnGround;
 
         public AnimatedObject(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames) :

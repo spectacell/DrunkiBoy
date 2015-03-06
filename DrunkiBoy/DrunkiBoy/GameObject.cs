@@ -20,6 +20,7 @@ namespace DrunkiBoy
             this.pos = pos;
             this.srcRect = srcRect;
             this.isActive = isActive;
+            this.tex = tex;
             SetColorData();
         }
 

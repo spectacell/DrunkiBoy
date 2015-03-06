@@ -1,1 +1,2 @@
 D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoyContent\obj\x86\Debug\DrunkiBoyContent.contentprojResolveAssemblyReference.cache
+C:\DrunkiBoy\DrunkiBoy\DrunkiBoyContent\obj\x86\Debug\DrunkiBoyContent.contentprojResolveAssemblyReference.cache
