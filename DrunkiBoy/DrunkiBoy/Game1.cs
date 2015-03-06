@@ -17,6 +17,8 @@ namespace DrunkiBoy
         SpriteBatch spriteBatch;
         public static int windowWidth, windowHeight;
 
+        Level level;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -25,16 +27,22 @@ namespace DrunkiBoy
 
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            
             windowHeight = Window.ClientBounds.Height;
             windowWidth = Window.ClientBounds.Width;
 
             TextureManager.LoadContent(Content);
+
+            level = new Level(GraphicsDevice);
         }
 
         protected override void UnloadContent()
@@ -49,6 +57,7 @@ namespace DrunkiBoy
                 this.Exit();
 
             KeyMouseReader.Update();
+            level.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -57,7 +66,7 @@ namespace DrunkiBoy
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            level.Draw(spriteBatch);
             base.Draw(gameTime);
         }
     }
