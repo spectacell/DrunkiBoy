@@ -25,7 +25,8 @@ namespace DrunkiBoy
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames)
             : base(pos, tex, srcRect, isActive, nrFrames)
         {
-
+            livesLeft = defaultLives;
+            //ResetSpawnTimer();
         }
         public override void Update(GameTime gameTime)
         {
@@ -59,19 +60,16 @@ namespace DrunkiBoy
         }
         private void AddFriction(int facing)
         {
-            if (facing == 0) //Moving Left
-                movement.X += movement.X * 0.2f;
-            else
-                movement.X -= movement.X * 0.2f;
+            movement.X -= movement.X * 0.2f;
         }
 
         //private void PlayerJumping()
         //{
-        //    if (KeyMouseReader.KeyPressed(Keys.Up) && activePlatform != null && !teleporting)
+        //    if (KeyMouseReader.KeyPressed(Keys.Up))// && activePlatform != null && !teleporting)
         //    {
         //        if (onShroom)
         //        {
-        //            movement.Y = -jumpHeight - (0.5f * (activePlatform.pos.Y - activePlatform.orgPos.Y)); 
+        //            movement.Y = -jumpHeight - (0.5f * (activePlatform.pos.Y - activePlatform.orgPos.Y));
         //            onShroom = false;
         //            if (activePlatform.pos.Y != activePlatform.orgPos.Y)
         //            {
