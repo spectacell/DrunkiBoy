@@ -34,7 +34,7 @@ namespace DrunkiBoy
             layers[0].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund1 });
             layers[1].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund2 });
             layers[2].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund3 });
-#endregion
+            #endregion
             player = new Player(new Vector2(100,100), TextureManager.player, new Rectangle(0,0,20,80), true, 1);
         }
         

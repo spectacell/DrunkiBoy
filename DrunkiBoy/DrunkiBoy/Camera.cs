@@ -37,7 +37,6 @@
         
         public float Rotation { get; set; }
 
-       
         public Rectangle? Limits
         {
             get
