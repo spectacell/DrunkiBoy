@@ -36,9 +36,9 @@ namespace DrunkiBoy
                 new BackgroundLayer(camera) { Parallax = new Vector2(0.2f, 1.0f) }
             };
             // En bakgrund läggs till till varje lager här, går att lägga till flera
-            layers[0].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund1 });
-            layers[1].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund2 });
-            layers[2].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund3 });
+            layers[0].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.background1 });
+            layers[1].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.background2 });
+            layers[2].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.background3 });
             #endregion
             LoadContent(levelTextFilePath);
             player = new Player(new Vector2(100,100), TextureManager.player, new Rectangle(0,0,280,220), true, 1);
@@ -66,8 +66,6 @@ namespace DrunkiBoy
 
         public void LoadContent(String textFile)
         {
-            
-
             objects = new List<GameObject>();
 
             sr = new StreamReader(textFile);
@@ -78,20 +76,20 @@ namespace DrunkiBoy
 
                 if (temp[0] == "P")
                 {
-                    itemManager.AddPlatform(new Platform(Constants.platformCharSymbol, new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLATFORM_SRC_RECT));
+                    itemManager.AddPlatform(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), TextureManager.platform, true));
 
                     if (levelEditor)
-                        objects.Add(new Platform(Constants.platformCharSymbol, new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLATFORM_SRC_RECT));
+                        objects.Add(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), TextureManager.platform, true));
                     else
-                        platforms.Add(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLATFORM_SRC_RECT, true));
+                        itemManager.AddPlatform(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), TextureManager.platform, true));
                 }
-                else if (temp[0] == "Y")
-                {
-                    if (levelEditor)
-                        objects.Add(new Player(Constants.playerCharSymbol, new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLAYER_SRC_RECT));
-                    else
-                        player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLAYER_SRC_RECT, 4);
-                }
+                //else if (temp[0] == "Y")
+                //{
+                //    if (levelEditor)
+                //        objects.Add(new Player(Constants.playerCharSymbol, new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLAYER_SRC_RECT));
+                //    else
+                //        player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLAYER_SRC_RECT, 4);
+                //}
 
             }
             sr.Close();

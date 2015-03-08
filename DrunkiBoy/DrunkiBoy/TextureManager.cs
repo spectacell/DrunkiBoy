@@ -9,11 +9,12 @@ namespace DrunkiBoy
 {
     class TextureManager
     {
-        public static Texture2D aTexture, bakgrund1, bakgrund2, bakgrund3, player;
+        public static Texture2D platform, background1, background2, background3, player;
 
         public static void LoadContent(ContentManager content)
         {
             player = content.Load<Texture2D>("player_spriteSheet");
+            platform = content.Load<Texture2D>("platform");
             //bakgrund1 = content.Load<Texture2D>("textures/bakgrund1");
             //bakgrund2 = content.Load<Texture2D>("textures/bakgrund2");
             //bakgrund3 = content.Load<Texture2D>("textures/bakgrund3");

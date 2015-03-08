@@ -20,7 +20,7 @@ namespace DrunkiBoy
         private bool saved;
         private bool drawLevelSaved;
         private double drawTextTimer, drawTextTimerDefault = 1000;
-        enum items { Platform, Player }; //osv...
+        enum items { Platform, Player, Arrow }; //osv...
         items selectedItem;
         private bool showMenu;
 
@@ -61,7 +61,7 @@ namespace DrunkiBoy
             SaveOnCtrlS();
 
             CountDownDrawLevelSavedTimer(gameTime);
-            Zoom();
+            //Zoom();
 
             //if (KeyMouseReader.KeyPressed(Keys.D1))
             //{
@@ -117,7 +117,6 @@ namespace DrunkiBoy
             Platform intersectingPlatform;
             if (KeyMouseReader.LeftClick())
             {
-                
                 Point mouseIsAt = new Point(mouseState.X + (int)camera.Position.X - (Game1.windowWidth / 2), mouseState.Y + (int)camera.Position.Y - (Game1.windowHeight / 2));
                     switch (selectedItem)
                     {
@@ -125,37 +124,38 @@ namespace DrunkiBoy
                             intersectingPlatform = IntersectsPlatform(mouseIsAt, Constants.PLATFORM_SRC_RECT);
                             if (intersectingPlatform != null)
                             {
-                                if (mouseIsAt.X < intersectingPlatform.pos.X - Constants.PLAYER_SRC_RECT.Width/2) //Snap to left or right of exisisting platform
+                                if (mouseIsAt.X < intersectingPlatform.pos.X - Constants.PLATFORM_SRC_RECT.Width / 2) //Snap to left or right of exisisting platform
                                 {
-                                    objects.Add(new Platform(Constants.platformCharSymbol, 
-                                        new Vector2(intersectingPlatform.BoundingBox.Left - Constants.PLATFORM_SRC_RECT.Width, intersectingPlatform.pos.Y), Constants.PLATFORM_SRC_RECT));
+                                    objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Left - Constants.PLATFORM_SRC_RECT.Width, intersectingPlatform.pos.Y), 
+                                                TextureManager.platform, true));
                                 }
                                 else
                                 {
-                                    objects.Add(new Platform(Constants.platformCharSymbol, new Vector2(intersectingPlatform.BoundingBox.Right, intersectingPlatform.pos.Y), Constants.PLATFORM_SRC_RECT));
+                                    objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Right, intersectingPlatform.pos.Y), 
+                                                TextureManager.platform, true));
                                 }
                             }
                             else
                             {
-                                objects.Add(new Platform(Constants.platformCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.PLATFORM_SRC_RECT));
+                                objects.Add(new Platform(new Vector2(mouseIsAt.X, mouseIsAt.Y), TextureManager.platform, true));
                             }
                             break;
 
-                        case items.Player:
-                            intersectingPlatform = IntersectsPlatform(mouseIsAt, Constants.PLAYER_SRC_RECT);
-                            if (intersectingPlatform != null)
-                            {
-                                objects.Add(new Player(Constants.playerCharSymbol, new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - Constants.PLAYER_SRC_RECT.Height),
-                                    Constants.PLAYER_SRC_RECT));
-                                objects.Add(new SpawnPosition(Constants.spawnCharSymbol, new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - Constants.SPAWN_SRC_RECT.Height),
-                                    Constants.SPAWN_SRC_RECT));
-                            }
-                            else
-                            {
-                                objects.Add(new Player(Constants.playerCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.PLAYER_SRC_RECT));
-                                objects.Add(new SpawnPosition(Constants.spawnCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.SPAWN_SRC_RECT));
-                            }
-                            break;
+                        //case items.Player:
+                        //    intersectingPlatform = IntersectsPlatform(mouseIsAt, Constants.PLAYER_SRC_RECT);
+                        //    if (intersectingPlatform != null)
+                        //    {
+                        //        objects.Add(new Player(Constants.playerCharSymbol, new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - Constants.PLAYER_SRC_RECT.Height),
+                        //            Constants.PLAYER_SRC_RECT));
+                        //        objects.Add(new SpawnPosition(Constants.spawnCharSymbol, new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - Constants.SPAWN_SRC_RECT.Height),
+                        //            Constants.SPAWN_SRC_RECT));
+                        //    }
+                        //    else
+                        //    {
+                        //        objects.Add(new Player(Constants.playerCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.PLAYER_SRC_RECT));
+                        //        objects.Add(new SpawnPosition(Constants.spawnCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.SPAWN_SRC_RECT));
+                        //    }
+                        //    break;
                     }
                     
                     saved = false;
@@ -170,7 +170,7 @@ namespace DrunkiBoy
         /// <returns></returns>
         private Platform IntersectsPlatform (Point mouseIsAt, Rectangle srcRect)
         {
-            foreach (GodObject anObject in objects)
+            foreach (GameObject anObject in objects)
             {
                 if (anObject is Platform && anObject.BoundingBox.Intersects(new Rectangle(mouseIsAt.X, mouseIsAt.Y, srcRect.Width, srcRect.Height)))
                 {
@@ -193,7 +193,7 @@ namespace DrunkiBoy
             if (KeyMouseReader.LeftClick() && selectedItem == items.Arrow)
             {
                 Point mouseIsAt = new Point(mouseState.X + (int)camera.Position.X - (Game1.windowWidth / 2), mouseState.Y + (int)camera.Position.Y - (Game1.windowHeight / 2));
-                foreach (GodObject o in objects)
+                foreach (GameObject o in objects)
                 {
                     if (o.BoundingBox.Contains(mouseIsAt))
                     {
