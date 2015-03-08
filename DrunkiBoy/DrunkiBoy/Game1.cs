@@ -41,8 +41,9 @@ namespace DrunkiBoy
             windowWidth = Window.ClientBounds.Width;
 
             TextureManager.LoadContent(Content);
+            Constants.LoadContent(Content);
 
-            level = new Level(GraphicsDevice);
+            level = new Level(GraphicsDevice, "levels/level1.txt", Content); //Ändra hårdkodade texten här sen så att ett GameState eller nåt sätter vilken level vi läser in
         }
 
         protected override void UnloadContent()

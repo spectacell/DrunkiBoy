@@ -5,18 +5,23 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using System.IO;
 
 namespace DrunkiBoy
 {
     class Level
     {
-        Player player;
-        GraphicsDevice gd;
+        protected Player player;
+        protected GraphicsDevice gd;
         
-        Camera camera;
-        List<BackgroundLayer> layers;
+        protected Camera camera;
+        protected List<BackgroundLayer> layers;
 
-        public Level(GraphicsDevice gd)
+        protected StreamReader sr;
+        protected List<GameObject> objects; //For the Level editor
+
+        protected ItemManager itemManager = new ItemManager();
+        public Level(GraphicsDevice gd, String levelTextFilePath, ContentManager content)
         {
             #region Kamera och parallaxbakgrunder
             this.gd = gd;
@@ -35,19 +40,21 @@ namespace DrunkiBoy
             layers[1].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund2 });
             layers[2].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.bakgrund3 });
             #endregion
+            LoadContent(levelTextFilePath);
             player = new Player(new Vector2(100,100), TextureManager.player, new Rectangle(0,0,280,220), true, 1);
         }
         
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             player.Update(gameTime);
+            itemManager.Update(player, gameTime);
 
             // Riktar kameran mot spelaren...
             camera.LookAt(player.pos);
         }
         
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {        
             Vector2 parallax = new Vector2(1f);
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
@@ -56,6 +63,40 @@ namespace DrunkiBoy
             foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
                 layer.Draw(spriteBatch);
         }
+
+        public void LoadContent(String textFile)
+        {
+            
+
+            objects = new List<GameObject>();
+
+            sr = new StreamReader(textFile);
+
+            while (!sr.EndOfStream)
+            {
+                string[] temp = sr.ReadLine().Split(':');
+
+                if (temp[0] == "P")
+                {
+                    itemManager.AddPlatform(new Platform(Constants.platformCharSymbol, new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLATFORM_SRC_RECT));
+
+                    if (levelEditor)
+                        objects.Add(new Platform(Constants.platformCharSymbol, new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLATFORM_SRC_RECT));
+                    else
+                        platforms.Add(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLATFORM_SRC_RECT, true));
+                }
+                else if (temp[0] == "Y")
+                {
+                    if (levelEditor)
+                        objects.Add(new Player(Constants.playerCharSymbol, new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLAYER_SRC_RECT));
+                    else
+                        player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Constants.PLAYER_SRC_RECT, 4);
+                }
+
+            }
+            sr.Close();
+        }
+
     }
     
 }

@@ -1,1 +1,3 @@
 Content\player_spriteSheet.xnb
+Content\Font.xnb
+Content\FontBig.xnb

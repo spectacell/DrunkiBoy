@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace DrunkiBoy
 {
-    abstract class Enemy
+    abstract class Enemy : AnimatedObject
     {
     }
 }

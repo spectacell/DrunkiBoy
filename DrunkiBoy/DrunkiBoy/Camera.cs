@@ -80,13 +80,8 @@
             Position = position - new Vector2(_viewport.Width / 2.0f, _viewport.Height / 2.0f);
         }
 
-        public void Move(Vector2 displacement, bool respectRotation = false)
-        {
-            if (respectRotation)
-            {
-                displacement = Vector2.Transform(displacement, Matrix.CreateRotationZ(-Rotation));
-            }
-            
+        public void Move(Vector2 displacement)
+        {          
             Position += displacement;
         }
 

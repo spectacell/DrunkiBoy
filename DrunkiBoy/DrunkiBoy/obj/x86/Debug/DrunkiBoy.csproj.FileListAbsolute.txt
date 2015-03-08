@@ -7,3 +7,5 @@ C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\DrunkiBoy.pdb
 C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.exe
 C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.pdb
 C:\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\player_spriteSheet.xnb
+D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.exe
+D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.pdb
