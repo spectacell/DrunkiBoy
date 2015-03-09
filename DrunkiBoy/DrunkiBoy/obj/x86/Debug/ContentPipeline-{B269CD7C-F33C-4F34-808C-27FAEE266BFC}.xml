@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\player_spriteSheet.xnb</Output>
-      <Time>2015-03-09T08:52:41.7578128+01:00</Time>
+      <Output>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\player_spriteSheet.xnb</Output>
+      <Time>2015-03-09T13:11:31.3632999+01:00</Time>
     </Item>
     <Item>
       <Source>platform.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\platform.xnb</Output>
-      <Time>2015-03-09T08:34:36.6653297+01:00</Time>
+      <Output>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\platform.xnb</Output>
+      <Time>2015-03-09T13:11:31.3622998+01:00</Time>
     </Item>
     <Item>
       <Source>deleteCursor.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\deleteCursor.xnb</Output>
-      <Time>2015-03-09T08:41:43.3779195+01:00</Time>
+      <Output>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\deleteCursor.xnb</Output>
+      <Time>2015-03-09T13:11:31.3602997+01:00</Time>
     </Item>
     <Item>
       <Source>bg1.jpg</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg1.xnb</Output>
-      <Time>2015-03-09T10:08:25.4038722+01:00</Time>
+      <Output>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg1.xnb</Output>
+      <Time>2015-03-09T13:11:31.3542993+01:00</Time>
     </Item>
     <Item>
       <Source>bg2.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg2.xnb</Output>
-      <Time>2015-03-09T10:35:21.1066174+01:00</Time>
+      <Output>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg2.xnb</Output>
+      <Time>2015-03-09T13:11:31.3592996+01:00</Time>
     </Item>
     <Item>
       <Source>Font.spritefont</Source>
@@ -52,8 +52,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\Font.xnb</Output>
-      <Time>2015-03-08T15:53:23.0532945+01:00</Time>
+      <Output>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\Font.xnb</Output>
+      <Time>2015-03-09T13:11:31.3472989+01:00</Time>
     </Item>
     <Item>
       <Source>FontBig.spritefont</Source>
@@ -61,8 +61,17 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\FontBig.xnb</Output>
-      <Time>2015-03-08T15:53:41.8753213+01:00</Time>
+      <Output>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\FontBig.xnb</Output>
+      <Time>2015-03-09T13:11:31.348299+01:00</Time>
+    </Item>
+    <Item>
+      <Source>space.png</Source>
+      <Name>space</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\space.xnb</Output>
+      <Time>2015-03-09T13:21:49.7326686+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -71,10 +80,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoyContent\</RootDirectory>
-      <LoggerRootDirectory>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoyContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -103,7 +112,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2014-10-19T17:32:36.521024+02:00</Value>
+        <Value>2014-10-30T21:24:50.9112787+01:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

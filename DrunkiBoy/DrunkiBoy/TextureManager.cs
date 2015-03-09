@@ -16,7 +16,7 @@ namespace DrunkiBoy
             player = content.Load<Texture2D>("player_spriteSheet");
             platform = content.Load<Texture2D>("platform");
             deleteCursor = content.Load<Texture2D>("deleteCursor");
-            background1 = content.Load<Texture2D>("bg1");
+            background1 = content.Load<Texture2D>("space");
             background2 = content.Load<Texture2D>("bg2");
             //bakgrund3 = content.Load<Texture2D>("textures/bakgrund3");
         }

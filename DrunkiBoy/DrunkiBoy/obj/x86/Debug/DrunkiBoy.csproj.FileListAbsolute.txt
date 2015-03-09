@@ -18,3 +18,17 @@ D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\platform.xnb
 D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\deleteCursor.xnb
 D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg1.xnb
 D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg2.xnb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\player_spriteSheet.xnb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\platform.xnb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\deleteCursor.xnb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg1.xnb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg2.xnb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\Font.xnb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\FontBig.xnb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\DrunkiBoy.exe
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\DrunkiBoy.pdb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.csprojResolveAssemblyReference.cache
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.exe
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\obj\x86\Debug\DrunkiBoy.pdb
+C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\space.xnb
