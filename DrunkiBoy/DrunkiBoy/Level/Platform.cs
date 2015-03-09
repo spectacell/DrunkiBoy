@@ -12,7 +12,7 @@ namespace DrunkiBoy
         public Platform(Vector2 pos, Texture2D tex, bool isActive)
             : base(pos, tex, isActive)
         {
-            this.type = "platform";
+            this.type = "platform"; //Bokstav eller namn som identifierar objektet i textfilen som läser in banan
         }
     }
 }

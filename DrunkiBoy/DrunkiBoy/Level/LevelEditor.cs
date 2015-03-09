@@ -13,18 +13,18 @@ namespace DrunkiBoy
     class LevelEditor : Level
     {
         private int editingLevel = 0;
-        private Rectangle itemSrcRect;
+        private GameObject selectedObject;
+
         KeyboardState keyBoardState;
         MouseState mouseState, oldMouseState;
         private int camSpeed = 4;
         private bool saved;
         private bool drawLevelSaved;
         private double drawTextTimer, drawTextTimerDefault = 1000;
-        enum items { Platform, Player, Arrow }; //osv...
+        enum items { Platform, Player, RemovingObject }; //osv...
         items selectedItem;
         private bool showMenu;
 
-        private int nrOfSpawns;
         private String strItemMenu = "P: Platform\nY: Player";
         private String strItemMenu2 = "Right-click for remove tool\n\",\" Zooms out and \".\" Zooms in\nCtrl-S to save";
 
@@ -34,16 +34,11 @@ namespace DrunkiBoy
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
             selectedItem = items.Platform;
-            itemSrcRect = Constants.PLATFORM_SRC_RECT;
+            selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), TextureManager.platform, true);
+            camera.Position = new Vector2(0, levelHeight - Game1.windowHeight);
         }
         public override void Update(GameTime gameTime)
         {
-            nrOfSpawns = 0;
-            //foreach (GameObject ob in objects)
-            //{
-            //    if (ob is SpawnPosition)
-            //        nrOfSpawns++;
-            //}
             keyBoardState = Keyboard.GetState();
 
             oldMouseState = mouseState;
@@ -63,21 +58,21 @@ namespace DrunkiBoy
             CountDownDrawLevelSavedTimer(gameTime);
             //Zoom();
 
-            //if (KeyMouseReader.KeyPressed(Keys.D1))
-            //{
-            //    editingLevel = 0;
-            //    LoadContent(Constants.LEVELS[editingLevel], true);
-            //}
-            //if (KeyMouseReader.KeyPressed(Keys.D2))
-            //{
-            //    editingLevel = 1;
-            //    LoadContent(Constants.LEVELS[editingLevel], true);
-            //}
-            //if (KeyMouseReader.KeyPressed(Keys.D3))
-            //{
-            //    editingLevel = 2;
-            //    LoadContent(Constants.LEVELS[editingLevel], true);
-            //}
+            if (KeyMouseReader.KeyPressed(Keys.D1))
+            {
+                editingLevel = 0;
+                LoadContent(Constants.LEVELS[editingLevel]);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.D2))
+            {
+                editingLevel = 1;
+                LoadContent(Constants.LEVELS[editingLevel]);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.D3))
+            {
+                editingLevel = 2;
+                LoadContent(Constants.LEVELS[editingLevel]);
+            }
         }
         
         private void CountDownDrawLevelSavedTimer(GameTime gameTime)
@@ -109,6 +104,10 @@ namespace DrunkiBoy
                 saved = true;
             }
         }
+        public Vector2 ScreenToWorld(Vector2 screenPosition)
+        {
+            return Vector2.Transform(screenPosition, Matrix.Invert(camera.GetViewMatrix(Vector2.One)));
+        }
         /// <summary>
         /// Adds the selected item to the objects list at the mouse position or snapped to a platform
         /// </summary>
@@ -117,16 +116,16 @@ namespace DrunkiBoy
             Platform intersectingPlatform;
             if (KeyMouseReader.LeftClick())
             {
-                Point mouseIsAt = new Point(mouseState.X + (int)camera.Position.X - (Game1.windowWidth / 2), mouseState.Y + (int)camera.Position.Y - (Game1.windowHeight / 2));
-                    switch (selectedItem)
+                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));  
+                switch (selectedItem)
                     {
                         case items.Platform: 
-                            intersectingPlatform = IntersectsPlatform(mouseIsAt, Constants.PLATFORM_SRC_RECT);
+                            intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox);
                             if (intersectingPlatform != null)
                             {
-                                if (mouseIsAt.X < intersectingPlatform.pos.X - Constants.PLATFORM_SRC_RECT.Width / 2) //Snap to left or right of exisisting platform
+                                if (mouseIsAt.X < intersectingPlatform.pos.X - selectedObject.BoundingBox.Width / 2) //Snap to left or right of exisisting platform
                                 {
-                                    objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Left - Constants.PLATFORM_SRC_RECT.Width, intersectingPlatform.pos.Y), 
+                                    objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Left - selectedObject.BoundingBox.Width, intersectingPlatform.pos.Y), 
                                                 TextureManager.platform, true));
                                 }
                                 else
@@ -141,21 +140,22 @@ namespace DrunkiBoy
                             }
                             break;
 
-                        //case items.Player:
-                        //    intersectingPlatform = IntersectsPlatform(mouseIsAt, Constants.PLAYER_SRC_RECT);
-                        //    if (intersectingPlatform != null)
-                        //    {
-                        //        objects.Add(new Player(Constants.playerCharSymbol, new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - Constants.PLAYER_SRC_RECT.Height),
-                        //            Constants.PLAYER_SRC_RECT));
-                        //        objects.Add(new SpawnPosition(Constants.spawnCharSymbol, new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - Constants.SPAWN_SRC_RECT.Height),
-                        //            Constants.SPAWN_SRC_RECT));
-                        //    }
-                        //    else
-                        //    {
-                        //        objects.Add(new Player(Constants.playerCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.PLAYER_SRC_RECT));
-                        //        objects.Add(new SpawnPosition(Constants.spawnCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.SPAWN_SRC_RECT));
-                        //    }
-                        //    break;
+                        case items.Player:
+                            intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox);
+                            if (intersectingPlatform != null)
+                            {
+                                selectedObject.pos = new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height);
+                                objects.Add(selectedObject);
+                                //objects.Add(new SpawnPosition(selectedObject.type, new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height),
+                                //    selectedObject.BoundingBox));
+                            }
+                            else
+                            {
+                                selectedObject.pos = new Vector2(mouseIsAt.X, mouseIsAt.Y);
+                                objects.Add(selectedObject);
+                                //objects.Add(new SpawnPosition(Constants.spawnCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.SPAWN_SRC_RECT));
+                            }
+                            break;
                     }
                     
                     saved = false;
@@ -168,11 +168,11 @@ namespace DrunkiBoy
         /// <param name="mouseIsAt">Coordinates of the mouse</param>
         /// <param name="srcRect">Source Rectangle of the selected Item</param>
         /// <returns></returns>
-        private Platform IntersectsPlatform (Point mouseIsAt, Rectangle srcRect)
+        private Platform IntersectsPlatform (Vector2 mouseIsAt, Rectangle srcRect)
         {
             foreach (GameObject anObject in objects)
             {
-                if (anObject is Platform && anObject.BoundingBox.Intersects(new Rectangle(mouseIsAt.X, mouseIsAt.Y, srcRect.Width, srcRect.Height)))
+                if (anObject is Platform && anObject.BoundingBox.Intersects(new Rectangle((int)mouseIsAt.X, (int)mouseIsAt.Y, srcRect.Width, srcRect.Height)))
                 {
                     return (Platform)anObject;
                 }
@@ -187,15 +187,14 @@ namespace DrunkiBoy
         {
             if (KeyMouseReader.RightClick())
             {
-                selectedItem = items.Arrow;
-                itemSrcRect = Constants.ARROW_SRC_RECT;
+                selectedItem = items.RemovingObject;
             }
-            if (KeyMouseReader.LeftClick() && selectedItem == items.Arrow)
+            if (KeyMouseReader.LeftClick() && selectedItem == items.RemovingObject)
             {
-                Point mouseIsAt = new Point(mouseState.X + (int)camera.Position.X - (Game1.windowWidth / 2), mouseState.Y + (int)camera.Position.Y - (Game1.windowHeight / 2));
+                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y)); 
                 foreach (GameObject o in objects)
                 {
-                    if (o.BoundingBox.Contains(mouseIsAt))
+                    if (o.BoundingBox.Contains(new Point((int)mouseIsAt.X, (int)mouseIsAt.Y)))
                     {
                         objects.Remove(o);
                         break;
@@ -212,12 +211,13 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.P))
             {
                 selectedItem = items.Platform;
-                itemSrcRect = Constants.PLATFORM_SRC_RECT;
+                selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), TextureManager.platform, true);
             }
             if (KeyMouseReader.KeyPressed(Keys.Y))
             {
                 selectedItem = items.Player;
-                itemSrcRect = Constants.PLAYER_SRC_RECT;
+                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), TextureManager.player, 
+                                            new Rectangle(0,0,100,200), true, 1);
             }
         }
 
@@ -263,7 +263,7 @@ namespace DrunkiBoy
 
             foreach (GameObject g in objects)
             {
-                sw.Write(g.charSymbol+":"+g.pos.X+":"+g.pos.Y+"\r\n");
+                sw.Write(g.type+":"+g.pos.X+":"+g.pos.Y+"\r\n");
             }
 
             sw.Close();
@@ -271,7 +271,10 @@ namespace DrunkiBoy
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 parallax = new Vector2(1f);
+            foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
+                layer.Draw(spriteBatch);
+
+            Vector2 parallax = Vector2.One; //parallax vector2.one innebär ingen parallax, kameran rör sig med full hastighet. Mindre värde gör den långsammare
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
             foreach (GameObject g in objects)
             {
@@ -280,14 +283,14 @@ namespace DrunkiBoy
             
             spriteBatch.End();
 
-            spriteBatch.Begin();
-            spriteBatch.Draw(Constants.SPRITESHEET, new Vector2(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y), itemSrcRect, Color.White);
+            spriteBatch.Begin(); //Allt som inte ska följa med kameran ritas ut här
+            spriteBatch.Draw(selectedObject.tex, new Vector2(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y), selectedObject.srcRect, Color.White);
             
             if (drawLevelSaved)
             {
                 spriteBatch.DrawString(Constants.FONT_BIG, "Level has been saved", 
                     new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString("Level has been saved").X / 2, 
-                                Game1.windowHeight / 2 - Constants.FONT.MeasureString("Level has been saved").Y / 2), Color.Black);
+                                Game1.windowHeight / 2 - Constants.FONT.MeasureString("Level has been saved").Y / 2), Color.White);
             }
             if(showMenu)
             {
@@ -298,11 +301,10 @@ namespace DrunkiBoy
             else
             {
                 spriteBatch.DrawString(Constants.FONT, "Currently Editing: " + Constants.LEVELS[editingLevel] + "\nF1 for menu", new Vector2(10, 10), Color.Black);
+                spriteBatch.DrawString(Constants.FONT, "Cam pos: " + camera.Position, new Vector2(10, 60), Color.Black);  
             }
-            spriteBatch.DrawString(Constants.FONT, "Spawn positions: " + nrOfSpawns, new Vector2(Game1.windowWidth-220, 10), Color.Gold);
             spriteBatch.End();
-            foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
-                layer.Draw(spriteBatch);
+            
         }
     }
 }

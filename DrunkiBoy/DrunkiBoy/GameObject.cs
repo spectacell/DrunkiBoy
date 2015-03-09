@@ -11,9 +11,9 @@ namespace DrunkiBoy
     {
         public Vector2 pos;
         public Texture2D tex;
-        public string type;
+        public string type; //Bokstav eller namn som identifierar objektet i textfilen som läser in banan
         public bool isActive; // Kan behövas om objektet ska markeras för bortplockning ur en lista eller om det inte ska ritas ut alls. 
-        protected Rectangle srcRect; //Rektangeln i spritesheeten där bilden är.
+        public Rectangle srcRect; //Rektangeln i spritesheeten där bilden är.
         public float drawLayer; // För spriteBatch.Draw så att vi kan styra vad som ritas ut ovanför vad.
         protected Color[] colorData; //För pixelkollision
         public GameObject(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive)

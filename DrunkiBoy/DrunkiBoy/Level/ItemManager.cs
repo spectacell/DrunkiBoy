@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,15 @@ namespace DrunkiBoy
         {
             UpdatePlatforms(player);
         }
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Platform platform in platforms)
+            {
+                spriteBatch.Draw(platform.tex, platform.pos, platform.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+               
 
+        }
         private void UpdatePlatforms(Player player)
         {
             foreach (Platform platform in platforms)
@@ -32,7 +41,7 @@ namespace DrunkiBoy
                 {
                     if (enemy.activePlatform == null)
                     {
-                        if (enemy.BoundingBox.Intersects(platform.BoundingBox) && !enemy.isKilled)
+                        if (enemy.BoundingBox.Intersects(platform.BoundingBox))// && !enemy.isKilled)
                         {
                             enemy.activePlatform = platform; //Sets the activate platform
                             enemy.pos.Y = platform.BoundingBox.Top - enemy.BoundingBox.Height + 1; //+1 to maintain the Intersection

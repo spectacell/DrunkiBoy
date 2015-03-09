@@ -1,3 +1,7 @@
 Content\player_spriteSheet.xnb
 Content\Font.xnb
 Content\FontBig.xnb
+Content\platform.xnb
+Content\deleteCursor.xnb
+Content\bg1.xnb
+Content\bg2.xnb

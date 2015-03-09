@@ -12,7 +12,6 @@
         public BackgroundLayer(Camera camera)
         {
             this.camera = camera;
-            Parallax = Vector2.One;
             Backgrounds = new List<ParallaxBackgroundImage>();
         }
         public void Draw(SpriteBatch spriteBatch)

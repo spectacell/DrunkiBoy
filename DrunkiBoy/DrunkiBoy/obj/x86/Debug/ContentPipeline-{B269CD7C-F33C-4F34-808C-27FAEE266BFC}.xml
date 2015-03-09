@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\player_spriteSheet.xnb</Output>
-      <Time>2015-03-08T15:04:16.3499261+01:00</Time>
+      <Time>2015-03-09T08:52:41.7578128+01:00</Time>
     </Item>
     <Item>
       <Source>Font.spritefont</Source>
@@ -27,6 +27,42 @@
       <Options>None</Options>
       <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\FontBig.xnb</Output>
       <Time>2015-03-08T15:53:41.8753213+01:00</Time>
+    </Item>
+    <Item>
+      <Source>platform.png</Source>
+      <Name>platform</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\platform.xnb</Output>
+      <Time>2015-03-09T08:34:36.6653297+01:00</Time>
+    </Item>
+    <Item>
+      <Source>deleteCursor.png</Source>
+      <Name>deleteCursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\deleteCursor.xnb</Output>
+      <Time>2015-03-09T08:41:43.3779195+01:00</Time>
+    </Item>
+    <Item>
+      <Source>bg1.jpg</Source>
+      <Name>bg1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg1.xnb</Output>
+      <Time>2015-03-09T10:08:25.4038722+01:00</Time>
+    </Item>
+    <Item>
+      <Source>bg2.png</Source>
+      <Name>bg2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg2.xnb</Output>
+      <Time>2015-03-09T10:35:21.1066174+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -25,12 +25,12 @@ namespace DrunkiBoy
             this.frameWidth = srcRect.Width;
             this.nrFrames = nrFrames;
             //Skapar array med två srcRect som animationen utgår från. En för varje riktning. srcRect för objekt vänt åt höger och 1 för objekt vänt åt vänster.
-            facingSrcRects = new Rectangle[2] { srcRect, new Rectangle(nrFrames * srcRect.Width, srcRect.Y, srcRect.Width, srcRect.Height) };
+            facingSrcRects = new Rectangle[2] { new Rectangle(nrFrames * srcRect.Width, srcRect.Y, srcRect.Width, srcRect.Height), srcRect };
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            if (!(this is Player)) //Player ännu inte skapad. Player sköter sin egen nedräkning i och med att den bara ska räkna när player rör sig. Andra objekt animeras hela tiden.
+            if (!(this is Player)) //Player sköter sin egen nedräkning i och med att den bara ska räkna när player rör sig. Andra objekt animeras hela tiden.
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds; //Animation time counter
 
             if (timeTilNextFrame <= 0)
@@ -39,6 +39,7 @@ namespace DrunkiBoy
                 frame++;
                 srcRect.X = facingSrcRects[facing].X + (frame % nrFrames) * frameWidth; //Väljer nästa frame. facingSrcRects[facing] som skapades i constructorn ser till att rätt animation körs. En för vänster och en för höger.
             }
+            AddGravity();
         }
 
         protected void AddGravity()
