@@ -45,7 +45,7 @@ namespace DrunkiBoy
             windowHeight = Window.ClientBounds.Height;
             windowWidth = Window.ClientBounds.Width;
 
-            TextureManager.LoadContent(Content);
+            Textures.LoadContent(Content);
             Constants.LoadContent(Content);
 
             level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);

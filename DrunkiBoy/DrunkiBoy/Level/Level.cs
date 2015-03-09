@@ -21,6 +21,7 @@ namespace DrunkiBoy
         protected List<GameObject> objects; //For the Level editor
 
         protected ItemManager itemManager = new ItemManager();
+        protected EnemyManager enemyManager = new EnemyManager();
 
         protected int levelHeight = 2000, levelWidth = 6000;
 
@@ -38,8 +39,8 @@ namespace DrunkiBoy
                 //new BackgroundLayer(camera) { Parallax = new Vector2(0.4f, 1.0f) }
             };
             // En bakgrund läggs till till varje lager här, går att lägga till flera
-            layers[0].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - TextureManager.background1.Height), TextureManager.background1));
-            layers[1].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - TextureManager.background2.Height), TextureManager.background2));
+            layers[0].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.background1.Height), Textures.background1));
+            layers[1].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.background2.Height), Textures.background2));
 
             //layers[2].ListOfBackgrounds.Add(new ParallaxBackgroundImage(new Vector2(0, levelHeight - TextureManager.background3.Height), TextureManager.background3));
             #endregion
@@ -49,7 +50,8 @@ namespace DrunkiBoy
         public virtual void Update(GameTime gameTime)
         {
             player.Update(gameTime);
-            itemManager.Update(gameTime, player);
+            enemyManager.Update(gameTime, player);
+            itemManager.Update(gameTime, player, enemyManager.enemies);
 
             // Riktar kameran mot spelaren...
             camera.LookAt(player.pos);
@@ -63,6 +65,7 @@ namespace DrunkiBoy
             Vector2 parallax = new Vector2(1f);
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
             player.Draw(spriteBatch);
+            enemyManager.Draw(spriteBatch);
             itemManager.Draw(spriteBatch);
             spriteBatch.End();
             
@@ -80,12 +83,12 @@ namespace DrunkiBoy
 
                 if (temp[0] == "platform")
                 {
-                    itemManager.AddPlatform(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), TextureManager.platform, true));
-                    objects.Add(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), TextureManager.platform, true)); //För leveleditorn
+                    itemManager.AddPlatform(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.platform, true));
+                    objects.Add(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.platform, true)); //För leveleditorn
                 }
                 else if (temp[0] == "player")
                 {
-                        player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), TextureManager.player, new Rectangle(0,0,138,190), true, 5);
+                        player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.player, new Rectangle(0,0,138,190), true, 5);
                         objects.Add(player);
                 }
 

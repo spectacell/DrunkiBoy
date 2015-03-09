@@ -10,30 +10,34 @@ namespace DrunkiBoy
     class ItemManager
     {
         public List<Platform> platforms = new List<Platform>();
-        public List<Enemy> enemies = new List<Enemy>();
 
         public ItemManager()
         {
 
         }
-        public void AddPlatform(Platform platform)
+        public void Update(GameTime gameTime, Player player, List<Enemy> enemies)
         {
-            platforms.Add(platform);
-        }
-        public void Update(GameTime gameTime, Player player)
-        {
-            UpdatePlatforms(player);
+            UpdatePlatforms(player, enemies);
         }
         public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            DrawPlatforms(spriteBatch);
+        }
+
+        private void DrawPlatforms(SpriteBatch spriteBatch)
         {
             foreach (Platform platform in platforms)
             {
                 spriteBatch.Draw(platform.tex, platform.pos, platform.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
-               
-
         }
-        private void UpdatePlatforms(Player player)
+
+        public void AddPlatform(Platform platform)
+        {
+            platforms.Add(platform);
+        }
+        
+        private void UpdatePlatforms(Player player, List<Enemy> enemies)
         {
             foreach (Platform platform in platforms)
             {

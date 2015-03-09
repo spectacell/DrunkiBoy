@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DrunkiBoy
 {
-    class TextureManager
+    class Textures
     {
         public static Texture2D platform, background1, background2, background3, player, deleteCursor;
 

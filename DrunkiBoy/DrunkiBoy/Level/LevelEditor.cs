@@ -34,7 +34,7 @@ namespace DrunkiBoy
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
             selectedItem = items.Platform;
-            selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), TextureManager.platform, true);
+            selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), Textures.platform, true);
             camera.Position = new Vector2(0, levelHeight - Game1.windowHeight);
         }
         public override void Update(GameTime gameTime)
@@ -116,50 +116,41 @@ namespace DrunkiBoy
             Platform intersectingPlatform;
             if (KeyMouseReader.LeftClick())
             {
-                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));  
-                switch (selectedItem)
-                    {
-                        case items.Platform: 
-                            intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox);
-                            if (intersectingPlatform != null)
-                            {
-                                if (mouseIsAt.X < intersectingPlatform.pos.X - selectedObject.BoundingBox.Width / 2) //Snap to left or right of exisisting platform
-                                {
-                                    objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Left - selectedObject.BoundingBox.Width, intersectingPlatform.pos.Y), 
-                                                TextureManager.platform, true));
-                                }
-                                else
-                                {
-                                    objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Right, intersectingPlatform.pos.Y), 
-                                                TextureManager.platform, true));
-                                }
-                            }
-                            else
-                            {
-                                objects.Add(new Platform(new Vector2(mouseIsAt.X, mouseIsAt.Y), TextureManager.platform, true));
-                            }
-                            break;
+                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
+                intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox); //Rör objektet vid någon plattform så returneras vilken det är
 
-                        case items.Player:
-                            intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox);
-                            if (intersectingPlatform != null)
+                switch (selectedItem)
+                {
+                    case items.Platform:    
+                        if (intersectingPlatform != null)
+                        {
+                            if (mouseIsAt.X < intersectingPlatform.pos.X - selectedObject.BoundingBox.Width / 2) //Snap to left or right of exisisting platform
                             {
-                                selectedObject.pos = new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height);
-                                objects.Add(selectedObject);
-                                //objects.Add(new SpawnPosition(selectedObject.type, new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height),
-                                //    selectedObject.BoundingBox));
+                                objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Left - selectedObject.BoundingBox.Width, intersectingPlatform.pos.Y), Textures.platform, true));
                             }
                             else
                             {
-                                selectedObject.pos = new Vector2(mouseIsAt.X, mouseIsAt.Y);
-                                objects.Add(selectedObject);
-                                //objects.Add(new SpawnPosition(Constants.spawnCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.SPAWN_SRC_RECT));
+                                objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Right, intersectingPlatform.pos.Y), Textures.platform, true));
                             }
-                            break;
-                    }
-                    
-                    saved = false;
-                
+                        }
+                        else
+                        {
+                            objects.Add(new Platform(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.platform, true));
+                        }
+                        break;
+
+                    case items.Player:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Player(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.player, new Rectangle(0,0,100,200), true, 1));
+                        }
+                        else
+                        {
+                            objects.Add(new Player(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.player, new Rectangle(0, 0, 100, 200), true, 1));
+                        }
+                        break;
+                }
+                saved = false;
             }
         }
         /// <summary>
@@ -211,13 +202,12 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.P))
             {
                 selectedItem = items.Platform;
-                selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), TextureManager.platform, true);
+                selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), Textures.platform, true);
             }
             if (KeyMouseReader.KeyPressed(Keys.Y))
             {
                 selectedItem = items.Player;
-                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), TextureManager.player, 
-                                            new Rectangle(0,0,100,200), true, 1);
+                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), Textures.player, new Rectangle(0,0,100,200), true, 1);
             }
         }
 
