@@ -35,12 +35,13 @@ namespace DrunkiBoy
                 //Varje lager är en eller flera bakgrunder som rör sig med hastighet specificerat i Vector2
                 new BackgroundLayer(camera) { Parallax = new Vector2(0.2f, 1.0f) },
                 new BackgroundLayer(camera) { Parallax = new Vector2(0.6f, 1.0f) },
-                new BackgroundLayer(camera) { Parallax = new Vector2(0.4f, 1.0f) }
+                //new BackgroundLayer(camera) { Parallax = new Vector2(0.4f, 1.0f) }
             };
             // En bakgrund läggs till till varje lager här, går att lägga till flera
-            layers[0].Backgrounds.Add(new ParallaxBackgroundImage { Position = new Vector2(0, levelHeight - TextureManager.background1.Height), Texture = TextureManager.background1 });
-            layers[1].Backgrounds.Add(new ParallaxBackgroundImage { Position = new Vector2(0, levelHeight - TextureManager.background2.Height), Texture = TextureManager.background2 });
-            layers[2].Backgrounds.Add(new ParallaxBackgroundImage { Texture = TextureManager.background3 });
+            layers[0].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - TextureManager.background1.Height), TextureManager.background1));
+            layers[1].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - TextureManager.background2.Height), TextureManager.background2));
+
+            //layers[2].ListOfBackgrounds.Add(new ParallaxBackgroundImage(new Vector2(0, levelHeight - TextureManager.background3.Height), TextureManager.background3));
             #endregion
             LoadContent(levelTextFilePath);
         }

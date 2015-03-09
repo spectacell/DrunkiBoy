@@ -8,23 +8,34 @@
     {
         private readonly Camera camera;
         public Vector2 Parallax { get; set; }
-        public List<ParallaxBackgroundImage> Backgrounds { get; private set; }
+        public List<BackgroundImage> ListOfBackgrounds { get; private set; }
         public BackgroundLayer(Camera camera)
         {
             this.camera = camera;
-            Backgrounds = new List<ParallaxBackgroundImage>();
+            ListOfBackgrounds = new List<BackgroundImage>();
         }
         public void Draw(SpriteBatch spriteBatch)
 	    {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(Parallax));
-    	    
-            foreach(ParallaxBackgroundImage bg in Backgrounds)
-		        bg.Draw(spriteBatch);
-            
+
+            foreach (BackgroundImage bg in ListOfBackgrounds)
+            {
+                bg.Draw(spriteBatch);
+            }
             spriteBatch.End();
 	    }
-
-        //Ev. ha de här två i LevelEditorn...lite osäker
+        /// <summary>
+        /// Adds a background to the List of backgrounds in the layer. Also creates 3 additional backgrounds surrounding the first one.
+        /// </summary>
+        /// <param name="image">The image to add</param>
+        public void AddBackground(BackgroundImage image)
+        {
+            ListOfBackgrounds.Add(image);
+            ListOfBackgrounds.Add(new BackgroundImage(new Vector2(image.pos.X + image.Texture.Width, image.pos.Y), image.Texture));
+            ListOfBackgrounds.Add(new BackgroundImage(new Vector2(image.pos.X, image.pos.Y - image.Texture.Height), image.Texture));
+            ListOfBackgrounds.Add(new BackgroundImage(new Vector2(image.pos.X + image.Texture.Width, image.pos.Y - image.Texture.Height), image.Texture)); 
+            //Lägger till tre bakgrunder av samma, runt om den första. Lär gå att lösa snyggare genom att få bakgrunderna att upprepas automatiskt
+        }
         public Vector2 WorldToScreen(Vector2 worldPosition)
         {
             return Vector2.Transform(worldPosition, camera.GetViewMatrix(Parallax));

@@ -11,24 +11,6 @@
       <Time>2015-03-09T08:52:41.7578128+01:00</Time>
     </Item>
     <Item>
-      <Source>Font.spritefont</Source>
-      <Name>Font</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\Font.xnb</Output>
-      <Time>2015-03-08T15:53:23.0532945+01:00</Time>
-    </Item>
-    <Item>
-      <Source>FontBig.spritefont</Source>
-      <Name>FontBig</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\FontBig.xnb</Output>
-      <Time>2015-03-08T15:53:41.8753213+01:00</Time>
-    </Item>
-    <Item>
       <Source>platform.png</Source>
       <Name>platform</Name>
       <Importer>TextureImporter</Importer>
@@ -64,11 +46,29 @@
       <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg2.xnb</Output>
       <Time>2015-03-09T10:35:21.1066174+01:00</Time>
     </Item>
+    <Item>
+      <Source>Font.spritefont</Source>
+      <Name>Font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\Font.xnb</Output>
+      <Time>2015-03-08T15:53:23.0532945+01:00</Time>
+    </Item>
+    <Item>
+      <Source>FontBig.spritefont</Source>
+      <Name>FontBig</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\FontBig.xnb</Output>
+      <Time>2015-03-08T15:53:41.8753213+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{B269CD7C-F33C-4F34-808C-27FAEE266BFC}</ContentProjectGUID>
       <TargetPlatform>Windows</TargetPlatform>
-      <TargetProfile>Reach</TargetProfile>
+      <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
       <RootDirectory>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoyContent\</RootDirectory>

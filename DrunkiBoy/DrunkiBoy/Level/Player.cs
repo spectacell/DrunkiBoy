@@ -54,7 +54,6 @@ namespace DrunkiBoy
                 facing = 1;
             }
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
-            Console.WriteLine(movement);
             //pos.X = MathHelper.Clamp(pos.X, -(Game1.windowWidth / 2), Level.currentLevel.levelLength - srcRect.Width);
         }
         private void AddFriction(int facing)

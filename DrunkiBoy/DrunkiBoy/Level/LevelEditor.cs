@@ -300,8 +300,8 @@ namespace DrunkiBoy
             }
             else
             {
-                spriteBatch.DrawString(Constants.FONT, "Currently Editing: " + Constants.LEVELS[editingLevel] + "\nF1 for menu", new Vector2(10, 10), Color.Black);
-                spriteBatch.DrawString(Constants.FONT, "Cam pos: " + camera.Position, new Vector2(10, 60), Color.Black);  
+                spriteBatch.DrawString(Constants.FONT, "Currently Editing: " + Constants.LEVELS[editingLevel] + "\nF1 for menu", new Vector2(10, 10), Color.White);
+                spriteBatch.DrawString(Constants.FONT, "Cam pos: " + camera.Position, new Vector2(10, 60), Color.White);  
             }
             spriteBatch.End();
             
