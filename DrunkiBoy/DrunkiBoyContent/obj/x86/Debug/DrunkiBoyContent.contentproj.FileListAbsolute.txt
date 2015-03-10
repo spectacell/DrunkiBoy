@@ -1,3 +1,0 @@
-D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoyContent\obj\x86\Debug\DrunkiBoyContent.contentprojResolveAssemblyReference.cache
-C:\DrunkiBoy\DrunkiBoy\DrunkiBoyContent\obj\x86\Debug\DrunkiBoyContent.contentprojResolveAssemblyReference.cache
-C:\Users\isac\Documents\GitHub\DrunkiBoy\DrunkiBoy\DrunkiBoyContent\obj\x86\Debug\DrunkiBoyContent.contentprojResolveAssemblyReference.cache
