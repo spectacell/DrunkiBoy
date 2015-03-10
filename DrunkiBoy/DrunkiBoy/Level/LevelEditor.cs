@@ -12,20 +12,23 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
+        private String strItemMenu = "P: Platform\nY: Player"; //osv...
+        enum items { Platform, Player, RemovingObject }; //osv...
+
         private int editingLevel = 0;
         private GameObject selectedObject;
 
         KeyboardState keyBoardState;
         MouseState mouseState, oldMouseState;
+        protected Int32 scroll;
+
         private int camSpeed = 4;
         private bool saved;
         private bool drawLevelSaved;
         private double drawTextTimer, drawTextTimerDefault = 1000;
-        enum items { Platform, Player, RemovingObject }; //osv...
+        
         items selectedItem;
         private bool showMenu;
-
-        private String strItemMenu = "P: Platform\nY: Player";
         private String strItemMenu2 = "Right-click for remove tool\n\",\" Zooms out and \".\" Zooms in\nCtrl-S to save";
 
         public LevelEditor(GraphicsDevice gd, String levelTextFilePath, ContentManager content) :
@@ -46,6 +49,8 @@ namespace DrunkiBoy
 
             F1ToShowMenu();
             MoveCamera();
+            Zoom();
+            camera.Update();
 
             SelectItemBasedOnKeyInput();
 
@@ -56,7 +61,7 @@ namespace DrunkiBoy
             SaveOnCtrlS();
 
             CountDownDrawLevelSavedTimer(gameTime);
-            //Zoom();
+            
 
             if (KeyMouseReader.KeyPressed(Keys.D1))
             {
@@ -179,6 +184,7 @@ namespace DrunkiBoy
             if (KeyMouseReader.RightClick())
             {
                 selectedItem = items.RemovingObject;
+                selectedObject = new Cursor_RemoveItem(new Vector2(mouseState.X, mouseState.Y), Textures.deleteCursor, true);
             }
             if (KeyMouseReader.LeftClick() && selectedItem == items.RemovingObject)
             {
@@ -207,7 +213,7 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.Y))
             {
                 selectedItem = items.Player;
-                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), Textures.player, new Rectangle(0,0,100,200), true, 1);
+                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), Textures.player, new Rectangle(0, 0, 138, 190), true, 1);
             }
         }
 
@@ -231,20 +237,22 @@ namespace DrunkiBoy
             }
         }
 
-        //private void Zoom()
-        //{
-        //    if (KeyMouseReader.KeyPressed(Keys.OemComma))
-        //    {
-        //        cam.Zoom -= 0.1f;
-        //    }
-        //    if (KeyMouseReader.KeyPressed(Keys.OemPeriod))
-        //    {
-        //        cam.Zoom += 0.1f;
-        //    }
-        //}
-        /// <summary>
-        /// Writes from the objects list to the current Level text-file.
-        /// </summary>
+        private void Zoom()
+        {
+            if (mouseState.ScrollWheelValue > scroll)
+	            {
+	                camera.Zoom += 0.1f;
+                    scroll = mouseState.ScrollWheelValue;
+	            }
+            else if (mouseState.ScrollWheelValue < scroll)
+	            {
+	                camera.Zoom -= 0.1f;
+                    scroll = mouseState.ScrollWheelValue;
+	            }
+        }
+         /// <summary>
+         /// Writes from the objects list to the current Level text-file.
+         /// </summary>
         private void SaveLevelToFile()
         {
             StreamWriter sw;

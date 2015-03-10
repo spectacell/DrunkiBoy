@@ -11,7 +11,10 @@
             Origin = new Vector2(_viewport.Width / 2.0f, _viewport.Height / 2.0f);
             Zoom = 1.0f;
         }
-
+        public void Update()
+        {
+            Zoom = MathHelper.Clamp(Zoom, 0.0f, 10.0f);
+        }
         public Vector2 Position
         {
             get
