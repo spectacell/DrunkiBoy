@@ -12,20 +12,23 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
+        private String strItemMenu = "P: Platform\nY: Player"; //osv...
+        enum items { Platform, Player, RemovingObject }; //osv...
+
         private int editingLevel = 0;
         private GameObject selectedObject;
 
         KeyboardState keyBoardState;
         MouseState mouseState, oldMouseState;
+        protected Int32 scroll;
+
         private int camSpeed = 4;
         private bool saved;
         private bool drawLevelSaved;
         private double drawTextTimer, drawTextTimerDefault = 1000;
-        enum items { Platform, Player, RemovingObject }; //osv...
+
         items selectedItem;
         private bool showMenu;
-
-        private String strItemMenu = "P: Platform\nY: Player";
         private String strItemMenu2 = "Right-click for remove tool\n\",\" Zooms out and \".\" Zooms in\nCtrl-S to save";
 
         public LevelEditor(GraphicsDevice gd, String levelTextFilePath, ContentManager content) :
@@ -34,7 +37,7 @@ namespace DrunkiBoy
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
             selectedItem = items.Platform;
-            selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), TextureManager.platform, true);
+            selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), Textures.platform, true);
             camera.Position = new Vector2(0, levelHeight - Game1.windowHeight);
         }
         public override void Update(GameTime gameTime)
@@ -46,6 +49,8 @@ namespace DrunkiBoy
 
             F1ToShowMenu();
             MoveCamera();
+            Zoom();
+            camera.Update();
 
             SelectItemBasedOnKeyInput();
 
@@ -56,7 +61,7 @@ namespace DrunkiBoy
             SaveOnCtrlS();
 
             CountDownDrawLevelSavedTimer(gameTime);
-            //Zoom();
+
 
             if (KeyMouseReader.KeyPressed(Keys.D1))
             {
@@ -74,7 +79,7 @@ namespace DrunkiBoy
                 LoadContent(Constants.LEVELS[editingLevel]);
             }
         }
-        
+
         private void CountDownDrawLevelSavedTimer(GameTime gameTime)
         {
             if (drawLevelSaved)
@@ -116,50 +121,41 @@ namespace DrunkiBoy
             Platform intersectingPlatform;
             if (KeyMouseReader.LeftClick())
             {
-                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));  
-                switch (selectedItem)
-                    {
-                        case items.Platform: 
-                            intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox);
-                            if (intersectingPlatform != null)
-                            {
-                                if (mouseIsAt.X < intersectingPlatform.pos.X - selectedObject.BoundingBox.Width / 2) //Snap to left or right of exisisting platform
-                                {
-                                    objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Left - selectedObject.BoundingBox.Width, intersectingPlatform.pos.Y), 
-                                                TextureManager.platform, true));
-                                }
-                                else
-                                {
-                                    objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Right, intersectingPlatform.pos.Y), 
-                                                TextureManager.platform, true));
-                                }
-                            }
-                            else
-                            {
-                                objects.Add(new Platform(new Vector2(mouseIsAt.X, mouseIsAt.Y), TextureManager.platform, true));
-                            }
-                            break;
+                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
+                intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox); //Rör objektet vid någon plattform så returneras vilken det är
 
-                        case items.Player:
-                            intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox);
-                            if (intersectingPlatform != null)
+                switch (selectedItem)
+                {
+                    case items.Platform:
+                        if (intersectingPlatform != null)
+                        {
+                            if (mouseIsAt.X < intersectingPlatform.pos.X - selectedObject.BoundingBox.Width / 2) //Snap to left or right of exisisting platform
                             {
-                                selectedObject.pos = new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height);
-                                objects.Add(selectedObject);
-                                //objects.Add(new SpawnPosition(selectedObject.type, new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height),
-                                //    selectedObject.BoundingBox));
+                                objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Left - selectedObject.BoundingBox.Width, intersectingPlatform.pos.Y), Textures.platform, true));
                             }
                             else
                             {
-                                selectedObject.pos = new Vector2(mouseIsAt.X, mouseIsAt.Y);
-                                objects.Add(selectedObject);
-                                //objects.Add(new SpawnPosition(Constants.spawnCharSymbol, new Vector2(mouseIsAt.X, mouseIsAt.Y), Constants.SPAWN_SRC_RECT));
+                                objects.Add(new Platform(new Vector2(intersectingPlatform.BoundingBox.Right, intersectingPlatform.pos.Y), Textures.platform, true));
                             }
-                            break;
-                    }
-                    
-                    saved = false;
-                
+                        }
+                        else
+                        {
+                            objects.Add(new Platform(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.platform, true));
+                        }
+                        break;
+
+                    case items.Player:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Player(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.player, new Rectangle(0, 0, 100, 200), true, 1, 80));
+                        }
+                        else
+                        {
+                            objects.Add(new Player(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.player, new Rectangle(0, 0, 100, 200), true, 1, 80));
+                        }
+                        break;
+                }
+                saved = false;
             }
         }
         /// <summary>
@@ -168,7 +164,7 @@ namespace DrunkiBoy
         /// <param name="mouseIsAt">Coordinates of the mouse</param>
         /// <param name="srcRect">Source Rectangle of the selected Item</param>
         /// <returns></returns>
-        private Platform IntersectsPlatform (Vector2 mouseIsAt, Rectangle srcRect)
+        private Platform IntersectsPlatform(Vector2 mouseIsAt, Rectangle srcRect)
         {
             foreach (GameObject anObject in objects)
             {
@@ -188,10 +184,11 @@ namespace DrunkiBoy
             if (KeyMouseReader.RightClick())
             {
                 selectedItem = items.RemovingObject;
+                selectedObject = new Cursor_RemoveItem(new Vector2(mouseState.X, mouseState.Y), Textures.deleteCursor, true);
             }
             if (KeyMouseReader.LeftClick() && selectedItem == items.RemovingObject)
             {
-                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y)); 
+                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
                 foreach (GameObject o in objects)
                 {
                     if (o.BoundingBox.Contains(new Point((int)mouseIsAt.X, (int)mouseIsAt.Y)))
@@ -211,19 +208,12 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.P))
             {
                 selectedItem = items.Platform;
-                selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), TextureManager.platform, true);
+                selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), Textures.platform, true);
             }
             if (KeyMouseReader.KeyPressed(Keys.Y))
             {
                 selectedItem = items.Player;
-<<<<<<< HEAD
-
-                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), TextureManager.player, 
-                                            new Rectangle(0,0,100,200), true, 1, 80);
-
-=======
-                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), Textures.player, new Rectangle(0,0,100,200), true, 1);
->>>>>>> parent of 95fa569... LevelEditor har nu Zoom med musScroll
+                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), Textures.player, new Rectangle(0, 0, 138, 190), true, 1, 80);
             }
         }
 
@@ -247,17 +237,19 @@ namespace DrunkiBoy
             }
         }
 
-        //private void Zoom()
-        //{
-        //    if (KeyMouseReader.KeyPressed(Keys.OemComma))
-        //    {
-        //        cam.Zoom -= 0.1f;
-        //    }
-        //    if (KeyMouseReader.KeyPressed(Keys.OemPeriod))
-        //    {
-        //        cam.Zoom += 0.1f;
-        //    }
-        //}
+        private void Zoom()
+        {
+            if (mouseState.ScrollWheelValue > scroll)
+            {
+                camera.Zoom += 0.1f;
+                scroll = mouseState.ScrollWheelValue;
+            }
+            else if (mouseState.ScrollWheelValue < scroll)
+            {
+                camera.Zoom -= 0.1f;
+                scroll = mouseState.ScrollWheelValue;
+            }
+        }
         /// <summary>
         /// Writes from the objects list to the current Level text-file.
         /// </summary>
@@ -269,7 +261,7 @@ namespace DrunkiBoy
 
             foreach (GameObject g in objects)
             {
-                sw.Write(g.type+":"+g.pos.X+":"+g.pos.Y+"\r\n");
+                sw.Write(g.type + ":" + g.pos.X + ":" + g.pos.Y + "\r\n");
             }
 
             sw.Close();
@@ -286,31 +278,31 @@ namespace DrunkiBoy
             {
                 g.Draw(spriteBatch);
             }
-            
+
             spriteBatch.End();
 
             spriteBatch.Begin(); //Allt som inte ska följa med kameran ritas ut här
             spriteBatch.Draw(selectedObject.tex, new Vector2(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y), selectedObject.srcRect, Color.White);
-            
+
             if (drawLevelSaved)
             {
-                spriteBatch.DrawString(Constants.FONT_BIG, "Level has been saved", 
-                    new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString("Level has been saved").X / 2, 
+                spriteBatch.DrawString(Constants.FONT_BIG, "Level has been saved",
+                    new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString("Level has been saved").X / 2,
                                 Game1.windowHeight / 2 - Constants.FONT.MeasureString("Level has been saved").Y / 2), Color.White);
             }
-            if(showMenu)
+            if (showMenu)
             {
                 spriteBatch.DrawString(Constants.FONT, strItemMenu, new Vector2(10, 10), Color.White);
                 spriteBatch.DrawString(Constants.FONT, strItemMenu2, new Vector2(250, 10), Color.White);
-                
+
             }
             else
             {
                 spriteBatch.DrawString(Constants.FONT, "Currently Editing: " + Constants.LEVELS[editingLevel] + "\nF1 for menu", new Vector2(10, 10), Color.White);
-                spriteBatch.DrawString(Constants.FONT, "Cam pos: " + camera.Position, new Vector2(10, 60), Color.White);  
+                spriteBatch.DrawString(Constants.FONT, "Cam pos: " + camera.Position, new Vector2(10, 60), Color.White);
             }
             spriteBatch.End();
-            
+
         }
     }
 }

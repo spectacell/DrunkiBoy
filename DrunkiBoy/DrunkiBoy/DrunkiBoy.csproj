@@ -72,6 +72,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cursor_RemoveItem.cs" />
     <Compile Include="Level\AnimatedObject.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Constants.cs" />
@@ -85,12 +86,14 @@
     <Compile Include="Level\LevelEditor.cs" />
     <Compile Include="Level\Platform.cs" />
     <Compile Include="Level\Player.cs" />
+    <Compile Include="KlassMallar\Mall_AnimeratObjekt.cs" />
+    <Compile Include="KlassMallar\Mall_StatisktObjekt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Background\BackgroundImage.cs" />
-    <Compile Include="TextureManager.cs" />
-    <Compile Include="Torch.cs" />
+    <Compile Include="Textures.cs" />
+    <Compile Include="Level\Torch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

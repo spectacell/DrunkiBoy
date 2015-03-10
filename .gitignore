@@ -41,7 +41,8 @@ local.properties
 *.user
 *.sln.docstates
 *.xml
-
+*.exe
+*.xnb
 # Build results
 
 [Dd]ebug/

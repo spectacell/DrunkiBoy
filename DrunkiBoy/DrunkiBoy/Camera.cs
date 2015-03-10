@@ -11,19 +11,22 @@
             Origin = new Vector2(_viewport.Width / 2.0f, _viewport.Height / 2.0f);
             Zoom = 1.0f;
         }
-
+        public void Update()
+        {
+            Zoom = MathHelper.Clamp(Zoom, 0.0f, 10.0f);
+        }
         public Vector2 Position
         {
             get
             {
                 return _position;
             }
-            set 
+            set
             {
-                _position = value;  
+                _position = value;
 
                 // If there's a limit set and there's no zoom or rotation clamp the position
-                if(Limits != null && Zoom == 1.0f && Rotation == 0.0f)
+                if (Limits != null && Zoom == 1.0f && Rotation == 0.0f)
                 {
                     _position.X = MathHelper.Clamp(_position.X, Limits.Value.X, Limits.Value.X + Limits.Value.Width - _viewport.Width);
                     _position.Y = MathHelper.Clamp(_position.Y, Limits.Value.Y, Limits.Value.Y + Limits.Value.Height - _viewport.Height);
@@ -32,9 +35,9 @@
         }
 
         public Vector2 Origin { get; set; }
-        
+
         public float Zoom { get; set; }
-        
+
         public float Rotation { get; set; }
 
         public Rectangle? Limits
@@ -45,7 +48,7 @@
             }
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     // Assign limit but make sure it's always bigger than the viewport
                     _limits = new Rectangle
@@ -81,7 +84,7 @@
         }
 
         public void Move(Vector2 displacement)
-        {          
+        {
             Position += displacement;
         }
 

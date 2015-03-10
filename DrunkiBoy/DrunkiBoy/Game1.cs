@@ -46,12 +46,12 @@ namespace DrunkiBoy
             windowHeight = Window.ClientBounds.Height;
             windowWidth = Window.ClientBounds.Width;
 
-            TextureManager.LoadContent(Content);
+            Textures.LoadContent(Content);
             Constants.LoadContent(Content);
 
             level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             levelEditor = new LevelEditor(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
-            torch = new Torch(new Vector2(100, 100), TextureManager.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 50);
+            torch = new Torch(new Vector2(100, 100), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 50);
         }
 
         protected override void UnloadContent()
