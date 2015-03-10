@@ -44,7 +44,11 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\DrunkiBoy\DrunkiBoy\DrunkiBoy\DrunkiBoy\bin\x86\Debug\Content\bg2.xnb</Output>
+<<<<<<< HEAD
       <Time>2015-03-10T14:38:49.0419004+01:00</Time>
+=======
+      <Time>2015-03-09T10:35:21.1066174+01:00</Time>
+>>>>>>> parent of 95fa569... LevelEditor har nu Zoom med musScroll
     </Item>
     <Item>
       <Source>space.png</Source>
