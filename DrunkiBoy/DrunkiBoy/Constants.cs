@@ -12,8 +12,6 @@ namespace DrunkiBoy
     class Constants
     {
         public static SpriteFont FONT, FONT_BIG;
-        public static char platformCharSymbol = 'P';
-        public static char playerCharSymbol = 'Y';
         public static string[] LEVELS = Directory.GetFiles(@"levels\"); //Läser in alla filer som ligger i mappen levels i en array LEVELS
 
         public static void LoadContent(ContentManager content)

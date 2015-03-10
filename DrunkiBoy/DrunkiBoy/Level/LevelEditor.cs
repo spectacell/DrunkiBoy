@@ -216,8 +216,12 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.Y))
             {
                 selectedItem = items.Player;
+<<<<<<< HEAD
                 selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), TextureManager.player, 
                                             new Rectangle(0,0,100,200), true, 1, 80);
+=======
+                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), Textures.player, new Rectangle(0,0,100,200), true, 1);
+>>>>>>> parent of 95fa569... LevelEditor har nu Zoom med musScroll
             }
         }
 
