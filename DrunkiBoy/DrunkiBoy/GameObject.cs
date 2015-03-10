@@ -37,7 +37,7 @@ namespace DrunkiBoy
         {
             if (isActive) 
             { 
-                spriteBatch.Draw(tex, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                spriteBatch.Draw(tex, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             }
         }
         /// <summary>

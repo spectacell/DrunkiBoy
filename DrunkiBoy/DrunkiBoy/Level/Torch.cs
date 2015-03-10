@@ -18,7 +18,7 @@ namespace DrunkiBoy
             this.type = "torch";            
            
         }
-        
+        //Kan ta bort Draw() härifrån sen när Torch är implementerad, eftersom den använder Draw i AnimatedObject klassen
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();

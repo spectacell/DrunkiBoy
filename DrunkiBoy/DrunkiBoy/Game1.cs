@@ -88,8 +88,6 @@ namespace DrunkiBoy
                     torch.Update(gameTime);
                     break;
             }
-            
-
             base.Update(gameTime);
         }
 
