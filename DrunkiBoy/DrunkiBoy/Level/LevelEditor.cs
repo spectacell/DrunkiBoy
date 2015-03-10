@@ -216,8 +216,10 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.Y))
             {
                 selectedItem = items.Player;
+
                 selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), TextureManager.player, 
                                             new Rectangle(0,0,100,200), true, 1, 80);
+
             }
         }
 
