@@ -11,7 +11,7 @@ namespace DrunkiBoy
     {
         protected int nrFrames, frame, frameWidth;
         protected double timeTilNextFrame = 0;
-        protected const double frameInterval = 80;
+        protected double frameInterval;
         protected Rectangle[] facingSrcRects;
         public int facing = 1; //Vilket håll objektet är vänt åt. Rör man sig åt vänster sätts den till 0 och om man rör sig åt höger så 1.
 
@@ -19,9 +19,10 @@ namespace DrunkiBoy
         public Platform activePlatform; //plattformsklassen är ännu inte skapad
         public bool isOnGround;
 
-        public AnimatedObject(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames) :
+        public AnimatedObject(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval) :
             base(pos, tex, srcRect, isActive)
         {
+            this.frameInterval = frameInterval;
             this.frameWidth = srcRect.Width;
             this.nrFrames = nrFrames;
             //Skapar array med två srcRect som animationen utgår från. En för varje riktning. srcRect för objekt vänt åt höger och 1 för objekt vänt åt vänster.

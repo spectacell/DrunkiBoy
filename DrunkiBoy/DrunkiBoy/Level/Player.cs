@@ -20,8 +20,8 @@ namespace DrunkiBoy
         private double spawnTimer, spawnTimerDefault = 750;
         private bool movingLeft;
 
-        public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames)
-            : base(pos, tex, srcRect, isActive, nrFrames)
+        public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
+            : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
             livesLeft = defaultLives;
             this.type = "player";

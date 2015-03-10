@@ -11,8 +11,8 @@ namespace DrunkiBoy
     {
        
         
-        public Torch(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames)
-            : base(pos, tex, srcRect, isActive, nrFrames)
+        public Torch(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
+            : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
             
             this.type = "torch";            

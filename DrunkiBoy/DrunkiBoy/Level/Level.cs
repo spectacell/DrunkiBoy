@@ -85,7 +85,7 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "player")
                 {
-                        player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), TextureManager.player, new Rectangle(0,0,138,190), true, 5);
+                        player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), TextureManager.player, new Rectangle(0,0,138,190), true, 5, 80);
                         objects.Add(player);
                 }
 
