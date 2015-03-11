@@ -12,6 +12,7 @@ namespace DrunkiBoy
         public List<Platform> platforms = new List<Platform>();
         public List<Enemy> enemies = new List<Enemy>();
         public List<Torch> torches = new List<Torch>();
+        public List<Key> keys = new List<Key>();
 
         public ItemManager()
         {
@@ -25,12 +26,25 @@ namespace DrunkiBoy
         {
             torches.Add(torch);
         }
+        public void AddKey(Key key)
+        {
+            keys.Add(key);
+        }
         
         public void Update(GameTime gameTime, Player player)
         {
             UpdatePlatforms(player);
             UpdateTorches(gameTime);
+            UpdateKeys(gameTime);
             
+        }
+
+        private void UpdateKeys(GameTime gameTime)
+        {
+            foreach (Key key in keys)
+            {
+                key.Update(gameTime);
+            }
         }
 
         private void UpdateTorches(GameTime gameTime)
@@ -49,6 +63,10 @@ namespace DrunkiBoy
             foreach (Torch torchs in torches)
             {
                 spriteBatch.Draw(torchs.tex,torchs.pos, torchs.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+            foreach (Key key in keys)
+            {
+                spriteBatch.Draw(key.tex, key.pos, key.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
                
 
