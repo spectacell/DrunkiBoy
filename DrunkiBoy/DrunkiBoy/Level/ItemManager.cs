@@ -11,6 +11,7 @@ namespace DrunkiBoy
     {
         public List<Platform> platforms = new List<Platform>();
         public List<Enemy> enemies = new List<Enemy>();
+        public List<Torch> torches = new List<Torch>();
 
         public ItemManager()
         {
@@ -20,15 +21,34 @@ namespace DrunkiBoy
         {
             platforms.Add(platform);
         }
+        public void AddTorch(Torch torch)
+        {
+            torches.Add(torch);
+        }
+        
         public void Update(GameTime gameTime, Player player)
         {
             UpdatePlatforms(player);
+            UpdateTorches(gameTime);
+            
+        }
+
+        private void UpdateTorches(GameTime gameTime)
+        {
+            foreach (Torch torchs in torches)
+            {
+                torchs.Update(gameTime);
+            }
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             foreach (Platform platform in platforms)
             {
                 spriteBatch.Draw(platform.tex, platform.pos, platform.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+            foreach (Torch torchs in torches)
+            {
+                spriteBatch.Draw(torchs.tex,torchs.pos, torchs.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
                
 
@@ -60,7 +80,7 @@ namespace DrunkiBoy
                         player.pos.Y = platform.BoundingBox.Top - player.BoundingBox.Height + 1; //+1 to maintain the Intersection
                         player.movement.Y = 0;
                     }
-                }
+                }              
             }
         }
     }

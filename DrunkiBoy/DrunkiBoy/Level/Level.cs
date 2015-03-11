@@ -88,6 +88,11 @@ namespace DrunkiBoy
                         player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.player, new Rectangle(0,0,138,190), true, 5, 80);
                         objects.Add(player);
                 }
+                else if (temp[0] == "torch")
+                {
+                     itemManager.AddTorch(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 50));
+                     objects.Add(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 50));
+                }
 
             }
             sr.Close();

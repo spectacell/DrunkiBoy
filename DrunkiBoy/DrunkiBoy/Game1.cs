@@ -85,7 +85,6 @@ namespace DrunkiBoy
                 case gameState.levelEditor:
                     
                     levelEditor.Update(gameTime);
-                    torch.Update(gameTime);
                     break;
             }
             base.Update(gameTime);
@@ -105,7 +104,6 @@ namespace DrunkiBoy
                 case gameState.levelEditor:
                     
                     levelEditor.Draw(spriteBatch);
-                    torch.Draw(spriteBatch);
                     break;
             }
             

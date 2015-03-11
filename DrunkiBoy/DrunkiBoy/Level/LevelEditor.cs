@@ -12,8 +12,8 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        private String strItemMenu = "P: Platform\nY: Player"; //osv...
-        enum items { Platform, Player, RemovingObject }; //osv...
+        private String strItemMenu = "P: Platform\nY: Player"; //osv...           
+        enum items { Platform, Player, RemovingObject, Torch }; //osv...
 
         private int editingLevel = 0;
         private GameObject selectedObject;
@@ -30,6 +30,7 @@ namespace DrunkiBoy
         items selectedItem;
         private bool showMenu;
         private String strItemMenu2 = "Right-click for remove tool\n\",\" Zooms out and \".\" Zooms in\nCtrl-S to save";
+        private String strItemMenu3 = "T: Torch ";
 
         public LevelEditor(GraphicsDevice gd, String levelTextFilePath, ContentManager content) :
             base(gd, levelTextFilePath, content)
@@ -154,6 +155,18 @@ namespace DrunkiBoy
                             objects.Add(new Player(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.player, new Rectangle(0, 0, 100, 200), true, 1, 80));
                         }
                         break;
+
+                    case items.Torch:
+                        if (intersectingPlatform!= null)
+                        {
+                            objects.Add(new Torch(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 1, 50));
+
+                        }
+                        else
+                        {
+                            objects.Add(new Torch(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 1, 50));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -214,6 +227,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Player;
                 selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), Textures.player, new Rectangle(0, 0, 138, 190), true, 1, 80);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.T))
+            {
+                selectedItem = items.Torch;
+                selectedObject = new Torch(new Vector2(mouseState.X, mouseState.Y), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 1, 50);
             }
         }
 
@@ -294,6 +312,7 @@ namespace DrunkiBoy
             {
                 spriteBatch.DrawString(Constants.FONT, strItemMenu, new Vector2(10, 10), Color.White);
                 spriteBatch.DrawString(Constants.FONT, strItemMenu2, new Vector2(250, 10), Color.White);
+                spriteBatch.DrawString(Constants.FONT, strItemMenu3, new Vector2(10, 60), Color.White);
 
             }
             else
