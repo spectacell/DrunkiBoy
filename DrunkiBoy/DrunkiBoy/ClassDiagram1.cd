@@ -1,129 +1,157 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="DrunkiBoy.BackgroundImage" Collapsed="true">
-    <Position X="10" Y="0.5" Width="1.5" />
+    <Position X="19.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAIAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Background\BackgroundImage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.BackgroundLayer" Collapsed="true">
-    <Position X="11.75" Y="0.5" Width="1.5" />
+    <Position X="21.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAgAAAgAIAAAACAAABAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Background\BackgroundLayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Camera" Collapsed="true">
-    <Position X="13.5" Y="0.5" Width="1.5" />
+    <Position X="23" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAIAgEAAAAQAAACAAAAAAEAAAgAwAAAI=</HashCode>
+      <HashCode>AAQAAAAAAIAAAIAgEAAAAQAAACAAAAAAEAAAgAwAAAI=</HashCode>
       <FileName>Camera.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Constants" Collapsed="true">
-    <Position X="15.25" Y="0.5" Width="1.5" />
+    <Position X="24.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAACABAAAAAAAAAAIAAAAACAAAAAAAAAAAAAABAAQ=</HashCode>
+      <HashCode>AAAAAAABAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAQ=</HashCode>
       <FileName>Constants.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DrunkiBoy.Game1" Collapsed="true">
-    <Position X="11.75" Y="1.5" Width="1.5" />
+  <Class Name="DrunkiBoy.Cursor_RemoveItem" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAEEAAAAAAAwAAQgAAAAAEAAEAAAgAFAAAAAAAAIQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cursor_RemoveItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrunkiBoy.Game1" Collapsed="true">
+    <Position X="21.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEEAAAAAAAwAAQgAEAAAEAAEAAAgAFAAAAAAAAIQ=</HashCode>
       <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.GameObject" Collapsed="true">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="9" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAQwAAAIAIAJAAACAhAAAAAAAAEAAAYAA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="DrunkiBoy.Key" Collapsed="true">
+    <Position X="10.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Key.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="DrunkiBoy.AnimatedObject" Collapsed="true">
-    <Position X="3" Y="1.75" Width="1.5" />
+    <Position X="8" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQACBAAAAQEAAAAAAAgAAAAAAAAQAAgAEAAIQBAAAA=</HashCode>
       <FileName>Level\AnimatedObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Enemy" Collapsed="true">
-    <Position X="3" Y="3.25" Width="1.5" />
+    <Position X="12.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Level\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.EnemyManager" Collapsed="true">
-    <Position X="10" Y="1.5" Width="1.5" />
+    <Position X="19.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAAAAABAAA=</HashCode>
       <FileName>Level\EnemyManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.ItemManager" Collapsed="true">
-    <Position X="13.5" Y="1.5" Width="1.5" />
+    <Position X="23" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAQAAAgAAAAAAAAAAAAAAAAAJAAAAAAgAAAA=</HashCode>
+      <HashCode>AAQIAAAAAQAIAgIAAAAAAAAAAAAAACAJAAAAAAgAAAA=</HashCode>
       <FileName>Level\ItemManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Level" Collapsed="true">
-    <Position X="0.5" Y="4.5" Width="1.5" />
+    <Position X="0.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAIAgAAAgAAAAAAAAAAAQAAAgABAAAgBIAEAAQ=</HashCode>
       <FileName>Level\Level.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.LevelEditor" Collapsed="true">
-    <Position X="0.5" Y="5.75" Width="1.5" />
+    <Position X="0.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAUCQAAAwAACAgEAAABQAAAECAIIAAAUAAAAIAGwCEA=</HashCode>
+      <HashCode>AAUCQAAAwAACAgEAEABQAAAECAIIACAUAAAAIAGwCEA=</HashCode>
       <FileName>Level\LevelEditor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Platform" Collapsed="true">
-    <Position X="7.5" Y="1.75" Width="1.5" />
+    <Position X="17" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Level\Platform.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Player" Collapsed="true">
-    <Position X="5.25" Y="3.25" Width="1.5" />
+    <Position X="3.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAwAAEBAAAAAABAAAAQAIAAgAAAAgAQAlAEACIIAEAg=</HashCode>
       <FileName>Level\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="DrunkiBoy.Torch" Collapsed="true">
+    <Position X="8" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Level\Torch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="DrunkiBoy.Program" Collapsed="true">
-    <Position X="10" Y="2.5" Width="1.5" />
+    <Position X="19.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DrunkiBoy.TextureManager" Collapsed="true">
-    <Position X="11.75" Y="2.5" Width="1.5" />
+  <Class Name="DrunkiBoy.Textures" Collapsed="true">
+    <Position X="21.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAACAAAAAAQAAAAAAAAAAAAABAAAABAgAAAw=</HashCode>
-      <FileName>TextureManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="DrunkiBoy.Torch" Collapsed="true">
-    <Position X="0.75" Y="3.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAIAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
-      <FileName>Torch.cs</FileName>
+      <HashCode>AAAAAAAEAACAAAQAAQAAAAAAAAAAAAABAAAABAgAAAw=</HashCode>
+      <FileName>Textures.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="KeyMouseReader" Collapsed="true">
-    <Position X="15.25" Y="1.5" Width="1.5" />
+    <Position X="24.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BBQCAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAIAABAAAA=</HashCode>
       <FileName>KeyMouseReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrunkiBoy.Mall.Mall_AnimeratObjekt" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KlassMallar\Mall_AnimeratObjekt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrunkiBoy.Mall.Mall_StatisktObjekt" Collapsed="true">
+    <Position X="1.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KlassMallar\Mall_StatisktObjekt.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
