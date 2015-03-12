@@ -90,14 +90,20 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "torch")
                 {
-                        itemManager.AddTorch(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 50));
-                        objects.Add(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 50));
+                        itemManager.AddTorch(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 180));
+                        objects.Add(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 180));
                 }
                 else if (temp[0] == "Key")
                 {
-                        itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 50));
+                        itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 200));
                         
-                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 50));
+                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 200));
+                }
+                else if (temp[0] == "heart")
+                {
+                    itemManager.Addheart(new Heart(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.heart, new Rectangle(0, 0, 31, 26), true, 2, 180));
+
+                    objects.Add(new Heart(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.heart, new Rectangle(0, 0, 31, 26), true, 2, 180));
                 }
             }
             sr.Close();

@@ -13,7 +13,7 @@ namespace DrunkiBoy
         public List<Enemy> enemies = new List<Enemy>();
         public List<Torch> torches = new List<Torch>();
         public List<Key> keys = new List<Key>();
-
+        public List<Heart> hearts = new List<Heart>();
         public ItemManager()
         {
 
@@ -30,13 +30,26 @@ namespace DrunkiBoy
         {
             keys.Add(key);
         }
+        public void Addheart(Heart heart)
+        {
+            hearts.Add(heart);
+        }
         
         public void Update(GameTime gameTime, Player player)
         {
             UpdatePlatforms(player);
             UpdateTorches(gameTime);
             UpdateKeys(gameTime);
+            UpdateHeart(gameTime);
             
+        }
+
+        private void UpdateHeart(GameTime gameTime)
+        {
+            foreach (Heart heart in hearts)
+            {
+                heart.Update(gameTime);
+            }
         }
 
         private void UpdateKeys(GameTime gameTime)
@@ -67,6 +80,10 @@ namespace DrunkiBoy
             foreach (Key key in keys)
             {
                 spriteBatch.Draw(key.tex, key.pos, key.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+            foreach (Heart heart in hearts)
+            {
+                spriteBatch.Draw(heart.tex, heart.pos, heart.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
                
 

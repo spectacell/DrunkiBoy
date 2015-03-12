@@ -22,6 +22,7 @@ namespace DrunkiBoy
         LevelEditor levelEditor;
         Torch torch;
         Key key;
+        Heart heart;
 
         public enum gameState { inGame, levelEditor };
         public static gameState currentGameState = gameState.levelEditor;
@@ -52,8 +53,9 @@ namespace DrunkiBoy
 
             level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             levelEditor = new LevelEditor(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
-            torch = new Torch(new Vector2(100, 100), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 50);
-            key = new Key(new Vector2(150, 150), Textures.Key, new Rectangle(0, 0, 20, 30), true, 2, 50);
+            torch = new Torch(new Vector2(100, 100), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 180);
+            key = new Key(new Vector2(150, 150), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 200);
+            heart = new Heart(new Vector2(150, 100), Textures.heart, new Rectangle(0, 0, 31, 26),true,  2, 180);
         }
 
         protected override void UnloadContent()
