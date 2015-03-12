@@ -107,15 +107,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtraLif1.png">
-      <Name>ExtraLif1</Name>
+    <Compile Include="ExtraLif2.png">
+      <Name>ExtraLif2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtraLif2.png">
-      <Name>ExtraLif2</Name>
+    <Compile Include="flaska.png">
+      <Name>flaska</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="burgare.png">
+      <Name>burgare</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Pizza.png">
+      <Name>Pizza</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
