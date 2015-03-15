@@ -13,7 +13,7 @@ namespace DrunkiBoy
     class LevelEditor : Level
     {
         private String strItemMenu = "P: Platform\nY: Player"; //osv...           
-        enum items { Platform, Player, RemovingObject, Torch, Key, Heart }; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller }; //osv...
 
         private int editingLevel = 0;
         private GameObject selectedObject;
@@ -33,6 +33,7 @@ namespace DrunkiBoy
         private String strItemMenu3 = "T: Torch ";
         private String strItemManu4 = "K: Key ";
         private String strItemMenu5 = "H: Heart ";
+        private String strItemMenu6 = "S: Painkiller ";
 
         public LevelEditor(GraphicsDevice gd, String levelTextFilePath, ContentManager content) :
             base(gd, levelTextFilePath, content)
@@ -191,6 +192,16 @@ namespace DrunkiBoy
                             objects.Add(new Heart(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.heart, new Rectangle(0, 0, 31, 32), true, 1, 50));
                         }
                         break;
+                    case items.Painkiller:
+                        if (intersectingPlatform!= null)
+                        {
+                            objects.Add(new Painkiller(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 1, 50));
+                        }
+                        else
+                        {
+                            objects.Add(new Painkiller(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 1, 50));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -266,6 +277,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Heart;
                 selectedObject = new Heart(new Vector2(mouseState.X, mouseState.Y), Textures.heart, new Rectangle(0, 0, 31, 26), true, 1, 50);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.S))
+            {
+                selectedItem = items.Painkiller;
+                selectedObject = new Painkiller(new Vector2(mouseState.X, mouseState.Y), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 1, 50);
             }
         }
 
@@ -349,6 +365,7 @@ namespace DrunkiBoy
                 spriteBatch.DrawString(Constants.FONT, strItemMenu3, new Vector2(10, 60), Color.White);
                 spriteBatch.DrawString(Constants.FONT, strItemManu4, new Vector2(10,85), Color.White);
                 spriteBatch.DrawString(Constants.FONT, strItemMenu5, new Vector2(10, 110), Color.White);
+                spriteBatch.DrawString(Constants.FONT, strItemMenu6, new Vector2(10, 135), Color.White);
                     
 
             }
