@@ -14,6 +14,7 @@ namespace DrunkiBoy
         public List<Torch> torches = new List<Torch>();
         public List<Key> keys = new List<Key>();
         public List<Heart> hearts = new List<Heart>();
+        public List<Painkiller> painkillers = new List<Painkiller>();
         public ItemManager()
         {
 
@@ -34,6 +35,10 @@ namespace DrunkiBoy
         {
             hearts.Add(heart);
         }
+        public void AddPainkiller(Painkiller painkiller)
+        {
+            painkillers.Add(painkiller);
+        }
         
         public void Update(GameTime gameTime, Player player)
         {
@@ -41,7 +46,15 @@ namespace DrunkiBoy
             UpdateTorches(gameTime);
             UpdateKeys(gameTime);
             UpdateHeart(gameTime);
-            
+            UpdatePainkiller(gameTime);
+        }
+
+        private void UpdatePainkiller(GameTime gameTime)
+        {
+            foreach (Painkiller Painkiller in painkillers)
+            {
+                Painkiller.Update(gameTime);
+            }
         }
 
         private void UpdateHeart(GameTime gameTime)
@@ -84,6 +97,10 @@ namespace DrunkiBoy
             foreach (Heart heart in hearts)
             {
                 spriteBatch.Draw(heart.tex, heart.pos, heart.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+            foreach (Painkiller painkiller in painkillers)
+            {
+                spriteBatch.Draw(painkiller.tex, painkiller.pos, painkiller.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
                
 
