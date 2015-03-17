@@ -13,7 +13,7 @@ namespace DrunkiBoy
 
         public static void LoadContent(ContentManager content)
         {
-            player = content.Load<Texture2D>("player_spriteSheet");
+            player = content.Load<Texture2D>("character-animation");
             platform = content.Load<Texture2D>("platform");
             deleteCursor = content.Load<Texture2D>("deleteCursor");
             background1 = content.Load<Texture2D>("space");
