@@ -11,9 +11,9 @@ using System.IO;
 namespace DrunkiBoy
 {
     class LevelEditor : Level
-    {
-        private String strItemMenu = "P: Platform\nY: Player"; //osv...           
+    {         
         enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller }; //osv...
+        items selectedItem;
 
         private int editingLevel = 0;
         private GameObject selectedObject;
@@ -27,17 +27,20 @@ namespace DrunkiBoy
         private bool drawLevelSaved;
         private double drawTextTimer, drawTextTimerDefault = 1000;
 
-        items selectedItem;
         private bool showMenu;
-        private String strItemMenu2 = "Right-click for remove tool\n\",\" Zooms out and \".\" Zooms in\nCtrl-S to save";
-        private String strItemMenu3 = "T: Torch ";
-        private String strItemManu4 = "K: Key ";
-        private String strItemMenu5 = "H: Heart ";
-        private String strItemMenu6 = "S: Painkiller ";
+        private List<string> menuEntries = new List<string>();
+        private string menuInstructions = "Right-click for remove tool\nScroll mousewheel to zoom\nCtrl-S to save";
 
         public LevelEditor(GraphicsDevice gd, String levelTextFilePath, ContentManager content) :
             base(gd, levelTextFilePath, content)
         {
+            menuEntries.Add("P: Platform");
+            menuEntries.Add("Y: Player");
+            menuEntries.Add("T: Torch");
+            menuEntries.Add("K: Key");
+            menuEntries.Add("H: Heart");
+            menuEntries.Add("S: Painkiller");
+
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
             selectedItem = items.Platform;
@@ -360,12 +363,18 @@ namespace DrunkiBoy
             }
             if (showMenu)
             {
-                spriteBatch.DrawString(Constants.FONT, strItemMenu, new Vector2(10, 10), Color.White);
-                spriteBatch.DrawString(Constants.FONT, strItemMenu2, new Vector2(250, 10), Color.White);
-                spriteBatch.DrawString(Constants.FONT, strItemMenu3, new Vector2(10, 60), Color.White);
-                spriteBatch.DrawString(Constants.FONT, strItemManu4, new Vector2(10,85), Color.White);
-                spriteBatch.DrawString(Constants.FONT, strItemMenu5, new Vector2(10, 110), Color.White);
-                spriteBatch.DrawString(Constants.FONT, strItemMenu6, new Vector2(10, 135), Color.White);
+                spriteBatch.DrawString(Constants.FONT, menuInstructions, new Vector2(10,10), Color.White);
+                
+
+                Vector2 entryPos = new Vector2(10, 100);
+                int offset = 0;
+                foreach (string entry in menuEntries)
+                {
+                    spriteBatch.DrawString(Constants.FONT, entry, new Vector2(entryPos.X, entryPos.Y+offset), Color.White);
+                    offset += 25;
+                }
+
+
                     
 
             }
