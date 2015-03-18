@@ -46,14 +46,19 @@ namespace DrunkiBoy
             UpdateTorches(gameTime);
             UpdateKeys(gameTime);
             UpdateHeart(gameTime);
-            UpdatePainkiller(gameTime);
+            UpdatePainkiller(gameTime, player);
         }
 
-        private void UpdatePainkiller(GameTime gameTime)
+        private void UpdatePainkiller(GameTime gameTime, Player player)
         {
-            foreach (Painkiller Painkiller in painkillers)
+            foreach (Painkiller painkiller in painkillers)
             {
-                Painkiller.Update(gameTime);
+                if (painkiller.DetectPixelCollision(player))
+                {
+                    painkillers.Remove(painkiller);
+                    break;
+                }
+                painkiller.Update(gameTime);
             }
         }
 
