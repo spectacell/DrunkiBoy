@@ -15,6 +15,7 @@ namespace DrunkiBoy
         public List<Key> keys = new List<Key>();
         public List<Heart> hearts = new List<Heart>();
         public List<Painkiller> painkillers = new List<Painkiller>();
+        public List<Teleport> teleports = new List<Teleport>();
         public ItemManager()
         {
 
@@ -39,14 +40,27 @@ namespace DrunkiBoy
         {
             painkillers.Add(painkiller);
         }
+        public void AddTeleport(Teleport teleport)
+        {
+            teleports.Add(teleport);
+        }
         
         public void Update(GameTime gameTime, Player player)
         {
             UpdatePlatforms(player);
             UpdateTorches(gameTime);
-            UpdateKeys(gameTime);
-            UpdateHeart(gameTime);
+            UpdateKeys(gameTime, player);
+            UpdateHeart(gameTime, player);
             UpdatePainkiller(gameTime, player);
+            UpdateTeleport(gameTime);
+        }
+
+        private void UpdateTeleport(GameTime gameTime)
+        {
+            foreach (Teleport teleport in teleports)
+            {
+                teleport.Update(gameTime);
+            }
         }
 
         private void UpdatePainkiller(GameTime gameTime, Player player)
@@ -61,19 +75,31 @@ namespace DrunkiBoy
                 painkiller.Update(gameTime);
             }
         }
-
-        private void UpdateHeart(GameTime gameTime)
+       
+       
+        private void UpdateHeart(GameTime gameTime, Player player)
         {
             foreach (Heart heart in hearts)
             {
+                if (heart.DetectPixelCollision(player))
+                {
+                    hearts.Remove(heart);
+                    break;
+                }
                 heart.Update(gameTime);
             }
+
         }
 
-        private void UpdateKeys(GameTime gameTime)
+        private void UpdateKeys(GameTime gameTime, Player player)
         {
             foreach (Key key in keys)
             {
+                if (key.DetectPixelCollision(player))
+                {
+                    keys.Remove(key);
+                    break;
+                }
                 key.Update(gameTime);
             }
         }
@@ -82,6 +108,7 @@ namespace DrunkiBoy
         {
             foreach (Torch torchs in torches)
             {
+                
                 torchs.Update(gameTime);
             }
         }
@@ -106,6 +133,10 @@ namespace DrunkiBoy
             foreach (Painkiller painkiller in painkillers)
             {
                 spriteBatch.Draw(painkiller.tex, painkiller.pos, painkiller.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+            foreach (Teleport teleport in teleports)
+            {
+                spriteBatch.Draw(teleport.tex, teleport.pos, teleport.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
                
 

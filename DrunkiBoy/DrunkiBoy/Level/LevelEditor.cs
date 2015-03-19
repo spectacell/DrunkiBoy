@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {         
-        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller }; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport }; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -40,6 +40,7 @@ namespace DrunkiBoy
             menuEntries.Add("K: Key");
             menuEntries.Add("H: Heart");
             menuEntries.Add("S: Painkiller");
+            menuEntries.Add("F: Teleport");
 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
@@ -205,6 +206,16 @@ namespace DrunkiBoy
                             objects.Add(new Painkiller(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 1, 50));
                         }
                         break;
+                    case items.Teleport:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Teleport(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.teleport, new Rectangle(0, 0, 200, 100), true, 1, 50));
+                        }
+                        else
+                        {
+                            objects.Add(new Teleport(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.teleport, new Rectangle(0, 0, 200, 100), true, 1, 50));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -285,6 +296,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Painkiller;
                 selectedObject = new Painkiller(new Vector2(mouseState.X, mouseState.Y), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 1, 50);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.F))
+            {
+                selectedItem = items.Teleport;
+                selectedObject = new Teleport(new Vector2(mouseState.X, mouseState.Y), Textures.teleport, new Rectangle(0, 0, 200, 100), true, 1, 50);
             }
         }
 

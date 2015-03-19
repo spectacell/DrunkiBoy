@@ -95,6 +95,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Background\BackgroundImage.cs" />
+    <Compile Include="Teleport.cs" />
     <Compile Include="Textures.cs" />
     <Compile Include="Level\Torch.cs" />
   </ItemGroup>

@@ -95,21 +95,27 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "Key")
                 {
-                        itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 200));
+                        itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 250));
                         
-                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 200));
+                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 250));
                 }
                 else if (temp[0] == "heart")
                 {
-                    itemManager.Addheart(new Heart(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.heart, new Rectangle(0, 0, 31, 26), true, 2, 180));
+                    itemManager.Addheart(new Heart(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.heart, new Rectangle(0, 0, 31, 26), true, 2, 250));
 
-                    objects.Add(new Heart(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.heart, new Rectangle(0, 0, 31, 26), true, 2, 180));
+                    objects.Add(new Heart(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.heart, new Rectangle(0, 0, 31, 26), true, 2, 250));
                 }
                 else if (temp[0] == "painkiller")
                 {
-                    itemManager.AddPainkiller(new Painkiller(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 2, 180));
+                    itemManager.AddPainkiller(new Painkiller(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 2, 230));
 
-                    objects.Add(new Painkiller(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 2, 180));
+                    objects.Add(new Painkiller(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 2, 230));
+                }
+                else if (temp[0] == "teleport")
+                {
+                    itemManager.AddTeleport(new Teleport(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.teleport, new Rectangle(0, 0, 200, 100), true, 2, 100));
+
+                    objects.Add(new Teleport(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.teleport, new Rectangle(0, 0, 200, 100), true, 2, 100));
                 }
             }
             sr.Close();
