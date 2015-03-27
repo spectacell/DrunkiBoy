@@ -13,7 +13,7 @@ namespace DrunkiBoy
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
             
-            this.type = "Key";            
+            this.type = "key";            
            
         }
     }
