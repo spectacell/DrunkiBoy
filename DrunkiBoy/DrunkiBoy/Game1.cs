@@ -59,7 +59,7 @@ namespace DrunkiBoy
             key = new Key(new Vector2(150, 150), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 250);
             heart = new Heart(new Vector2(150, 100), Textures.heart, new Rectangle(0, 0, 31, 26),true,  2, 250);
             painkiller = new Painkiller(new Vector2(150, 200), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 3, 230);
-            teleport = new Teleport(new Vector2(150, 250), Textures.teleport, new Rectangle(0, 0, 200, 267), true, 2, 100);
+            teleport = new Teleport(new Vector2(150, 250), Textures.AktivTeleport, new Rectangle(0, 0, 200, 267), true, 2, 100);
         }
 
         protected override void UnloadContent()
