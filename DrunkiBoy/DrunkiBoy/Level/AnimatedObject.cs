@@ -16,7 +16,7 @@ namespace DrunkiBoy
         public int facing = 1; //Vilket håll objektet är vänt åt. Rör man sig åt vänster sätts den till 0 och om man rör sig åt höger så 1.
 
         public Vector2 movement;
-        public Platform activePlatform; //plattformsklassen är ännu inte skapad
+        public Platform activePlatform;
         public bool isOnGround;
 
         public AnimatedObject(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval) :
@@ -25,7 +25,7 @@ namespace DrunkiBoy
             this.frameInterval = frameInterval;
             this.frameWidth = srcRect.Width;
             this.nrFrames = nrFrames;
-            //Skapar array med två srcRect som animationen utgår från. En för varje riktning. srcRect för objekt vänt åt höger och 1 för objekt vänt åt vänster.
+            //Skapar array med två srcRect som animationen utgår från. En för varje riktning. 0 för objekt vänt åt höger och 1 för objekt vänt åt vänster.
             facingSrcRects = new Rectangle[2] { new Rectangle(nrFrames * srcRect.Width, srcRect.Y, srcRect.Width, srcRect.Height), srcRect };
         }
 

@@ -11,10 +11,13 @@ namespace DrunkiBoy
     class Player : AnimatedObject
     {
         const int playerSpeed = 80;
-        KeyboardState ks;
         public static int livesLeft;
         private int defaultLives = 3;
         public static int healthLeft, defaultHealth = 100;
+        public static int score = 132432;
+
+        public static int activePowerUp; //Tänkte att man kunde ha numrerade powerups, typ 0: odödlig, 1: flygförmåga, 2: nånting
+
 
         public int jumpHeight = 12;
         public Vector2 currentSpawnPos;
@@ -27,7 +30,7 @@ namespace DrunkiBoy
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
             livesLeft = defaultLives;
-            healthLeft = 70;
+            healthLeft = defaultHealth;
             this.type = "player";
             //ResetSpawnTimer();
         }

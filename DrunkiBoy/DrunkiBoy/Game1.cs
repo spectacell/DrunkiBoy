@@ -80,6 +80,7 @@ namespace DrunkiBoy
             {
                 case gameState.inGame:
                     level.Update(gameTime);
+                    gui.Update(gameTime);
                     break;
 
                 case gameState.levelEditor:
