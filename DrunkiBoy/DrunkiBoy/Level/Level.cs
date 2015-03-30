@@ -24,6 +24,9 @@ namespace DrunkiBoy
 
         protected int levelHeight = 2000, levelWidth = 6000;
 
+        public static double timeLeft;
+        private double defaultTime = 240;
+
         public Level(GraphicsDevice gd, String levelTextFilePath, ContentManager content)
         {
             #region Kamera och parallaxbakgrunder
@@ -44,12 +47,14 @@ namespace DrunkiBoy
             //layers[2].ListOfBackgrounds.Add(new ParallaxBackgroundImage(new Vector2(0, levelHeight - TextureManager.background3.Height), TextureManager.background3));
             #endregion
             LoadContent(levelTextFilePath);
+            timeLeft = defaultTime;
         }
         
         public virtual void Update(GameTime gameTime)
         {
             player.Update(gameTime);
             itemManager.Update(gameTime, player);
+            timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
 
             // Riktar kameran mot spelaren...
             camera.LookAt(player.pos);

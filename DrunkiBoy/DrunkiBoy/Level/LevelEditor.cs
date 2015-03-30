@@ -375,29 +375,24 @@ namespace DrunkiBoy
             {
                 spriteBatch.DrawString(Constants.FONT_BIG, "Level has been saved",
                     new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString("Level has been saved").X / 2,
-                                Game1.windowHeight / 2 - Constants.FONT.MeasureString("Level has been saved").Y / 2), Color.White);
+                                Game1.windowHeight / 2 - Constants.FONT.MeasureString("Level has been saved").Y / 2), Constants.fontColor);
             }
             if (showMenu)
             {
-                spriteBatch.DrawString(Constants.FONT, menuInstructions, new Vector2(10,10), Color.White);
+                spriteBatch.DrawString(Constants.FONT, menuInstructions, new Vector2(10, 10), Constants.fontColor);
                 
-
                 Vector2 entryPos = new Vector2(10, 100);
                 int offset = 0;
                 foreach (string entry in menuEntries)
                 {
-                    spriteBatch.DrawString(Constants.FONT, entry, new Vector2(entryPos.X, entryPos.Y+offset), Color.White);
+                    spriteBatch.DrawString(Constants.FONT, entry, new Vector2(entryPos.X, entryPos.Y + offset), Constants.fontColor);
                     offset += 25;
                 }
-
-
-                    
-
             }
             else
             {
-                spriteBatch.DrawString(Constants.FONT, "Currently Editing: " + Constants.LEVELS[editingLevel] + "\nF1 for menu", new Vector2(10, 10), Color.White);
-                spriteBatch.DrawString(Constants.FONT, "Cam pos: " + camera.Position, new Vector2(10, 60), Color.White);
+                spriteBatch.DrawString(Constants.FONT, "Currently Editing: " + Constants.LEVELS[editingLevel] + "\nF1 for menu", new Vector2(10, 10), Constants.fontColor);
+                spriteBatch.DrawString(Constants.FONT, "Cam pos: " + camera.Position, new Vector2(10, 60), Constants.fontColor);
             }
             spriteBatch.End();
 

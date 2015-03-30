@@ -9,9 +9,9 @@ with.
   <Asset Type="Graphics:FontDescription">
 
     <!--
-    Modify this string to change the font that will be imported.
+    Modify this string to change the font that will be imported. //Finns att ladda ner på Dropbox i mappen 8-bit font
     -->
-    <FontName>Segoe UI Mono</FontName>
+    <FontName>8BIT WONDER</FontName>
 
     <!--
     Size is a float value, measured in points. Modify this value to change

@@ -12,7 +12,10 @@ namespace DrunkiBoy
     {
         const int playerSpeed = 80;
         KeyboardState ks;
-        public int livesLeft, defaultLives = 3;
+        public static int livesLeft;
+        private int defaultLives = 3;
+        public static int healthLeft, defaultHealth = 100;
+
         public int jumpHeight = 12;
         public Vector2 currentSpawnPos;
         public Vector2 playerMovement;
@@ -24,6 +27,7 @@ namespace DrunkiBoy
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
             livesLeft = defaultLives;
+            healthLeft = 70;
             this.type = "player";
             //ResetSpawnTimer();
         }

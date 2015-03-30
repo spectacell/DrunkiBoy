@@ -10,6 +10,7 @@ namespace DrunkiBoy
     class Textures
     {
         public static Texture2D platform, background1, background2, background3, player, deleteCursor, torchTex, Key, heart, flaska, hamburgare, pizza, painkiller, teleport,AktivTeleport;
+        public static Texture2D healthBarGreen, healthBarRed;
 
         public static void LoadContent(ContentManager content)
         {
@@ -27,7 +28,8 @@ namespace DrunkiBoy
             painkiller = content.Load<Texture2D>("painkiller");
             teleport = content.Load<Texture2D>("teleport2");
             AktivTeleport = content.Load<Texture2D>("TeleportAktiv");
-            
+            healthBarGreen = content.Load<Texture2D>("GUI/healthBarGreen");
+            healthBarRed = content.Load<Texture2D>("GUI/healthBarRed");
             
 
             //bakgrund3 = content.Load<Texture2D>("textures/bakgrund3");
