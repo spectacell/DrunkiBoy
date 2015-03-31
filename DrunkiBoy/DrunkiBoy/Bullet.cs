@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace DrunkiBoy
 {
     //här är jag  osäker om vi ska ärva från gameobject eller hur jag ska fortsätta
+    //behövs Update Draw method  Update 
     class Bullet // : GameObject
     {
 

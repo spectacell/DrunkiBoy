@@ -7,6 +7,7 @@ using System.Text;
 
 namespace DrunkiBoy
 {
+    // behövs att skapa particles för olika vapen, och ändra att particle kommer att bli animerad vid träff 
     public class Particle
     {
         public Texture2D Texture { get; set; }        // The texture that will be drawn to represent the particle
