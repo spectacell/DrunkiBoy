@@ -6,12 +6,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace DrunkiBoy
 {
-    class GUI
+    public class GUI
     {
         private string strLives, strLevel, strCurrentLevel, strItemsLeft, strTime, strTitle, strTitleVersion;
         private Vector2 strLivesPos, healthBarPos, strLevelPos, strItemsLeftPos, strTimePos, strTitlePos, powerUpPos;
         private int scorePosY;
-        private GUIActivePowerUp activePowerUp;
+        private ActivePowerUpDisplay activePowerUp;
+        private Texture2D healthBarTex;
+        private double blinkTimer, blinkTimerDefault = 250;
         public GUI()
         {
             strLives = "LIVES ";
@@ -24,7 +26,7 @@ namespace DrunkiBoy
             strCurrentLevel = crntLevel.ToString();
 
             strLivesPos = new Vector2(16, 16);
-            healthBarPos = new Vector2(14, 57);
+            healthBarPos = new Vector2(13, 57);
             strLevelPos = new Vector2(577, 16);
             scorePosY = 57;
             strItemsLeftPos = new Vector2(920, 16);
@@ -32,12 +34,15 @@ namespace DrunkiBoy
             strTitlePos = new Vector2(843, 698);
             
             powerUpPos = new Vector2(Textures.healthBarRed.Width+25, strLivesPos.Y + 3);
-            activePowerUp = new GUIActivePowerUp(powerUpPos, Textures.powerUpTimer, new Rectangle(0,0,63,63), true, 12, 1000);
+            activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0,0,63,63), false, 13, 1000, 0);
+
+            healthBarTex = Textures.healthBarRed;
         }
 
         public virtual void Update(GameTime gameTime)
         {
             activePowerUp.Update(gameTime);
+            HealthBarBlinking(gameTime);
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
@@ -49,7 +54,7 @@ namespace DrunkiBoy
                 spriteBatch.Draw(Textures.heart, new Vector2(strLivesPos.X + Constants.FONT_BIG.MeasureString(strLives).X + i*40, strLivesPos.Y+5), new Rectangle(0, 0, 31, 26), Color.White);
             }
             //Health bar
-            spriteBatch.Draw(Textures.healthBarRed, healthBarPos, Color.White);
+            spriteBatch.Draw(healthBarTex, healthBarPos, Color.White);
             float greenBarWidth = ((float)Player.healthLeft / (float)Player.defaultHealth) * Textures.healthBarGreen.Width;
             spriteBatch.Draw(Textures.healthBarGreen, new Vector2(healthBarPos.X + 3, healthBarPos.Y + 3), new Rectangle(0, 0, (int)greenBarWidth, Textures.healthBarGreen.Height), Color.White);
             //Aktiv powerup
@@ -72,6 +77,28 @@ namespace DrunkiBoy
             spriteBatch.DrawString(Constants.FONT, strTitle, strTitlePos, Constants.fontColor);
             spriteBatch.DrawString(Constants.FONT, strTitleVersion, new Vector2(strTitlePos.X + Constants.FONT.MeasureString(strTitle).X, strTitlePos.Y), Constants.fontColor2);
             spriteBatch.End();
+        }
+        public void ShowPowerUpCounter(int powerUp) //Skickar nog in ett powerUp-objekt här sen istället. Tänker att tiden poweruppen ska vara aktiv finns i varje powerup-objekt
+        {
+            double time = 15000; //Fås från powerup sen
+            int frameInterval = (int)(time / 12); //tiden i ms delat med antal frames
+            activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0, 0, 63, 63), true, 13, frameInterval, powerUp);
+        }
+        private void HealthBarBlinking(GameTime gameTime)
+        {
+            if (blinkTimer >= 0)
+            {
+                healthBarTex = Textures.healthBarRedBlink;
+            }
+            else
+            {
+                healthBarTex = Textures.healthBarRed;
+            }
+            blinkTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+        }
+        public void BlinkHealthBar() //Kör när player tar skada
+        {
+            blinkTimer = blinkTimerDefault;
         }
     }
 }

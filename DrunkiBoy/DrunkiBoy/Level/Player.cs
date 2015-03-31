@@ -10,39 +10,59 @@ namespace DrunkiBoy
 {
     class Player : AnimatedObject
     {
-        const int playerSpeed = 80;
+        private const int playerSpeed = 80;
         public static int livesLeft;
         private int defaultLives = 3;
-        public static int healthLeft, defaultHealth = 100;
+        public static int healthLeft, defaultHealth = 200;
         public static int score = 132432;
 
-        public static int activePowerUp; //Tänkte att man kunde ha numrerade powerups, typ 0: odödlig, 1: flygförmåga, 2: nånting
-
+        public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
+        private double activePowerUpTimer;
 
         public int jumpHeight = 12;
-        public Vector2 currentSpawnPos;
-        public Vector2 playerMovement;
+        //public Vector2 currentSpawnPos;
         private bool playerDead;
-        private double spawnTimer, spawnTimerDefault = 750;
-        private bool movingLeft;
+        //private double spawnTimer, spawnTimerDefault = 750;
+        //private bool movingLeft;
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
             livesLeft = defaultLives;
-            healthLeft = defaultHealth;
+            healthLeft = 60;
             this.type = "player";
             //ResetSpawnTimer();
         }
         public override void Update(GameTime gameTime)
         {
-            PlayerMovement(gameTime);
-            AddFriction(facing);
+            switch (activePowerUp)
+            {
+                case 0: //Vanlig
+                    PlayerMovement(gameTime);
+                    AddFriction(facing);
 
-            PlayerJumping();
-            CheckIfPlayerIsOnPlatform();
-            AnimateWhenInAir(gameTime);
+                    PlayerJumping();
+                    CheckIfPlayerIsOnPlatform();
+                    AnimateWhenInAir(gameTime);
+                break;
+                case 1: //Odödlig
+                    PlayerMovement(gameTime);
+                    AddFriction(facing);
 
+                    PlayerJumping();
+                    CheckIfPlayerIsOnPlatform();
+                    AnimateWhenInAir(gameTime);
+                    activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+                break;
+
+                case 2: //Flygförmåga
+                    activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+                break;
+            }
+            if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
+            {
+                activePowerUp = 0;
+            }
             base.Update(gameTime);
         }
 
@@ -76,21 +96,26 @@ namespace DrunkiBoy
                 activePlatform = null;
             }
         }
-
-        public void SetPlayerDead(bool timeRanOut)
+        /// <summary>
+        /// När livet tar slut eller om man ramlar av plattform
+        /// </summary>
+        public void SetPlayerDead()
         {
             playerDead = true;
             movement = Vector2.Zero;
             if (livesLeft > 1)
             {
                 livesLeft--;
+                //Metod här sen som spawnar vid senaste checkpoint
             }
             else
             {
                 //Game1.currentGameState = Game1.gameState.GameOver;
             }
         }
-
+        /// <summary>
+        /// Körs hela tiden för att kolla om spelaren fortfarande är på en plattform, annars sätts activePlatform till null. 
+        /// </summary>
         private void CheckIfPlayerIsOnPlatform()
         {
             if (activePlatform != null)
@@ -102,6 +127,10 @@ namespace DrunkiBoy
             }
         }
 
+        /// <summary>
+        /// Så att player fortsätter animera när man hoppar
+        /// </summary>
+        /// <param name="gameTime"></param>
         private void AnimateWhenInAir(GameTime gameTime)
         {
             if (activePlatform == null)
@@ -109,6 +138,9 @@ namespace DrunkiBoy
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
             }
         }
+        /// <summary>
+        /// Körs när man tar ett extraliv
+        /// </summary>
         public void AddLife()
         {
             if (livesLeft < defaultLives)
@@ -116,7 +148,59 @@ namespace DrunkiBoy
                 livesLeft++;
             }
         }
-
-
+        /// <summary>
+        /// Körs när man tar en PowerUp. Switch/case satsen i Update() avgör vad som händer med player när poweruppen är aktiv
+        /// </summary>
+        /// <param name="powerUp"></param>
+        public void ActivatePowerUp(int powerUp) //Skickar nog in ett powerUp-objekt här sen istället. Tänker att tiden poweruppen ska vara aktiv finns i varje powerup-objekt
+        {
+            activePowerUp = powerUp;
+            //activePowerUpTimer = powerUp.timer; //Nåt i den här stilen sen
+            Game1.gui.ShowPowerUpCounter(powerUp);
+        }
+        /// <summary>
+        /// Körs när man tar ett föremål som ger hälsa
+        /// </summary>
+        /// <param name="amountToAdd"></param>
+        public void AddHealth(int amountToAdd)
+        {
+            if (healthLeft + amountToAdd < defaultHealth) //Kollar så att man inte får mer health än max, vilket är defaultHealth
+            {
+                for (int i = 0; i < amountToAdd; i++)
+                {
+                    healthLeft += 1; //Tänker mig nån delay här så att healthbar ökar lite snyggt
+                }
+            }
+            else
+            {
+                healthLeft = defaultHealth;
+            }
+        }
+        /// <summary>
+        /// Körs när man springer in i något som ger en skada
+        /// </summary>
+        /// <param name="amountToLose"></param>
+        public void LoseHealth(int amountToLose)
+        {
+            if (healthLeft - amountToLose > 0) 
+            {
+                for (int i = 0; i < amountToLose; i++)
+                {
+                    healthLeft -= 1; //Tänker mig nån delay här så att healthbar minskar lite snyggt
+                }
+            }
+            else //Då är man död...
+            {
+                SetPlayerDead();
+            }
+        }
+        /// <summary>
+        /// Körs när man springer på något som ger poäng
+        /// </summary>
+        /// <param name="scoreToAdd">Hur mycket poäng att lägga till</param>
+        public void AddScore(int scoreToAdd)
+        {
+            score += scoreToAdd;
+        }
     }
 }

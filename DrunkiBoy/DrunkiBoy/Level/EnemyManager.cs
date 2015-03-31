@@ -10,16 +10,11 @@ namespace DrunkiBoy
     {
         public List<Enemy> enemies = new List<Enemy>();
 
-        public void AddPlatform(Enemy enemy)
+        public void AddEnemy(Enemy enemy)
         {
             enemies.Add(enemy);
         }
         public void Update(GameTime gameTime, Player player)
-        {
-            UpdateEnemies(gameTime);
-        }
-
-        private void UpdateEnemies(GameTime gameTime)
         {
             foreach (Enemy enemy in enemies)
             {

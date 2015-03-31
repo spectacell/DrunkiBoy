@@ -67,7 +67,7 @@ namespace DrunkiBoy
         {
             get
             {   //Har joxat lite med bredden här för att det skulle se bra ut med att hoppa upp o ner från plattformar. Kanske behöver ändras sen.
-                return new Rectangle((int)pos.X+5, (int)pos.Y + srcRect.Height - 5, srcRect.Width-10, 5);
+                return new Rectangle((int)pos.X+8, (int)pos.Y + srcRect.Height - 5, srcRect.Width-16, 5);
             }
         }
         /// <summary>

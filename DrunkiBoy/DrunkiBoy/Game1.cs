@@ -18,9 +18,9 @@ namespace DrunkiBoy
         public static int windowWidth, windowHeight;
 
         public static int currentLevel = 0; //0 är level 1
-        Level level;
-        LevelEditor levelEditor;
-        GUI gui;
+        private Level level;
+        private LevelEditor levelEditor;
+        public static GUI gui;
 
         public enum gameState { inGame, levelEditor };
         public static gameState currentGameState = gameState.levelEditor;
@@ -74,6 +74,15 @@ namespace DrunkiBoy
                 levelEditor = new LevelEditor(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
                 currentGameState = gameState.levelEditor;
             }
+
+            //TESTING METOD
+            if (KeyMouseReader.KeyPressed(Keys.A))
+            {
+                Player.activePowerUp = 1;
+                gui.ShowPowerUpCounter(1);
+                gui.BlinkHealthBar();
+            }
+            //---------------
 
             KeyMouseReader.Update();
             switch (currentGameState)

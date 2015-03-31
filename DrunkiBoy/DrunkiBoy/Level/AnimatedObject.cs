@@ -25,6 +25,7 @@ namespace DrunkiBoy
             this.frameInterval = frameInterval;
             this.frameWidth = srcRect.Width;
             this.nrFrames = nrFrames;
+            timeTilNextFrame = frameInterval;
             //Skapar array med två srcRect som animationen utgår från. En för varje riktning. 0 för objekt vänt åt höger och 1 för objekt vänt åt vänster.
             facingSrcRects = new Rectangle[2] { new Rectangle(nrFrames * srcRect.Width, srcRect.Y, srcRect.Width, srcRect.Height), srcRect };
         }

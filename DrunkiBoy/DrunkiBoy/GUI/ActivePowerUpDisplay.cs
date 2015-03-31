@@ -7,16 +7,27 @@ using System.Text;
 
 namespace DrunkiBoy 
 {
-    class GUIActivePowerUp : GameObject
+    class ActivePowerUpDisplay : GameObject
     {
         private double timeTilNextFrame, frameInterval;
         private int frame, nrFrames, frameWidth;
-        public GUIActivePowerUp(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
+        private Texture2D powerUpTexture;
+        public ActivePowerUpDisplay(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval, int powerUpToDisplay)
             : base(pos, tex, srcRect, isActive)
         {
             this.nrFrames = nrFrames;
             this.frameInterval = frameInterval;
             frameWidth = srcRect.Width;
+            timeTilNextFrame = frameInterval;
+
+            switch (powerUpToDisplay)
+            {
+                case 1: //Odödlighet
+                    powerUpTexture = Textures.testPowerUp;
+                    break;
+                case 2: //Flygförmåga
+                    break;
+            }
         }
 
         public virtual void Update(GameTime gameTime)
@@ -33,6 +44,13 @@ namespace DrunkiBoy
             {
                 isActive = false;
             }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (isActive)
+                spriteBatch.Draw(powerUpTexture, pos, Color.White);
+            base.Draw(spriteBatch);
         }
     }
 }
