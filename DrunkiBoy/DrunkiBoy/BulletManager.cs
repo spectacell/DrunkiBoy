@@ -20,7 +20,7 @@ namespace DrunkiBoy
             //här ska vi skriva in de olika bullet som hamburgare, alkohol  osv men vi behöver att skaffa de olika "bullet"klasserna
             // som t.ex. : if ( hamburgare is hamburgareklass)
             Bullet Bullet;
-            if (player is )
+            //if (player is )
             //                  { Bullet = new hamburgareklass                 
             //                  }
             //                  else Bullet = new alkoholklass....
