@@ -24,6 +24,7 @@ namespace DrunkiBoy
         private bool playerDead;
         //private double spawnTimer, spawnTimerDefault = 750;
         //private bool movingLeft;
+        List<Bullet> bullets = new List<Bullet>();  // list for bullets
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -201,6 +202,21 @@ namespace DrunkiBoy
         public void AddScore(int scoreToAdd)
         {
             score += scoreToAdd;
+        }
+        public void Shoot()
+        {
+
+        }
+        public void UpdateBullet()
+        {
+            foreach (Bullet bullet in bullets)
+            {
+
+            }
+        }
+        public void LoadContent()
+        { 
+            
         }
     }
 }

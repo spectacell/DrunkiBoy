@@ -10,13 +10,20 @@ namespace DrunkiBoy
 {
     //här är jag  osäker om vi ska ärva från gameobject eller hur jag ska fortsätta
     //behövs Update Draw method  Update 
-    class Bullet // : GameObject
+    class Bullet  : GameObject
     {
 
-    //    public Bullet(Texture2D texture, Vector2 position)
-    //        : base(texture, position)
-    //    {
+        public Bullet(Vector2 pos, Texture2D tex, bool isActive) : base(pos, tex, isActive)
+        {
 
-    //    }
+        }
+        public void Update(GameTime gameTime)
+        {
+
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+
+        }
     }
 }
