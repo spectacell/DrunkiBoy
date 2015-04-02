@@ -129,7 +129,7 @@ namespace DrunkiBoy
             Platform intersectingPlatform;
             if (KeyMouseReader.LeftClick())
             {
-                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
+                Vector2 mouseIsAt = ScreenToWorld(new Vector2((int)mouseState.X, (int)mouseState.Y));
                 intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox); //Rör objektet vid någon plattform så returneras vilken det är
 
                 switch (selectedItem)
@@ -155,11 +155,11 @@ namespace DrunkiBoy
                     case items.Player:
                         if (intersectingPlatform != null)
                         {
-                            objects.Add(new Player(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.player, new Rectangle(0, 0, 100, 200), true, 1, 80));
+                            objects.Add(new Player(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.player, new Rectangle(0, 0, 95, 146), true, 1, 80));
                         }
                         else
                         {
-                            objects.Add(new Player(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.player, new Rectangle(0, 0, 100, 200), true, 1, 80));
+                            objects.Add(new Player(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.player, new Rectangle(0, 0, 95, 146), true, 1, 80));
                         }
                         break;
 
@@ -275,7 +275,7 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.Y))
             {
                 selectedItem = items.Player;
-                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), Textures.player, new Rectangle(0, 0, 138, 190), true, 1, 80);
+                selectedObject = new Player(new Vector2(mouseState.X, mouseState.Y), Textures.player, new Rectangle(0, 0, 95, 146), true, 1, 80);
             }
             if (KeyMouseReader.KeyPressed(Keys.T))
             {
