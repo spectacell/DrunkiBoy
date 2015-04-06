@@ -10,7 +10,7 @@ namespace DrunkiBoy
     class Textures
     {
         public static Texture2D platform, background1, background2, background3, player, deleteCursor, torchTex, Key, heart, flaska, hamburgare, pizza, painkiller, teleport,AktivTeleport;
-        public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp;
+        public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant;
 
         public static void LoadContent(ContentManager content)
         {
@@ -33,6 +33,8 @@ namespace DrunkiBoy
             healthBarRedBlink = content.Load<Texture2D>("GUI/healthBarRed_blink");
             powerUpTimer = content.Load<Texture2D>("GUI/powerUpTimerAnimation");
             testPowerUp = content.Load<Texture2D>("GUI/testPowerUp");
+            money = content.Load<Texture2D>("Money");
+            pant = content.Load<Texture2D>("Pant");
 
             //bakgrund3 = content.Load<Texture2D>("textures/bakgrund3");
         }

@@ -95,6 +95,7 @@
     <Compile Include="Level\Player.cs" />
     <Compile Include="KlassMallar\Mall_AnimeratObjekt.cs" />
     <Compile Include="KlassMallar\Mall_StatisktObjekt.cs" />
+    <Compile Include="Money.cs" />
     <Compile Include="Painkiller.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="ParticleEngine.cs" />
