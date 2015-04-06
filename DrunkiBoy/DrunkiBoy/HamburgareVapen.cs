@@ -9,12 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 namespace DrunkiBoy
 {
     // kan vara onödigt klass
-    class HamburgareVapen : Player
+    class HamburgareVapen : Bullet
     {
-         public HamburgareVapen(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
-            : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
+
+         public HamburgareVapen(Vector2 pos, Vector2 velocity)
+            : base(pos, velocity,Textures.hamburgare, true, 200)    // sätt texturen till hamburgare , 200 för hur långt det åker
         {
 
-        }
+        }               
     }
 }

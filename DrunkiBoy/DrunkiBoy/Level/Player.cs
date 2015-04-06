@@ -43,6 +43,7 @@ namespace DrunkiBoy
                     AddFriction(facing);
 
                     PlayerJumping();
+                    Shoot();
                     CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
                 break;
@@ -51,6 +52,7 @@ namespace DrunkiBoy
                     AddFriction(facing);
 
                     PlayerJumping();
+                    Shoot();
                     CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
                     activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
@@ -205,18 +207,18 @@ namespace DrunkiBoy
         }
         public void Shoot()
         {
+            if (KeyMouseReader.KeyPressed(Keys.Space))
 
-        }
-        public void UpdateBullet()
-        {
-            foreach (Bullet bullet in bullets)
             {
-
+                if (facing == 0)  // vänster hållet att skjuta
+                {
+                    BulletManager.AddBullet(new HamburgareVapen(pos, new Vector2(-1, 0)));
+                }
+                else if (facing == 1)  // högeråt
+                {
+                    BulletManager.AddBullet(new HamburgareVapen(pos, new Vector2(1, 0)));
+                }
             }
-        }
-        public void LoadContent()
-        { 
-            
-        }
+        }                
     }
 }

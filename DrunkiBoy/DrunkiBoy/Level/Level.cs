@@ -54,6 +54,7 @@ namespace DrunkiBoy
         {
             player.Update(gameTime);
             itemManager.Update(gameTime, player);
+            BulletManager.Update(gameTime);
             timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
 
             // Riktar kameran mot spelaren...
@@ -69,6 +70,7 @@ namespace DrunkiBoy
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
             player.Draw(spriteBatch);
             itemManager.Draw(spriteBatch);
+            BulletManager.Draw(spriteBatch);
             spriteBatch.End();
             
         }

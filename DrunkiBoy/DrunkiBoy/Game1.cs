@@ -109,7 +109,7 @@ namespace DrunkiBoy
             {
                 case gameState.inGame:
                     level.Draw(spriteBatch);
-                    gui.Draw(spriteBatch);
+                    gui.Draw(spriteBatch);                    
                     break;
 
                 case gameState.levelEditor:
