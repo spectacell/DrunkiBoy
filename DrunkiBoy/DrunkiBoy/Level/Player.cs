@@ -212,11 +212,11 @@ namespace DrunkiBoy
             {
                 if (facing == 0)  // vänster hållet att skjuta
                 {
-                    BulletManager.AddBullet(new HamburgareVapen(pos, new Vector2(-1, 0)));
+                    BulletManager.AddBullet(new HamburgareVapen(pos, new Vector2(-2, 0)));
                 }
                 else if (facing == 1)  // högeråt
                 {
-                    BulletManager.AddBullet(new HamburgareVapen(pos, new Vector2(1, 0)));
+                    BulletManager.AddBullet(new HamburgareVapen(pos, new Vector2(2, 0)));
                 }
             }
         }                
