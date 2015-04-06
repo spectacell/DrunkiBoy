@@ -107,7 +107,6 @@
     <Compile Include="Teleport.cs" />
     <Compile Include="Textures.cs" />
     <Compile Include="Level\Torch.cs" />
-    <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

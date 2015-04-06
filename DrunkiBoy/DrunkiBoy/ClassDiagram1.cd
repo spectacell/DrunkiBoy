@@ -1,42 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="DrunkiBoy.BackgroundImage" Collapsed="true">
-    <Position X="38.25" Y="0.5" Width="1.5" />
+    <Position X="36" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAIAAAAAAAAAAAAIAAAAAAAA=</HashCode>
       <FileName>Background\BackgroundImage.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.BackgroundLayer" Collapsed="true">
-    <Position X="40" Y="0.5" Width="1.5" />
+    <Position X="37.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAQAAAAgAAAgAIAAAACAAABAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Background\BackgroundLayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Bullet" Collapsed="true">
-    <Position X="26.75" Y="1.75" Width="1.5" />
+    <Position X="24.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAEAAA=</HashCode>
       <FileName>Bullet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.BulletManager" Collapsed="true">
-    <Position X="41.75" Y="0.5" Width="1.5" />
+    <Position X="39.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAgAAAAIAAAgAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>BulletManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Camera" Collapsed="true">
-    <Position X="43.5" Y="0.5" Width="1.5" />
+    <Position X="41.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAIAAAIAgEAAAAQAAACAAAAAAEAAAgAwAAAI=</HashCode>
       <FileName>Camera.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Constants" Collapsed="true">
-    <Position X="38.25" Y="1.5" Width="1.5" />
+    <Position X="36" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgABAACAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAQ=</HashCode>
       <FileName>Constants.cs</FileName>
@@ -50,35 +50,35 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Game1" Collapsed="true">
-    <Position X="41.75" Y="1.5" Width="1.5" />
+    <Position X="39.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAEEBAAAAAAwAAQgAAAAAEAAEAAAgABAAAAAAAAIQ=</HashCode>
       <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.GameObject" Collapsed="true">
-    <Position X="19" Y="0.5" Width="1.5" />
+    <Position X="17.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQBAAAAAAAAQwAAAIAIAJAAACAhAAAAAAAAEAAAYAA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.ActivePowerUpDisplay" Collapsed="true">
-    <Position X="31.25" Y="1.75" Width="1.5" />
+    <Position X="29" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAQAAgAAAAAgAAAAAAAAAAAgAEAAAQAAAAA=</HashCode>
       <FileName>GUI\ActivePowerUpDisplay.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.GUI" Collapsed="true">
-    <Position X="43.5" Y="1.5" Width="1.5" />
+    <Position X="41.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAQFUAACQIAEBiCCgAAAAIAAAAAAIAABAAQACgAAAAg=</HashCode>
       <FileName>GUI\GUI.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.HamburgareVapen" Collapsed="true">
-    <Position X="11" Y="4.75" Width="1.5" />
+    <Position X="24.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>HamburgareVapen.cs</FileName>
@@ -92,7 +92,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.AnimatedObject" Collapsed="true">
-    <Position X="12.25" Y="1.75" Width="1.5" />
+    <Position X="12" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQACBAAAAQEAAAAAAAgAAAAAAAAQAAgAEAAIQBAAAA=</HashCode>
       <FileName>Level\AnimatedObject.cs</FileName>
@@ -106,7 +106,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.EnemyManager" Collapsed="true">
-    <Position X="40" Y="1.5" Width="1.5" />
+    <Position X="37.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAEAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Level\EnemyManager.cs</FileName>
@@ -120,7 +120,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.ItemManager" Collapsed="true">
-    <Position X="38.25" Y="2.5" Width="1.5" />
+    <Position X="36" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAQYACJAAQAIEgICAAAAAAAAAAAAACANAQAAIAgAMAA=</HashCode>
       <FileName>Level\ItemManager.cs</FileName>
@@ -141,14 +141,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Platform" Collapsed="true">
-    <Position X="29" Y="1.75" Width="1.5" />
+    <Position X="26.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Level\Platform.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Player" Collapsed="true">
-    <Position X="11" Y="3.25" Width="1.5" />
+    <Position X="13.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAwAAEBIAIAABgQAAEQIIAAAAAAAgAQBAIAACIIAkQg=</HashCode>
       <FileName>Level\Player.cs</FileName>
@@ -162,7 +162,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Money" Collapsed="true">
-    <Position X="35.75" Y="1.75" Width="1.5" />
+    <Position X="33.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Money.cs</FileName>
@@ -183,21 +183,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Particle" Collapsed="true">
-    <Position X="41.75" Y="2.5" Width="1.5" />
+    <Position X="39.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAggAgAAAAAAABAAAAAAAAAEIAgAAEAAQ=</HashCode>
       <FileName>Particle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.ParticleEngine" Collapsed="true">
-    <Position X="43.5" Y="2.5" Width="1.5" />
+    <Position X="41.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAEAAAgAAAAgBAAAAAAAEAAAAAAQAAAAAAAA=</HashCode>
       <FileName>ParticleEngine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Program" Collapsed="true">
-    <Position X="38.25" Y="3.5" Width="1.5" />
+    <Position X="36" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
@@ -211,35 +211,28 @@
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Textures" Collapsed="true">
-    <Position X="40" Y="3.5" Width="1.5" />
+    <Position X="37.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgEAACAACwEQwAAAAAAEAAAAAEFAAABJAlAEAw=</HashCode>
       <FileName>Textures.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DrunkiBoy.Weapon" Collapsed="true">
-    <Position X="24.5" Y="1.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Weapon.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="KeyMouseReader" Collapsed="true">
-    <Position X="40" Y="2.5" Width="1.5" />
+    <Position X="37.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BBQCAAAAAAAAAAEAAAAAAAACAAAAAAAAAAAIAABAAAA=</HashCode>
       <FileName>KeyMouseReader.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Mall.Mall_AnimeratObjekt" Collapsed="true">
-    <Position X="13.25" Y="3.25" Width="1.5" />
+    <Position X="11" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>KlassMallar\Mall_AnimeratObjekt.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="DrunkiBoy.Mall.Mall_StatisktObjekt" Collapsed="true">
-    <Position X="33.5" Y="1.75" Width="1.5" />
+    <Position X="31.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>KlassMallar\Mall_StatisktObjekt.cs</FileName>
