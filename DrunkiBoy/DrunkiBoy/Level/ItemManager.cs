@@ -63,7 +63,32 @@ namespace DrunkiBoy
             UpdateHeart(gameTime, player);
             UpdatePainkiller(gameTime, player);
             UpdateTeleport(gameTime);
+            UpdateMoney(gameTime, player);
+            UpdatePant(gameTime, player);
             
+            
+        }
+        private void UpdatePant(GameTime gameTime, Player player)
+        {
+            foreach (Pant pant in pants)
+            {
+                if (pant.DetectPixelCollision(player))
+                {
+                    pants.Remove(pant);
+                    break;
+                }
+            }
+        }
+        private void UpdateMoney(GameTime gameTime, Player player)
+        {
+            foreach (Money money in moneys)
+            {
+                if (money.DetectPixelCollision(player))
+                {
+                    moneys.Remove(money);
+                    break;
+                }
+            }
         }
 
        
