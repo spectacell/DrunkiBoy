@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {         
-        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport }; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant }; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -41,6 +41,8 @@ namespace DrunkiBoy
             menuEntries.Add("H: Heart");
             menuEntries.Add("S: Painkiller");
             menuEntries.Add("F: Teleport");
+            menuEntries.Add("M: Money");
+            menuEntries.Add("E: Pant");
 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
@@ -216,6 +218,30 @@ namespace DrunkiBoy
                             objects.Add(new Teleport(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.AktivTeleport, new Rectangle(0, 0, 200, 267), true, 1, 50));
                         }
                         break;
+                    case items.Money:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Money(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.money, new Rectangle(0, 0, 70, 32), true));
+
+                        }
+                        else
+                        {
+                            objects.Add(new Money(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.money, new Rectangle(0, 0, 70, 32), true));
+                        }
+
+                        break;
+                    case items.Pant:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Pant(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.pant, new Rectangle(0, 0, 33, 77), true));
+
+                        }
+                        else
+                        {
+                            objects.Add(new Pant(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.pant, new Rectangle(0, 0, 33, 77), true));
+                        }
+
+                        break;
                 }
                 saved = false;
             }
@@ -301,6 +327,16 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Teleport;
                 selectedObject = new Teleport(new Vector2(mouseState.X, mouseState.Y), Textures.teleport, new Rectangle(0, 0, 200, 267), true, 1, 50);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.M))
+            {
+                selectedItem = items.Money;
+                selectedObject = new Money(new Vector2(mouseState.X, mouseState.Y), Textures.money, new Rectangle(0, 0, 70, 32), true);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.E))
+            {
+                selectedItem = items.Pant;
+                selectedObject = new Pant(new Vector2(mouseState.X, mouseState.Y), Textures.pant, new Rectangle(0, 0, 33, 77), true);
             }
         }
 

@@ -16,9 +16,19 @@ namespace DrunkiBoy
         public List<Heart> hearts = new List<Heart>();
         public List<Painkiller> painkillers = new List<Painkiller>();
         public List<Teleport> teleports = new List<Teleport>();
+        public List<Money> moneys = new List<Money>();
+        public List<Pant> pants = new List<Pant>();
         public ItemManager()
         {
 
+        }
+        public void AddPant(Pant pant)
+        {
+            pants.Add(pant);
+        }
+        public void AddMoney(Money money)
+        {
+            moneys.Add(money);
         }
         public void AddPlatform(Platform platform)
         {
@@ -53,8 +63,10 @@ namespace DrunkiBoy
             UpdateHeart(gameTime, player);
             UpdatePainkiller(gameTime, player);
             UpdateTeleport(gameTime);
+            
         }
 
+       
         private void UpdateTeleport(GameTime gameTime)
         {
             foreach (Teleport teleport in teleports)
@@ -138,6 +150,15 @@ namespace DrunkiBoy
             {
                 spriteBatch.Draw(teleport.tex, teleport.pos, teleport.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
+            foreach (Money money in moneys)
+            {
+                spriteBatch.Draw(money.tex, money.pos, money.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+            foreach (Pant pant in pants)
+            {
+                spriteBatch.Draw(pant.tex, pant.pos, pant.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+               
                
 
         }

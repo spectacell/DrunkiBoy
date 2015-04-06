@@ -122,6 +122,18 @@ namespace DrunkiBoy
 
                     objects.Add(new Teleport(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.AktivTeleport, new Rectangle(0, 0, 200, 267), true, 2, 100));
                 }
+                else if (temp[0] == "money")
+                {
+                    itemManager.AddMoney(new Money(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.money, new Rectangle(0, 0, 70, 32), true));
+
+                    objects.Add(new Money(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.money, new Rectangle(0, 0, 70, 32), true));
+                }
+                else if (temp[0] == "pant")
+                {
+                    itemManager.AddPant(new Pant(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.pant, new Rectangle(0, 0, 33, 77), true));
+
+                    objects.Add(new Money(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.money, new Rectangle(0, 0, 33, 77), true));
+                }
             }
             sr.Close();
         }
