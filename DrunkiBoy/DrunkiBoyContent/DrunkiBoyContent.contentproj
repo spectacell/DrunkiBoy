@@ -135,8 +135,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="character-animation.png">
-      <Name>character-animation</Name>
+    <Compile Include="Player\player-animation.png">
+      <Name>player-animation</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -198,6 +198,13 @@
   <ItemGroup>
     <Compile Include="Pant.png">
       <Name>Pant</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Player\player-animation_burger.png">
+      <Name>player-animation_burger</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

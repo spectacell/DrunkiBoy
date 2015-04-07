@@ -9,12 +9,13 @@ namespace DrunkiBoy
 {
     class Textures
     {
-        public static Texture2D platform, background1, background2, background3, player, deleteCursor, torchTex, Key, heart, flaska, hamburgare, pizza, painkiller, teleport,AktivTeleport;
+        public static Texture2D platform, background1, background2, background3, player, player_burger, deleteCursor, torchTex, Key, heart, flaska, hamburgare, pizza, painkiller, teleport,AktivTeleport;
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant;
 
         public static void LoadContent(ContentManager content)
         {
-            player = content.Load<Texture2D>("character-animation");
+            player = content.Load<Texture2D>("Player/player-animation");
+            player_burger = content.Load<Texture2D>("Player/player-animation_burger");
             platform = content.Load<Texture2D>("platform");
             deleteCursor = content.Load<Texture2D>("deleteCursor");
             background1 = content.Load<Texture2D>("space");
