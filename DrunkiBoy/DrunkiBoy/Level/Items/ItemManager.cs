@@ -19,10 +19,21 @@ namespace DrunkiBoy
         public List<Money> moneys = new List<Money>();
         public List<Pant> pants = new List<Pant>();
         public List<Burger> burgers = new List<Burger>();
+        public List<Pizza> pizzas = new List<Pizza>();
+        public List<Bottle> bottles = new List<Bottle>();
+        
 
         public ItemManager()
         {
 
+        }
+        public void AddBottle(Bottle bottle)
+        {
+            bottles.Add(bottle);
+        }
+        public void AddPizza(Pizza pizza)
+        {
+            pizzas.Add(pizza);
         }
         public void AddPant(Pant pant)
         {
@@ -71,8 +82,32 @@ namespace DrunkiBoy
             UpdateMoney(gameTime, player);
             UpdatePant(gameTime, player);
             UpdateBurgers(gameTime, player);
+            UpdatePizza(gameTime, player);
+            UpdateBottle(gameTime, player);
 
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
+        }
+        private void UpdateBottle(GameTime gameTime, Player player)
+        {
+            foreach (Bottle bottle in bottles)
+            {
+                if (bottle.DetectPixelCollision(player))
+                {
+                    bottles.Remove(bottle);
+                    break;
+                }
+            }
+        }
+        private void UpdatePizza(GameTime gameTime, Player player)
+        {
+            foreach (Pizza pizza in pizzas)
+            {
+                if (pizza.DetectPixelCollision(player))
+                {
+                    pizzas.Remove(pizza);
+                    break;
+                }
+            }
         }
         private void UpdatePant(GameTime gameTime, Player player)
         {
@@ -208,6 +243,14 @@ namespace DrunkiBoy
             foreach (Burger burger in burgers)
             {
                 spriteBatch.Draw(burger.tex, burger.pos, burger.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+            foreach (Pizza pizza in pizzas)
+            {
+                spriteBatch.Draw(pizza.tex, pizza.pos, pizza.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
+            foreach (Bottle bottle in bottles)
+            {
+                spriteBatch.Draw(bottle.tex, bottle.pos, bottle.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
         }
         private void UpdatePlatforms(Player player)

@@ -117,8 +117,8 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "teleport")
                 {
-                    itemManager.AddTeleport(new Teleport(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.AktivTeleport, new Rectangle(0, 0, 200, 267), true, 2, 100));
-                    objects.Add(new Teleport(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.AktivTeleport, new Rectangle(0, 0, 200, 267), true, 2, 100));
+                    itemManager.AddTeleport(new Teleport(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.teleport, new Rectangle(0, 0, 200, 267), true, 2, 100));
+                    objects.Add(new Teleport(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.teleport, new Rectangle(0, 0, 200, 267), true, 2, 100));
                 }
                 else if (temp[0] == "money")
                 {
@@ -134,6 +134,16 @@ namespace DrunkiBoy
                 {
                     itemManager.AddBurger(new Burger(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.hamburgare, true));
                     objects.Add(new Burger(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.hamburgare, true));
+                }
+                else if (temp[0] == "pizza")
+                {
+                    itemManager.AddPizza(new Pizza(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.pizza, true));
+                    objects.Add(new Pizza(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.pizza, true));
+                }
+                else if (temp[0] == "bottle")
+                {
+                    itemManager.AddBottle(new Bottle(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flaska, true));
+                    objects.Add(new Bottle(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flaska, true));
                 }
             }
             sr.Close();

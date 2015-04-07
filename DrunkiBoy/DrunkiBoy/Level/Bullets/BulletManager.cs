@@ -18,14 +18,9 @@ namespace DrunkiBoy
 
         public static void AddBullet(Bullet bullet)
         {
-            //här ska vi skriva in de olika bullet som hamburgare, alkohol  osv men vi behöver att skaffa de olika "bullet"klasserna
-            // som t.ex. : if ( hamburgare is hamburgareklass)
+           
             bullets.Add(bullet);
-            //if (player is )
-            //                  { Bullet = new hamburgareklass                 
-            //                  }
-            //                  else Bullet = new alkoholklass....
-                                   
+                       
            
         }
         public static void Update(GameTime gameTime)
