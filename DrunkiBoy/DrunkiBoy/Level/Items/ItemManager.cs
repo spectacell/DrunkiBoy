@@ -19,6 +19,7 @@ namespace DrunkiBoy
         public List<Money> moneys = new List<Money>();
         public List<Pant> pants = new List<Pant>();
         public List<Burger> burgers = new List<Burger>();
+
         public ItemManager()
         {
 
@@ -70,7 +71,8 @@ namespace DrunkiBoy
             UpdateMoney(gameTime, player);
             UpdatePant(gameTime, player);
             UpdateBurgers(gameTime, player);
-            
+
+            GUI.itemsLeftToCollect = ItemsLeftToCollect();
         }
         private void UpdatePant(GameTime gameTime, Player player)
         {
@@ -160,12 +162,15 @@ namespace DrunkiBoy
                 if (burger.DetectPixelCollision(player))
                 {
                     burgers.Remove(burger);
-                    player.tex = Textures.player_burger;
+                    player.PickUpWeapon(Player.weaponType.burger);
                     break;
                 }
             }
         }
-
+        public int ItemsLeftToCollect()
+        {
+            return keys.Count(); //Räkna alla listor med saker som måste plockas här sen...
+        }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             foreach (Platform platform in platforms)

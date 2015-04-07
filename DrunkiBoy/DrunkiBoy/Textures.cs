@@ -9,7 +9,7 @@ namespace DrunkiBoy
 {
     class Textures
     {
-        public static Texture2D platform, background1, background2, background3, player, player_burger, deleteCursor, torchTex, Key, heart, flaska, hamburgare, pizza, painkiller, teleport,AktivTeleport;
+        public static Texture2D platform, background1, background2, background3, player, player_burger, deleteCursor, torchTex, Key, heart, flaska, hamburgare, pizza, painkiller, teleport, AktivTeleport;
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant;
 
         public static void LoadContent(ContentManager content)

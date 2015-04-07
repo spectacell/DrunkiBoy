@@ -14,6 +14,7 @@ namespace DrunkiBoy
         private ActivePowerUpDisplay activePowerUp;
         private Texture2D healthBarTex;
         private double blinkTimer, blinkTimerDefault = 250;
+        public static int itemsLeftToCollect;
         public GUI()
         {
             strLives = "LIVES ";
@@ -68,7 +69,7 @@ namespace DrunkiBoy
             spriteBatch.DrawString(Constants.FONT, Player.score.ToString(), new Vector2(centerPosScore, scorePosY), Constants.fontColor2);
             //Föremål kvar att plocka
             spriteBatch.DrawString(Constants.FONT_BIG, strItemsLeft, strItemsLeftPos, Constants.fontColor);
-            spriteBatch.DrawString(Constants.FONT_BIG, "3", new Vector2(strItemsLeftPos.X + Constants.FONT_BIG.MeasureString(strItemsLeft).X, strItemsLeftPos.Y), Constants.fontColor2);
+            spriteBatch.DrawString(Constants.FONT_BIG, itemsLeftToCollect.ToString(), new Vector2(strItemsLeftPos.X + Constants.FONT_BIG.MeasureString(strItemsLeft).X, strItemsLeftPos.Y), Constants.fontColor2);
             //Tid kvar
             spriteBatch.DrawString(Constants.FONT_BIG, strTime, strTimePos, Constants.fontColor);
             int timeLeft = (int)Level.timeLeft; //För att avrunda till heltal

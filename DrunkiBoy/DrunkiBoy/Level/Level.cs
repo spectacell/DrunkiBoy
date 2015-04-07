@@ -59,8 +59,8 @@ namespace DrunkiBoy
 
             // Riktar kameran mot spelaren...
             camera.LookAt(player.pos);
+
         }
-        
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
@@ -93,53 +93,46 @@ namespace DrunkiBoy
                 else if (temp[0] == "player")
                 {
                     player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.player, new Rectangle(0, 0, 95, 146), true, 8, 80);
-                        objects.Add(player);
+                    objects.Add(player);
                 }
                 else if (temp[0] == "torch")
                 {
-                        itemManager.AddTorch(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 180));
-                        objects.Add(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 180));
+                    itemManager.AddTorch(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 180));
+                    objects.Add(new Torch(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 4, 180));
                 }
                 else if (temp[0] == "key")
                 {
-                        itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 250));
-                        
+                    itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 250));
                     objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 250));
                 }
                 else if (temp[0] == "heart")
                 {
                     itemManager.Addheart(new Heart(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.heart, new Rectangle(0, 0, 31, 26), true, 2, 250));
-
                     objects.Add(new Heart(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.heart, new Rectangle(0, 0, 31, 26), true, 2, 250));
                 }
                 else if (temp[0] == "painkiller")
                 {
                     itemManager.AddPainkiller(new Painkiller(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 2, 230));
-
                     objects.Add(new Painkiller(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.painkiller, new Rectangle(0, 0, 53, 37), true, 2, 230));
                 }
                 else if (temp[0] == "teleport")
                 {
                     itemManager.AddTeleport(new Teleport(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.AktivTeleport, new Rectangle(0, 0, 200, 267), true, 2, 100));
-
                     objects.Add(new Teleport(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.AktivTeleport, new Rectangle(0, 0, 200, 267), true, 2, 100));
                 }
                 else if (temp[0] == "money")
                 {
                     itemManager.AddMoney(new Money(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.money, new Rectangle(0, 0, 70, 32), true));
-
                     objects.Add(new Money(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.money, new Rectangle(0, 0, 70, 32), true));
                 }
                 else if (temp[0] == "pant")
                 {
                     itemManager.AddPant(new Pant(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.pant, new Rectangle(0, 0, 33, 77), true));
-
                     objects.Add(new Money(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.money, new Rectangle(0, 0, 33, 77), true));
                 }
                 else if (temp[0] == "burger")
                 {
                     itemManager.AddBurger(new Burger(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.hamburgare, true));
-
                     objects.Add(new Burger(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.hamburgare, true));
                 }
             }

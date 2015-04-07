@@ -18,13 +18,14 @@ namespace DrunkiBoy
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
+        public enum weaponType { none, burger, pizza, bottle, molotovCocktail };
+        private weaponType currentWeapon;
 
         public int jumpHeight = 12;
         //public Vector2 currentSpawnPos;
         private bool playerDead;
         //private double spawnTimer, spawnTimerDefault = 750;
         //private bool movingLeft;
-        List<Bullet> bullets = new List<Bullet>();  // list for bullets
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -205,19 +206,63 @@ namespace DrunkiBoy
         {
             score += scoreToAdd;
         }
+
+        public void PickUpWeapon(weaponType type)
+        {
+            switch (type)
+            {
+                case weaponType.none:
+                    tex = Textures.player;
+                    currentWeapon = weaponType.none;
+                    break;
+                case weaponType.burger:
+                    tex = Textures.player_burger;
+                    currentWeapon = weaponType.burger;
+                    break;
+                case weaponType.pizza:
+                    //tex = Textures.player_pizza;
+                    currentWeapon = weaponType.pizza;
+                    break;
+                case weaponType.bottle:
+                    //tex = Textures.player_bottle;
+                    currentWeapon = weaponType.bottle;
+                    break;
+                case weaponType.molotovCocktail:
+                    //tex = Textures.player_molotovCocktail;
+                    currentWeapon = weaponType.molotovCocktail;
+                    break;
+            }
+        }
         public void Shoot()
         {
             if (KeyMouseReader.KeyPressed(Keys.Space))
-
             {
+                Vector2 bulletPos, bulletVelocity;
                 if (facing == 0)  // vänster hållet att skjuta
                 {
-                    BulletManager.AddBullet(new HamburgareVapen(pos, new Vector2(-2, 0)));
+                    bulletPos = new Vector2(pos.X, pos.Y + 60);
+                    bulletVelocity = new Vector2(-2, 0);
                 }
-                else if (facing == 1)  // högeråt
+                else //Högeråt
                 {
-                    BulletManager.AddBullet(new HamburgareVapen(pos, new Vector2(2, 0)));
+                    bulletPos = new Vector2(pos.X + 60, pos.Y + 60);
+                    bulletVelocity = new Vector2(2, 0);
                 }
+                switch (currentWeapon)
+                {
+                    case weaponType.burger:
+                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity));
+                    break;
+                    case weaponType.pizza:
+
+                    break;
+                    case weaponType.bottle:
+
+                    break;
+                    case weaponType.molotovCocktail:
+
+                    break;
+                }  
             }
         }                
     }
