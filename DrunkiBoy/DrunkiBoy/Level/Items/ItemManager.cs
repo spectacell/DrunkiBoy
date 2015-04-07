@@ -18,6 +18,7 @@ namespace DrunkiBoy
         public List<Teleport> teleports = new List<Teleport>();
         public List<Money> moneys = new List<Money>();
         public List<Pant> pants = new List<Pant>();
+        public List<Burger> burgers = new List<Burger>();
         public ItemManager()
         {
 
@@ -54,7 +55,10 @@ namespace DrunkiBoy
         {
             teleports.Add(teleport);
         }
-        
+        public void AddBurger(Burger burger)
+        {
+            burgers.Add(burger);
+        }
         public void Update(GameTime gameTime, Player player)
         {
             UpdatePlatforms(player);
@@ -65,7 +69,7 @@ namespace DrunkiBoy
             UpdateTeleport(gameTime);
             UpdateMoney(gameTime, player);
             UpdatePant(gameTime, player);
-            
+            UpdateBurgers(gameTime, player);
             
         }
         private void UpdatePant(GameTime gameTime, Player player)
@@ -149,6 +153,19 @@ namespace DrunkiBoy
                 torchs.Update(gameTime);
             }
         }
+        private void UpdateBurgers(GameTime gameTime, Player player)
+        {
+            foreach (Burger burger in burgers)
+            {
+                if (burger.DetectPixelCollision(player))
+                {
+                    burgers.Remove(burger);
+                    player.tex = Textures.player_burger;
+                    break;
+                }
+            }
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             foreach (Platform platform in platforms)
@@ -183,9 +200,10 @@ namespace DrunkiBoy
             {
                 spriteBatch.Draw(pant.tex, pant.pos, pant.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             }
-               
-               
-
+            foreach (Burger burger in burgers)
+            {
+                spriteBatch.Draw(burger.tex, burger.pos, burger.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            }
         }
         private void UpdatePlatforms(Player player)
         {

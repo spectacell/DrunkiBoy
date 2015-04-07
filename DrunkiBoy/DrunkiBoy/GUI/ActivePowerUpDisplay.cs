@@ -30,7 +30,7 @@ namespace DrunkiBoy
             }
         }
 
-        public virtual void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds; //Animation time counter
 

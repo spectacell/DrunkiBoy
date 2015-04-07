@@ -14,12 +14,13 @@ namespace DrunkiBoy
     {
         private Vector2 velocity;
         private float skottRange;
-        public Bullet(Vector2 pos,Vector2 velocity, Texture2D tex, bool isActive, float skottRange) : base(pos, tex, isActive)
+        public Bullet(Vector2 pos,Vector2 velocity, Texture2D tex, bool isActive, float skottRange) : 
+            base(pos, tex, isActive)
         {
             this.velocity = velocity;
             this.skottRange = skottRange;
         }
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {                        
             pos = pos + velocity;
 
@@ -28,11 +29,6 @@ namespace DrunkiBoy
             {
                 isActive = false;
             }
-
-        }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
         }
     }
 }

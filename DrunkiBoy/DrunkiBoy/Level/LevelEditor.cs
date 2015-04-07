@@ -11,8 +11,8 @@ using System.IO;
 namespace DrunkiBoy
 {
     class LevelEditor : Level
-    {         
-        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant }; //osv...
+    {
+        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant, Burger }; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -43,6 +43,7 @@ namespace DrunkiBoy
             menuEntries.Add("F: Teleport");
             menuEntries.Add("M: Money");
             menuEntries.Add("E: Pant");
+            menuEntries.Add("B: Burger");
 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
@@ -169,7 +170,6 @@ namespace DrunkiBoy
                         if (intersectingPlatform!= null)
                         {
                             objects.Add(new Torch(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.torchTex, new Rectangle(0, 0, 60, 53), true, 1, 50));
-
                         }
                         else
                         {
@@ -180,7 +180,6 @@ namespace DrunkiBoy
                         if (intersectingPlatform != null)
                         {
                             objects.Add(new Key(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.Key, new Rectangle(0, 0, 35, 64), true, 1, 50));
-
                         }
                         else
                         {
@@ -222,7 +221,6 @@ namespace DrunkiBoy
                         if (intersectingPlatform != null)
                         {
                             objects.Add(new Money(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.money, new Rectangle(0, 0, 70, 32), true));
-
                         }
                         else
                         {
@@ -234,13 +232,23 @@ namespace DrunkiBoy
                         if (intersectingPlatform != null)
                         {
                             objects.Add(new Pant(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.pant, new Rectangle(0, 0, 33, 77), true));
-
                         }
                         else
                         {
                             objects.Add(new Pant(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.pant, new Rectangle(0, 0, 33, 77), true));
                         }
 
+                        break;
+
+                    case items.Burger:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Burger(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.hamburgare, true));
+                        }
+                        else
+                        {
+                            objects.Add(new Burger(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.hamburgare, true));
+                        }
                         break;
                 }
                 saved = false;
@@ -337,6 +345,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Pant;
                 selectedObject = new Pant(new Vector2(mouseState.X, mouseState.Y), Textures.pant, new Rectangle(0, 0, 33, 77), true);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.B))
+            {
+                selectedItem = items.Burger;
+                selectedObject = new Burger(new Vector2(mouseState.X, mouseState.Y), Textures.hamburgare, true);
             }
         }
 

@@ -92,7 +92,7 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "player")
                 {
-                    player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.player_burger, new Rectangle(0, 0, 95, 146), true, 8, 80);
+                    player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.player, new Rectangle(0, 0, 95, 146), true, 8, 80);
                         objects.Add(player);
                 }
                 else if (temp[0] == "torch")
@@ -135,6 +135,12 @@ namespace DrunkiBoy
                     itemManager.AddPant(new Pant(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.pant, new Rectangle(0, 0, 33, 77), true));
 
                     objects.Add(new Money(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.money, new Rectangle(0, 0, 33, 77), true));
+                }
+                else if (temp[0] == "burger")
+                {
+                    itemManager.AddBurger(new Burger(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.hamburgare, true));
+
+                    objects.Add(new Burger(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.hamburgare, true));
                 }
             }
             sr.Close();
