@@ -30,7 +30,7 @@ namespace DrunkiBoy
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
-            livesLeft = defaultLives;
+            livesLeft = 2;
             healthLeft = 60;
             this.type = "player";
             //ResetSpawnTimer();

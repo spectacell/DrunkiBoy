@@ -162,6 +162,7 @@ namespace DrunkiBoy
                 if (heart.DetectPixelCollision(player))
                 {
                     hearts.Remove(heart);
+                    player.AddLife();
                     break;
                 }
                 heart.Update(gameTime);
