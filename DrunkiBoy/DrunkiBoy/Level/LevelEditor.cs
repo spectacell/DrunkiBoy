@@ -124,7 +124,9 @@ namespace DrunkiBoy
         }
         public Vector2 ScreenToWorld(Vector2 screenPosition)
         {
-            return Vector2.Transform(screenPosition, Matrix.Invert(camera.GetViewMatrix(Vector2.One)));
+            screenPosition = Vector2.Transform(screenPosition, Matrix.Invert(camera.GetViewMatrix(Vector2.One)));
+            screenPosition = new Vector2((int)screenPosition.X, (int)screenPosition.Y);
+            return screenPosition;
         }
         /// <summary>
         /// Adds the selected item to the objects list at the mouse position or snapped to a platform
@@ -134,9 +136,8 @@ namespace DrunkiBoy
             Platform intersectingPlatform;
             if (KeyMouseReader.LeftClick())
             {
-                Vector2 mouseIsAt = ScreenToWorld(new Vector2((int)mouseState.X, (int)mouseState.Y));
+                Vector2 mouseIsAt = ScreenToWorld(new Vector2(mouseState.X, mouseState.Y));
                 intersectingPlatform = IntersectsPlatform(mouseIsAt, selectedObject.BoundingBox); //Rör objektet vid någon plattform så returneras vilken det är
-
                 switch (selectedItem)
                 {
                     case items.Platform:

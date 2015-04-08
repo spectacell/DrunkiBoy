@@ -52,7 +52,6 @@ namespace DrunkiBoy
                     particle--;
                 }
 			} 		
-           
         }
         public void Draw(SpriteBatch spriteBatch)
         {
