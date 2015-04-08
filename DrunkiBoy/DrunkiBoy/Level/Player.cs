@@ -241,12 +241,12 @@ namespace DrunkiBoy
                 if (facing == 0)  // vänster hållet att skjuta
                 {
                     bulletPos = new Vector2(pos.X, pos.Y + 60);
-                    bulletVelocity = new Vector2(-2, 0);
+                    bulletVelocity = new Vector2(-4, 0);
                 }
                 else //Högeråt
                 {
                     bulletPos = new Vector2(pos.X + 60, pos.Y + 60);
-                    bulletVelocity = new Vector2(2, 0);
+                    bulletVelocity = new Vector2(4, 0);
                 }
                 switch (currentWeapon)
                 {
