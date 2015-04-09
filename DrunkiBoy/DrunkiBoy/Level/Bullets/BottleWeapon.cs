@@ -10,7 +10,7 @@ namespace DrunkiBoy
     class BottleWeapon : Bullet
     {
         public BottleWeapon(Vector2 pos, Vector2 velocity)
-            : base(pos, velocity, Textures.bottle, true, 200)
+            : base(pos, velocity, Textures.bottle, true, 400)
         {
             
         }   

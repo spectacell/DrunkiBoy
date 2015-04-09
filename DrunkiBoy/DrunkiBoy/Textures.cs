@@ -9,7 +9,7 @@ namespace DrunkiBoy
 {
     class Textures
     {
-        public static Texture2D platform, background1, background2, player, player_burger, player_pizza, player_bottle, player_bottle_molotov,
+        public static Texture2D platform, background1, background2, player, player_burger, player_lower_body, player_upper_body, player_pizza, player_bottle, player_bottle_molotov,
                                 deleteCursor, torchTex, Key, heart, bottle, hamburgare, pizza, painkiller, teleport, AktivTeleport, smokeTexture, explosionTexture;
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant;
 
@@ -18,10 +18,12 @@ namespace DrunkiBoy
         public static void LoadContent(ContentManager content)
         {
             player = content.Load<Texture2D>("Player/player-animation");
-            player_burger = content.Load<Texture2D>("Player/player-animation_burger");
-            player_pizza = content.Load<Texture2D>("Player/player-animation_pizza");
-            player_bottle = content.Load<Texture2D>("Player/player-animation_bottle");
-            player_bottle_molotov = content.Load<Texture2D>("Player/player-animation_bottle_molotov");
+            player_upper_body = content.Load<Texture2D>("Player/player-animation_upper_body");
+            player_lower_body = content.Load<Texture2D>("Player/player-animation_lower_body");
+            player_burger = content.Load<Texture2D>("Player/player-animation_burger_ub");
+            player_pizza = content.Load<Texture2D>("Player/player-animation_pizza_ub");
+            player_bottle = content.Load<Texture2D>("Player/player-animation_bottle_ub");
+            player_bottle_molotov = content.Load<Texture2D>("Player/player-animation_bottle_molotov_ub");
             platform = content.Load<Texture2D>("platform");
             deleteCursor = content.Load<Texture2D>("deleteCursor");
             background1 = content.Load<Texture2D>("space");

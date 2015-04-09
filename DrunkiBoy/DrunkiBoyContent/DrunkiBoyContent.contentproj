@@ -203,34 +203,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player\player-animation_burger.png">
-      <Name>player-animation_burger</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Player\player-animation_pizza.png">
-      <Name>player-animation_pizza</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Player\player-animation_bottle.png">
-      <Name>player-animation_bottle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Player\player-animation_bottle_molotov.png">
-      <Name>player-animation_bottle_molotov</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Particles\heart_particle.png">
       <Name>heart_particle</Name>
       <Importer>TextureImporter</Importer>
@@ -268,6 +240,40 @@
   <ItemGroup>
     <Compile Include="Particles\explosion_texture.PNG">
       <Name>explosion_texture</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Player\player-animation_bottle_molotov_ub.png">
+      <Name>player-animation_bottle_molotov_ub</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Player\player-animation_bottle_ub.png">
+      <Name>player-animation_bottle_ub</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Player\player-animation_burger_ub.png">
+      <Name>player-animation_burger_ub</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Player\player-animation_pizza_ub.png">
+      <Name>player-animation_pizza_ub</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Player\player-animation_lower_body.png">
+      <Name>player-animation_lower_body</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Player\player-animation_upper_body.png">
+      <Name>player-animation_upper_body</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

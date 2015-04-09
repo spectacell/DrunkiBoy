@@ -10,11 +10,13 @@ namespace DrunkiBoy
 {
     class Player : AnimatedObject
     {
+        private Texture2D texUpperBody, texLowerBody;
+
         private const int playerSpeed = 80;
         public static int livesLeft;
         private int defaultLives = 3;
         public static int healthLeft, defaultHealth = 200;
-        public static int score = 132432;
+        public static int score = 0;
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
@@ -33,6 +35,8 @@ namespace DrunkiBoy
             livesLeft = 2;
             healthLeft = 60;
             this.type = "player";
+            texUpperBody = Textures.player_upper_body;
+            texLowerBody = Textures.player_lower_body;
             //ResetSpawnTimer();
         }
         public override void Update(GameTime gameTime)
@@ -78,7 +82,7 @@ namespace DrunkiBoy
                 movement.X -= 1;
                 facing = 0;
             }
-            if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !playerDead)
+            else if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !playerDead)
             {
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 movement.X += 1;
@@ -212,23 +216,23 @@ namespace DrunkiBoy
             switch (type)
             {
                 case weaponType.none:
-                    tex = Textures.player;
+                    texUpperBody = Textures.player_upper_body;
                     currentWeapon = weaponType.none;
                     break;
                 case weaponType.burger:
-                    tex = Textures.player_burger;
+                    texUpperBody = Textures.player_burger;
                     currentWeapon = weaponType.burger;
                     break;
                 case weaponType.pizza:
-                    tex = Textures.player_pizza;
+                    texUpperBody = Textures.player_pizza;
                     currentWeapon = weaponType.pizza;
                     break;
                 case weaponType.bottle:
-                    tex = Textures.player_bottle;
+                    texUpperBody = Textures.player_bottle;
                     currentWeapon = weaponType.bottle;
                     break;
                 case weaponType.molotovCocktail:
-                    tex = Textures.player_bottle_molotov;
+                    texUpperBody = Textures.player_bottle_molotov;
                     currentWeapon = weaponType.molotovCocktail;
                     break;
             }
@@ -241,12 +245,12 @@ namespace DrunkiBoy
                 if (facing == 0)  // vänster hållet att skjuta
                 {
                     bulletPos = new Vector2(pos.X, pos.Y + 60);
-                    bulletVelocity = new Vector2(-4, 0);
+                    bulletVelocity = new Vector2(-10, 0);
                 }
                 else //Högeråt
                 {
                     bulletPos = new Vector2(pos.X + 60, pos.Y + 60);
-                    bulletVelocity = new Vector2(4, 0);
+                    bulletVelocity = new Vector2(10, 0);
                 }
                 switch (currentWeapon)
                 {
@@ -266,6 +270,11 @@ namespace DrunkiBoy
                     break;
                 }  
             }
-        }                
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texLowerBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+        }   
     }
 }
