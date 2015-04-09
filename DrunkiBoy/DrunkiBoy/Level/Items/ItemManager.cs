@@ -76,8 +76,8 @@ namespace DrunkiBoy
             UpdatePlatforms(player);
             UpdateTorches(gameTime, player);
             UpdateKeys(gameTime, player);
-            UpdateHeart(gameTime, player);
-            UpdatePainkiller(gameTime, player);
+            UpdateHearts(gameTime, player);
+            UpdatePainkillers(gameTime, player);
             UpdateTeleport(gameTime);
             UpdateMoney(gameTime, player);
             UpdatePant(gameTime, player);
@@ -143,7 +143,7 @@ namespace DrunkiBoy
             }
         }
 
-        private void UpdatePainkiller(GameTime gameTime, Player player)
+        private void UpdatePainkillers(GameTime gameTime, Player player)
         {
             foreach (Painkiller painkiller in painkillers)
             {
@@ -157,19 +157,22 @@ namespace DrunkiBoy
         }
        
        
-        private void UpdateHeart(GameTime gameTime, Player player)
+        private void UpdateHearts(GameTime gameTime, Player player)
         {
             foreach (Heart heart in hearts)
             {
                 if (heart.DetectPixelCollision(player))
                 {
-                    hearts.Remove(heart);
-                    player.AddLife();
-                    break;
+                    heart.PickUp();  
                 }
                 heart.Update(gameTime);
+                if (heart.isActive == false)
+                {
+                    player.AddLife();
+                    hearts.Remove(heart);
+                    break;
+                }
             }
-
         }
 
         private void UpdateKeys(GameTime gameTime, Player player)
@@ -216,47 +219,47 @@ namespace DrunkiBoy
         {
             foreach (Platform platform in platforms)
             {
-                spriteBatch.Draw(platform.tex, platform.pos, platform.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                platform.Draw(spriteBatch);
             }
-            foreach (Torch torchs in torches)
+            foreach (Torch torch in torches)
             {
-                spriteBatch.Draw(torchs.tex,torchs.pos, torchs.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                torch.Draw(spriteBatch);
             }
             foreach (Key key in keys)
             {
-                spriteBatch.Draw(key.tex, key.pos, key.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                key.Draw(spriteBatch);
             }
             foreach (Heart heart in hearts)
             {
-                spriteBatch.Draw(heart.tex, heart.pos, heart.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                heart.Draw(spriteBatch);
             }
             foreach (Painkiller painkiller in painkillers)
             {
-                spriteBatch.Draw(painkiller.tex, painkiller.pos, painkiller.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                painkiller.Draw(spriteBatch);
             }
             foreach (Teleport teleport in teleports)
             {
-                spriteBatch.Draw(teleport.tex, teleport.pos, teleport.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                teleport.Draw(spriteBatch);
             }
             foreach (Money money in moneys)
             {
-                spriteBatch.Draw(money.tex, money.pos, money.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                money.Draw(spriteBatch);
             }
             foreach (Pant pant in pants)
             {
-                spriteBatch.Draw(pant.tex, pant.pos, pant.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                pant.Draw(spriteBatch);
             }
             foreach (Burger burger in burgers)
             {
-                spriteBatch.Draw(burger.tex, burger.pos, burger.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                burger.Draw(spriteBatch);
             }
             foreach (Pizza pizza in pizzas)
             {
-                spriteBatch.Draw(pizza.tex, pizza.pos, pizza.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                pizza.Draw(spriteBatch);
             }
             foreach (Bottle bottle in bottles)
             {
-                spriteBatch.Draw(bottle.tex, bottle.pos, bottle.srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                bottle.Draw(spriteBatch);
             }
         }
         private void UpdatePlatforms(Player player)

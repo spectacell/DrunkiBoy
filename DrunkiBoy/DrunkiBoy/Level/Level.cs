@@ -102,8 +102,8 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "key")
                 {
-                    itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 250));
-                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 20, 30), true, 3, 250));
+                    itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 30, 30), true, 2, 450));
+                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 30, 30), true, 2, 250));
                 }
                 else if (temp[0] == "heart")
                 {
