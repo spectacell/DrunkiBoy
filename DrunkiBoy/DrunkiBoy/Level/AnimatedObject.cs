@@ -48,6 +48,7 @@ namespace DrunkiBoy
         {
             movement.Y += 0.6f;
         }
+        
         /// <summary>
         /// Returns true when object is outside of the visible screen
         /// </summary>

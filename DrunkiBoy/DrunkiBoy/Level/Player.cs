@@ -10,8 +10,9 @@ namespace DrunkiBoy
 {
     class Player : AnimatedObject
     {
-        private Texture2D texUpperBody, texLowerBody;
-
+        private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
+        bool animateShooting;
+        int currentFrame;
         private const int playerSpeed = 80;
         public static int livesLeft;
         private int defaultLives = 3;
@@ -72,6 +73,7 @@ namespace DrunkiBoy
                 activePowerUp = 0;
             }
             base.Update(gameTime);
+            AnimateShooting(gameTime);
         }
 
         private void PlayerMovement(GameTime gameTime)
@@ -220,21 +222,34 @@ namespace DrunkiBoy
                     currentWeapon = weaponType.none;
                     break;
                 case weaponType.burger:
-                    texUpperBody = Textures.player_burger;
+                    texUpperBody = prevTexUpperBody = Textures.player_burger;
                     currentWeapon = weaponType.burger;
                     break;
                 case weaponType.pizza:
-                    texUpperBody = Textures.player_pizza;
+                    texUpperBody = prevTexUpperBody = Textures.player_pizza;
                     currentWeapon = weaponType.pizza;
                     break;
                 case weaponType.bottle:
-                    texUpperBody = Textures.player_bottle;
+                    texUpperBody = prevTexUpperBody = Textures.player_bottle;
                     currentWeapon = weaponType.bottle;
                     break;
                 case weaponType.molotovCocktail:
-                    texUpperBody = Textures.player_bottle_molotov;
+                    texUpperBody = prevTexUpperBody = Textures.player_bottle_molotov;
                     currentWeapon = weaponType.molotovCocktail;
                     break;
+            }
+        }
+        protected void AnimateShooting(GameTime gameTime)
+        {
+            if (animateShooting)
+            {
+                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+            if (frame == 7)
+            {
+                animateShooting = false;
+                texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
+                nrFrames = 8;
             }
         }
         public void Shoot()
@@ -249,12 +264,17 @@ namespace DrunkiBoy
                 }
                 else //Högeråt
                 {
-                    bulletPos = new Vector2(pos.X + 60, pos.Y + 60);
+                    bulletPos = new Vector2(pos.X + 60, pos.Y + 35);
                     bulletVelocity = new Vector2(10, 0);
+                    frame = 0;
                 }
                 switch (currentWeapon)
                 {
                     case weaponType.burger:
+                        nrFrames = 4;
+                        currentFrame = 1;
+                        texUpperBody = Textures.player_burger_shooting;
+                        animateShooting = true;
                         BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity));
                     break;
                     case weaponType.pizza:
