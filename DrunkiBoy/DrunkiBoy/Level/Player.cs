@@ -244,13 +244,14 @@ namespace DrunkiBoy
             if (animateShooting)
             {
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (frame == 7)
+                {
+                    animateShooting = false;
+                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
+                    nrFrames = 8;
+                }
             }
-            if (frame == 7)
-            {
-                animateShooting = false;
-                texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
-                nrFrames = 8;
-            }
+            
         }
         public void Shoot()
         {
