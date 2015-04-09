@@ -74,7 +74,7 @@ namespace DrunkiBoy
         public void Update(GameTime gameTime, Player player)
         {
             UpdatePlatforms(player);
-            UpdateTorches(gameTime);
+            UpdateTorches(gameTime, player);
             UpdateKeys(gameTime, player);
             UpdateHeart(gameTime, player);
             UpdatePainkiller(gameTime, player);
@@ -83,17 +83,18 @@ namespace DrunkiBoy
             UpdatePant(gameTime, player);
             UpdateBurgers(gameTime, player);
             UpdatePizza(gameTime, player);
-            UpdateBottle(gameTime, player);
+            UpdateBottles(gameTime, player);
 
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
         }
-        private void UpdateBottle(GameTime gameTime, Player player)
+        private void UpdateBottles(GameTime gameTime, Player player)
         {
             foreach (Bottle bottle in bottles)
             {
                 if (bottle.DetectPixelCollision(player))
                 {
                     bottles.Remove(bottle);
+                    player.PickUpWeapon(Player.weaponType.bottle);
                     break;
                 }
             }
@@ -105,6 +106,7 @@ namespace DrunkiBoy
                 if (pizza.DetectPixelCollision(player))
                 {
                     pizzas.Remove(pizza);
+                    player.PickUpWeapon(Player.weaponType.pizza);
                     break;
                 }
             }
@@ -183,12 +185,15 @@ namespace DrunkiBoy
             }
         }
 
-        private void UpdateTorches(GameTime gameTime)
+        private void UpdateTorches(GameTime gameTime, Player player)
         {
-            foreach (Torch torchs in torches)
+            foreach (Torch torch in torches)
             {
-                
-                torchs.Update(gameTime);
+                if (player.currentWeapon == Player.weaponType.bottle && player.DetectPixelCollision(torch)) 
+                {
+                    player.PickUpWeapon(Player.weaponType.molotovCocktail);
+                }
+                torch.Update(gameTime);
             }
         }
         private void UpdateBurgers(GameTime gameTime, Player player)

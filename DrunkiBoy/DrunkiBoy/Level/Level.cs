@@ -142,8 +142,8 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "bottle")
                 {
-                    itemManager.AddBottle(new Bottle(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flaska, true));
-                    objects.Add(new Bottle(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flaska, true));
+                    itemManager.AddBottle(new Bottle(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.bottle, true));
+                    objects.Add(new Bottle(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.bottle, true));
                 }
             }
             sr.Close();

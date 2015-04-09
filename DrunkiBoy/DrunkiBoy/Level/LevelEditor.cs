@@ -266,11 +266,11 @@ namespace DrunkiBoy
                     case items.Bottle:
                         if (intersectingPlatform != null)
                         {
-                            objects.Add(new Bottle(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.flaska, true));
+                            objects.Add(new Bottle(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.bottle, true));
                         }
                         else
                         {
-                            objects.Add(new Bottle(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.flaska, true));
+                            objects.Add(new Bottle(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.bottle, true));
                         }
                         break;
                 }
@@ -382,7 +382,7 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.C))
             {
                 selectedItem = items.Bottle;
-                selectedObject = new Bottle(new Vector2(mouseState.X, mouseState.Y), Textures.flaska, true);
+                selectedObject = new Bottle(new Vector2(mouseState.X, mouseState.Y), Textures.bottle, true);
             }
         }
 

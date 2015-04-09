@@ -19,7 +19,7 @@ namespace DrunkiBoy
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
         public enum weaponType { none, burger, pizza, bottle, molotovCocktail };
-        private weaponType currentWeapon;
+        public weaponType currentWeapon;
 
         public int jumpHeight = 12;
         //public Vector2 currentSpawnPos;
@@ -220,15 +220,15 @@ namespace DrunkiBoy
                     currentWeapon = weaponType.burger;
                     break;
                 case weaponType.pizza:
-                    //tex = Textures.player_pizza;
+                    tex = Textures.player_pizza;
                     currentWeapon = weaponType.pizza;
                     break;
                 case weaponType.bottle:
-                    //tex = Textures.player_bottle;
+                    tex = Textures.player_bottle;
                     currentWeapon = weaponType.bottle;
                     break;
                 case weaponType.molotovCocktail:
-                    //tex = Textures.player_molotovCocktail;
+                    tex = Textures.player_bottle_molotov;
                     currentWeapon = weaponType.molotovCocktail;
                     break;
             }
