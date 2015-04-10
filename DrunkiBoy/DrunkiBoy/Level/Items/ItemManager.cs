@@ -117,22 +117,12 @@ namespace DrunkiBoy
             {
                 if (pant.DetectPixelCollision(player))
                 {
+                    player.AddScorePant();
                     pants.Remove(pant);
                     break;
                 }
             }
-        }
-        private void UpdateMoney(GameTime gameTime, Player player)
-        {
-            foreach (Money money in moneys)
-            {
-                if (money.DetectPixelCollision(player))
-                {
-                    moneys.Remove(money);
-                    break;
-                }
-            }
-        }
+        }       
 
        
         private void UpdateTeleport(GameTime gameTime)
@@ -153,6 +143,18 @@ namespace DrunkiBoy
                     break;
                 }
                 painkiller.Update(gameTime);
+            }
+        }
+        private void UpdateMoney(GameTime gameTime, Player player)
+        {
+            foreach (Money money in moneys)
+            {
+                if (money.DetectPixelCollision(player))
+                {
+                    player.AddScoreMoney();
+                    moneys.Remove(money);
+                    break;
+                }
             }
         }
        

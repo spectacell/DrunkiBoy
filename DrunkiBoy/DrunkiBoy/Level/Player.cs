@@ -19,7 +19,7 @@ namespace DrunkiBoy
         bool animateShooting;
 
         private const int playerSpeed = 80;
-        public static int livesLeft;
+        public static int livesLeft;        
         private int defaultLives = 3;
         public static int healthLeft, defaultHealth = 200;
         public static int score = 0;
@@ -92,6 +92,7 @@ namespace DrunkiBoy
                 srcRectLB.X = facingSrcRects[facing].X + (frameLB % nrFrames) * frameWidth;
             }
         }
+        
 
         private void PlayerMovement(GameTime gameTime)
         {
@@ -183,6 +184,15 @@ namespace DrunkiBoy
                 livesLeft++;
             }
         }
+        public void AddScoreMoney()
+        {
+            score = score+ 10;
+        }
+        public void AddScorePant()
+        {
+            score = score + 20;
+        }
+        
         /// <summary>
         /// Körs när man tar en PowerUp. Switch/case satsen i Update() avgör vad som händer med player när poweruppen är aktiv
         /// </summary>
