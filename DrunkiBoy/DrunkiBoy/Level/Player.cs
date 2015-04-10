@@ -327,7 +327,7 @@ namespace DrunkiBoy
                     BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
 
                     break;
-                    case weaponType.bottle:
+                    case weaponType.bottle:                    
                     BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity));
 
                     break;

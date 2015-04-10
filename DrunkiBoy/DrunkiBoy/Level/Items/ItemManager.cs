@@ -139,6 +139,7 @@ namespace DrunkiBoy
             {
                 if (painkiller.DetectPixelCollision(player))
                 {
+                    player.AddHealth(10);
                     painkillers.Remove(painkiller);
                     break;
                 }
