@@ -183,7 +183,8 @@ namespace DrunkiBoy
             foreach (Key key in keys)
             {
                 if (key.DetectPixelCollision(player))
-                {
+                {                    
+                    player.Itemleft();
                     keys.Remove(key);
                     break;
                 }
