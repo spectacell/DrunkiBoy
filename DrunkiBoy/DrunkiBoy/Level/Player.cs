@@ -11,8 +11,13 @@ namespace DrunkiBoy
     class Player : AnimatedObject
     {
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
+
+        //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
+        double timeTilNextFrameLB = 0; 
+        private int frameLB;
+        private Rectangle srcRectLB;
         bool animateShooting;
-        int currentFrame;
+
         private const int playerSpeed = 80;
         public static int livesLeft;
         private int defaultLives = 3;
@@ -33,6 +38,7 @@ namespace DrunkiBoy
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
+            srcRectLB = srcRect;
             livesLeft = 2;
             healthLeft = 60;
             this.type = "player";
@@ -73,20 +79,39 @@ namespace DrunkiBoy
                 activePowerUp = 0;
             }
             base.Update(gameTime);
+            AnimateLowerBody();
             AnimateShooting(gameTime);
+        }
+
+        private void AnimateLowerBody()
+        {
+            if (timeTilNextFrameLB <= 0)
+            {
+                timeTilNextFrameLB = frameInterval;
+                frameLB++;
+                srcRectLB.X = facingSrcRects[facing].X + (frameLB % nrFrames) * frameWidth;
+            }
         }
 
         private void PlayerMovement(GameTime gameTime)
         {
-            if (KeyMouseReader.keyState.IsKeyDown(Keys.Left) && pos.X > -(Game1.windowWidth / 2) && !playerDead)
+            if (KeyMouseReader.keyState.IsKeyDown(Keys.Left) && !playerDead)
             {
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (!animateShooting)
+                {
+                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
                 movement.X -= 1;
                 facing = 0;
             }
             else if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !playerDead)
             {
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (!animateShooting)
+                {
+                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
                 movement.X += 1;
                 facing = 1;
             }
@@ -145,7 +170,7 @@ namespace DrunkiBoy
         {
             if (activePlatform == null)
             {
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
             }
         }
         /// <summary>
@@ -212,7 +237,10 @@ namespace DrunkiBoy
         {
             score += scoreToAdd;
         }
-
+        /// <summary>
+        /// Körs från ItemManager när player tar upp ett vapen. Ändrar players textur och currentWeapon-variabel så att rätt skott skjuts
+        /// </summary>
+        /// <param name="type">Vapentyp</param>
         public void PickUpWeapon(weaponType type)
         {
             switch (type)
@@ -239,19 +267,27 @@ namespace DrunkiBoy
                     break;
             }
         }
+        /// <summary>
+        /// Så att en skottanimation körs när man skjuter. Körs när animateShooting-variabeln sätts till true och avslutas när alla 8 frames körts. Då
+        /// byter player till föregående textur igen.
+        /// </summary>
+        /// <param name="gameTime"></param>
         protected void AnimateShooting(GameTime gameTime)
         {
             if (animateShooting)
             {
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (frame == 7)
+                if (facing == 1 && frame == 7)
                 {
                     animateShooting = false;
                     texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
-                    nrFrames = 8;
+                }
+                if (facing == 0 && frame == 15)
+                {
+                    animateShooting = false;
+                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
                 }
             }
-            
         }
         public void Shoot()
         {
@@ -262,6 +298,7 @@ namespace DrunkiBoy
                 {
                     bulletPos = new Vector2(pos.X, pos.Y + 60);
                     bulletVelocity = new Vector2(-10, 0);
+                    frame = 7;
                 }
                 else //Högeråt
                 {
@@ -272,8 +309,6 @@ namespace DrunkiBoy
                 switch (currentWeapon)
                 {
                     case weaponType.burger:
-                        nrFrames = 4;
-                        currentFrame = 1;
                         texUpperBody = Textures.player_burger_shooting;
                         animateShooting = true;
                         BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity));
@@ -292,9 +327,13 @@ namespace DrunkiBoy
                 }  
             }
         }
+        /// <summary>
+        /// Två Draw() här, en för underkroppen och en för överkroppen.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texLowerBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
         }   
     }

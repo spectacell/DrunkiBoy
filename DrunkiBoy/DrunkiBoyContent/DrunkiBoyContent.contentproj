@@ -279,8 +279,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player\player-animation_burger_shoot.png">
-      <Name>player-animation_burger_shoot</Name>
+    <Compile Include="Player\player-animation_burger_shooting.png">
+      <Name>player-animation_burger_shooting</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

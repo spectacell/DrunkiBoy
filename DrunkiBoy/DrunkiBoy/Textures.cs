@@ -22,7 +22,7 @@ namespace DrunkiBoy
             player_upper_body = content.Load<Texture2D>("Player/player-animation_upper_body");
             player_lower_body = content.Load<Texture2D>("Player/player-animation_lower_body");
             player_burger = content.Load<Texture2D>("Player/player-animation_burger_ub");
-            player_burger_shooting = content.Load<Texture2D>("Player/player-animation_burger_shoot");
+            player_burger_shooting = content.Load<Texture2D>("Player/player-animation_burger_shooting");
             player_pizza = content.Load<Texture2D>("Player/player-animation_pizza_ub");
             player_bottle = content.Load<Texture2D>("Player/player-animation_bottle_ub");
             player_bottle_molotov = content.Load<Texture2D>("Player/player-animation_bottle_molotov_ub");
