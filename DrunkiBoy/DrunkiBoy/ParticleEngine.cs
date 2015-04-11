@@ -58,6 +58,7 @@ namespace DrunkiBoy
             int ttl = 40 + random.Next(40);
             return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
         }
+        
 
         public void Update(Vector2 pos)
         {
@@ -68,7 +69,8 @@ namespace DrunkiBoy
             
                 for (int i = 0; i < total; i++)
 			    {
-                    particles.Add(GenerateNewParticle());
+                   particles.Add(GenerateNewParticle());
+                   
 			    }
 			    for (int particle = 0; particle < particles.Count; particle++)
 			    {

@@ -23,6 +23,7 @@ namespace DrunkiBoy
         private int defaultLives = 3;
         public static int healthLeft, defaultHealth = 200;
         public static int score = 0;
+        public static int itemleft = 3;
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
@@ -191,6 +192,10 @@ namespace DrunkiBoy
         public void AddScorePant()
         {
             score = score + 20;
+        }
+        public void Itemleft()
+        {
+            itemleft--;
         }
         
         /// <summary>

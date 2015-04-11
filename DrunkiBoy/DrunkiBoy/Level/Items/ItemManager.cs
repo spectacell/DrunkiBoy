@@ -21,7 +21,7 @@ namespace DrunkiBoy
         public List<Burger> burgers = new List<Burger>();
         public List<Pizza> pizzas = new List<Pizza>();
         public List<Bottle> bottles = new List<Bottle>();
-        
+
 
         public ItemManager()
         {
@@ -122,9 +122,9 @@ namespace DrunkiBoy
                     break;
                 }
             }
-        }       
+        }
 
-       
+
         private void UpdateTeleport(GameTime gameTime)
         {
             foreach (Teleport teleport in teleports)
@@ -152,21 +152,27 @@ namespace DrunkiBoy
             {
                 if (money.DetectPixelCollision(player))
                 {
+                    money.PickUp();
+                }
+                money.Update(gameTime);
+                if (money.isActive == false)
+                {
                     player.AddScoreMoney();
                     moneys.Remove(money);
                     break;
                 }
+
             }
         }
-       
-       
+
+
         private void UpdateHearts(GameTime gameTime, Player player)
         {
             foreach (Heart heart in hearts)
             {
                 if (heart.DetectPixelCollision(player))
                 {
-                    heart.PickUp();  
+                    heart.PickUp();
                 }
                 heart.Update(gameTime);
                 if (heart.isActive == false)
@@ -183,7 +189,7 @@ namespace DrunkiBoy
             foreach (Key key in keys)
             {
                 if (key.DetectPixelCollision(player))
-                {                    
+                {
                     player.Itemleft();
                     keys.Remove(key);
                     break;
@@ -196,7 +202,7 @@ namespace DrunkiBoy
         {
             foreach (Torch torch in torches)
             {
-                if (player.currentWeapon == Player.weaponType.bottle && player.DetectPixelCollision(torch)) 
+                if (player.currentWeapon == Player.weaponType.bottle && player.DetectPixelCollision(torch))
                 {
                     player.PickUpWeapon(Player.weaponType.molotovCocktail);
                 }
@@ -278,8 +284,8 @@ namespace DrunkiBoy
                         player.pos.Y = platform.BoundingBox.Top - player.BoundingBox.Height + 1; //+1 to maintain the Intersection
                         player.movement.Y = 0;
                     }
-                } 
-                
+                }
+
                 //foreach (Enemy enemy in enemies)
                 //{
                 //    if (enemy.activePlatform == null)
