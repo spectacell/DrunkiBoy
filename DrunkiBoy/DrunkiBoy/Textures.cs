@@ -14,7 +14,7 @@ namespace DrunkiBoy
         public static Texture2D platform, background1, background2, deleteCursor, torchTex, Key, heart, bottle, hamburgare, pizza, painkiller, teleport, AktivTeleport, smokeTexture, explosionTexture;
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant;
 
-        public static List<Texture2D> heartParticles, smokeParticles, starParticles;
+        public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles;
 
         public static void LoadContent(ContentManager content)
         {
@@ -53,6 +53,8 @@ namespace DrunkiBoy
             heartParticles.Add(content.Load<Texture2D>("Particles/heart_particle2"));
             starParticles = new List<Texture2D>();
             starParticles.Add(content.Load<Texture2D>("star"));
+            pantParticles = new List<Texture2D>();
+            pantParticles.Add(content.Load<Texture2D>("pant_Particle"));
             smokeParticles = new List<Texture2D>();
             smokeParticles.Add(content.Load<Texture2D>("Particles/smoke_particle"));
             

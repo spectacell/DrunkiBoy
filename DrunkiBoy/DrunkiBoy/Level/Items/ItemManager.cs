@@ -117,6 +117,11 @@ namespace DrunkiBoy
             {
                 if (pant.DetectPixelCollision(player))
                 {
+                    pant.PickUp();
+                }
+                pant.Update(gameTime);
+                if (pant.isActive == false)
+                {
                     player.AddScorePant();
                     pants.Remove(pant);
                     break;
