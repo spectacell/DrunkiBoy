@@ -144,11 +144,15 @@ namespace DrunkiBoy
             {
                 if (painkiller.DetectPixelCollision(player))
                 {
+                    painkiller.PickUp();
+                }
+                painkiller.Update(gameTime);
+                if (painkiller.isActive == false)
+                {
                     player.AddHealth(10);
                     painkillers.Remove(painkiller);
                     break;
-                }
-                painkiller.Update(gameTime);
+                }                
             }
         }
         private void UpdateMoney(GameTime gameTime, Player player)
