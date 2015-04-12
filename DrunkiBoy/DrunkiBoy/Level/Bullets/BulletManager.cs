@@ -31,9 +31,11 @@ namespace DrunkiBoy
                 bullet.Update(gameTime);
                 if (bullet.isActive == false)
                 {
+                  
                     bullets.Remove(bullet);
                     break;
                 }
+                //particleEngine.CreateParticlesInCircleRange(bullet.pos);
             }
             
            

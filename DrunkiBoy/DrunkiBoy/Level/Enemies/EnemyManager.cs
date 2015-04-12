@@ -19,7 +19,8 @@ namespace DrunkiBoy
             foreach (Enemy enemy in enemies)
             {
                 enemy.Update(gameTime);
-            }
+                
+            }            
         }
     }
 }
