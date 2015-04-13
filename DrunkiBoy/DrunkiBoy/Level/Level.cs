@@ -69,6 +69,7 @@ namespace DrunkiBoy
                         currentLevelState = levelState.lostLife;
                     }
                     itemManager.Update(gameTime, player);
+                    enemyManager.Update(gameTime, player);
                     BulletManager.Update(gameTime);
                     timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -113,6 +114,7 @@ namespace DrunkiBoy
                     spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
                     player.Draw(spriteBatch);
                     itemManager.Draw(spriteBatch);
+                    enemyManager.Draw(spriteBatch);
                     BulletManager.Draw(spriteBatch);
                     spriteBatch.End();
                     break;
@@ -201,8 +203,8 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "flashlight")
                 {
-                    enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 100));
-                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 100));
+                    enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 230));
+                    objects.Add(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 230));
                 }
             }
             sr.Close();
