@@ -13,7 +13,7 @@ namespace DrunkiBoy
 
         public static Texture2D platform, background1, background2, deleteCursor, torchTex, Key, heart, bottle, bottle_molotov, hamburgare, pizza, painkiller, jagerbomb, teleport, AktivTeleport, smokeTexture, explosionTexture;
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant;
-
+        public static Texture2D flashlight;
         public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles, painkillerParticles, burgerParticles, pizzaParticles, bottleparticles;
 
         public static void LoadContent(ContentManager content)
@@ -27,6 +27,7 @@ namespace DrunkiBoy
             player_bottle = content.Load<Texture2D>("Player/player-animation_bottle_ub");
             player_bottle_molotov = content.Load<Texture2D>("Player/player-animation_bottle_molotov_ub");
             platform = content.Load<Texture2D>("platform");
+            flashlight = content.Load<Texture2D>("Flashlight(Animation)");
             deleteCursor = content.Load<Texture2D>("deleteCursor");
             background1 = content.Load<Texture2D>("space");
             background2 = content.Load<Texture2D>("bg2");

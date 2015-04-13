@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb }; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -47,6 +47,7 @@ namespace DrunkiBoy
             menuEntries.Add("V: Pizza");
             menuEntries.Add("C: Bottle");
             menuEntries.Add("J: Jagerbomb");
+            menuEntries.Add("L: Flashlight");
 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
@@ -284,6 +285,16 @@ namespace DrunkiBoy
                             objects.Add(new Jagerbomb(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.jagerbomb, true));
                         }
                         break;
+                    case items.Flashlight:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Flashlight(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.flashlight, new Rectangle(0, 0, 60, 53), true, 1, 50));
+                        }
+                        else
+                        {
+                            objects.Add(new Flashlight(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.flashlight, new Rectangle(0, 0, 60, 53), true, 1, 50));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -399,6 +410,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Jagerbomb;
                 selectedObject = new Jagerbomb(new Vector2(mouseState.X, mouseState.Y), Textures.jagerbomb, true);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.L))
+            {
+                selectedItem = items.Flashlight;
+                selectedObject = new Teleport(new Vector2(mouseState.X, mouseState.Y), Textures.flashlight, new Rectangle(0, 0, 200, 267), true, 1, 50);
             }
         }
 

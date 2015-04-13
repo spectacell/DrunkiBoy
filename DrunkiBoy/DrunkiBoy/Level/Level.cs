@@ -21,6 +21,7 @@ namespace DrunkiBoy
         protected List<GameObject> objects; //For the Level editor
 
         protected ItemManager itemManager = new ItemManager();
+        protected EnemyManager enemyManager = new EnemyManager();
 
         protected int levelHeight = 2000, levelWidth = 6000;
 
@@ -54,6 +55,7 @@ namespace DrunkiBoy
         {
             player.Update(gameTime);
             itemManager.Update(gameTime, player);
+            enemyManager.Update(gameTime, player);
             BulletManager.Update(gameTime);
             timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -70,6 +72,7 @@ namespace DrunkiBoy
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
             player.Draw(spriteBatch);
             itemManager.Draw(spriteBatch);
+            enemyManager.Draw(spriteBatch);
             BulletManager.Draw(spriteBatch);
             spriteBatch.End();
             
@@ -149,6 +152,11 @@ namespace DrunkiBoy
                 {
                     itemManager.AddJagerbomb(new Jagerbomb(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.jagerbomb, true));
                     objects.Add(new Jagerbomb(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.jagerbomb, true));
+                }
+                else if (temp[0] == "flashlight")
+                {
+                    enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 900));
+                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 250));
                 }
             }
             sr.Close();
