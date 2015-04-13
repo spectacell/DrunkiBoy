@@ -21,7 +21,7 @@ namespace DrunkiBoy
         private Level level;
         private LevelEditor levelEditor;
 
-        public enum gameState { inGame, levelEditor };
+        public enum gameState { inGame, levelComplete, gameOver, levelEditor };
         public static gameState currentGameState = gameState.levelEditor;
 
         public Game1()

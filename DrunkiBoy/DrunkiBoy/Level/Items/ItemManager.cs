@@ -138,7 +138,7 @@ namespace DrunkiBoy
                 pant.Update(gameTime);
                 if (pant.isActive == false)
                 {
-                    player.AddScorePant();
+                    player.AddScore(20);
                     pants.Remove(pant);
                     break;
                 }
@@ -181,7 +181,7 @@ namespace DrunkiBoy
                 money.Update(gameTime);
                 if (money.isActive == false)
                 {
-                    player.AddScoreMoney();
+                    player.AddScore(20);
                     moneys.Remove(money);
                     break;
                 }
@@ -214,7 +214,6 @@ namespace DrunkiBoy
             {
                 if (key.DetectPixelCollision(player))
                 {
-                    player.Itemleft();
                     keys.Remove(key);
                     break;
                 }

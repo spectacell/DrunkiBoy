@@ -6,11 +6,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using System.IO;
+using Microsoft.Xna.Framework.Input;
 
 namespace DrunkiBoy
 {
     class Level
     {
+        public enum levelState { running, lostLife}
+        public levelState currentLevelState;
         protected Player player;
         protected GraphicsDevice gd;
         
@@ -48,31 +51,68 @@ namespace DrunkiBoy
             #endregion
             LoadContent(levelTextFilePath);
             timeLeft = defaultTime;
+            currentLevelState = levelState.running;
         }
         
         public virtual void Update(GameTime gameTime)
         {
-            player.Update(gameTime);
-            itemManager.Update(gameTime, player);
-            BulletManager.Update(gameTime);
-            timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
+            switch (currentLevelState)
+            {
+                case levelState.running:
+                    player.Update(gameTime);
+                    if (player.isDead)
+                    {
+                        currentLevelState = levelState.lostLife;
+                    }
+                    itemManager.Update(gameTime, player);
+                    BulletManager.Update(gameTime);
+                    timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Riktar kameran mot spelaren...
-            camera.LookAt(player.pos);
+                    // Riktar kameran mot spelaren...
+                    camera.LookAt(player.pos);
+                    
+                    break;
 
+                case levelState.lostLife:
+                    if (Player.livesLeft > 0)
+                    {
+                        //Nån bild här eller nåt och en text som uppmanar spelaren att klicka för att börja om vid senaste checkpointen...
+                        if (KeyMouseReader.KeyPressed(Keys.Space))
+                        {
+                            player.isDead = false;
+                            player.pos = player.currentSpawnPos;
+                            currentLevelState = levelState.running;
+                        }
+                    }
+                    else
+                    {
+                        //Om antal liv är mindre än noll så skicka till GameOver-skärm
+                    }
+                    break;
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
-                layer.Draw(spriteBatch);
-            Vector2 parallax = new Vector2(1f);
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
-            player.Draw(spriteBatch);
-            itemManager.Draw(spriteBatch);
-            BulletManager.Draw(spriteBatch);
-            spriteBatch.End();
-            
+            switch (currentLevelState)
+            {
+                case levelState.running:
+                    foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
+                    { 
+                        layer.Draw(spriteBatch);
+                    }
+                    Vector2 parallax = new Vector2(1f);
+                    spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
+                    player.Draw(spriteBatch);
+                    itemManager.Draw(spriteBatch);
+                    BulletManager.Draw(spriteBatch);
+                    spriteBatch.End();
+                    break;
+
+                case levelState.lostLife:
+
+                    break;
+            }   
         }
 
         public void LoadContent(String textFile)
