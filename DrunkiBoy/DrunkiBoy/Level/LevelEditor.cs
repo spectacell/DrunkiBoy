@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle }; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb }; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -46,6 +46,7 @@ namespace DrunkiBoy
             menuEntries.Add("B: Burger");
             menuEntries.Add("V: Pizza");
             menuEntries.Add("C: Bottle");
+            menuEntries.Add("J: Jagerbomb");
 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
@@ -273,6 +274,16 @@ namespace DrunkiBoy
                             objects.Add(new Bottle(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.bottle, true));
                         }
                         break;
+                    case items.Jagerbomb:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Jagerbomb(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.jagerbomb, true));
+                        }
+                        else
+                        {
+                            objects.Add(new Jagerbomb(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.jagerbomb, true));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -383,6 +394,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Bottle;
                 selectedObject = new Bottle(new Vector2(mouseState.X, mouseState.Y), Textures.bottle, true);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.J))
+            {
+                selectedItem = items.Jagerbomb;
+                selectedObject = new Jagerbomb(new Vector2(mouseState.X, mouseState.Y), Textures.jagerbomb, true);
             }
         }
 

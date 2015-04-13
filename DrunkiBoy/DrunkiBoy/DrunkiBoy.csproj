@@ -83,6 +83,7 @@
     <Compile Include="Level\Bullets\HamburgareVapen.cs" />
     <Compile Include="Level\Items\Burger.cs" />
     <Compile Include="Level\Items\Heart.cs" />
+    <Compile Include="Level\Items\Jagerbomb.cs" />
     <Compile Include="Level\Items\Key.cs" />
     <Compile Include="Level\AnimatedObject.cs" />
     <Compile Include="Camera.cs" />

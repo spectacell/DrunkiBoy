@@ -145,6 +145,11 @@ namespace DrunkiBoy
                     itemManager.AddBottle(new Bottle(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.bottle, true));
                     objects.Add(new Bottle(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.bottle, true));
                 }
+                else if (temp[0] == "jagerbomb")
+                {
+                    itemManager.AddJagerbomb(new Jagerbomb(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.jagerbomb, true));
+                    objects.Add(new Jagerbomb(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.jagerbomb, true));
+                }
             }
             sr.Close();
         }

@@ -21,11 +21,15 @@ namespace DrunkiBoy
         public List<Burger> burgers = new List<Burger>();
         public List<Pizza> pizzas = new List<Pizza>();
         public List<Bottle> bottles = new List<Bottle>();
-
+        public List<Jagerbomb> jagerbombs = new List<Jagerbomb>();
 
         public ItemManager()
         {
 
+        }
+        public void AddJagerbomb(Jagerbomb jagerbomb)
+        {
+            jagerbombs.Add(jagerbomb);
         }
         public void AddBottle(Bottle bottle)
         {
@@ -84,8 +88,20 @@ namespace DrunkiBoy
             UpdateBurgers(gameTime, player);
             UpdatePizza(gameTime, player);
             UpdateBottles(gameTime, player);
-
+            UpdateJagerbombs(gameTime, player);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
+        }
+        private void UpdateJagerbombs(GameTime gameTime, Player player)
+        {
+            foreach (Jagerbomb jagerbomb in jagerbombs)
+            {
+                if (jagerbomb.DetectPixelCollision(player))
+                {
+                    jagerbombs.Remove(jagerbomb);
+                    player.AddHealth(20);
+                    break;
+                }
+            }
         }
         private void UpdateBottles(GameTime gameTime, Player player)
         {
@@ -128,7 +144,6 @@ namespace DrunkiBoy
                 }
             }
         }
-
 
         private void UpdateTeleport(GameTime gameTime)
         {
@@ -279,6 +294,10 @@ namespace DrunkiBoy
             foreach (Bottle bottle in bottles)
             {
                 bottle.Draw(spriteBatch);
+            }
+            foreach (Jagerbomb jagerbomb in jagerbombs)
+            {
+                jagerbomb.Draw(spriteBatch);
             }
         }
         private void UpdatePlatforms(Player player)
