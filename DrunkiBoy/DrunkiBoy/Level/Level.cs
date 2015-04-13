@@ -58,11 +58,7 @@ namespace DrunkiBoy
         public virtual void Update(GameTime gameTime)
         {
 
-            //player.Update(gameTime);
-            //itemManager.Update(gameTime, player);
-            //enemyManager.Update(gameTime, player);
-            //BulletManager.Update(gameTime);
-            //timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
+            
 
             switch (currentLevelState)
             {
@@ -103,15 +99,7 @@ namespace DrunkiBoy
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
-                layer.Draw(spriteBatch);
-            Vector2 parallax = new Vector2(1f);
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
-            player.Draw(spriteBatch);
-            itemManager.Draw(spriteBatch);
-            enemyManager.Draw(spriteBatch);
-            BulletManager.Draw(spriteBatch);
-            spriteBatch.End();
+            
             
 
             switch (currentLevelState)
@@ -121,7 +109,7 @@ namespace DrunkiBoy
                     { 
                         layer.Draw(spriteBatch);
                     }
-                    //Vector2 parallax = new Vector2(1f);
+                    Vector2 parallax = new Vector2(1f);
                     spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
                     player.Draw(spriteBatch);
                     itemManager.Draw(spriteBatch);
