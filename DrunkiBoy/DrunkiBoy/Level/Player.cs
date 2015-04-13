@@ -317,27 +317,33 @@ namespace DrunkiBoy
                 }
                 else //Högeråt
                 {
-                    bulletPos = new Vector2(pos.X + 60, pos.Y + 35);
+                    bulletPos = new Vector2(pos.X + 60, pos.Y + 60);
                     bulletVelocity = new Vector2(10, 0);
                     frame = 0;
                 }
                 switch (currentWeapon)
                 {
                     case weaponType.burger:
-                        texUpperBody = Textures.player_burger_shooting;
+                        texUpperBody = Textures.player_shooting;
                         animateShooting = true;
                         BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity));
                     break;
-                    case weaponType.pizza:
-                    BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
 
+                    case weaponType.pizza:
+                        texUpperBody = Textures.player_shooting;
+                        animateShooting = true;
+                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
                     break;
-                    case weaponType.bottle:                    
-                    BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity));
+                    case weaponType.bottle:     
+                        texUpperBody = Textures.player_shooting;
+                        animateShooting = true;
+                        BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity));
 
                     break;
                     case weaponType.molotovCocktail:
-
+                        texUpperBody = Textures.player_shooting;
+                        animateShooting = true;
+                        BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity));
                     break;
                 }  
             }
@@ -348,7 +354,7 @@ namespace DrunkiBoy
         /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
         }   
     }

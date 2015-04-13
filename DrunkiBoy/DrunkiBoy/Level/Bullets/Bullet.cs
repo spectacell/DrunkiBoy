@@ -31,9 +31,7 @@ namespace DrunkiBoy
             
             if (skottRange <= 0)
             {
-                isActive = false;
-                
-                
+                isActive = false;  
             }
         }
         public override void Draw(SpriteBatch spriteBatch)

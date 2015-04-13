@@ -18,10 +18,7 @@ namespace DrunkiBoy
 
         public static void AddBullet(Bullet bullet)
         {
-           
             bullets.Add(bullet);
-                       
-           
         }
         public static void Update(GameTime gameTime)
         {
@@ -31,7 +28,6 @@ namespace DrunkiBoy
                 bullet.Update(gameTime);
                 if (bullet.isActive == false)
                 {
-                  
                     bullets.Remove(bullet);
                     break;
                 }
