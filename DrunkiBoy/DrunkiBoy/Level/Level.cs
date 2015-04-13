@@ -57,13 +57,13 @@ namespace DrunkiBoy
         
         public virtual void Update(GameTime gameTime)
         {
-<<<<<<< HEAD
-            player.Update(gameTime);
-            itemManager.Update(gameTime, player);
-            enemyManager.Update(gameTime, player);
-            BulletManager.Update(gameTime);
-            timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
-=======
+
+            //player.Update(gameTime);
+            //itemManager.Update(gameTime, player);
+            //enemyManager.Update(gameTime, player);
+            //BulletManager.Update(gameTime);
+            //timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
+
             switch (currentLevelState)
             {
                 case levelState.running:
@@ -75,7 +75,7 @@ namespace DrunkiBoy
                     itemManager.Update(gameTime, player);
                     BulletManager.Update(gameTime);
                     timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
->>>>>>> origin/master
+
 
                     // Riktar kameran mot spelaren...
                     camera.LookAt(player.pos);
@@ -103,7 +103,6 @@ namespace DrunkiBoy
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-<<<<<<< HEAD
             foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
                 layer.Draw(spriteBatch);
             Vector2 parallax = new Vector2(1f);
@@ -114,7 +113,7 @@ namespace DrunkiBoy
             BulletManager.Draw(spriteBatch);
             spriteBatch.End();
             
-=======
+
             switch (currentLevelState)
             {
                 case levelState.running:
@@ -122,7 +121,7 @@ namespace DrunkiBoy
                     { 
                         layer.Draw(spriteBatch);
                     }
-                    Vector2 parallax = new Vector2(1f);
+                    //Vector2 parallax = new Vector2(1f);
                     spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
                     player.Draw(spriteBatch);
                     itemManager.Draw(spriteBatch);
@@ -134,7 +133,7 @@ namespace DrunkiBoy
 
                     break;
             }   
->>>>>>> origin/master
+
         }
 
         public void LoadContent(String textFile)
@@ -164,7 +163,7 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "key")
                 {
-                    itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 30, 30), true, 2, 450));
+                    itemManager.AddKey(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 30, 30), true, 2, 250));
                     objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Key, new Rectangle(0, 0, 30, 30), true, 2, 250));
                 }
                 else if (temp[0] == "heart")
@@ -214,8 +213,8 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "flashlight")
                 {
-                    enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 900));
-                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 250));
+                    enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 100));
+                    objects.Add(new Key(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 100));
                 }
             }
             sr.Close();
