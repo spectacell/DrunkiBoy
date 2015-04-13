@@ -31,14 +31,15 @@ namespace DrunkiBoy
         public weaponType currentWeapon;
 
         public int jumpHeight = 12;
-        //public Vector2 currentSpawnPos;
-        private bool playerDead;
+        public Vector2 currentSpawnPos;
+        public bool isDead;
         //private double spawnTimer, spawnTimerDefault = 750;
         //private bool movingLeft;
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
+            currentSpawnPos = pos;
             srcRectLB = srcRect;
             livesLeft = 2;
             healthLeft = 60;
@@ -56,22 +57,27 @@ namespace DrunkiBoy
                     AddFriction(facing);
 
                     PlayerJumping();
-                    Shoot();
+                    Shooting();
                     CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
+
+                    SetDeadFallingOffPlatform();
                 break;
                 case 1: //Odödlig
                     PlayerMovement(gameTime);
                     AddFriction(facing);
 
                     PlayerJumping();
-                    Shoot();
+                    Shooting();
                     CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
+                    SetDeadFallingOffPlatform();
                     activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
                 break;
 
                 case 2: //Flygförmåga
+                    Shooting();
+                    SetDeadFallingOffPlatform();
                     activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
                 break;
             }
@@ -82,6 +88,14 @@ namespace DrunkiBoy
             base.Update(gameTime);
             AnimateLowerBody();
             AnimateShooting(gameTime);
+        }
+
+        private void SetDeadFallingOffPlatform()
+        {
+            if (pos.Y > 2000)
+            {
+                SetPlayerDead();
+            }
         }
 
         private void AnimateLowerBody()
@@ -97,7 +111,7 @@ namespace DrunkiBoy
 
         private void PlayerMovement(GameTime gameTime)
         {
-            if (KeyMouseReader.keyState.IsKeyDown(Keys.Left) && !playerDead)
+            if (KeyMouseReader.keyState.IsKeyDown(Keys.Left) && !isDead)
             {
                 timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 if (!animateShooting)
@@ -107,7 +121,7 @@ namespace DrunkiBoy
                 movement.X -= 1;
                 facing = 0;
             }
-            else if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !playerDead)
+            else if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !isDead)
             {
                 timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 if (!animateShooting)
@@ -138,17 +152,12 @@ namespace DrunkiBoy
         /// </summary>
         public void SetPlayerDead()
         {
-            playerDead = true;
             movement = Vector2.Zero;
-            if (livesLeft > 1)
+            if (livesLeft > 0)
             {
                 livesLeft--;
-                //Metod här sen som spawnar vid senaste checkpoint
             }
-            else
-            {
-                //Game1.currentGameState = Game1.gameState.GameOver;
-            }
+            isDead = true; //Level ändrar automatiskt levelState till lostLife när player.isDead = true
         }
         /// <summary>
         /// Körs hela tiden för att kolla om spelaren fortfarande är på en plattform, annars sätts activePlatform till null. 
@@ -185,18 +194,6 @@ namespace DrunkiBoy
                 livesLeft++;
             }
         }
-        public void AddScoreMoney()
-        {
-            score = score+ 10;
-        }
-        public void AddScorePant()
-        {
-            score = score + 20;
-        }
-        public void Itemleft()
-        {
-            itemleft--;
-        }
         
         /// <summary>
         /// Körs när man tar en PowerUp. Switch/case satsen i Update() avgör vad som händer med player när poweruppen är aktiv
@@ -211,7 +208,7 @@ namespace DrunkiBoy
         /// <summary>
         /// Körs när man tar ett föremål som ger hälsa
         /// </summary>
-        /// <param name="amountToAdd"></param>
+        /// <param name="amountToAdd">Hur mycket hälsa man öka med </param>
         public void AddHealth(int amountToAdd)
         {
             if (healthLeft + amountToAdd < defaultHealth) //Kollar så att man inte får mer health än max, vilket är defaultHealth
@@ -229,7 +226,7 @@ namespace DrunkiBoy
         /// <summary>
         /// Körs när man springer in i något som ger en skada
         /// </summary>
-        /// <param name="amountToLose"></param>
+        /// <param name="amountToLose">Hur mycket skada man vill att spelaren ska ta</param>
         public void LoseHealth(int amountToLose)
         {
             if (healthLeft - amountToLose > 0) 
@@ -304,7 +301,7 @@ namespace DrunkiBoy
                 }
             }
         }
-        public void Shoot()
+        public void Shooting()
         {
             if (KeyMouseReader.KeyPressed(Keys.Space))
             {
