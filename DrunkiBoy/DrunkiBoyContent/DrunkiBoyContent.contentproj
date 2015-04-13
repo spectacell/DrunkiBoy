@@ -300,28 +300,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Painkiller_Particle.png">
+    <Compile Include="Particles\Painkiller_Particle.png">
       <Name>Painkiller_Particle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="burger_particles.png">
+    <Compile Include="Particles\burger_particles.png">
       <Name>burger_particles</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pizza_particles.png">
+    <Compile Include="Particles\pizza_particles.png">
       <Name>pizza_particles</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bottle_particles.png">
+    <Compile Include="Particles\bottle_particles.png">
       <Name>bottle_particles</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

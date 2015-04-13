@@ -60,13 +60,13 @@ namespace DrunkiBoy
             smokeParticles = new List<Texture2D>();
             smokeParticles.Add(content.Load<Texture2D>("Particles/smoke_particle"));
             painkillerParticles = new List<Texture2D>();
-            painkillerParticles.Add(content.Load<Texture2D>("Painkiller_Particle"));
+            painkillerParticles.Add(content.Load<Texture2D>("Particles/Painkiller_Particle"));
             burgerParticles = new List<Texture2D>();
-            burgerParticles.Add(content.Load<Texture2D>("burger_particles"));
+            burgerParticles.Add(content.Load<Texture2D>("Particles/burger_particles"));
             pizzaParticles = new List<Texture2D>();
-            pizzaParticles.Add(content.Load<Texture2D>("pizza_particles"));
+            pizzaParticles.Add(content.Load<Texture2D>("Particles/pizza_particles"));
             bottleparticles = new List<Texture2D>();
-            bottleparticles.Add(content.Load<Texture2D>("bottle_particles"));
+            bottleparticles.Add(content.Load<Texture2D>("Particles/bottle_particles"));
 
             
             //smokeParticles.Add(content.Load<Texture2D>("Particles/smoke_particle2"));

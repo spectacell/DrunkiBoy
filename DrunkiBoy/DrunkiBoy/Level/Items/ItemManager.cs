@@ -188,26 +188,7 @@ namespace DrunkiBoy
 
             }
         }
-
-
-        private void UpdateHearts(GameTime gameTime, Player player)
-        {
-            foreach (Heart heart in hearts)
-            {
-                if (heart.DetectPixelCollision(player))
-                {
-                    heart.PickUp();
-                }
-                heart.Update(gameTime);
-                if (heart.isActive == false)
-                {
-                    player.AddLife();
-                    hearts.Remove(heart);
-                    break;
-                }
-            }
-        }
-
+              
         private void UpdateKeys(GameTime gameTime, Player player)
         {
             foreach (Key key in keys)
@@ -230,6 +211,23 @@ namespace DrunkiBoy
                     player.PickUpWeapon(Player.weaponType.molotovCocktail);
                 }
                 torch.Update(gameTime);
+            }
+        }
+        private void UpdateHearts(GameTime gameTime, Player player)
+        {
+            foreach (Heart heart in hearts)
+            {
+                if (heart.DetectPixelCollision(player))
+                {
+                    heart.PickUp();
+                }
+                heart.Update(gameTime);
+                if (heart.isActive == false)
+                {
+                    player.AddLife();
+                    hearts.Remove(heart);
+                    break;
+                }
             }
         }
         private void UpdateBurgers(GameTime gameTime, Player player)
