@@ -79,56 +79,49 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Torch4.png">
+    <Compile Include="items\Torch4.png">
       <Name>Torch4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Key.png">
+    <Compile Include="items\Key.png">
       <Name>Key</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Heartspritesheet.png">
-      <Name>Heartspritesheet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ExtraLif2.png">
+    <Compile Include="items\ExtraLif2.png">
       <Name>ExtraLif2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="flaska.png">
+    <Compile Include="items\flaska.png">
       <Name>flaska</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="burgare.png">
+    <Compile Include="items\burgare.png">
       <Name>burgare</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pizza.png">
+    <Compile Include="items\Pizza.png">
       <Name>Pizza</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="painkiller.png">
+    <Compile Include="items\painkiller.png">
       <Name>painkiller</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -189,14 +182,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Money.png">
+    <Compile Include="items\Money.png">
       <Name>Money</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pant.png">
+    <Compile Include="items\Pant.png">
       <Name>Pant</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -286,14 +279,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="star.png">
+    <Compile Include="Particles\star.png">
       <Name>star</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pant_Particle.png">
+    <Compile Include="Particles\pant_Particle.png">
       <Name>pant_Particle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -335,7 +328,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="jagerbomb.png">
+    <Compile Include="items\jagerbomb.png">
       <Name>jagerbomb</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
