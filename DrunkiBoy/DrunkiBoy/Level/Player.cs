@@ -16,8 +16,10 @@ namespace DrunkiBoy
         double timeTilNextFrameLB = 0; 
         private int frameLB;
         private Rectangle srcRectLB;
+
         private bool animateShooting;
         private bool shootingLeft;
+
         private const int playerSpeed = 80;
         public static int livesLeft;        
         private int defaultLives = 3;
@@ -35,7 +37,6 @@ namespace DrunkiBoy
         public Vector2 currentSpawnPos;
         public bool isDead;
         //private double spawnTimer, spawnTimerDefault = 750;
-        //private bool movingLeft;
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -43,7 +44,7 @@ namespace DrunkiBoy
             currentSpawnPos = pos;
             srcRectLB = srcRect;
             livesLeft = 2;
-            healthLeft = 60;
+            healthLeft = targetHealth = 60;
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
@@ -131,7 +132,6 @@ namespace DrunkiBoy
         {
             movement.X -= movement.X * 0.2f;
         }
-
         private void PlayerJumping()
         {
             if (KeyMouseReader.KeyPressed(Keys.Up) && activePlatform != null)
@@ -140,7 +140,6 @@ namespace DrunkiBoy
                 activePlatform = null;
             }
         }
-
         /// <summary>
         /// Så att player fortsätter animera när man hoppar
         /// </summary>
@@ -190,7 +189,6 @@ namespace DrunkiBoy
                 }
             }
         }
-        
         private void SetDeadFallingOffPlatform()
         {
             if (pos.Y > 2000) //Bättre sätt?
@@ -223,7 +221,6 @@ namespace DrunkiBoy
                 }
             }
         }
-
         /// <summary>
         /// Körs när man tar ett extraliv
         /// </summary>
@@ -233,8 +230,7 @@ namespace DrunkiBoy
             {
                 livesLeft++;
             }
-        }
-        
+        } 
         /// <summary>
         /// Körs när man tar en PowerUp. Switch/case satsen i Update() avgör vad som händer med player när poweruppen är aktiv
         /// </summary>
@@ -248,21 +244,16 @@ namespace DrunkiBoy
         /// <summary>
         /// Körs när man tar ett föremål som ger hälsa
         /// </summary>
-        /// <param name="amountToAdd">Hur mycket hälsa man öka med </param>
+        /// <param name="amountToAdd">Hur mycket hälsa man vill öka med</param>
         public void AddHealth(int amountToAdd)
         {
             if (healthLeft + amountToAdd < defaultHealth) //Kollar så att man inte får mer health än max, vilket är defaultHealth
             {
                 targetHealth = healthLeft + amountToAdd;
-                //for (int i = 0; i < amountToAdd; i++)
-                //{
-                //    healthLeft += 1; //Tänker mig nån delay här så att healthbar ökar lite snyggt
-                //}
             }
             else
             {
                 targetHealth = defaultHealth;
-                //healthLeft = defaultHealth;
             }
         }
         /// <summary>
@@ -274,11 +265,6 @@ namespace DrunkiBoy
             if (healthLeft - amountToLose > 0) 
             {
                 targetHealth = healthLeft - amountToLose;
-                //for (int i = 0; i < amountToLose; i++)
-                //{
-                //    healthLeft -= 1; //Tänker mig nån delay här så att healthbar minskar lite snyggt
-                //    pos.X -= 5;
-                //}
             }
             else //Då är man död...
             {
@@ -286,6 +272,9 @@ namespace DrunkiBoy
                 SetPlayerDead();
             }
         }
+        /// <summary>
+        /// Ökar eller minskar hälsan i GUI gradvis när targetHealth sätts till mer eller mindre än aktuell health (healthLeft)
+        /// </summary>
         private void AnimateHealthBar()
         {
             if (healthLeft != targetHealth)
@@ -343,20 +332,19 @@ namespace DrunkiBoy
         /// byter player till föregående textur igen.
         /// </summary>
         /// <param name="gameTime"></param>
-        
         public void Shooting()
         {
             if (KeyMouseReader.KeyPressed(Keys.Space))
             {
                 Vector2 bulletPos, bulletVelocity;
-                if (facing == 0)  // vänster hållet att skjuta
+                if (facing == 0)  // Skjuter vänster
                 {
                     shootingLeft = true;
                     bulletPos = new Vector2(pos.X, pos.Y + 60);
                     bulletVelocity = new Vector2(-10, 0);
-                    frame = 7;
+                    frame = 8;
                 }
-                else //Högeråt
+                else //Skjuter höger
                 {
                     shootingLeft = false;
                     bulletPos = new Vector2(pos.X + 60, pos.Y + 60);
