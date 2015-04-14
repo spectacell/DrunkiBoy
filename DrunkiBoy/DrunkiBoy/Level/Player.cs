@@ -22,6 +22,7 @@ namespace DrunkiBoy
         public static int livesLeft;        
         private int defaultLives = 3;
         public static int healthLeft, defaultHealth = 200;
+        private int targetHealth;
         public static int score = 0;
         public static int itemleft = 3;
 
@@ -88,6 +89,7 @@ namespace DrunkiBoy
             base.Update(gameTime);
             AnimateLowerBody();
             AnimateShooting(gameTime);
+            AnimateHealthBar();
         }
         /// <summary>
         /// Räknar ner timeTilNextFrameLB och timeTilNextFrame när man styr player
@@ -251,14 +253,16 @@ namespace DrunkiBoy
         {
             if (healthLeft + amountToAdd < defaultHealth) //Kollar så att man inte får mer health än max, vilket är defaultHealth
             {
-                for (int i = 0; i < amountToAdd; i++)
-                {
-                    healthLeft += 1; //Tänker mig nån delay här så att healthbar ökar lite snyggt
-                }
+                targetHealth = healthLeft + amountToAdd;
+                //for (int i = 0; i < amountToAdd; i++)
+                //{
+                //    healthLeft += 1; //Tänker mig nån delay här så att healthbar ökar lite snyggt
+                //}
             }
             else
             {
-                healthLeft = defaultHealth;
+                targetHealth = defaultHealth;
+                //healthLeft = defaultHealth;
             }
         }
         /// <summary>
@@ -269,16 +273,31 @@ namespace DrunkiBoy
         {
             if (healthLeft - amountToLose > 0) 
             {
-                for (int i = 0; i < amountToLose; i++)
-                {
-                    healthLeft -= 1; //Tänker mig nån delay här så att healthbar minskar lite snyggt
-                    pos.X -= 5;
-                }
+                targetHealth = healthLeft - amountToLose;
+                //for (int i = 0; i < amountToLose; i++)
+                //{
+                //    healthLeft -= 1; //Tänker mig nån delay här så att healthbar minskar lite snyggt
+                //    pos.X -= 5;
+                //}
             }
             else //Då är man död...
             {
                 healthLeft = 0;
                 SetPlayerDead();
+            }
+        }
+        private void AnimateHealthBar()
+        {
+            if (healthLeft != targetHealth)
+            {
+                if (healthLeft < targetHealth)
+                {
+                    healthLeft++;
+                }
+                else
+                {
+                    healthLeft--;
+                }
             }
         }
         /// <summary>

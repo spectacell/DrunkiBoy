@@ -15,7 +15,7 @@ namespace DrunkiBoy
          public HamburgareVapen(Vector2 pos, Vector2 velocity)
             : base(pos, velocity, Textures.hamburgare, true, 400)    // sätt texturen till hamburgare , 200 för hur långt det åker
         {
-            particleEngine = new ParticleEngine(Textures.burgerParticles, pos, Textures.hamburgare, false);
+            particleEngine = new ParticleEngine(Textures.burgerParticles, pos, false);
         }
          //public void shot()
          //{

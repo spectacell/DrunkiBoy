@@ -17,7 +17,7 @@ namespace DrunkiBoy
         {
             
             this.type = "painkiller";
-            particleEngine = new ParticleEngine(Textures.painkillerParticles, pos, Textures.painkiller, false);
+            particleEngine = new ParticleEngine(Textures.painkillerParticles, pos, false);
            
         }
          public void PickUp()

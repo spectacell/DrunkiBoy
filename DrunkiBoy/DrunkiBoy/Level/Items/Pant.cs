@@ -15,7 +15,7 @@ namespace DrunkiBoy
         public Pant(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive) : base( pos, tex, isActive)
         {
             this.type = "pant";
-            particleEngine = new ParticleEngine(Textures.pantParticles, pos, Textures.pant, false);
+            particleEngine = new ParticleEngine(Textures.pantParticles, pos, false);
         }
         public void PickUp()
         {

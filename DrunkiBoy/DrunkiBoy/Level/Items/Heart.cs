@@ -17,7 +17,7 @@ namespace DrunkiBoy
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
             this.type = "heart";
-            particleEngine = new ParticleEngine(Textures.heartParticles, pos, Textures.heart, false);
+            particleEngine = new ParticleEngine(Textures.heartParticles, pos, false);
         }
         public void PickUp()
         {

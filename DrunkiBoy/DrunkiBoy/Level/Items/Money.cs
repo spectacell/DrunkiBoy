@@ -15,7 +15,7 @@ namespace DrunkiBoy
         public Money(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive) : base( pos, tex, isActive)
         {
             this.type = "money";
-            particleEngine = new ParticleEngine(Textures.starParticles, pos, Textures.money, false);
+            particleEngine = new ParticleEngine(Textures.starParticles, pos, false);
         }
         public void PickUp()
         {

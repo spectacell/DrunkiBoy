@@ -14,11 +14,12 @@ namespace DrunkiBoy
         public Vector2 EmitterLocation { get; set; }
         private List<Particle> particles;
         private List<Texture2D> textures;
-        private bool isActive;
+        public bool isActive;
 
-        public ParticleEngine(List<Texture2D> textures, Vector2 location)
+        public ParticleEngine(List<Texture2D> textures, Vector2 location, bool isActive)
         {
             EmitterLocation = location;
+            this.isActive = isActive;  
             this.textures = textures;
             this.particles = new List<Particle>();
             random = new Random();
