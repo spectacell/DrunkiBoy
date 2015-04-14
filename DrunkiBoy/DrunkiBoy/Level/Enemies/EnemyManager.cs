@@ -26,12 +26,9 @@ namespace DrunkiBoy
             foreach (Enemy enemy in enemies)
             {
                 enemy.Update(gameTime);
-            }   
-
-            foreach (Flashlight flashlight in flashlights)
-            {
-                flashlight.Update(gameTime);
             }
+
+            UpdateFlashlights(gameTime, player);
         }
 
         private void UpdateFlashlights(GameTime gameTime, Player player)
@@ -40,6 +37,7 @@ namespace DrunkiBoy
             {
                 if (flashlight.DetectPixelCollision(player))
                 {
+                    player.LoseHealth(100);
                     flashlights.Remove(flashlight);
                     break;
                 }

@@ -276,6 +276,7 @@ namespace DrunkiBoy
             }
             else //Då är man död...
             {
+                healthLeft = 0;
                 SetPlayerDead();
             }
         }

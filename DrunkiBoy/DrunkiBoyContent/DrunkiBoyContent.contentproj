@@ -44,7 +44,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="platform.png">
+    <Compile Include="Level\platform.png">
       <Name>platform</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -58,77 +58,77 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bg1.jpg">
+    <Compile Include="Level\bg1.jpg">
       <Name>bg1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bg2.png">
+    <Compile Include="Level\bg2.png">
       <Name>bg2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="space.png">
+    <Compile Include="Level\space.png">
       <Name>space</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Torch4.png">
+    <Compile Include="Items\Torch4.png">
       <Name>Torch4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Key.png">
+    <Compile Include="Items\Key.png">
       <Name>Key</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Heartspritesheet.png">
+    <Compile Include="Items\Heartspritesheet.png">
       <Name>Heartspritesheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtraLif2.png">
+    <Compile Include="Items\ExtraLif2.png">
       <Name>ExtraLif2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="flaska.png">
+    <Compile Include="Items\flaska.png">
       <Name>flaska</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="burgare.png">
+    <Compile Include="Items\burgare.png">
       <Name>burgare</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pizza.png">
+    <Compile Include="Items\Pizza.png">
       <Name>Pizza</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="painkiller.png">
+    <Compile Include="Items\painkiller.png">
       <Name>painkiller</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -142,14 +142,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="teleport2.png">
+    <Compile Include="Items\teleport2.png">
       <Name>teleport2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TeleportAktiv.png">
+    <Compile Include="Items\TeleportAktiv.png">
       <Name>TeleportAktiv</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -189,14 +189,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Money.png">
+    <Compile Include="Items\Money.png">
       <Name>Money</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pant.png">
+    <Compile Include="Items\Pant.png">
       <Name>Pant</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -286,14 +286,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="star.png">
+    <Compile Include="Particles\star.png">
       <Name>star</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="pant_Particle.png">
+    <Compile Include="Particles\pant_Particle.png">
       <Name>pant_Particle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -328,28 +328,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bottle_molotov.png">
+    <Compile Include="Items\bottle_molotov.png">
       <Name>bottle_molotov</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="jagerbomb.png">
+    <Compile Include="Items\jagerbomb.png">
       <Name>jagerbomb</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Flashlight.png">
+    <Compile Include="Enemies\Flashlight.png">
       <Name>Flashlight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Flashlight%28Animation%29.png">
+    <Compile Include="Enemies\Flashlight%28Animation%29.png">
       <Name>Flashlight%28Animation%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

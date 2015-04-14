@@ -288,11 +288,11 @@ namespace DrunkiBoy
                     case items.Flashlight:
                         if (intersectingPlatform != null)
                         {
-                            objects.Add(new Flashlight(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.flashlight, new Rectangle(0, 0, 60, 53), true, 1, 50));
+                            objects.Add(new Flashlight(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 1, 50));
                         }
                         else
                         {
-                            objects.Add(new Flashlight(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.flashlight, new Rectangle(0, 0, 60, 53), true, 1, 50));
+                            objects.Add(new Flashlight(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 1, 50));
                         }
                         break;
                 }
@@ -414,7 +414,7 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.L))
             {
                 selectedItem = items.Flashlight;
-                selectedObject = new Teleport(new Vector2(mouseState.X, mouseState.Y), Textures.flashlight, new Rectangle(0, 0, 200, 267), true, 1, 50);
+                selectedObject = new Flashlight(new Vector2(mouseState.X, mouseState.Y), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 1, 50);
             }
         }
 

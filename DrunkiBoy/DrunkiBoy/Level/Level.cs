@@ -57,9 +57,6 @@ namespace DrunkiBoy
         
         public virtual void Update(GameTime gameTime)
         {
-
-            
-
             switch (currentLevelState)
             {
                 case levelState.running:
@@ -72,7 +69,6 @@ namespace DrunkiBoy
                     enemyManager.Update(gameTime, player);
                     BulletManager.Update(gameTime);
                     timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
-
 
                     // Riktar kameran mot spelaren...
                     camera.LookAt(player.pos);
@@ -100,9 +96,6 @@ namespace DrunkiBoy
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            
-            
-
             switch (currentLevelState)
             {
                 case levelState.running:
@@ -123,7 +116,6 @@ namespace DrunkiBoy
 
                     break;
             }   
-
         }
 
         public void LoadContent(String textFile)
