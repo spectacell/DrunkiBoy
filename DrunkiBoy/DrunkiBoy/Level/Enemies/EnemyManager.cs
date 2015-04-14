@@ -37,8 +37,8 @@ namespace DrunkiBoy
             {
                 if (flashlight.DetectPixelCollision(player))
                 {
-                    player.LoseHealth(100);
-                    flashlights.Remove(flashlight);
+                    player.LoseHealth(10);
+                    //flashlights.Remove(flashlight);
                     break;
                 }
             }

@@ -272,6 +272,7 @@ namespace DrunkiBoy
                 for (int i = 0; i < amountToLose; i++)
                 {
                     healthLeft -= 1; //Tänker mig nån delay här så att healthbar minskar lite snyggt
+                    pos.X -= 5;
                 }
             }
             else //Då är man död...
