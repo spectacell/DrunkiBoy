@@ -13,7 +13,8 @@ namespace DrunkiBoy
         private int scorePosY;
         private ActivePowerUpDisplay activePowerUp;
         private Texture2D healthBarTex;
-        private double blinkTimer, blinkTimerDefault = 250;
+        private double healthBarBlinkTimer, healthBarBlinkTimerDefault = 250;
+        public static bool healthBarBlinking;
         public static int itemsLeftToCollect;
         public GUI()
         {
@@ -44,6 +45,7 @@ namespace DrunkiBoy
         {
             activePowerUp.Update(gameTime);
             HealthBarBlinking(gameTime);
+            BlinkHealthBar();
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
@@ -85,9 +87,13 @@ namespace DrunkiBoy
             int frameInterval = (int)(time / 12); //tiden i ms delat med antal frames
             activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0, 0, 63, 63), true, 13, frameInterval, powerUp);
         }
+        /// <summary>
+        /// Ändrar healthBar-texturen om healthBarBlinkTimer är >= 0 så att det ser ut som att den blinkar till
+        /// </summary>
+        /// <param name="gameTime"></param>
         private void HealthBarBlinking(GameTime gameTime)
         {
-            if (blinkTimer >= 0)
+            if (healthBarBlinkTimer >= 0)
             {
                 healthBarTex = Textures.healthBarRedBlink;
             }
@@ -95,11 +101,18 @@ namespace DrunkiBoy
             {
                 healthBarTex = Textures.healthBarRed;
             }
-            blinkTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            healthBarBlinkTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
         }
-        public void BlinkHealthBar() //Kör när player tar skada
+        /// <summary>
+        /// I Player klassen så sätts healthBarBlinking till true när player ökar/minskar health. Det aktiverar timern här så att healthBar blinkar till
+        /// </summary>
+        public void BlinkHealthBar()
         {
-            blinkTimer = blinkTimerDefault;
+            if (healthBarBlinking) 
+            { 
+                healthBarBlinkTimer = healthBarBlinkTimerDefault;
+                healthBarBlinking = false;
+            }
         }
     }
 }

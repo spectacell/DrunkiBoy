@@ -224,7 +224,7 @@ namespace DrunkiBoy
                 heart.Update(gameTime);
                 if (heart.isActive == false)
                 {
-                    player.AddLife();
+                    player.AddALife();
                     hearts.Remove(heart);
                     break;
                 }

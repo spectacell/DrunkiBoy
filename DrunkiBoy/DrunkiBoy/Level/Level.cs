@@ -83,6 +83,7 @@ namespace DrunkiBoy
                         {
                             player.isDead = false;
                             player.pos = player.currentSpawnPos;
+                            player.ResetHealth();
                             currentLevelState = levelState.running;
                         }
                     }

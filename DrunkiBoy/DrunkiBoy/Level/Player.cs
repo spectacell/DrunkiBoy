@@ -44,7 +44,7 @@ namespace DrunkiBoy
             currentSpawnPos = pos;
             srcRectLB = srcRect;
             livesLeft = 2;
-            healthLeft = targetHealth = 60;
+            ResetHealth();
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
@@ -193,20 +193,32 @@ namespace DrunkiBoy
         {
             if (pos.Y > 2000) //Bättre sätt?
             {
-                SetPlayerDead();
+                LooseALife();
             }
         }
         /// <summary>
+        /// Körs när man tar ett extraliv
+        /// </summary>
+        public void AddALife()
+        {
+            if (livesLeft < defaultLives)
+            {
+                livesLeft++;
+            }
+        } 
+        /// <summary>
         /// När livet tar slut eller om man ramlar av plattform
         /// </summary>
-        public void SetPlayerDead()
+        public void LooseALife()
         {
             movement = Vector2.Zero;
             if (livesLeft > 0)
             {
+                isDead = true; //Level ändrar automatiskt levelState i Level till lostLife när player.isDead == true
                 livesLeft--;
+                ResetHealth();
             }
-            isDead = true; //Level ändrar automatiskt levelState till lostLife när player.isDead = true
+            
         }
         /// <summary>
         /// Körs hela tiden för att kolla om spelaren fortfarande är på en plattform, annars sätts activePlatform till null. 
@@ -219,16 +231,6 @@ namespace DrunkiBoy
                 {
                     activePlatform = null;
                 }
-            }
-        }
-        /// <summary>
-        /// Körs när man tar ett extraliv
-        /// </summary>
-        public void AddLife()
-        {
-            if (livesLeft < defaultLives)
-            {
-                livesLeft++;
             }
         } 
         /// <summary>
@@ -250,26 +252,37 @@ namespace DrunkiBoy
             if (healthLeft + amountToAdd < defaultHealth) //Kollar så att man inte får mer health än max, vilket är defaultHealth
             {
                 targetHealth = healthLeft + amountToAdd;
+                GUI.healthBarBlinking = true;
             }
             else
             {
                 targetHealth = defaultHealth;
+                GUI.healthBarBlinking = true;
             }
         }
         /// <summary>
         /// Körs när man springer in i något som ger en skada
         /// </summary>
         /// <param name="amountToLose">Hur mycket skada man vill att spelaren ska ta</param>
-        public void LoseHealth(int amountToLose)
+        public void LoseHealth(int amountToLose, Vector2 enemyPos)
         {
             if (healthLeft - amountToLose > 0) 
             {
                 targetHealth = healthLeft - amountToLose;
+                GUI.healthBarBlinking = true;
+                if (pos.X < enemyPos.X)
+                {
+                    pos.X -= 100;
+                }
+                else
+                {
+                    pos.X += 100;
+                }
             }
             else //Då är man död...
             {
                 healthLeft = 0;
-                SetPlayerDead();
+                LooseALife();
             }
         }
         /// <summary>
@@ -377,6 +390,13 @@ namespace DrunkiBoy
                     break;
                 }  
             }
+        }
+        /// <summary>
+        /// Återställer hälsan till defaultHealth
+        /// </summary>
+        public void ResetHealth()
+        {
+            healthLeft = targetHealth = defaultHealth;
         }
         /// <summary>
         /// Två Draw() här, en för underkroppen och en för överkroppen.
