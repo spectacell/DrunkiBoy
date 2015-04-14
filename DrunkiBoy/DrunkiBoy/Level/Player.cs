@@ -16,8 +16,8 @@ namespace DrunkiBoy
         double timeTilNextFrameLB = 0; 
         private int frameLB;
         private Rectangle srcRectLB;
-        bool animateShooting;
-
+        private bool animateShooting;
+        private bool shootingLeft;
         private const int playerSpeed = 80;
         public static int livesLeft;        
         private int defaultLives = 3;
@@ -89,50 +89,41 @@ namespace DrunkiBoy
             AnimateLowerBody();
             AnimateShooting(gameTime);
         }
-
-        private void SetDeadFallingOffPlatform()
-        {
-            if (pos.Y > 2000)
-            {
-                SetPlayerDead();
-            }
-        }
-
-        private void AnimateLowerBody()
-        {
-            if (timeTilNextFrameLB <= 0)
-            {
-                timeTilNextFrameLB = frameInterval;
-                frameLB++;
-                srcRectLB.X = facingSrcRects[facing].X + (frameLB % nrFrames) * frameWidth;
-            }
-        }
-        
-
+        /// <summary>
+        /// Räknar ner timeTilNextFrameLB och timeTilNextFrame när man styr player
+        /// </summary>
+        /// <param name="gameTime"></param>
         private void PlayerMovement(GameTime gameTime)
         {
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Left) && !isDead)
             {
                 timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (!animateShooting)
-                {
-                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                }
+                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+
                 movement.X -= 1;
                 facing = 0;
+                ForceFrameChange();
             }
             else if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !isDead)
             {
                 timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (!animateShooting)
-                {
-                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                }
+                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+
                 movement.X += 1;
                 facing = 1;
+                ForceFrameChange();
             }
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
             //pos.X = MathHelper.Clamp(pos.X, -(Game1.windowWidth / 2), Level.currentLevel.levelLength - srcRect.Width);
+        }
+        /// <summary>
+        /// Ser till att player vänder sig så fort man trycker vänster eller höger piltangent även om timeTilNextFrame inte hunnit bli noll.
+        /// Undviker "skridskoeffekten" som fanns innnan.
+        /// </summary>
+        private void ForceFrameChange()
+        {
+            srcRectLB.X = facingSrcRects[facing].X + (frameLB % nrFrames) * frameWidth;
+            srcRect.X = facingSrcRects[facing].X + (frame % nrFrames) * frameWidth;
         }
         private void AddFriction(int facing)
         {
@@ -145,6 +136,64 @@ namespace DrunkiBoy
             {
                 movement.Y += -jumpHeight;
                 activePlatform = null;
+            }
+        }
+
+        /// <summary>
+        /// Så att player fortsätter animera när man hoppar
+        /// </summary>
+        /// <param name="gameTime"></param>
+        private void AnimateWhenInAir(GameTime gameTime)
+        {
+            if (activePlatform == null)
+            {
+                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+        }
+        /// <summary>
+        /// Skiljer på under- och överkropp. Underkroppen ska bara animeras när man styr player. Överkroppen animeras även då man skjuter.
+        /// Den andra animeringsmetoden ligger i AnimatedObject-klassen
+        /// </summary>
+        private void AnimateLowerBody()
+        {
+            if (timeTilNextFrameLB <= 0)
+            {
+                timeTilNextFrameLB = frameInterval;
+                frameLB++;
+                srcRectLB.X = facingSrcRects[facing].X + (frameLB % nrFrames) * frameWidth;
+            }
+        }
+        /// <summary>
+        /// Räknar ner timeTilNextFrame när animateShooting == true så att överkroppen animeras då
+        /// </summary>
+        /// <param name="gameTime"></param>
+        protected void AnimateShooting(GameTime gameTime)
+        {
+            if (animateShooting)
+            {
+                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (facing == 1 && frame == 7)
+                {
+                    animateShooting = false;
+                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
+                }
+                if (facing == 0 && frame == 15)
+                {
+                    animateShooting = false;
+                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
+                }
+                if ((shootingLeft && facing == 1) || (!shootingLeft && facing == 0)) //Slutar animera skottanimationen om player vänder sig om
+                {
+                    animateShooting = false;
+                }
+            }
+        }
+        
+        private void SetDeadFallingOffPlatform()
+        {
+            if (pos.Y > 2000) //Bättre sätt?
+            {
+                SetPlayerDead();
             }
         }
         /// <summary>
@@ -173,17 +222,6 @@ namespace DrunkiBoy
             }
         }
 
-        /// <summary>
-        /// Så att player fortsätter animera när man hoppar
-        /// </summary>
-        /// <param name="gameTime"></param>
-        private void AnimateWhenInAir(GameTime gameTime)
-        {
-            if (activePlatform == null)
-            {
-                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-            }
-        }
         /// <summary>
         /// Körs när man tar ett extraliv
         /// </summary>
@@ -284,23 +322,7 @@ namespace DrunkiBoy
         /// byter player till föregående textur igen.
         /// </summary>
         /// <param name="gameTime"></param>
-        protected void AnimateShooting(GameTime gameTime)
-        {
-            if (animateShooting)
-            {
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (facing == 1 && frame == 7)
-                {
-                    animateShooting = false;
-                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
-                }
-                if (facing == 0 && frame == 15)
-                {
-                    animateShooting = false;
-                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
-                }
-            }
-        }
+        
         public void Shooting()
         {
             if (KeyMouseReader.KeyPressed(Keys.Space))
@@ -308,12 +330,14 @@ namespace DrunkiBoy
                 Vector2 bulletPos, bulletVelocity;
                 if (facing == 0)  // vänster hållet att skjuta
                 {
+                    shootingLeft = true;
                     bulletPos = new Vector2(pos.X, pos.Y + 60);
                     bulletVelocity = new Vector2(-10, 0);
                     frame = 7;
                 }
                 else //Högeråt
                 {
+                    shootingLeft = false;
                     bulletPos = new Vector2(pos.X + 60, pos.Y + 60);
                     bulletVelocity = new Vector2(10, 0);
                     frame = 0;
@@ -351,6 +375,8 @@ namespace DrunkiBoy
         /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (!animateShooting)//Borde kunna få in den här någon annanstans men kommer inte på nåt bra nu. srcRect är samma om man inte skjuter
+                srcRectLB = srcRect;
             spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
         }   
