@@ -15,6 +15,7 @@ namespace DrunkiBoy
         public enum levelState { running, lostLife}
         public levelState currentLevelState;
         protected Player player;
+        protected Pizza pizza;
         protected GraphicsDevice gd;
         
         protected Camera camera;
@@ -196,8 +197,8 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "flashlight")
                 {
-                    enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 230));
-                    objects.Add(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 230));
+                    enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 700));
+                    objects.Add(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 700));
                 }
             }
             sr.Close();

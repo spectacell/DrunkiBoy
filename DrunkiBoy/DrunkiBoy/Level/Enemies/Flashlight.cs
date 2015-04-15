@@ -7,13 +7,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DrunkiBoy
 {
-    class Flashlight : AnimatedObject
+    class Flashlight : Enemy
     {
         public Flashlight(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
-            this.type = "flashlight";   
+            this.type = "flashlight";
 
+            health = 2;
         }
     }
 }

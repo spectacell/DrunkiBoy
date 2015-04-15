@@ -23,23 +23,35 @@ namespace DrunkiBoy
 
         public void Update(GameTime gameTime, Player player)
         {
-            foreach (Enemy enemy in enemies)
-            {
-                enemy.Update(gameTime);
-            }
-
             UpdateFlashlights(gameTime, player);
         }
 
         private void UpdateFlashlights(GameTime gameTime, Player player)
         {
+
             foreach (Flashlight flashlight in flashlights)
             {
+                flashlight.Update(gameTime);
                 if (flashlight.DetectPixelCollision(player))
                 {
                     player.LoseHealth(10, flashlight.pos);
                     //flashlights.Remove(flashlight);
                     break;
+                }
+
+                if (flashlight.isActive == false)
+                {
+                    flashlights.Remove(flashlight);
+                    break;
+                }
+
+                foreach (Bullet bullet in BulletManager.bullets)
+                {
+                    if (flashlight.DetectPixelCollision(bullet))
+                    {
+                        flashlight.LoseHealth();
+                        bullet.isActive = false;
+                    }
                 }
             }
         }
