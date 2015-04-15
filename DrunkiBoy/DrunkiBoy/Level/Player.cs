@@ -10,9 +10,12 @@ namespace DrunkiBoy
 {
     class Player : AnimatedObject
     {
+        private ParticleEngine2 particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, Textures.explosionTexture, false);
+
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
         private Vector2 targetPos;
         private bool movingBack;
+
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
         double timeTilNextFrameLB = 0; 
         private int frameLB;
@@ -282,29 +285,35 @@ namespace DrunkiBoy
                 LooseALife();
             }
         }
+        /// <summary>
+        /// Flyttar players pos gradvis bakåt vid kontakt med Enemy
+        /// </summary>
+        /// <param name="gameTime"></param>
         private void MoveBackWhenEnemyContact(GameTime gameTime)
         {
             if (movingBack) 
             {
-                //if (pos.X - targetPos.X > 2)// || targetPos.X + pos.X > 2)
-                //{
-                    if (pos.X > targetPos.X)
-                    {
-                        pos.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
-                    }
-                    if (pos.X < targetPos.X)
-                    {
-                        pos.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
-                    }
-                    if (Math.Abs(targetPos.X - pos.X) < 5)
-                    {
-                        movingBack = false;
-                    }
+                if (pos.X > targetPos.X)
+                {
+                    pos.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
+                    particleEngine.Update(new Vector2(pos.X+srcRect.Width, pos.Y + srcRect.Height / 2));
+                }
+                if (pos.X < targetPos.X)
+                {
+                    pos.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
+                    particleEngine.Update(new Vector2(pos.X, pos.Y + srcRect.Height / 2));
+                }
+                if (Math.Abs(targetPos.X - pos.X) < 5)
+                {
+                    movingBack = false;
+                    particleEngine.isActive = false;
+                }
             }
         }
         private void MovePlayerBack(Vector2 enemyPos)
         {
             movingBack = true;
+            //particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, Textures.flashlight, true);
             if (pos.X < enemyPos.X)
             {
                 targetPos.X = enemyPos.X - 150;
@@ -410,7 +419,6 @@ namespace DrunkiBoy
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
                         BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity));
-
                     break;
                     case weaponType.molotovCocktail:
                         texUpperBody = Textures.player_shooting;
@@ -437,6 +445,8 @@ namespace DrunkiBoy
                 srcRectLB = srcRect;
             spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            if (particleEngine.isActive)
+                particleEngine.Draw(spriteBatch);
         }   
     }
 }
