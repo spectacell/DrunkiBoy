@@ -30,7 +30,6 @@ namespace DrunkiBoy
         public static int healthLeft, defaultHealth = 200;
         private int targetHealth;
         public static int score = 0;
-        public static int itemleft = 3;
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
@@ -39,13 +38,12 @@ namespace DrunkiBoy
 
         public int jumpHeight = 12;
         public Vector2 currentSpawnPos;
-        public bool isDead;
+        public bool isDead {get; private set;}
         //private double spawnTimer, spawnTimerDefault = 750;
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
-            targetPos = pos;
             currentSpawnPos = pos;
             srcRectLB = srcRect;
             livesLeft = 2;
@@ -97,6 +95,14 @@ namespace DrunkiBoy
             AnimateShooting(gameTime);
             AnimateHealthBar();
             MoveBackWhenEnemyContact(gameTime);
+        }
+        public void BringToLife()
+        {
+            isDead = false;
+        }
+        public void ResetPos()
+        {
+            targetPos = pos = currentSpawnPos;
         }
         /// <summary>
         /// Räknar ner timeTilNextFrameLB och timeTilNextFrame när man styr player
@@ -271,6 +277,7 @@ namespace DrunkiBoy
         /// Körs när man springer in i något som ger en skada
         /// </summary>
         /// <param name="amountToLose">Hur mycket skada man vill att spelaren ska ta</param>
+        /// /// <param name="enemyPos">Position att ugå från när players nya targetPos sätts</param>
         public void LoseHealth(int amountToLose, Vector2 enemyPos)
         {
             if (healthLeft - amountToLose > 0) 

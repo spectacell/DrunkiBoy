@@ -15,7 +15,6 @@ namespace DrunkiBoy
         public enum levelState { running, lostLife}
         public levelState currentLevelState;
         protected Player player;
-        protected Pizza pizza;
         protected GraphicsDevice gd;
         
         protected Camera camera;
@@ -82,8 +81,8 @@ namespace DrunkiBoy
                         //Nån bild här eller nåt och en text som uppmanar spelaren att klicka för att börja om vid senaste checkpointen...
                         if (KeyMouseReader.KeyPressed(Keys.Space))
                         {
-                            player.isDead = false;
-                            player.pos = player.currentSpawnPos;
+                            player.BringToLife();
+                            player.ResetPos();
                             player.ResetHealth();
                             currentLevelState = levelState.running;
                         }
