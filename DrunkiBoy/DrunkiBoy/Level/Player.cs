@@ -11,7 +11,8 @@ namespace DrunkiBoy
     class Player : AnimatedObject
     {
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
-
+        private Vector2 targetPos;
+        private bool movingBack;
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
         double timeTilNextFrameLB = 0; 
         private int frameLB;
@@ -41,6 +42,7 @@ namespace DrunkiBoy
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
+            targetPos = pos;
             currentSpawnPos = pos;
             srcRectLB = srcRect;
             livesLeft = 2;
@@ -91,6 +93,7 @@ namespace DrunkiBoy
             AnimateLowerBody();
             AnimateShooting(gameTime);
             AnimateHealthBar();
+            MoveBackWhenEnemyContact(gameTime);
         }
         /// <summary>
         /// Räknar ner timeTilNextFrameLB och timeTilNextFrame när man styr player
@@ -98,7 +101,7 @@ namespace DrunkiBoy
         /// <param name="gameTime"></param>
         private void PlayerMovement(GameTime gameTime)
         {
-            if (KeyMouseReader.keyState.IsKeyDown(Keys.Left) && !isDead)
+            if (KeyMouseReader.keyState.IsKeyDown(Keys.Left) && !isDead && !movingBack)
             {
                 timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -107,7 +110,7 @@ namespace DrunkiBoy
                 facing = 0;
                 ForceFrameChange();
             }
-            else if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !isDead)
+            else if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !isDead && !movingBack)
             {
                 timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -117,6 +120,7 @@ namespace DrunkiBoy
                 ForceFrameChange();
             }
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
+
             //pos.X = MathHelper.Clamp(pos.X, -(Game1.windowWidth / 2), Level.currentLevel.levelLength - srcRect.Width);
         }
         /// <summary>
@@ -270,19 +274,44 @@ namespace DrunkiBoy
             {
                 targetHealth = healthLeft - amountToLose;
                 GUI.healthBarBlinking = true;
-                if (pos.X < enemyPos.X)
-                {
-                    pos.X -= 100;
-                }
-                else
-                {
-                    pos.X += 100;
-                }
+                MovePlayerBack(enemyPos);
             }
             else //Då är man död...
             {
                 healthLeft = 0;
                 LooseALife();
+            }
+        }
+        private void MoveBackWhenEnemyContact(GameTime gameTime)
+        {
+            if (movingBack) 
+            {
+                //if (pos.X - targetPos.X > 2)// || targetPos.X + pos.X > 2)
+                //{
+                    if (pos.X > targetPos.X)
+                    {
+                        pos.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
+                    }
+                    if (pos.X < targetPos.X)
+                    {
+                        pos.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
+                    }
+                    if (Math.Abs(targetPos.X - pos.X) < 5)
+                    {
+                        movingBack = false;
+                    }
+            }
+        }
+        private void MovePlayerBack(Vector2 enemyPos)
+        {
+            movingBack = true;
+            if (pos.X < enemyPos.X)
+            {
+                targetPos.X = enemyPos.X - 150;
+            }
+            else
+            {
+                targetPos.X = enemyPos.X + 150;
             }
         }
         /// <summary>
