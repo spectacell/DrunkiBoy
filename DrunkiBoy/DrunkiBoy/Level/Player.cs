@@ -303,7 +303,7 @@ namespace DrunkiBoy
                     pos.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
                     particleEngine.Update(new Vector2(pos.X, pos.Y + srcRect.Height / 2));
                 }
-                if (Math.Abs(targetPos.X - pos.X) < 5)
+                if (Math.Abs(targetPos.X - pos.X) < 10)
                 {
                     movingBack = false;
                     particleEngine.isActive = false;
