@@ -96,6 +96,9 @@ namespace DrunkiBoy
                     levelEditor.Update(gameTime);
                     break;
                 case gameState.levelComplete:
+                    currentGameState = gameState.gameOver;
+                    break;
+                case gameState.gameOver:
 
                     break;
             }
@@ -118,7 +121,10 @@ namespace DrunkiBoy
                     
                     levelEditor.Draw(spriteBatch);
                     break;
-                case gameState.levelComplete:
+                    case gameState.levelComplete:
+
+                    break;
+                    case gameState.gameOver:
 
                     break;
             }
