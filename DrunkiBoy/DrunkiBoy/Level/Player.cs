@@ -15,7 +15,6 @@ namespace DrunkiBoy
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
         private Vector2 targetPos;
         private bool movingBack, weaponThrown;
-        private float opacity = 1f;
 
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
         double timeTilNextFrameLB = 0; 
@@ -54,9 +53,8 @@ namespace DrunkiBoy
             texLowerBody = Textures.player_lower_body;
             //ResetSpawnTimer();
         }
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            Console.WriteLine(pos);
             switch (activePowerUp)
             {
                 case 0: //Vanlig
@@ -296,7 +294,6 @@ namespace DrunkiBoy
             if (movingBack) 
             {
                 texUpperBody = Textures.player_upper_body_hurt;
-                opacity = 0.9f;
                 if (pos.X > targetPos.X)
                 {
                     pos.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
@@ -309,7 +306,6 @@ namespace DrunkiBoy
                 }
                 if (Math.Abs(targetPos.X - pos.X) < 10)
                 {
-                    opacity = 1f;
                     weaponThrown = false;
                     movingBack = false;
                     particleEngine.isActive = false;
@@ -521,8 +517,8 @@ namespace DrunkiBoy
         {
             if (!animateShooting)//Borde kunna få in den här någon annanstans men kommer inte på nåt bra nu. srcRect är samma om man inte skjuter
                 srcRectLB = srcRect;
-            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White * opacity, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-            spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White * opacity, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             if (particleEngine.isActive)
                 particleEngine.Draw(spriteBatch);
         }   

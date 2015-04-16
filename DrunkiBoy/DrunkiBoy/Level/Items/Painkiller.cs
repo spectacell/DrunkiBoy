@@ -25,7 +25,7 @@ namespace DrunkiBoy
              moving = true;
              particleEngine.isActive = true;
          }
-         public void Update(GameTime gameTime)
+         public override void Update(GameTime gameTime)
          {
              if (moving)
              {

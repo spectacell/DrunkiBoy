@@ -48,11 +48,12 @@ namespace DrunkiBoy
             Texture2D texture = textures[random.Next(textures.Count)];
             Vector2 position = EmitterLocation;
             Vector2 velocity = new Vector2((float)(random.NextDouble() * 2 - 1)/3, -Math.Abs((float)(random.NextDouble() * 2 - 1)/3));
+            velocity.Y += -0.3f;
             float angle = 0;
             float angularVelocity = 0.1f * (float)(random.NextDouble() * 2 - 1);
             Color color = colors[(random.Next(0, colorTexture.Height) * colorTexture.Width) +
                                   random.Next(0, colorTexture.Width)]; //Slumpar fram en färg från colorTexture
-            float size = (float)random.NextDouble()/10;
+            float size = (float)random.NextDouble()/5;
             int ttl = 20 + random.Next(40);
             return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
         }
