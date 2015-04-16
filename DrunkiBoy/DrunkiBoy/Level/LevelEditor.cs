@@ -483,8 +483,7 @@ namespace DrunkiBoy
             spriteBatch.End();
 
             spriteBatch.Begin(); //Allt som inte ska följa med kameran ritas ut här
-            spriteBatch.Draw(selectedObject.tex, new Vector2(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y), selectedObject.srcRect, Color.White);
-
+            spriteBatch.Draw(selectedObject.tex, new Vector2(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y), selectedObject.srcRect, Color.White, 0, Vector2.Zero, camera.Zoom, SpriteEffects.None, 0);
             if (drawLevelSaved)
             {
                 spriteBatch.DrawString(Constants.FONT_BIG, "Level has been saved",

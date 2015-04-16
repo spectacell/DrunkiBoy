@@ -56,6 +56,7 @@ namespace DrunkiBoy
         }
         public override void Update(GameTime gameTime)
         {
+            Console.WriteLine(pos);
             switch (activePowerUp)
             {
                 case 0: //Vanlig
