@@ -47,7 +47,7 @@ namespace DrunkiBoy
             currentSpawnPos = pos;
             srcRectLB = srcRect;
             livesLeft = 2;
-            ResetHealth();
+            Reset();
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
@@ -293,6 +293,7 @@ namespace DrunkiBoy
         {
             if (movingBack) 
             {
+                
                 texUpperBody = Textures.player_upper_body_hurt;
                 if (pos.X > targetPos.X)
                 {
@@ -360,7 +361,7 @@ namespace DrunkiBoy
             switch (type)
             {
                 case weaponType.none:
-                    texUpperBody = Textures.player_upper_body;
+                    texUpperBody = prevTexUpperBody = Textures.player_upper_body;
                     currentWeapon = weaponType.none;
                     break;
                 case weaponType.burger:

@@ -76,5 +76,33 @@ namespace DrunkiBoy
                 particles[index].Draw(spriteBatch);
             }
         }
+        private Particle GenerateParticleCircleRange()
+        {
+            Texture2D texture = textures[random.Next(textures.Count)];
+            Vector2 position = EmitterLocation;
+            Vector2 velocity = new Vector2(
+                    1f * (float)(random.NextDouble() * 2 - 1),
+                    1f * (float)(random.NextDouble() * 2 - 1));
+            float angle = 0;
+            float angularVelocity = 0.1f * (float)(random.NextDouble() * 2 - 1);
+            Color color = new Color(
+                    (float)random.NextDouble(),
+                    0,
+                    0);
+            float size = (float)(random.NextDouble() * 0.5);
+            int ttl = 40 + random.Next(40);
+
+            return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
+        }
+        internal void CreateParticlesInCircleRange(Vector2 position)
+        {
+            int total = 100;
+            EmitterLocation = position;
+
+            for (int i = 0; i < total; i++)
+            {
+                particles.Add(GenerateParticleCircleRange());
+            }
+        }
     }
 }

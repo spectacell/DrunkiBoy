@@ -95,6 +95,9 @@ namespace DrunkiBoy
                     
                     levelEditor.Update(gameTime);
                     break;
+                case gameState.levelComplete:
+
+                    break;
             }
             base.Update(gameTime);
         }
@@ -114,6 +117,9 @@ namespace DrunkiBoy
                 case gameState.levelEditor:
                     
                     levelEditor.Draw(spriteBatch);
+                    break;
+                case gameState.levelComplete:
+
                     break;
             }
             

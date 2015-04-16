@@ -82,7 +82,7 @@ namespace DrunkiBoy
             UpdateKeys(gameTime, player);
             UpdateHearts(gameTime, player);
             UpdatePainkillers(gameTime, player);
-            UpdateTeleport(gameTime);
+            UpdateTeleport(gameTime, player);
             UpdateMoney(gameTime, player);
             UpdatePant(gameTime, player);
             UpdateBurgers(gameTime, player);
@@ -146,12 +146,22 @@ namespace DrunkiBoy
             }
         }
 
-        private void UpdateTeleport(GameTime gameTime)
+        private void UpdateTeleport(GameTime gameTime, Player player)
         {
-            foreach (Teleport teleport in teleports)
-            {
-                teleport.Update(gameTime);
-            }
+            
+                foreach (Teleport teleport in teleports)
+                {
+                    if (ItemsLeftToCollect() == 0)
+                    {
+                        teleport.activate();
+                    }
+                    if (teleport.isActive && teleport.DetectPixelCollision(player))
+                    {
+                        Game1.currentGameState = Game1.gameState.levelComplete;
+                    }
+                    teleport.Update(gameTime);
+                }
+            
         }
 
         private void UpdatePainkillers(GameTime gameTime, Player player)
