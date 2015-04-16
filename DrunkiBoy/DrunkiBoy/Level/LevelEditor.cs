@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight}; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -48,6 +48,7 @@ namespace DrunkiBoy
             menuEntries.Add("C: Bottle");
             menuEntries.Add("J: Jagerbomb");
             menuEntries.Add("L: Flashlight");
+            menuEntries.Add("R: Radio");
 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
@@ -295,6 +296,16 @@ namespace DrunkiBoy
                             objects.Add(new Flashlight(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 1, 50));
                         }
                         break;
+                    case items.Radio:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Radio(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.radio, new Rectangle(0, 0, 174, 114), true, 1, 50));
+                        }
+                        else
+                        {
+                            objects.Add(new Radio(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.radio, new Rectangle(0, 0, 174, 114), true, 1, 50));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -415,6 +426,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Flashlight;
                 selectedObject = new Flashlight(new Vector2(mouseState.X, mouseState.Y), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 1, 50);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.R))
+            {
+                selectedItem = items.Radio;
+                selectedObject = new Radio(new Vector2(mouseState.X, mouseState.Y), Textures.radio, new Rectangle(0, 0, 174, 114), true, 1, 50);
             }
         }
 

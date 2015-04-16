@@ -11,6 +11,7 @@ namespace DrunkiBoy
     {
         public List<Enemy> enemies = new List<Enemy>();
         public List<Flashlight> flashlights = new List<Flashlight>();
+        public List<Radio> radios = new List<Radio>();
 
         public void AddEnemy(Enemy enemy)
         {
@@ -21,9 +22,15 @@ namespace DrunkiBoy
             flashlights.Add(flashlight);
         }
 
+        public void AddRadio(Radio radio)
+        {
+            radios.Add(radio);
+        }
+
         public void Update(GameTime gameTime, Player player)
         {
             UpdateFlashlights(gameTime, player);
+            UpdateRadios(gameTime, player);
         }
 
         private void UpdateFlashlights(GameTime gameTime, Player player)
@@ -56,11 +63,45 @@ namespace DrunkiBoy
             }
         }
 
+        private void UpdateRadios(GameTime gameTime, Player player)
+        {
+
+            foreach (Radio radio in radios)
+            {
+                radio.Update(gameTime);
+                if (radio.DetectPixelCollision(player))
+                {
+                    player.LoseHealth(20, radio.pos);
+                    break;
+                }
+
+                if (radio.isActive == false)
+                {
+                    radios.Remove(radio);
+                    break;
+                }
+
+                foreach (Bullet bullet in BulletManager.bullets)
+                {
+                    if (radio.DetectPixelCollision(bullet))
+                    {
+                        radio.LoseHealth();
+                        bullet.isActive = false;
+                    }
+                }
+            }
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Flashlight flashlight in flashlights)
             {
                 flashlight.Draw(spriteBatch);
+            }
+
+            foreach (Radio radio in radios)
+            {
+                radio.Draw(spriteBatch);
             }
         }
     }

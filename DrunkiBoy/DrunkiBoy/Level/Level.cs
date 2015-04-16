@@ -197,6 +197,11 @@ namespace DrunkiBoy
                     enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 700));
                     objects.Add(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 700));
                 }
+                else if (temp[0] == "radio")
+                {
+                    enemyManager.AddRadio(new Radio(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.radio, new Rectangle(0, 0, 174, 114), true, 2, 100));
+                    objects.Add(new Radio(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.radio, new Rectangle(0, 0, 174, 114), true, 2, 100));
+                }
             }
             sr.Close();
         }

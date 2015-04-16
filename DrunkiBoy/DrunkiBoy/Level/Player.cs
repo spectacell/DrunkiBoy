@@ -293,7 +293,6 @@ namespace DrunkiBoy
         {
             if (movingBack) 
             {
-                
                 texUpperBody = Textures.player_upper_body_hurt;
                 if (pos.X > targetPos.X)
                 {

@@ -114,6 +114,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Level\Background\BackgroundImage.cs" />
     <Compile Include="Level\Teleport.cs" />
+    <Compile Include="Radio.cs" />
     <Compile Include="Textures.cs" />
     <Compile Include="Level\Items\Torch.cs" />
   </ItemGroup>
