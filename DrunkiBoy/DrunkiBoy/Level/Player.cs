@@ -14,7 +14,8 @@ namespace DrunkiBoy
 
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
         private Vector2 targetPos;
-        private bool movingBack;
+        private bool movingBack, weaponThrown;
+        private float opacity = 1f;
 
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
         double timeTilNextFrameLB = 0; 
@@ -96,14 +97,7 @@ namespace DrunkiBoy
             AnimateHealthBar();
             MoveBackWhenEnemyContact(gameTime);
         }
-        public void BringToLife()
-        {
-            isDead = false;
-        }
-        public void ResetPos()
-        {
-            targetPos = pos = currentSpawnPos;
-        }
+        
         /// <summary>
         /// Räknar ner timeTilNextFrameLB och timeTilNextFrame när man styr player
         /// </summary>
@@ -231,7 +225,6 @@ namespace DrunkiBoy
                 livesLeft--;
                 ResetHealth();
             }
-            
         }
         /// <summary>
         /// Körs hela tiden för att kolla om spelaren fortfarande är på en plattform, annars sätts activePlatform till null. 
@@ -285,6 +278,7 @@ namespace DrunkiBoy
                 targetHealth = healthLeft - amountToLose;
                 GUI.healthBarBlinking = true;
                 MovePlayerBack(enemyPos);
+                ThrowWeaponInAir();
             }
             else //Då är man död...
             {
@@ -300,6 +294,8 @@ namespace DrunkiBoy
         {
             if (movingBack) 
             {
+                texUpperBody = Textures.player_upper_body_hurt;
+                opacity = 0.9f;
                 if (pos.X > targetPos.X)
                 {
                     pos.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
@@ -312,8 +308,11 @@ namespace DrunkiBoy
                 }
                 if (Math.Abs(targetPos.X - pos.X) < 10)
                 {
+                    opacity = 1f;
+                    weaponThrown = false;
                     movingBack = false;
                     particleEngine.isActive = false;
+                    texUpperBody = prevTexUpperBody;
                 }
             }
         }
@@ -436,12 +435,83 @@ namespace DrunkiBoy
             }
         }
         /// <summary>
+        /// Kastar vapnet rakt upp i luften. Körs när player stöter emot en fiende
+        /// </summary>
+        private void ThrowWeaponInAir()
+        {
+            if (!weaponThrown)
+            {
+                Vector2 bulletPos, bulletVelocity = new Vector2(0, -10);
+                if (facing == 0)  //vänster
+                {
+                    bulletPos = new Vector2(pos.X + 20, pos.Y);
+                }
+                else //höger
+                {
+                    bulletPos = new Vector2(pos.X + 30, pos.Y);
+                }
+                switch (currentWeapon)
+                {
+                    case weaponType.burger:
+                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity));
+                        weaponThrown = true;
+                        break;
+                    case weaponType.pizza:
+                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
+                        weaponThrown = true;
+                        break;
+                    case weaponType.bottle:
+                        BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity));
+                        weaponThrown = true;
+                        break;
+                    case weaponType.molotovCocktail:
+                        BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity));
+                        weaponThrown = true;
+                        break;
+                }
+            }
+        }
+        #region Reset metoder
+        /// <summary>
+        /// Återstället position, hälsa och sätter vapentyp till none
+        /// </summary>
+        public void Reset()
+        {
+            ResetPos();
+            BringToLife();
+            ResetWeapon();
+            ResetHealth();
+        }
+        /// <summary>
+        /// Sätter isDead = false
+        /// </summary>
+        private void BringToLife()
+        {
+            isDead = false;
+        }
+        /// <summary>
+        /// Sätter pos och targetPos till currentSpawnPos
+        /// </summary>
+        private void ResetPos()
+        {
+            targetPos = pos = currentSpawnPos;
+        }
+        /// <summary>
+        /// Återställer currentWeapon till none
+        /// </summary>
+        private void ResetWeapon()
+        {
+            currentWeapon = weaponType.none;
+            PickUpWeapon(weaponType.none);
+        }
+        /// <summary>
         /// Återställer hälsan till defaultHealth
         /// </summary>
-        public void ResetHealth()
+        private void ResetHealth()
         {
             healthLeft = targetHealth = defaultHealth;
         }
+        #endregion
         /// <summary>
         /// Två Draw() här, en för underkroppen och en för överkroppen.
         /// </summary>
@@ -450,8 +520,8 @@ namespace DrunkiBoy
         {
             if (!animateShooting)//Borde kunna få in den här någon annanstans men kommer inte på nåt bra nu. srcRect är samma om man inte skjuter
                 srcRectLB = srcRect;
-            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-            spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White * opacity, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White * opacity, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             if (particleEngine.isActive)
                 particleEngine.Draw(spriteBatch);
         }   

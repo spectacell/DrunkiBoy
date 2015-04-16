@@ -81,9 +81,7 @@ namespace DrunkiBoy
                         //Nån bild här eller nåt och en text som uppmanar spelaren att klicka för att börja om vid senaste checkpointen...
                         if (KeyMouseReader.KeyPressed(Keys.Space))
                         {
-                            player.BringToLife();
-                            player.ResetPos();
-                            player.ResetHealth();
+                            player.Reset();
                             currentLevelState = levelState.running;
                         }
                     }
