@@ -30,7 +30,7 @@ namespace DrunkiBoy
             facingSrcRects = new Rectangle[2] { new Rectangle(nrFrames * srcRect.Width, srcRect.Y, srcRect.Width, srcRect.Height), srcRect };
         }
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if (!(this is Player)) //Player sköter sin egen nedräkning i och med att den bara ska räkna när player rör sig. Andra objekt animeras hela tiden.
                 timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds; //Animation time counter

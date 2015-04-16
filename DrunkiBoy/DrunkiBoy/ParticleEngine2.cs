@@ -30,16 +30,29 @@ namespace DrunkiBoy
             colors = new Color[colorTexture.Width * colorTexture.Height];
             colorTexture.GetData(colors);
         }
+        public ParticleEngine2(Texture2D texture, Vector2 location, Texture2D colorTexture, bool isActive)
+        {
+            EmitterLocation = location;
+            this.isActive = isActive;
+            this.colorTexture = colorTexture;
+            textures = new List<Texture2D>();
+            textures.Add(texture);
+            this.particles = new List<Particle>();
+            random = new Random();
+            // Get color data from colors texture
+            colors = new Color[colorTexture.Width * colorTexture.Height];
+            colorTexture.GetData(colors);
+        }
         private Particle GenerateNewParticle()
         {
             Texture2D texture = textures[random.Next(textures.Count)];
             Vector2 position = EmitterLocation;
-            Vector2 velocity = new Vector2(1f * (float)(random.NextDouble() * 2 - 1), 1f * (float)(random.NextDouble() * 2 - 1));
+            Vector2 velocity = new Vector2((float)(random.NextDouble() * 2 - 1)/3, -Math.Abs((float)(random.NextDouble() * 2 - 1)/3));
             float angle = 0;
             float angularVelocity = 0.1f * (float)(random.NextDouble() * 2 - 1);
             Color color = colors[(random.Next(0, colorTexture.Height) * colorTexture.Width) +
                                   random.Next(0, colorTexture.Width)]; //Slumpar fram en färg från colorTexture
-            float size = (float)random.NextDouble();
+            float size = (float)random.NextDouble()/10;
             int ttl = 20 + random.Next(40);
             return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
         }
@@ -87,7 +100,30 @@ namespace DrunkiBoy
                 particles.Add(GenerateParticleCircleRange());
             }
         }
+        public void Update()
+        {
+            if (isActive)
+            {
+                int total = 20;
 
+                for (int i = 0; i < total; i++)
+                {
+                    particles.Add(GenerateNewParticle());
+                    //particles.Add(GenerateParticleCircleRange());
+
+                }
+                for (int particle = 0; particle < particles.Count; particle++)
+                {
+                    particles[particle].Update();
+                    if (particles[particle].TTL <= 0)
+                    {
+                        particles.RemoveAt(particle);
+                        particle--;
+                    }
+                }
+            }
+
+        }
         public void Update(Vector2 pos)
         {
             if (isActive)

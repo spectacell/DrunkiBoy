@@ -95,6 +95,7 @@ namespace DrunkiBoy
         {
             foreach (Jagerbomb jagerbomb in jagerbombs)
             {
+                jagerbomb.Update(gameTime);
                 if (jagerbomb.DetectPixelCollision(player))
                 {
                     jagerbombs.Remove(jagerbomb);

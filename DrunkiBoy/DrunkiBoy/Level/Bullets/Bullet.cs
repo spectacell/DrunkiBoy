@@ -22,7 +22,7 @@ namespace DrunkiBoy
             this.skottRange = skottRange;
             this.origin = new Vector2(tex.Width / 2, tex.Height / 2);
         }
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {                        
             pos += velocity;
             pos.Y += 0.6f; //gravitation...

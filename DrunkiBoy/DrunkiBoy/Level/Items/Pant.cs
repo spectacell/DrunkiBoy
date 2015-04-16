@@ -22,7 +22,7 @@ namespace DrunkiBoy
             moving = true;
             particleEngine.isActive = true;
         }
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if (moving)
             {
@@ -36,8 +36,6 @@ namespace DrunkiBoy
                     isActive = false;
                 }
             }
-
-            base.Update(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {

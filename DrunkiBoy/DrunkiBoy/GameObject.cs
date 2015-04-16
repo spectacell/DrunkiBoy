@@ -32,10 +32,6 @@ namespace DrunkiBoy
             srcRect = new Rectangle(0, 0, tex.Width, tex.Height);
             SetColorData();
         }
-        public virtual void Update(GameTime gameTime)
-        {
-
-        }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {

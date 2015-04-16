@@ -54,7 +54,7 @@ namespace DrunkiBoy
             texLowerBody = Textures.player_lower_body;
             //ResetSpawnTimer();
         }
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             Console.WriteLine(pos);
             switch (activePowerUp)
