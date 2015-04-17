@@ -72,6 +72,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Level\Bullets\KebabWeapon.cs" />
     <Compile Include="Level\Enemies\Flashlight.cs" />
     <Compile Include="Level\Bullets\MolotovWeapon.cs" />
     <Compile Include="Level\Items\Bottle.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Level\Items\Burger.cs" />
     <Compile Include="Level\Items\Heart.cs" />
     <Compile Include="Level\Items\Jagerbomb.cs" />
+    <Compile Include="Level\Items\Kebab.cs" />
     <Compile Include="Level\Items\Key.cs" />
     <Compile Include="Level\AnimatedObject.cs" />
     <Compile Include="Camera.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Level\Items\Money.cs" />
     <Compile Include="Level\Items\Painkiller.cs" />
     <Compile Include="Level\Items\Pant.cs" />
+    <Compile Include="Level\Items\Toilet.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="ParticleEngine2.cs" />
     <Compile Include="ParticleEngine.cs" />
@@ -114,7 +117,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Level\Background\BackgroundImage.cs" />
     <Compile Include="Level\Teleport.cs" />
-    <Compile Include="Radio.cs" />
+    <Compile Include="Level\Enemies\Radio.cs" />
     <Compile Include="Textures.cs" />
     <Compile Include="Level\Items\Torch.cs" />
   </ItemGroup>

@@ -11,7 +11,7 @@ namespace DrunkiBoy
     class Teleport : AnimatedObject
     {   
         // ska vi adda här switch mellan aktiv och ej aktiv teleport?
-        bool isActive;
+        public bool isActivated;
         public enum teleportType{teleport, aktivTeleport};
         private teleportType currentTeleport;
          public Teleport(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
@@ -24,7 +24,7 @@ namespace DrunkiBoy
        
         public void activate()
         {
-            isActive = true;
+            isActivated = true;
             tex = Textures.AktivTeleport;
         }
     }

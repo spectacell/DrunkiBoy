@@ -125,7 +125,9 @@ namespace DrunkiBoy
 
                     break;
                     case gameState.gameOver:
-
+                    spriteBatch.Begin();
+                    spriteBatch.Draw(Textures.gameOverScreen, Vector2.Zero, Color.White);
+                    spriteBatch.End();
                     break;
             }
             

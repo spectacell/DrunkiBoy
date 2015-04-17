@@ -20,12 +20,22 @@ namespace DrunkiBoy
         public List<Pant> pants = new List<Pant>();
         public List<Burger> burgers = new List<Burger>();
         public List<Pizza> pizzas = new List<Pizza>();
+        public List<Kebab> kebabs = new List<Kebab>();
         public List<Bottle> bottles = new List<Bottle>();
         public List<Jagerbomb> jagerbombs = new List<Jagerbomb>();
+        public List<Toilet> toilets = new List<Toilet>();
 
         public ItemManager()
         {
 
+        }
+        public void AddToilet(Toilet toilet)
+        {
+            toilets.Add(toilet);
+        }
+        public void AddKebab(Kebab kebab)
+        {
+            kebabs.Add(kebab);
         }
         public void AddJagerbomb(Jagerbomb jagerbomb)
         {
@@ -89,7 +99,34 @@ namespace DrunkiBoy
             UpdatePizza(gameTime, player);
             UpdateBottles(gameTime, player);
             UpdateJagerbombs(gameTime, player);
+            UpdateKebabs(gameTime, player);
+            UpdateToilets(gameTime, player);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
+        }
+        private void UpdateToilets(GameTime gameTime, Player player)
+        {
+            foreach (Toilet toilet in toilets)
+            {
+                if (!toilet.isActivated && toilet.DetectPixelCollision(player))
+                {
+                    player.SetSpawnPosition(toilet.pos);
+                    toilet.tex = Textures.toilet_open;
+                    toilet.isActivated = true;
+                    break;
+                }
+            }
+        }
+        private void UpdateKebabs(GameTime gameTime, Player player)
+        {
+            foreach (Kebab kebab in kebabs)
+            {
+                if (kebab.DetectPixelCollision(player))
+                {
+                    kebabs.Remove(kebab);
+                    player.PickUpWeapon(Player.weaponType.kebab);
+                    break;
+                }
+            }
         }
         private void UpdateJagerbombs(GameTime gameTime, Player player)
         {
@@ -155,7 +192,7 @@ namespace DrunkiBoy
                     {
                         teleport.activate();
                     }
-                    if (teleport.isActive && teleport.DetectPixelCollision(player))
+                    if (teleport.isActivated && teleport.DetectPixelCollision(player))
                     {
                         Game1.currentGameState = Game1.gameState.levelComplete;
                     }
@@ -306,6 +343,14 @@ namespace DrunkiBoy
             foreach (Jagerbomb jagerbomb in jagerbombs)
             {
                 jagerbomb.Draw(spriteBatch);
+            }
+            foreach (Kebab kebab in kebabs)
+            {
+                kebab.Draw(spriteBatch);
+            }
+            foreach (Toilet toilet in toilets)
+            {
+                toilet.Draw(spriteBatch);
             }
         }
         private void UpdatePlatforms(Player player)

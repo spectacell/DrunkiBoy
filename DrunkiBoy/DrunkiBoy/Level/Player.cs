@@ -33,7 +33,7 @@ namespace DrunkiBoy
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
-        public enum weaponType { none, burger, pizza, bottle, molotovCocktail };
+        public enum weaponType { none, burger, pizza, kebab, bottle, molotovCocktail };
         public weaponType currentWeapon;
 
         public int jumpHeight = 12;
@@ -237,7 +237,11 @@ namespace DrunkiBoy
                     activePlatform = null;
                 }
             }
-        } 
+        }
+        public void SetSpawnPosition(Vector2 pos)
+        {
+            currentSpawnPos = new Vector2(pos.X, pos.Y-50); //Lite högre än toalettens pos så att player inte spawnas under plattformen
+        }
         /// <summary>
         /// Körs när man tar en PowerUp. Switch/case satsen i Update() avgör vad som händer med player när poweruppen är aktiv
         /// </summary>
@@ -371,6 +375,10 @@ namespace DrunkiBoy
                     texUpperBody = prevTexUpperBody = Textures.player_pizza;
                     currentWeapon = weaponType.pizza;
                     break;
+                case weaponType.kebab:
+                    texUpperBody = prevTexUpperBody = Textures.player_kebab;
+                    currentWeapon = weaponType.kebab;
+                    break;
                 case weaponType.bottle:
                     texUpperBody = prevTexUpperBody = Textures.player_bottle;
                     currentWeapon = weaponType.bottle;
@@ -418,6 +426,11 @@ namespace DrunkiBoy
                         animateShooting = true;
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
                     break;
+                    case weaponType.kebab:
+                    texUpperBody = Textures.player_shooting;
+                    animateShooting = true;
+                    BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity));
+                    break;
                     case weaponType.bottle:     
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
@@ -455,6 +468,10 @@ namespace DrunkiBoy
                         break;
                     case weaponType.pizza:
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
+                        weaponThrown = true;
+                        break;
+                    case weaponType.kebab:
+                        BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity));
                         weaponThrown = true;
                         break;
                     case weaponType.bottle:

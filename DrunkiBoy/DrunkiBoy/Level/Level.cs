@@ -87,7 +87,7 @@ namespace DrunkiBoy
                     }
                     else
                     {
-                        //Om antal liv är mindre än noll så skicka till GameOver-skärm
+                        Game1.currentGameState = Game1.gameState.gameOver;
                     }
                     break;
             }
@@ -182,6 +182,11 @@ namespace DrunkiBoy
                     itemManager.AddPizza(new Pizza(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.pizza, true));
                     objects.Add(new Pizza(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.pizza, true));
                 }
+                else if (temp[0] == "kebab")
+                {
+                    itemManager.AddKebab(new Kebab(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.kebab, true));
+                    objects.Add(new Kebab(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.kebab, true));
+                }
                 else if (temp[0] == "bottle")
                 {
                     itemManager.AddBottle(new Bottle(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.bottle, true));
@@ -201,6 +206,11 @@ namespace DrunkiBoy
                 {
                     enemyManager.AddRadio(new Radio(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.radio, new Rectangle(0, 0, 174, 114), true, 2, 100));
                     objects.Add(new Radio(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.radio, new Rectangle(0, 0, 174, 114), true, 2, 100));
+                }
+                else if (temp[0] == "toilet")
+                {
+                    itemManager.AddToilet(new Toilet(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.toilet_closed, true));
+                    objects.Add(new Toilet(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.toilet_closed, true));
                 }
             }
             sr.Close();
