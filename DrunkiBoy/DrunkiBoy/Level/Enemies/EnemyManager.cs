@@ -57,8 +57,8 @@ namespace DrunkiBoy
                 {
                     if (flashlight.DetectPixelCollision(bullet))
                     {
-                        particleEngine.Textures = Textures.pizzaParticles;
-                        particleEngine.CreateParticlesInCircleRange(bullet.pos);
+                        //particleEngine.Textures = Textures.pizzaParticles;
+                        //particleEngine.CreateParticlesInCircleRange(bullet.pos);
                         flashlight.LoseHealth();
                         bullet.isActive = false;
                     }
