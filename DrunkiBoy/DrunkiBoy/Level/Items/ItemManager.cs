@@ -172,7 +172,7 @@ namespace DrunkiBoy
             foreach (Pizza pizza in pizzas)
             {
                
-                if (pizza.DetectPixelCollision(player))
+                if (pizza.DetectPixelCollision(player))  //den här  gör inget
                 {
                     
                     pizzas.Remove(pizza);

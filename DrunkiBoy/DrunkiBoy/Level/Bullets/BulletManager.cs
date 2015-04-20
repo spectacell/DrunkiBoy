@@ -13,7 +13,7 @@ namespace DrunkiBoy
     {
         public static Texture2D tex;
         public static List<Bullet> bullets = new List<Bullet>();
-        public static ParticleEngine particleEngine;
+        public static ParticleEngine particleEngine = new ParticleEngine();
         public static Vector2 pos;
         
 
@@ -32,31 +32,33 @@ namespace DrunkiBoy
             {
                 
                 bullet.Update(gameTime);
-                particleEngine = new ParticleEngine(Textures.pizzaParticles, pos, true);
+                
                 if (!player.animateShooting && bullet is PizzaWeapon) 
                 {
-                    
-                    
+
+
                     if (bullet.DetectPixelCollision(player))
-                    {                        
-                        particleEngine.CreateParticlesInCircleRange(bullet.pos);
-                         
-                        bullets.Remove(bullet);                        
-                        player.PickUpWeapon(Player.weaponType.pizza);
+                    {
                         
+
+                        bullets.Remove(bullet);
+                        player.PickUpWeapon(Player.weaponType.pizza);
+
                         break;
                     }
                     
                 }
                 
                 if (bullet.isActive == false)
-                {                                        
+                {
+                    particleEngine.Textures = Textures.pizzaParticles;
+                    particleEngine.CreateParticlesInCircleRange(bullet.pos);      
                     bullets.Remove(bullet);
                     break;
                 }
-                particleEngine.Update(pos);
+               
             }
-
+            particleEngine.Update();
             
             //remove bullets som träffar enemy , eller går utanför fönster
             //particleEngine.CreateParticlesInCircleRange(bullet.pos);
@@ -64,14 +66,11 @@ namespace DrunkiBoy
         public static void Draw(SpriteBatch spriteBatch)
         {
             foreach (Bullet b in bullets)
-            {
-                if (particleEngine.isActive)
-                {
-                    particleEngine.Draw(spriteBatch);
-                }
+            {            
+                                    
                 b.Draw(spriteBatch);
             }
-            
+            particleEngine.Draw(spriteBatch);
             
             
         }
