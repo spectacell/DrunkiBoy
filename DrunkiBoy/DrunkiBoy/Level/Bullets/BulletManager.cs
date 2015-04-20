@@ -35,33 +35,25 @@ namespace DrunkiBoy
                 
                 if (!player.animateShooting && bullet is PizzaWeapon) 
                 {
-
-
                     if (bullet.DetectPixelCollision(player))
-                    {
-                        
-
+                    {                       
                         bullets.Remove(bullet);
                         player.PickUpWeapon(Player.weaponType.pizza);
-
                         break;
-                    }
-                    
+                    }                    
                 }
                 
-                if (bullet.isActive == false)
-                {
-                    particleEngine.Textures = Textures.pizzaParticles;
-                    particleEngine.CreateParticlesInCircleRange(bullet.pos);      
+                if (bullet.isActive == false)                {
+                        
                     bullets.Remove(bullet);
                     break;
                 }
                
             }
-            particleEngine.Update();
+            
             
             //remove bullets som träffar enemy , eller går utanför fönster
-            //particleEngine.CreateParticlesInCircleRange(bullet.pos);
+            
         }
         public static void Draw(SpriteBatch spriteBatch)
         {
@@ -70,7 +62,7 @@ namespace DrunkiBoy
                                     
                 b.Draw(spriteBatch);
             }
-            particleEngine.Draw(spriteBatch);
+           
             
             
         }

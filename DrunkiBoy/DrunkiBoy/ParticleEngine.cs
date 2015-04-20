@@ -10,8 +10,7 @@ namespace DrunkiBoy
 {
     public class ParticleEngine
     {
-        private Random random;
-        public Vector2 EmitterLocation { get; set; }
+        private Random random;       
         private List<Particle> particles;
         private List<Texture2D> textures;
         public bool isActive;
@@ -19,26 +18,35 @@ namespace DrunkiBoy
         public ParticleEngine(List<Texture2D> textures, Vector2 location, bool isActive)
         {
             EmitterLocation = location;
-            this.isActive = isActive;  
+            this.isActive = isActive;
             this.textures = textures;
             this.particles = new List<Particle>();
             random = new Random();
         }
 
-        public void Update(Vector2 pos)
+        public ParticleEngine():this(new List<Texture2D>(),Vector2.Zero, false)
         {
-            if (isActive)
+            
+        }
+
+        public void Update(Vector2 pos) // byt namn på metoden / generar partiklarna här
+        {
+            if (isActive) 
             {
                 EmitterLocation = pos;
-            
-            int total = 10;
 
-            for (int i = 0; i < total; i++)
-            {
-                particles.Add(GenerateNewParticle());
-                
+                int total = 10;
+
+                for (int i = 0; i < total; i++)
+                {
+                    particles.Add(GenerateNewParticle());
+
+                }
             }
-           
+        }
+        public void Update() // uppdaterar particlarna
+        {
+
             for (int particle = 0; particle < particles.Count; particle++)
             {
                 particles[particle].Update();
@@ -47,7 +55,6 @@ namespace DrunkiBoy
                     particles.RemoveAt(particle);
                     particle--;
                 }
-            }
             }
         }
 
@@ -88,8 +95,8 @@ namespace DrunkiBoy
             float angularVelocity = 0.1f * (float)(random.NextDouble() * 2 - 1);
             Color color = new Color(
                     (float)random.NextDouble(),
-                    0,
-                    0);
+                    (float)random.NextDouble(),
+                    (float)random.NextDouble());
             float size = (float)(random.NextDouble() * 0.5);
             int ttl = 40 + random.Next(40);
 
@@ -105,5 +112,7 @@ namespace DrunkiBoy
                 particles.Add(GenerateParticleCircleRange());
             }
         }
+        public Vector2 EmitterLocation { get; set; } //propertys
+        public List<Texture2D> Textures { get { return textures; } set { this.textures = value; } }
     }
 }
