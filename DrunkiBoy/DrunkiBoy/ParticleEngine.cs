@@ -42,6 +42,7 @@ namespace DrunkiBoy
                     particles.Add(GenerateNewParticle());
 
                 }
+                Update();
             }
         }
         public void Update() // uppdaterar particlarna
