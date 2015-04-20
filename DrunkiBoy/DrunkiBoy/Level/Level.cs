@@ -31,6 +31,11 @@ namespace DrunkiBoy
         public static double timeLeft;
         private double defaultTime = 240;
 
+        string died = "I'M AFRAID YOU HAVE DIED, SIR";
+        string outOfTime = "I'M AFRAID YOU HAVE RUN OUT OF TIME";
+        string spaceToRestart = "PRESS <SPACE> TO RESTART";
+        
+
         public Level(GraphicsDevice gd, String levelTextFilePath, ContentManager content)
         {
             #region Kamera och parallaxbakgrunder
@@ -78,7 +83,6 @@ namespace DrunkiBoy
                 case levelState.lostLife:
                     if (Player.livesLeft > 0)
                     {
-                        //Nån bild här eller nåt och en text som uppmanar spelaren att klicka för att börja om vid senaste checkpointen...
                         if (KeyMouseReader.KeyPressed(Keys.Space))
                         {
                             player.Reset();
@@ -94,7 +98,6 @@ namespace DrunkiBoy
                 case levelState.outOfTime:
                     if (Player.livesLeft > 0)
                     {
-                        //Nån bild här eller nåt där det står att tiden tagit slut och så och en text som uppmanar spelaren att klicka för att börja om vid senaste checkpointen...
                         if (KeyMouseReader.KeyPressed(Keys.Space))
                         {
                             player.Reset();
@@ -141,8 +144,7 @@ namespace DrunkiBoy
                     player.Draw(spriteBatch);
                     spriteBatch.End();
                     spriteBatch.Begin();
-                    string died = "I'M AFRAID YOU HAVE DIED, SIR";
-                    string spaceToRestart = "PRESS <SPACE> TO RESTART";
+                    
                     spriteBatch.DrawString(Constants.FONT_BIG, died, new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString(died).X / 2,
                         270), Color.White);
                     spriteBatch.DrawString(Constants.FONT_BIG, spaceToRestart, new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString(spaceToRestart).X / 2,
@@ -151,7 +153,24 @@ namespace DrunkiBoy
                     break;
 
                 case levelState.outOfTime:
-
+                    foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
+                    { 
+                        layer.Draw(spriteBatch);
+                    }
+                    spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
+                    
+                    itemManager.Draw(spriteBatch);
+                    enemyManager.Draw(spriteBatch);
+                    BulletManager.Draw(spriteBatch);
+                    player.Draw(spriteBatch);
+                    spriteBatch.End();
+                    spriteBatch.Begin();
+                    
+                    spriteBatch.DrawString(Constants.FONT_BIG, outOfTime, new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString(outOfTime).X / 2,
+                        270), Color.White);
+                    spriteBatch.DrawString(Constants.FONT_BIG, spaceToRestart, new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString(spaceToRestart).X / 2,
+                        320), Color.White);
+                    spriteBatch.End();
                     break;
             }   
         }

@@ -525,7 +525,7 @@ namespace DrunkiBoy
         /// </summary>
         public void Reset()
         {
-            facing = 1;
+            facing = 1; //Så att player tittar åt höger när den återställs
             targetScore = score;
             shotDelay = shotDelayDefault;
             ResetPos();
