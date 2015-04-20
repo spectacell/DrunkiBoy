@@ -15,7 +15,7 @@ namespace DrunkiBoy
         public PizzaWeapon(Vector2 pos, Vector2 velocity)
             : base(pos, velocity, Textures.pizza, true, 400)
         {
-            particleEngine = new ParticleEngine(Textures.pizzaParticles, pos, true);
+            
             this.velocity.Y = -2;
         }
         public override void Update(GameTime gameTime)
