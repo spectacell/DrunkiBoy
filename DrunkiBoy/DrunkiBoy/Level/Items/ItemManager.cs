@@ -24,6 +24,7 @@ namespace DrunkiBoy
         public List<Bottle> bottles = new List<Bottle>();
         public List<Jagerbomb> jagerbombs = new List<Jagerbomb>();
         public List<Toilet> toilets = new List<Toilet>();
+        public static ParticleEngine particleEngine;
 
         public ItemManager()
         {
@@ -155,14 +156,18 @@ namespace DrunkiBoy
         }
         private void UpdatePizza(GameTime gameTime, Player player)
         {
+            
             foreach (Pizza pizza in pizzas)
             {
+               
                 if (pizza.DetectPixelCollision(player))
                 {
+                    
                     pizzas.Remove(pizza);
                     player.PickUpWeapon(Player.weaponType.pizza);
                     break;
                 }
+                
             }
         }
         private void UpdatePant(GameTime gameTime, Player player)
@@ -295,6 +300,7 @@ namespace DrunkiBoy
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            
             foreach (Platform platform in platforms)
             {
                 platform.Draw(spriteBatch);

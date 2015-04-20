@@ -21,7 +21,7 @@ namespace DrunkiBoy
         }
         public void PickUp()
         {
-            targetpos.Y = pos.Y - 60;
+            targetpos.Y = pos.Y - 200;
             moving = true;
             particleEngine.isActive = true;
         }

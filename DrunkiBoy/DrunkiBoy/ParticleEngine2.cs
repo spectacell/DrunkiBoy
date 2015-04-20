@@ -82,8 +82,7 @@ namespace DrunkiBoy
 
                 for (int i = 0; i < total; i++)
                 {
-                    particles.Add(GenerateNewParticle());
-                    //particles.Add(GenerateParticleCircleRange());
+                    particles.Add(GenerateNewParticle());                  
 
                 }
                 for (int particle = 0; particle < particles.Count; particle++)

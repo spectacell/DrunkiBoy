@@ -28,9 +28,11 @@ namespace DrunkiBoy
             pos.Y += 0.6f; //gravitation...
             rotation += 0.1f;
             shotRange = shotRange - velocity.Length();
+           
             
             if (shotRange <= 0)
             {
+                
                 isActive = false;  
             }
         }

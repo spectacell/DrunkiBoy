@@ -452,12 +452,13 @@ namespace DrunkiBoy
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
                         BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity));
+                        
                     break;
                     case weaponType.pizza:
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
-                        prevTexUpperBody = Textures.player_upper_body;
+                        prevTexUpperBody = Textures.player_upper_body;                        
                         currentWeapon = weaponType.none;
                     break;
                     case weaponType.kebab:
