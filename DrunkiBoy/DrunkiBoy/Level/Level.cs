@@ -67,9 +67,8 @@ namespace DrunkiBoy
                     }
                     itemManager.Update(gameTime, player);
                     enemyManager.Update(gameTime, player);
-                    BulletManager.Update(gameTime);
+                    BulletManager.Update(gameTime, player);
                     CountingDownTime(gameTime);
-                    
 
                     // Riktar kameran mot spelaren...
                     camera.LookAt(player.pos);

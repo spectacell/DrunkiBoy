@@ -21,7 +21,7 @@ namespace DrunkiBoy
         private int frameLB;
         private Rectangle srcRectLB;
 
-        private bool animateShooting;
+        public bool animateShooting;
         private bool shootingLeft;
         private double shotDelay, shotDelayDefault = 300;
 
@@ -31,7 +31,7 @@ namespace DrunkiBoy
         public static int healthLeft, defaultHealth = 200;
         private int targetHealth;
         public static int score = 0;
-        private int targetScore;
+        private int targetScore, realScore;
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
@@ -199,7 +199,7 @@ namespace DrunkiBoy
         /// Räknar ner timeTilNextFrame när animateShooting == true så att överkroppen animeras då
         /// </summary>
         /// <param name="gameTime"></param>
-        protected void AnimateShooting(GameTime gameTime)
+        private void AnimateShooting(GameTime gameTime)
         {
             if (animateShooting)
             {
@@ -378,8 +378,8 @@ namespace DrunkiBoy
         /// <param name="scoreToAdd">Hur mycket poäng att lägga till</param>
         public void AddScore(int scoreToAdd)
         {
-            targetScore = score + scoreToAdd;
-            //score += scoreToAdd;
+            targetScore = realScore + scoreToAdd;
+            realScore = targetScore;
         }
         private void AnimatingScore()
         {
@@ -453,11 +453,12 @@ namespace DrunkiBoy
                         animateShooting = true;
                         BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity));
                     break;
-
                     case weaponType.pizza:
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
+                        prevTexUpperBody = Textures.player_upper_body;
+                        currentWeapon = weaponType.none;
                     break;
                     case weaponType.kebab:
                     texUpperBody = Textures.player_shooting;

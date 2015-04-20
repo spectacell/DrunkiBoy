@@ -20,12 +20,22 @@ namespace DrunkiBoy
         {
             bullets.Add(bullet);
         }
-        public static void Update(GameTime gameTime)
+        public static void Update(GameTime gameTime, Player player)
         {
             // Update loopa genom Bullet listor
             foreach (Bullet bullet in bullets)
             {
                 bullet.Update(gameTime);
+                if (!player.animateShooting && bullet is PizzaWeapon) 
+                {
+                    if (bullet.DetectPixelCollision(player))
+                    {
+                        bullets.Remove(bullet);
+                        player.PickUpWeapon(Player.weaponType.pizza);
+                        break;
+                    }
+                }
+                bullet.OutOfRange();
                 if (bullet.isActive == false)
                 {
                     bullets.Remove(bullet);

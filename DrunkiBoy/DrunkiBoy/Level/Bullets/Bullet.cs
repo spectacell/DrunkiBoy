@@ -13,13 +13,13 @@ namespace DrunkiBoy
     class Bullet  : GameObject
     {
         protected Vector2 velocity, origin;
-        protected float skottRange, rotation;
+        protected float shotRange, rotation;
         ParticleEngine particleEngine;
-        public Bullet(Vector2 pos,Vector2 velocity, Texture2D tex, bool isActive, float skottRange) : 
+        public Bullet(Vector2 pos,Vector2 velocity, Texture2D tex, bool isActive, float shotRange) : 
             base(pos, tex, isActive)
         {
             this.velocity = velocity;
-            this.skottRange = skottRange;
+            this.shotRange = shotRange;
             this.origin = new Vector2(tex.Width / 2, tex.Height / 2);
         }
         public virtual void Update(GameTime gameTime)
@@ -27,9 +27,9 @@ namespace DrunkiBoy
             pos += velocity;
             pos.Y += 0.6f; //gravitation...
             rotation += 0.1f;
-            skottRange = skottRange - velocity.Length();
+            shotRange = shotRange - velocity.Length();
             
-            if (skottRange <= 0)
+            if (shotRange <= 0)
             {
                 isActive = false;  
             }

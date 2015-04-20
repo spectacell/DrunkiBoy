@@ -117,5 +117,12 @@ namespace DrunkiBoy
             }
             return false;
         }
+        public void OutOfRange()
+        {
+            if (pos.X < 0 || pos.X > Game1.windowWidth || pos.Y < 0 || pos.Y > Game1.windowHeight)
+            {
+                isActive = false;
+            }
+        }
     }
 }
