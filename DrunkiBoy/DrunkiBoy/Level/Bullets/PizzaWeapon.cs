@@ -37,6 +37,10 @@ namespace DrunkiBoy
                 hasTurned = true;
                 shotRange = 400;
             }
+            if (hasTurned)
+            {
+                DeactivateIfOutOfBounds(new Rectangle(0, 0, Level.levelWidth, Level.levelHeight));
+            }
         }
     }
 }

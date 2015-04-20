@@ -31,7 +31,7 @@ namespace DrunkiBoy
         public static int healthLeft, defaultHealth = 200;
         private int targetHealth;
         public static int score = 0;
-        private int targetScore, realScore;
+        private int targetScore, realScore; //realScore för att score-räknare inte hann med att räkna upp om man tog många poäng på en gång
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;

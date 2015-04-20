@@ -35,7 +35,6 @@ namespace DrunkiBoy
                         break;
                     }
                 }
-                bullet.OutOfRange();
                 if (bullet.isActive == false)
                 {
                     bullets.Remove(bullet);

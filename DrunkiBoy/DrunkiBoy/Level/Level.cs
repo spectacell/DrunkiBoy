@@ -26,7 +26,7 @@ namespace DrunkiBoy
         protected ItemManager itemManager = new ItemManager();
         protected EnemyManager enemyManager = new EnemyManager();
 
-        protected int levelHeight = 2000, levelWidth = 6000;
+        public static int levelHeight = 2000, levelWidth = 6000;
 
         public static double timeLeft;
         private double defaultTime = 240;

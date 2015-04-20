@@ -117,9 +117,9 @@ namespace DrunkiBoy
             }
             return false;
         }
-        public void OutOfRange()
+        public void DeactivateIfOutOfBounds(Rectangle bounds)
         {
-            if (pos.X < 0 || pos.X > Game1.windowWidth || pos.Y < 0 || pos.Y > Game1.windowHeight)
+            if (pos.X < -srcRect.Width || pos.X > bounds.Width || pos.Y < -srcRect.Height || pos.Y > bounds.Height)
             {
                 isActive = false;
             }
