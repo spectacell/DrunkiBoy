@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, Kebab, Toilet}; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, Kebab, Toilet}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -38,6 +38,8 @@ namespace DrunkiBoy
             menuEntries.Add("Y: Player");
             menuEntries.Add("T: Torch");
             menuEntries.Add("K: Key");
+            menuEntries.Add("W: Wallet");
+            menuEntries.Add("C: Cellphone");
             menuEntries.Add("H: Heart");
             menuEntries.Add("S: Painkiller");
             menuEntries.Add("F: Teleport");
@@ -45,7 +47,7 @@ namespace DrunkiBoy
             menuEntries.Add("E: Pant");
             menuEntries.Add("B: Burger");
             menuEntries.Add("V: Pizza");
-            menuEntries.Add("C: Bottle");
+            menuEntries.Add("O: Bottle");
             menuEntries.Add("J: Jagerbomb");
             menuEntries.Add("L: Flashlight");
             menuEntries.Add("R: Radio");
@@ -192,6 +194,26 @@ namespace DrunkiBoy
                         else
                         {
                             objects.Add(new Key(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.Key, new Rectangle(0, 0, 35, 64), true, 1, 50));
+                        }
+                        break;
+                    case items.Wallet:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Wallet(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.Wallet, new Rectangle(0, 0, 35, 64), true, 1, 50));
+                        }
+                        else
+                        {
+                            objects.Add(new Wallet(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.Wallet, new Rectangle(0, 0, 30, 30), true, 1, 50));
+                        }
+                        break;
+                    case items.Cellphone:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Cellphone(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.Cellphone, new Rectangle(0, 0, 35, 64), true, 1, 50));
+                        }
+                        else
+                        {
+                            objects.Add(new Cellphone(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.Cellphone, new Rectangle(0, 0, 30, 52), true, 1, 50));
                         }
                         break;
                     case items.Heart:
@@ -399,6 +421,16 @@ namespace DrunkiBoy
                 selectedItem = items.Key;
                 selectedObject = new Key(new Vector2(mouseState.X, mouseState.Y), Textures.Key, new Rectangle(0, 0, 20, 30), true, 1, 50);
             }
+            if (KeyMouseReader.KeyPressed(Keys.W))
+            {
+                selectedItem = items.Wallet;
+                selectedObject = new Wallet(new Vector2(mouseState.X, mouseState.Y), Textures.Wallet, new Rectangle(0, 0, 30, 30), true, 1, 50);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.C))
+            {
+                selectedItem = items.Cellphone;
+                selectedObject = new Cellphone(new Vector2(mouseState.X, mouseState.Y), Textures.Cellphone, new Rectangle(0, 0, 30, 52), true, 1, 50);
+            }
             if (KeyMouseReader.KeyPressed(Keys.H))
             {
                 selectedItem = items.Heart;
@@ -434,7 +466,7 @@ namespace DrunkiBoy
                 selectedItem = items.Pizza;
                 selectedObject = new Pizza(new Vector2(mouseState.X, mouseState.Y), Textures.pizza, true);
             }
-            if (KeyMouseReader.KeyPressed(Keys.C))
+            if (KeyMouseReader.KeyPressed(Keys.O))
             {
                 selectedItem = items.Bottle;
                 selectedObject = new Bottle(new Vector2(mouseState.X, mouseState.Y), Textures.bottle, true);

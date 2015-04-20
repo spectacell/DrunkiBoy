@@ -13,6 +13,8 @@ namespace DrunkiBoy
         public List<Enemy> enemies = new List<Enemy>();
         public List<Torch> torches = new List<Torch>();
         public List<Key> keys = new List<Key>();
+        public List<Wallet> wallets = new List<Wallet>();
+        public List<Cellphone> cellphones = new List<Cellphone>();
         public List<Heart> hearts = new List<Heart>();
         public List<Painkiller> painkillers = new List<Painkiller>();
         public List<Teleport> teleports = new List<Teleport>();
@@ -70,6 +72,14 @@ namespace DrunkiBoy
         {
             keys.Add(key);
         }
+        public void AddWallet(Wallet wallet)
+        {
+            wallets.Add(wallet);
+        }
+        public void AddCellphone (Cellphone cellphone)
+        {
+            cellphones.Add(cellphone);
+        }
         public void Addheart(Heart heart)
         {
             hearts.Add(heart);
@@ -91,6 +101,8 @@ namespace DrunkiBoy
             UpdatePlatforms(player);
             UpdateTorches(gameTime, player);
             UpdateKeys(gameTime, player);
+            UpdateWallets(gameTime, player);
+            UpdateCellphones(gameTime, player);
             UpdateHearts(gameTime, player);
             UpdatePainkillers(gameTime, player);
             UpdateTeleport(gameTime, player);
@@ -187,7 +199,6 @@ namespace DrunkiBoy
                 }
             }
         }
-
         private void UpdateTeleport(GameTime gameTime, Player player)
         {
                 foreach (Teleport teleport in teleports)
@@ -204,7 +215,6 @@ namespace DrunkiBoy
                     teleport.Update(gameTime);
                 }
         }
-
         private void UpdatePainkillers(GameTime gameTime, Player player)
         {
             foreach (Painkiller painkiller in painkillers)
@@ -239,8 +249,7 @@ namespace DrunkiBoy
                 }
 
             }
-        }
-              
+        }           
         private void UpdateKeys(GameTime gameTime, Player player)
         {
             foreach (Key key in keys)
@@ -253,7 +262,30 @@ namespace DrunkiBoy
                 key.Update(gameTime);
             }
         }
-
+        private void UpdateWallets(GameTime gameTime, Player player)
+        {
+            foreach (Wallet wallet in wallets)
+            {
+                if (wallet.DetectPixelCollision(player))
+                {
+                    wallets.Remove(wallet);
+                    break;
+                }
+                wallet.Update(gameTime);
+            }
+        }
+        private void UpdateCellphones(GameTime gameTime, Player player)
+        {
+            foreach(Cellphone cellphone in cellphones)
+            {
+                if (cellphone.DetectPixelCollision(player))
+                {
+                    cellphones.Remove(cellphone);
+                    break;
+                }
+                cellphone.Update(gameTime);
+            }
+        }
         private void UpdateTorches(GameTime gameTime, Player player)
         {
             foreach (Torch torch in torches)
@@ -312,6 +344,14 @@ namespace DrunkiBoy
             foreach (Key key in keys)
             {
                 key.Draw(spriteBatch);
+            }
+            foreach (Wallet wallet in wallets)
+            {
+                wallet.Draw(spriteBatch);
+            }
+            foreach (Cellphone cellphone in cellphones)
+            {
+                cellphone.Draw(spriteBatch);
             }
             foreach (Heart heart in hearts)
             {
