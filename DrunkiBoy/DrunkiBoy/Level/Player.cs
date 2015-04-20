@@ -525,6 +525,7 @@ namespace DrunkiBoy
         /// </summary>
         public void Reset()
         {
+            facing = 1;
             targetScore = score;
             shotDelay = shotDelayDefault;
             ResetPos();

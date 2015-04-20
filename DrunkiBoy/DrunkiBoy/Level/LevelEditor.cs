@@ -556,7 +556,6 @@ namespace DrunkiBoy
                 spriteBatch.DrawString(Constants.FONT, "Cam pos: " + camera.Position, new Vector2(10, 60), Constants.fontColor);
             }
             spriteBatch.End();
-
         }
     }
 }

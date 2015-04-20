@@ -16,7 +16,7 @@ namespace DrunkiBoy
         public levelState currentLevelState;
         protected Player player;
         protected GraphicsDevice gd;
-        
+        Vector2 parallax = new Vector2(1f);
         protected Camera camera;
         protected List<BackgroundLayer> layers;
 
@@ -119,17 +119,35 @@ namespace DrunkiBoy
                     { 
                         layer.Draw(spriteBatch);
                     }
-                    Vector2 parallax = new Vector2(1f);
                     spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
-                    player.Draw(spriteBatch);
+                    
                     itemManager.Draw(spriteBatch);
                     enemyManager.Draw(spriteBatch);
                     BulletManager.Draw(spriteBatch);
+                    player.Draw(spriteBatch);
                     spriteBatch.End();
                     break;
 
                 case levelState.lostLife:
-
+                    foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
+                    { 
+                        layer.Draw(spriteBatch);
+                    }
+                    spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
+                    
+                    itemManager.Draw(spriteBatch);
+                    enemyManager.Draw(spriteBatch);
+                    BulletManager.Draw(spriteBatch);
+                    player.Draw(spriteBatch);
+                    spriteBatch.End();
+                    spriteBatch.Begin();
+                    string died = "I'M AFRAID YOU HAVE DIED, SIR";
+                    string spaceToRestart = "PRESS <SPACE> TO RESTART";
+                    spriteBatch.DrawString(Constants.FONT_BIG, died, new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString(died).X / 2,
+                        270), Color.White);
+                    spriteBatch.DrawString(Constants.FONT_BIG, spaceToRestart, new Vector2(Game1.windowWidth / 2 - Constants.FONT_BIG.MeasureString(spaceToRestart).X / 2,
+                        320), Color.White);
+                    spriteBatch.End();
                     break;
 
                 case levelState.outOfTime:
