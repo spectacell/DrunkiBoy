@@ -198,7 +198,6 @@ namespace DrunkiBoy
                     }
                     teleport.Update(gameTime);
                 }
-            
         }
 
         private void UpdatePainkillers(GameTime gameTime, Player player)

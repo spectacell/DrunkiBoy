@@ -23,6 +23,7 @@ namespace DrunkiBoy
 
         private bool animateShooting;
         private bool shootingLeft;
+        private double shotDelay, shotDelayDefault = 300;
 
         private const int playerSpeed = 80;
         public static int livesLeft;        
@@ -95,6 +96,8 @@ namespace DrunkiBoy
             AnimateShooting(gameTime);
             AnimateHealthBar();
             MoveBackWhenEnemyContact(gameTime);
+            shotDelay -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            Console.WriteLine(shotDelay);
         }
         
         /// <summary>
@@ -393,11 +396,11 @@ namespace DrunkiBoy
         /// Så att en skottanimation körs när man skjuter. Körs när animateShooting-variabeln sätts till true och avslutas när alla 8 frames körts. Då
         /// byter player till föregående textur igen.
         /// </summary>
-        /// <param name="gameTime"></param>
         public void Shooting()
         {
-            if (KeyMouseReader.KeyPressed(Keys.Space))
+            if (!movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space))
             {
+                shotDelay = shotDelayDefault;
                 Vector2 bulletPos, bulletVelocity;
                 if (facing == 0)  // Skjuter vänster
                 {
@@ -491,6 +494,7 @@ namespace DrunkiBoy
         /// </summary>
         public void Reset()
         {
+            shotDelay = shotDelayDefault;
             ResetPos();
             BringToLife();
             ResetWeapon();
