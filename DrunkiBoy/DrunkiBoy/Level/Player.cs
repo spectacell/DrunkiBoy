@@ -96,8 +96,14 @@ namespace DrunkiBoy
             AnimateShooting(gameTime);
             AnimateHealthBar();
             MoveBackWhenEnemyContact(gameTime);
+            CountDownShotDelay(gameTime);
+        }
+        /// <summary>
+        /// Räknar ner shotDelay variablen som styr hur snabbt player kan skjuta.
+        /// </summary>
+        private void CountDownShotDelay(GameTime gameTime)
+        {
             shotDelay -= gameTime.ElapsedGameTime.TotalMilliseconds;
-            Console.WriteLine(shotDelay);
         }
         
         /// <summary>

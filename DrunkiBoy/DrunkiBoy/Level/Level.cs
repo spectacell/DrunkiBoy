@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class Level
     {
-        public enum levelState { running, lostLife}
+        public enum levelState { running, lostLife, outOfTime}
         public levelState currentLevelState;
         protected Player player;
         protected GraphicsDevice gd;
@@ -29,7 +29,7 @@ namespace DrunkiBoy
         protected int levelHeight = 2000, levelWidth = 6000;
 
         public static double timeLeft;
-        private double defaultTime = 240;
+        private double defaultTime = 2;
 
         public Level(GraphicsDevice gd, String levelTextFilePath, ContentManager content)
         {
@@ -68,7 +68,8 @@ namespace DrunkiBoy
                     itemManager.Update(gameTime, player);
                     enemyManager.Update(gameTime, player);
                     BulletManager.Update(gameTime);
-                    timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
+                    CountingDownTime(gameTime);
+                    
 
                     // Riktar kameran mot spelaren...
                     camera.LookAt(player.pos);
@@ -82,6 +83,23 @@ namespace DrunkiBoy
                         if (KeyMouseReader.KeyPressed(Keys.Space))
                         {
                             player.Reset();
+                            currentLevelState = levelState.running;
+                        }
+                    }
+                    else
+                    {
+                        Game1.currentGameState = Game1.gameState.gameOver;
+                    }
+                    break;
+
+                case levelState.outOfTime:
+                    if (Player.livesLeft > 0)
+                    {
+                        //Nån bild här eller nåt där det står att tiden tagit slut och så och en text som uppmanar spelaren att klicka för att börja om vid senaste checkpointen...
+                        if (KeyMouseReader.KeyPressed(Keys.Space))
+                        {
+                            player.Reset();
+                            timeLeft = defaultTime;
                             currentLevelState = levelState.running;
                         }
                     }
@@ -112,6 +130,10 @@ namespace DrunkiBoy
                     break;
 
                 case levelState.lostLife:
+
+                    break;
+
+                case levelState.outOfTime:
 
                     break;
             }   
@@ -215,7 +237,15 @@ namespace DrunkiBoy
             }
             sr.Close();
         }
-
+        private void CountingDownTime(GameTime gameTime)
+        {
+            timeLeft -= gameTime.ElapsedGameTime.TotalSeconds;
+            if (timeLeft <= 0)
+            {
+                player.LooseALife();
+                currentLevelState = levelState.outOfTime;
+            }
+        }
     }
     
 }

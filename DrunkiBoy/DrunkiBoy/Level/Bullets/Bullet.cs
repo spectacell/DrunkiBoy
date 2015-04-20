@@ -12,8 +12,8 @@ namespace DrunkiBoy
     //behövs Update Draw method  Update 
     class Bullet  : GameObject
     {
-        private Vector2 velocity, origin;
-        private float skottRange, rotation;
+        protected Vector2 velocity, origin;
+        protected float skottRange, rotation;
         ParticleEngine particleEngine;
         public Bullet(Vector2 pos,Vector2 velocity, Texture2D tex, bool isActive, float skottRange) : 
             base(pos, tex, isActive)
@@ -22,7 +22,7 @@ namespace DrunkiBoy
             this.skottRange = skottRange;
             this.origin = new Vector2(tex.Width / 2, tex.Height / 2);
         }
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {                        
             pos += velocity;
             pos.Y += 0.6f; //gravitation...
