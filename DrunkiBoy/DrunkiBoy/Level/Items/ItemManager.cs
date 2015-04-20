@@ -185,7 +185,6 @@ namespace DrunkiBoy
 
         private void UpdateTeleport(GameTime gameTime, Player player)
         {
-            
                 foreach (Teleport teleport in teleports)
                 {
                     if (ItemsLeftToCollect() == 0)
@@ -194,6 +193,7 @@ namespace DrunkiBoy
                     }
                     if (teleport.isActivated && teleport.DetectPixelCollision(player))
                     {
+                        player.AddScore((int)Level.timeLeft);
                         Game1.currentGameState = Game1.gameState.levelComplete;
                     }
                     teleport.Update(gameTime);
