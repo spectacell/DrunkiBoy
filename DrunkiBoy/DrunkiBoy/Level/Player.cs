@@ -31,6 +31,7 @@ namespace DrunkiBoy
         public static int healthLeft, defaultHealth = 200;
         private int targetHealth;
         public static int score = 0;
+        private int targetScore;
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
@@ -45,6 +46,7 @@ namespace DrunkiBoy
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
+            score = 0;
             currentSpawnPos = pos;
             srcRectLB = srcRect;
             livesLeft = 2;
@@ -56,6 +58,7 @@ namespace DrunkiBoy
         }
         public override void Update(GameTime gameTime)
         {
+            AnimatingScore();
             switch (activePowerUp)
             {
                 case 0: //Vanlig
@@ -97,6 +100,19 @@ namespace DrunkiBoy
             AnimateHealthBar();
             MoveBackWhenEnemyContact(gameTime);
             CountDownShotDelay(gameTime);
+        }
+        /// <summary>
+        /// Två Draw() här, en för underkroppen och en för överkroppen.
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (!animateShooting)//Borde kunna få in den här någon annanstans men kommer inte på nåt bra nu. srcRect är samma om man inte skjuter
+                srcRectLB = srcRect;
+            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            if (particleEngine.isActive)
+                particleEngine.Draw(spriteBatch);
         }
         /// <summary>
         /// Räknar ner shotDelay variablen som styr hur snabbt player kan skjuta.
@@ -362,7 +378,15 @@ namespace DrunkiBoy
         /// <param name="scoreToAdd">Hur mycket poäng att lägga till</param>
         public void AddScore(int scoreToAdd)
         {
-            score += scoreToAdd;
+            targetScore = score + scoreToAdd;
+            //score += scoreToAdd;
+        }
+        private void AnimatingScore()
+        {
+            if (score != targetScore)
+            {
+                score += 1;
+            }
         }
         /// <summary>
         /// Körs från ItemManager när player tar upp ett vapen. Ändrar players textur och currentWeapon-variabel så att rätt skott skjuts
@@ -500,6 +524,7 @@ namespace DrunkiBoy
         /// </summary>
         public void Reset()
         {
+            targetScore = score;
             shotDelay = shotDelayDefault;
             ResetPos();
             BringToLife();
@@ -536,18 +561,6 @@ namespace DrunkiBoy
             healthLeft = targetHealth = defaultHealth;
         }
         #endregion
-        /// <summary>
-        /// Två Draw() här, en för underkroppen och en för överkroppen.
-        /// </summary>
-        /// <param name="spriteBatch"></param>
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if (!animateShooting)//Borde kunna få in den här någon annanstans men kommer inte på nåt bra nu. srcRect är samma om man inte skjuter
-                srcRectLB = srcRect;
-            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-            spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
-            if (particleEngine.isActive)
-                particleEngine.Draw(spriteBatch);
-        }   
+           
     }
 }

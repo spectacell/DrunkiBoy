@@ -29,7 +29,7 @@ namespace DrunkiBoy
         protected int levelHeight = 2000, levelWidth = 6000;
 
         public static double timeLeft;
-        private double defaultTime = 2;
+        private double defaultTime = 240;
 
         public Level(GraphicsDevice gd, String levelTextFilePath, ContentManager content)
         {
