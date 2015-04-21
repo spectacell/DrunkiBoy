@@ -49,7 +49,7 @@ namespace DrunkiBoy
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (isActive)
-                spriteBatch.Draw(powerUpTexture, pos, Color.White);
+                spriteBatch.Draw(Textures.vodka, pos, Color.White);
             base.Draw(spriteBatch);
         }
     }

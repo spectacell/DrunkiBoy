@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, Kebab, Toilet}; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, Kebab, Toilet, Vodka}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -53,6 +53,7 @@ namespace DrunkiBoy
             menuEntries.Add("R: Radio");
             menuEntries.Add("A: Kebab");
             menuEntries.Add("I: Toilet");
+            menuEntries.Add("D: Vodka");
 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
@@ -350,6 +351,16 @@ namespace DrunkiBoy
                             objects.Add(new Toilet(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.toilet_closed, true));
                         }
                         break;
+                    case items.Vodka:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Vodka(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.vodka, true));
+                        }
+                        else
+                        {
+                            objects.Add(new Vodka(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.vodka, true));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -495,6 +506,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Toilet;
                 selectedObject = new Toilet(new Vector2(mouseState.X, mouseState.Y), Textures.toilet_closed, true);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.D))
+            {
+                selectedItem = items.Vodka;
+                selectedObject = new Vodka(new Vector2(mouseState.X, mouseState.Y), Textures.vodka, true);
             }
         }
 

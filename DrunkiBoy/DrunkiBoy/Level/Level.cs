@@ -281,6 +281,11 @@ namespace DrunkiBoy
                     itemManager.AddToilet(new Toilet(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.toilet_closed, true));
                     objects.Add(new Toilet(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.toilet_closed, true));
                 }
+                else if (temp[0] == "vodka")
+                {
+                    itemManager.AddVodka(new Vodka(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.vodka, true));
+                    objects.Add(new Vodka(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.vodka, true));
+                }
             }
             sr.Close();
         }

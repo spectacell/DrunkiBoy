@@ -25,6 +25,9 @@ namespace DrunkiBoy
         private bool shootingLeft;
         private double shotDelay, shotDelayDefault = 300;
 
+        public bool invincible;
+        public double invincibleTimer;
+
         private const int playerSpeed = 80;
         public static int livesLeft;        
         private int defaultLives = 3;
@@ -34,7 +37,7 @@ namespace DrunkiBoy
         private int targetScore, realScore; //realScore för att score-räknare inte hann med att räkna upp om man tog många poäng på en gång
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
-        private double activePowerUpTimer;
+        private double activePowerUpTimer = 10;
         public enum weaponType { none, burger, pizza, kebab, bottle, molotovCocktail };
         public weaponType currentWeapon;
 
@@ -64,7 +67,7 @@ namespace DrunkiBoy
                 case 0: //Vanlig
                     PlayerMovement(gameTime);
                     AddFriction(facing);
-
+                    invincible = false;
                     PlayerJumping();
                     Shooting();
                     CheckIfPlayerIsOnPlatform();
@@ -75,7 +78,7 @@ namespace DrunkiBoy
                 case 1: //Odödlig
                     PlayerMovement(gameTime);
                     AddFriction(facing);
-
+                    invincible = true;
                     PlayerJumping();
                     Shooting();
                     CheckIfPlayerIsOnPlatform();
@@ -93,6 +96,7 @@ namespace DrunkiBoy
             if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
             {
                 activePowerUp = 0;
+                activePowerUpTimer = 15;
             }
             base.Update(gameTime);
             AnimateLowerBody();
@@ -344,10 +348,13 @@ namespace DrunkiBoy
         {
             if (healthLeft - amountToLose > 0) 
             {
-                targetHealth = healthLeft - amountToLose;
-                GUI.healthBarBlinking = true;
-                MovePlayerBack(enemyPos);
-                ThrowWeaponInAir();
+                if (!invincible)
+                {
+                    targetHealth = healthLeft - amountToLose;
+                    GUI.healthBarBlinking = true;
+                    MovePlayerBack(enemyPos);
+                    ThrowWeaponInAir();
+                }
             }
             else //Då är man död...
             {
@@ -561,6 +568,7 @@ namespace DrunkiBoy
                 }
             }
         }
+
         #region Reset metoder
         /// <summary>
         /// Återstället position, hälsa och sätter vapentyp till none

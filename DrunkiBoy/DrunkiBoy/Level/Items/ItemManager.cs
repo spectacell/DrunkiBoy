@@ -26,6 +26,7 @@ namespace DrunkiBoy
         public List<Bottle> bottles = new List<Bottle>();
         public List<Jagerbomb> jagerbombs = new List<Jagerbomb>();
         public List<Toilet> toilets = new List<Toilet>();
+        public List<Vodka> vodkas = new List<Vodka>();
         public static ParticleEngine particleEngine;
 
         public ItemManager()
@@ -96,6 +97,11 @@ namespace DrunkiBoy
         {
             burgers.Add(burger);
         }
+        public void AddVodka(Vodka vodka)
+        {
+            vodkas.Add(vodka);
+        }
+
         public void Update(GameTime gameTime, Player player)
         {
             UpdatePlatforms(player);
@@ -114,6 +120,7 @@ namespace DrunkiBoy
             UpdateJagerbombs(gameTime, player);
             UpdateKebabs(gameTime, player);
             UpdateToilets(gameTime, player);
+            UpdateVodkas(gameTime, player);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
         }
         private void UpdateToilets(GameTime gameTime, Player player)
@@ -162,6 +169,18 @@ namespace DrunkiBoy
                 {
                     bottles.Remove(bottle);
                     player.PickUpWeapon(Player.weaponType.bottle);
+                    break;
+                }
+            }
+        }
+        private void UpdateVodkas(GameTime gameTime, Player player)
+        {
+            foreach (Vodka vodka in vodkas)
+            {
+                if (vodka.DetectPixelCollision(player))
+                {
+                    player.ActivatePowerUp(1);
+                    vodkas.Remove(vodka);
                     break;
                 }
             }
@@ -395,6 +414,10 @@ namespace DrunkiBoy
             foreach (Toilet toilet in toilets)
             {
                 toilet.Draw(spriteBatch);
+            }
+            foreach (Vodka vodka in vodkas)
+            {
+                vodka.Draw(spriteBatch);
             }
         }
         private void UpdatePlatforms(Player player)
