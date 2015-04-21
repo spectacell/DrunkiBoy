@@ -10,7 +10,7 @@ namespace DrunkiBoy
 {
     class Player : AnimatedObject
     {
-        private ParticleEngine2 particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, Textures.explosionTexture, false);
+        private ParticleEngine2 particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, 2, 1, Textures.bubble_particle, false);
 
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
         private Vector2 targetPos;
@@ -102,6 +102,7 @@ namespace DrunkiBoy
             CountDownShotDelay(gameTime);
             AnimatingScore();
             SpawnAnimation(gameTime);
+            particleEngine.Update();
         }
         /// <summary>
         /// Två Draw() här, en för underkroppen och en för överkroppen.
@@ -113,10 +114,7 @@ namespace DrunkiBoy
             { 
                 srcRectLB = srcRect;
             }
-            if (particleEngine.isActive)
-            {
-                particleEngine.Draw(spriteBatch);
-            }
+            
             if (!spawning) { 
                 spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
                 spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
@@ -124,6 +122,10 @@ namespace DrunkiBoy
             else
             {
                 spriteBatch.Draw(Textures.player_head, new Vector2(pos.X+2, pos.Y+50), srcRectSpawnHead, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            }
+            if (particleEngine.isActive)
+            {
+                particleEngine.Draw(spriteBatch);
             }
         }
                
@@ -279,10 +281,15 @@ namespace DrunkiBoy
                 }
             }
         }
+        /// <summary>
+        /// Animerar players huvud så att det kollar åt ena och sen andra hållet
+        /// </summary>
+        /// <param name="gameTime"></param>
         private void SpawnAnimation(GameTime gameTime)
         {
             if (spawnTimer > 0)
             {
+                particleEngine.isActive = true;
                 spawning = true;
                 spawnTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
 
@@ -298,13 +305,22 @@ namespace DrunkiBoy
             else
             {
                 spawning = false;
+                particleEngine.isActive = false;
             } 
         }
+        /// <summary>
+        /// Sätter Spawntimern till defaultvärdet så att timern börjar räkna ner
+        /// </summary>
         public void ResetSpawnTimer()
         {
             spawning = true;
             spawnTimer = spawnTimerDefault;
+            particleEngine = new ParticleEngine2(Textures.bubble_particle, new Vector2(currentSpawnPos.X + 42, currentSpawnPos.Y+srcRect.Height-45), 10, 1, Textures.water_texture, true);
         }
+        /// <summary>
+        /// Sätter players spawnposition. Körs från Toilet när player rör vid den.
+        /// </summary>
+        /// <param name="pos">Players position</param>
         public void SetSpawnPosition(Vector2 pos)
         {
             currentSpawnPos = new Vector2(pos.X-15, pos.Y - srcRect.Height + Textures.toilet_open.Height);
@@ -368,12 +384,12 @@ namespace DrunkiBoy
                 if (pos.X > targetPos.X)
                 {
                     pos.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
-                    particleEngine.Update(new Vector2(pos.X+srcRect.Width, pos.Y + srcRect.Height / 2));
+                    //particleEngine.Update(new Vector2(pos.X+srcRect.Width, pos.Y + srcRect.Height / 2));
                 }
                 if (pos.X < targetPos.X)
                 {
                     pos.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
-                    particleEngine.Update(new Vector2(pos.X, pos.Y + srcRect.Height / 2));
+                    //particleEngine.Update(new Vector2(pos.X, pos.Y + srcRect.Height / 2));
                 }
                 if (Math.Abs(targetPos.X - pos.X) < 10)
                 {
