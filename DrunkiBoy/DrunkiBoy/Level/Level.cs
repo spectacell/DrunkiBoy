@@ -86,6 +86,7 @@ namespace DrunkiBoy
                         if (KeyMouseReader.KeyPressed(Keys.Space))
                         {
                             player.Reset();
+                            player.ResetSpawnTimer();
                             currentLevelState = levelState.running;
                         }
                     }

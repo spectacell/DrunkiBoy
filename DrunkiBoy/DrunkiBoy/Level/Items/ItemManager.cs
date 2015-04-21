@@ -327,7 +327,7 @@ namespace DrunkiBoy
         }
         public int ItemsLeftToCollect()
         {
-            return keys.Count() + wallets.Count() + cellphones.Count(); //Räkna alla listor med saker som måste plockas här sen...
+            return keys.Count() + wallets.Count() + cellphones.Count();
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {

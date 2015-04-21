@@ -41,8 +41,9 @@ namespace DrunkiBoy
         public int jumpHeight = 12;
         public Vector2 currentSpawnPos;
         public bool isDead {get; private set;}
-        //private double spawnTimer, spawnTimerDefault = 750;
-
+        private double spawnTimer, spawnTimerDefault = 1750;
+        private bool spawning;
+        private Rectangle srcRectSpawnHead;
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
@@ -58,7 +59,6 @@ namespace DrunkiBoy
         }
         public override void Update(GameTime gameTime)
         {
-            AnimatingScore();
             switch (activePowerUp)
             {
                 case 0: //Vanlig
@@ -100,6 +100,8 @@ namespace DrunkiBoy
             AnimateHealthBar();
             MoveBackWhenEnemyContact(gameTime);
             CountDownShotDelay(gameTime);
+            AnimatingScore();
+            SpawnAnimation(gameTime);
         }
         /// <summary>
         /// Två Draw() här, en för underkroppen och en för överkroppen.
@@ -108,43 +110,49 @@ namespace DrunkiBoy
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (!animateShooting)//Borde kunna få in den här någon annanstans men kommer inte på nåt bra nu. srcRect är samma om man inte skjuter
+            { 
                 srcRectLB = srcRect;
-            spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-            spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            }
             if (particleEngine.isActive)
+            {
                 particleEngine.Draw(spriteBatch);
+            }
+            if (!spawning) { 
+                spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            }
+            else
+            {
+                spriteBatch.Draw(Textures.player_head, new Vector2(pos.X+2, pos.Y+50), srcRectSpawnHead, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            }
         }
-        /// <summary>
-        /// Räknar ner shotDelay variablen som styr hur snabbt player kan skjuta.
-        /// </summary>
-        private void CountDownShotDelay(GameTime gameTime)
-        {
-            shotDelay -= gameTime.ElapsedGameTime.TotalMilliseconds;
-        }
-        
+               
         /// <summary>
         /// Räknar ner timeTilNextFrameLB och timeTilNextFrame när man styr player
         /// </summary>
         /// <param name="gameTime"></param>
         private void PlayerMovement(GameTime gameTime)
         {
-            if (KeyMouseReader.keyState.IsKeyDown(Keys.Left) && !isDead && !movingBack)
-            {
-                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (!isDead && !movingBack && !spawning)
+            { 
+                if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
+                {
+                    timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
 
-                movement.X -= 1;
-                facing = 0;
-                ForceFrameChange();
-            }
-            else if (KeyMouseReader.keyState.IsKeyDown(Keys.Right) && !isDead && !movingBack)
-            {
-                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    movement.X -= 1;
+                    facing = 0;
+                    ForceFrameChange();
+                }
+                else if (KeyMouseReader.keyState.IsKeyDown(Keys.Right))
+                {
+                    timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
 
-                movement.X += 1;
-                facing = 1;
-                ForceFrameChange();
+                    movement.X += 1;
+                    facing = 1;
+                    ForceFrameChange();
+                }
             }
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
 
@@ -194,6 +202,13 @@ namespace DrunkiBoy
                 frameLB++;
                 srcRectLB.X = facingSrcRects[facing].X + (frameLB % nrFrames) * frameWidth;
             }
+        }
+        /// <summary>
+        /// Räknar ner shotDelay variablen som styr hur snabbt player kan skjuta.
+        /// </summary>
+        private void CountDownShotDelay(GameTime gameTime)
+        {
+            shotDelay -= gameTime.ElapsedGameTime.TotalMilliseconds;
         }
         /// <summary>
         /// Räknar ner timeTilNextFrame när animateShooting == true så att överkroppen animeras då
@@ -263,9 +278,35 @@ namespace DrunkiBoy
                 }
             }
         }
+        private void SpawnAnimation(GameTime gameTime)
+        {
+            if (spawnTimer > 0)
+            {
+                spawning = true;
+                spawnTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                if (spawnTimer <= spawnTimerDefault / 2)
+                {
+                    srcRectSpawnHead = new Rectangle(0, 0, 75, 60);
+                }
+                else if (spawnTimer >= 0)
+                {
+                    srcRectSpawnHead = new Rectangle(75, 0, 75, 60);
+                }
+            }
+            else
+            {
+                spawning = false;
+            } 
+        }
+        public void ResetSpawnTimer()
+        {
+            spawning = true;
+            spawnTimer = spawnTimerDefault;
+        }
         public void SetSpawnPosition(Vector2 pos)
         {
-            currentSpawnPos = new Vector2(pos.X, pos.Y-50); //Lite högre än toalettens pos så att player inte spawnas under plattformen
+            currentSpawnPos = new Vector2(pos.X-15, pos.Y - srcRect.Height + Textures.toilet_open.Height);
         }
         /// <summary>
         /// Körs när man tar en PowerUp. Switch/case satsen i Update() avgör vad som händer med player när poweruppen är aktiv
