@@ -13,7 +13,7 @@ namespace DrunkiBoy
         float speed = 70;
         public static ParticleEngine particleEngine;
         public PizzaWeapon(Vector2 pos, Vector2 velocity)
-            : base(pos, velocity, Textures.pizza, true, 400)
+            : base(pos, velocity, Textures.pizza, true, 450)
         {
             
             this.velocity.Y = -2;
