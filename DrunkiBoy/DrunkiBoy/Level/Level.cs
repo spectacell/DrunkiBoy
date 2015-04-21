@@ -207,12 +207,12 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "wallet")
                 {
-                    itemManager.AddWallet(new Wallet(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Wallet, new Rectangle(0, 0, 30, 30), true, 2, 250));
+                    itemManager.AddWallet(new Wallet(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Wallet, new Rectangle(0, 0, 30, 30), true, 1, 250));
                     objects.Add(new Wallet(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Wallet, new Rectangle(0, 0, 30, 30), true, 2, 250));
                 }
                 else if (temp[0] == "cellphone")
                 {
-                    itemManager.AddCellphone(new Cellphone(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Cellphone, new Rectangle(0, 0, 30, 52), true, 2, 250));
+                    itemManager.AddCellphone(new Cellphone(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Cellphone, new Rectangle(0, 0, 30, 52), true, 1, 250));
                     objects.Add(new Cellphone(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Cellphone, new Rectangle(0, 0, 30, 52), true, 2, 250));
                 }
                 else if (temp[0] == "heart")
