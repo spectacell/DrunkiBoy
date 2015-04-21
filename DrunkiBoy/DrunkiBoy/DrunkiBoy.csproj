@@ -98,6 +98,7 @@
     <Compile Include="Level\Background\BackgroundLayer.cs" />
     <Compile Include="Level\Items\ItemManager.cs" />
     <Compile Include="KeyMouseReader.cs" />
+    <Compile Include="Level\Items\Vodka.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\LevelEditor.cs" />
     <Compile Include="Level\Platform.cs" />
@@ -122,7 +123,6 @@
     <Compile Include="Textures.cs" />
     <Compile Include="Level\Items\Torch.cs" />
     <Compile Include="Level\Items\Wallet.cs" />
-    <Compile Include="Vodka.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

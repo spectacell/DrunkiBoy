@@ -16,9 +16,6 @@ namespace DrunkiBoy
         public static ParticleEngine particleEngine = new ParticleEngine();
         public static Vector2 pos;
 
-
-
-
         public static void AddBullet(Bullet bullet)
         {
 

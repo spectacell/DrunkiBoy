@@ -12,8 +12,8 @@ namespace DrunkiBoy
         public static Texture2D player, player_lower_body, player_upper_body, player_upper_body_hurt, player_burger, player_shooting, player_pizza, player_bottle, player_bottle_molotov, player_kebab, player_head;
 
         public static Texture2D platform, background1, background2, deleteCursor, torchTex, Key, Wallet, Cellphone, heart, bottle, bottle_molotov, hamburgare, pizza, kebab, painkiller, jagerbomb, 
-            bubble_particle, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, vodka;
-        public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant;
+            bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed;
+        public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant, vodka;
         public static Texture2D flashlight, radio;
         public static Texture2D gameOverScreen;
         public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles, painkillerParticles, burgerParticles, pizzaParticles, bottleparticles;
@@ -47,6 +47,7 @@ namespace DrunkiBoy
             hamburgare = content.Load<Texture2D>("Items/burgare");
             pizza = content.Load<Texture2D>("Items/Pizza");
             kebab = content.Load<Texture2D>("Items/kebab");
+            vodka = content.Load<Texture2D>("Items/Vodka");
             painkiller = content.Load<Texture2D>("Items/painkiller");
             jagerbomb = content.Load<Texture2D>("Items/jagerbomb");
             teleport = content.Load<Texture2D>("Items/teleport2");
@@ -58,13 +59,13 @@ namespace DrunkiBoy
             testPowerUp = content.Load<Texture2D>("GUI/testPowerUp");
             money = content.Load<Texture2D>("Items/Money");
             pant = content.Load<Texture2D>("Items/Pant");
-            vodka = content.Load<Texture2D>("Items/Vodka");
             toilet_open = content.Load<Texture2D>("Items/toilet_open");
             toilet_closed = content.Load<Texture2D>("Items/toilet_closed");
             gameOverScreen = content.Load<Texture2D>("GameOver");
             bubble_particle = content.Load<Texture2D>("Particles/bubble_particle");
             smokeTexture = content.Load<Texture2D>("Particles/smoke_texture");
             explosionTexture = content.Load<Texture2D>("Particles/explosion_texture");
+            water_texture = content.Load<Texture2D>("Particles/water_texture");
             heartParticles = new List<Texture2D>();
             heartParticles.Add(content.Load<Texture2D>("Particles/heart_particle"));
             heartParticles.Add(content.Load<Texture2D>("Particles/heart_particle2"));

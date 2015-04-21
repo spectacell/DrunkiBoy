@@ -101,7 +101,6 @@ namespace DrunkiBoy
         {
             vodkas.Add(vodka);
         }
-
         public void Update(GameTime gameTime, Player player)
         {
             UpdatePlatforms(player);
@@ -173,24 +172,12 @@ namespace DrunkiBoy
                 }
             }
         }
-        private void UpdateVodkas(GameTime gameTime, Player player)
-        {
-            foreach (Vodka vodka in vodkas)
-            {
-                if (vodka.DetectPixelCollision(player))
-                {
-                    player.ActivatePowerUp(1);
-                    vodkas.Remove(vodka);
-                    break;
-                }
-            }
-        }
         private void UpdatePizza(GameTime gameTime, Player player)
         {
             
             foreach (Pizza pizza in pizzas)
             {
-               
+
                 if (pizza.DetectPixelCollision(player))
                 {
                     pizzas.Remove(pizza);
@@ -340,6 +327,18 @@ namespace DrunkiBoy
                 {
                     burgers.Remove(burger);
                     player.PickUpWeapon(Player.weaponType.burger);
+                    break;
+                }
+            }
+        }
+        private void UpdateVodkas(GameTime gameTime, Player player)
+        {
+            foreach (Vodka vodka in vodkas)
+            {
+                if (vodka.DetectPixelCollision(player))
+                {
+                    vodkas.Remove(vodka);
+                    player.ActivatePowerUp(1);
                     break;
                 }
             }
