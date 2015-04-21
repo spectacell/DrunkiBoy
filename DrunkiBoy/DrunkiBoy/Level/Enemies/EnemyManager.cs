@@ -12,7 +12,7 @@ namespace DrunkiBoy
         public List<Enemy> enemies = new List<Enemy>();
         public List<Flashlight> flashlights = new List<Flashlight>();
         public List<Radio> radios = new List<Radio>();
-        public static ParticleEngine particleEngine;
+        public static ParticleEngine particleEngine = new ParticleEngine();
 
         public void AddEnemy(Enemy enemy)
         {
@@ -57,8 +57,8 @@ namespace DrunkiBoy
                 {
                     if (flashlight.DetectPixelCollision(bullet))
                     {
-                        //particleEngine.Textures = Textures.pizzaParticles;
-                        //particleEngine.CreateParticlesInCircleRange(bullet.pos);
+                        particleEngine.Textures = Textures.pizzaParticles;
+                        particleEngine.CreateParticlesInCircleRange(bullet.pos);
                         flashlight.LoseHealth();
                         bullet.isActive = false;
                     }
@@ -66,7 +66,7 @@ namespace DrunkiBoy
                 }
                 
             }
-           // particleEngine.Update();
+            particleEngine.Update();
         }
 
         private void UpdateRadios(GameTime gameTime, Player player)
@@ -109,7 +109,7 @@ namespace DrunkiBoy
             {
                 radio.Draw(spriteBatch);
             }
-            //particleEngine.Draw(spriteBatch);
+            particleEngine.Draw(spriteBatch);
         }
     }
 }
