@@ -16,7 +16,7 @@ namespace DrunkiBoy
             : base(pos, velocity, Textures.pizza, true, 450)
         {
             
-            this.velocity.Y = -2;
+            this.velocity.Y = -2; //Så att går lite snett uppåt
         }
         public override void Update(GameTime gameTime)
         {

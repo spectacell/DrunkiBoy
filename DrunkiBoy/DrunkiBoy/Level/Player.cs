@@ -208,7 +208,8 @@ namespace DrunkiBoy
         /// </summary>
         private void CountDownShotDelay(GameTime gameTime)
         {
-            shotDelay -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            if(shotDelay >= 0)
+                shotDelay -= gameTime.ElapsedGameTime.TotalMilliseconds;
         }
         /// <summary>
         /// Räknar ner timeTilNextFrame när animateShooting == true så att överkroppen animeras då
