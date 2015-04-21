@@ -91,11 +91,14 @@ namespace DrunkiBoy
                 {
                     if (radio.DetectPixelCollision(bullet))
                     {
+                        particleEngine.Textures = Textures.pizzaParticles;
+                        particleEngine.CreateParticlesInCircleRange(bullet.pos);
                         radio.LoseHealth();
                         bullet.isActive = false;
                     }
                 }
             }
+            particleEngine.Update();
         }
 
         public void Draw(SpriteBatch spriteBatch)
