@@ -215,12 +215,12 @@ namespace DrunkiBoy
                     case items.Heart:
                         if (intersectingPlatform != null)
                         {
-                            objects.Add(new Heart(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.heart, new Rectangle(0, 0, 64, 32), true, 1, 50));
+                            objects.Add(new Heart(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.heart, new Rectangle(0, 0, 31, 26), true, 1, 50));
 
                         }
                         else
                         {
-                            objects.Add(new Heart(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.heart, new Rectangle(0, 0, 31, 32), true, 1, 50));
+                            objects.Add(new Heart(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.heart, new Rectangle(0, 0, 31, 26), true, 1, 50));
                         }
                         break;
                     case items.Painkiller:
@@ -323,17 +323,17 @@ namespace DrunkiBoy
                         }
                         else
                         {
-                            objects.Add(new Flashlight(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 1, 50));
+                            objects.Add(new Flashlight(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.flashlight, new Rectangle(0, 0, 102, 138), true, 1, 50));
                         }
                         break;
                     case items.Radio:
                         if (intersectingPlatform != null)
                         {
-                            objects.Add(new Radio(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.radio, new Rectangle(0, 0, 174, 114), true, 1, 50));
+                            objects.Add(new Radio(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.radio, new Rectangle(0, 0, 150, 82), true, 1, 50));
                         }
                         else
                         {
-                            objects.Add(new Radio(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.radio, new Rectangle(0, 0, 174, 114), true, 1, 50));
+                            objects.Add(new Radio(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.radio, new Rectangle(0, 0, 150, 82), true, 1, 50));
                         }
                         break;
                     case items.Toilet:
@@ -485,12 +485,12 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.L))
             {
                 selectedItem = items.Flashlight;
-                selectedObject = new Flashlight(new Vector2(mouseState.X, mouseState.Y), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 1, 50);
+                selectedObject = new Flashlight(new Vector2(mouseState.X, mouseState.Y), Textures.flashlight, new Rectangle(0, 0, 102, 138), true, 1, 50);
             }
             if (KeyMouseReader.KeyPressed(Keys.R))
             {
                 selectedItem = items.Radio;
-                selectedObject = new Radio(new Vector2(mouseState.X, mouseState.Y), Textures.radio, new Rectangle(0, 0, 174, 114), true, 1, 50);
+                selectedObject = new Radio(new Vector2(mouseState.X, mouseState.Y), Textures.radio, new Rectangle(0, 0, 150, 82), true, 1, 50);
             }
             if (KeyMouseReader.KeyPressed(Keys.A))
             {

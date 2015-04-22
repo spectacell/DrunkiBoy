@@ -258,13 +258,13 @@ namespace DrunkiBoy
                 }
                 else if (temp[0] == "flashlight")
                 {
-                    enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 700));
-                    objects.Add(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 109, 146), true, 2, 700));
+                    enemyManager.AddFlashlight(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 102, 138), true, 2, 700));
+                    objects.Add(new Flashlight(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.flashlight, new Rectangle(0, 0, 102, 138), true, 2, 700));
                 }
                 else if (temp[0] == "radio")
                 {
-                    enemyManager.AddRadio(new Radio(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.radio, new Rectangle(0, 0, 174, 114), true, 2, 100));
-                    objects.Add(new Radio(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.radio, new Rectangle(0, 0, 174, 114), true, 2, 100));
+                    enemyManager.AddRadio(new Radio(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.radio, new Rectangle(0, 0, 150, 82), true, 2, 100));
+                    objects.Add(new Radio(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.radio, new Rectangle(0, 0, 150, 82), true, 2, 100));
                 }
                 else if (temp[0] == "toilet")
                 {
