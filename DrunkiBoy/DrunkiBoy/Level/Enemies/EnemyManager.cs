@@ -116,6 +116,11 @@ namespace DrunkiBoy
                 particleEngine.Textures = Textures.bottleparticles;
                 particleEngine.CreateParticlesInCircleRange(bullet.pos);
             }
+            if (bullet is KebabWeapon)
+            {
+                particleEngine.Textures = Textures.bottleparticles; //Kebabpartikellista behövs
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
+            }
         }
         public void AddEnemy(Enemy enemy)
         {

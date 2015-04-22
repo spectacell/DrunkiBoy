@@ -562,7 +562,9 @@ namespace DrunkiBoy
         public override void Draw(SpriteBatch spriteBatch)
         {
             foreach (BackgroundLayer layer in layers) //Ritar ut varje lager med alla bakgrunder som finns i respektive
+            {
                 layer.Draw(spriteBatch);
+            }
 
             Vector2 parallax = Vector2.One; //parallax vector2.one innebär ingen parallax, kameran rör sig med full hastighet. Mindre värde gör den långsammare
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.GetViewMatrix(parallax));
@@ -597,6 +599,7 @@ namespace DrunkiBoy
             {
                 spriteBatch.DrawString(Constants.FONT, "Currently Editing: " + Constants.LEVELS[editingLevel] + "\nF1 for menu", new Vector2(10, 10), Constants.fontColor);
                 spriteBatch.DrawString(Constants.FONT, "Cam pos: " + camera.Position, new Vector2(10, 60), Constants.fontColor);
+                spriteBatch.DrawString(Constants.FONT, "Zoom level: " + camera.Zoom, new Vector2(10, 80), Constants.fontColor);
             }
             spriteBatch.End();
         }
