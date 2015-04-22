@@ -33,6 +33,7 @@ namespace DrunkiBoy
         {
 
         }
+        #region Add-metoder
         public void AddToilet(Toilet toilet)
         {
             toilets.Add(toilet);
@@ -101,6 +102,7 @@ namespace DrunkiBoy
         {
             vodkas.Add(vodka);
         }
+        #endregion
         public void Update(GameTime gameTime, Player player)
         {
             UpdatePlatforms(player);
@@ -155,7 +157,7 @@ namespace DrunkiBoy
                 if (jagerbomb.DetectPixelCollision(player))
                 {
                     jagerbombs.Remove(jagerbomb);
-                    player.AddHealth(20);
+                    player.AddHealth(Constants.health_jagerbomb);
                     break;
                 }
             }
@@ -198,7 +200,7 @@ namespace DrunkiBoy
                 pant.Update(gameTime);
                 if (pant.isActive == false)
                 {
-                    player.AddScore(20);
+                    player.AddScore(Constants.score_pant);
                     pants.Remove(pant);
                     break;
                 }
@@ -231,7 +233,7 @@ namespace DrunkiBoy
                 painkiller.Update(gameTime);
                 if (painkiller.isActive == false)
                 {
-                    player.AddHealth(10);
+                    player.AddHealth(Constants.health_painkiller);
                     painkillers.Remove(painkiller);
                     break;
                 }                
@@ -248,7 +250,7 @@ namespace DrunkiBoy
                 money.Update(gameTime);
                 if (money.isActive == false)
                 {
-                    player.AddScore(20);
+                    player.AddScore(Constants.score_money);
                     moneys.Remove(money);
                     break;
                 }

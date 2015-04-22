@@ -15,6 +15,11 @@ namespace DrunkiBoy
         public static Color fontColor, fontColor2;
         public static string[] LEVELS = Directory.GetFiles(@"levels\"); //Läser in alla filer som ligger i mappen levels i en array LEVELS
 
+        public static int health_jagerbomb = 20;
+        public static int health_painkiller = 10;
+        public static int score_pant = 20;
+        public static int score_money = 20;
+        
         public static void LoadContent(ContentManager content)
         {
             FONT = content.Load<SpriteFont>("Font");

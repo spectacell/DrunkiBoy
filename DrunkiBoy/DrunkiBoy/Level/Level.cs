@@ -49,20 +49,6 @@ namespace DrunkiBoy
             currentLevelState = levelState.running;
         }
 
-        private void CreateBackgroundLayers()
-        {
-            layers = new List<BackgroundLayer>
-            {
-                //Varje lager är en eller flera bakgrunder som rör sig med hastighet specificerat i Vector2
-                new BackgroundLayer(camera) { Parallax = new Vector2(0.2f, 1.0f) },
-                new BackgroundLayer(camera) { Parallax = new Vector2(0.6f, 1.0f) },
-                //new BackgroundLayer(camera) { Parallax = new Vector2(0.4f, 1.0f) }
-            };
-            // En bakgrund läggs till till varje lager här, går att lägga till flera
-            layers[0].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.levelBackgrounds[Game1.currentLevel][0].Height), Textures.levelBackgrounds[Game1.currentLevel][0]));
-            layers[1].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.levelBackgrounds[Game1.currentLevel][1].Height), Textures.levelBackgrounds[Game1.currentLevel][1]));
-        }
-        
         public virtual void Update(GameTime gameTime)
         {
             switch (currentLevelState)
@@ -292,6 +278,19 @@ namespace DrunkiBoy
                 }
             }
             sr.Close();
+        }
+        private void CreateBackgroundLayers()
+        {
+            layers = new List<BackgroundLayer>
+            {
+                //Varje lager är en eller flera bakgrunder som rör sig med hastighet specificerat i Vector2
+                new BackgroundLayer(camera) { Parallax = new Vector2(0.2f, 1.0f) },
+                new BackgroundLayer(camera) { Parallax = new Vector2(0.6f, 1.0f) },
+                //new BackgroundLayer(camera) { Parallax = new Vector2(0.4f, 1.0f) }
+            };
+            // En bakgrund läggs till till varje lager här, går att lägga till flera
+            layers[0].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.levelBackgrounds[Game1.currentLevel][0].Height), Textures.levelBackgrounds[Game1.currentLevel][0]));
+            layers[1].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.levelBackgrounds[Game1.currentLevel][1].Height), Textures.levelBackgrounds[Game1.currentLevel][1]));
         }
         private void CountingDownTime(GameTime gameTime)
         {
