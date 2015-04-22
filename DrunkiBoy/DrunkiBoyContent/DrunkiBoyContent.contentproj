@@ -58,13 +58,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Level\bg1.jpg">
-      <Name>bg1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Level\bg2.png">
       <Name>bg2</Name>
       <Importer>TextureImporter</Importer>
