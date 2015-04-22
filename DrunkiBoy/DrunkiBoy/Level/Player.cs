@@ -26,7 +26,6 @@ namespace DrunkiBoy
         private double shotDelay, shotDelayDefault = 300;
 
         public bool invincible;
-        public double invincibleTimer;
 
         private const int playerSpeed = 80;
         public static int livesLeft;        
@@ -358,7 +357,7 @@ namespace DrunkiBoy
         /// </summary>
         /// <param name="amountToLose">Hur mycket skada man vill att spelaren ska ta</param>
         /// /// <param name="enemyPos">Position att ugå från när players nya targetPos sätts</param>
-        public void LoseHealth(int amountToLose, Vector2 enemyPos)
+        public void LoseHealth(int amountToLose, Vector2 enemyPos, int enemyWidth)
         {
             if (healthLeft - amountToLose > 0) 
             {
@@ -366,7 +365,7 @@ namespace DrunkiBoy
                 {
                     targetHealth = healthLeft - amountToLose;
                     GUI.healthBarBlinking = true;
-                    MovePlayerBack(enemyPos);
+                    MovePlayerBack(enemyPos, enemyWidth);
                     ThrowWeaponInAir();
                 }
             }
@@ -404,7 +403,7 @@ namespace DrunkiBoy
                 }
             }
         }
-        private void MovePlayerBack(Vector2 enemyPos)
+        private void MovePlayerBack(Vector2 enemyPos, int enemyWidth)
         {
             movingBack = true;
             //particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, Textures.flashlight, true);
@@ -414,7 +413,7 @@ namespace DrunkiBoy
             }
             else
             {
-                targetPos.X = enemyPos.X + 150;
+                targetPos.X = enemyPos.X + 50 + enemyWidth;
             }
         }
         /// <summary>

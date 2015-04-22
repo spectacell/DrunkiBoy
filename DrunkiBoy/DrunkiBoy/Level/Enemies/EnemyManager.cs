@@ -41,7 +41,7 @@ namespace DrunkiBoy
                 flashlight.Update(gameTime);
                 if (flashlight.DetectPixelCollision(player))
                 {
-                    player.LoseHealth(10, flashlight.pos);
+                    player.LoseHealth(10, flashlight.pos, flashlight.srcRect.Width);
                     break;
                 }
 
@@ -71,7 +71,7 @@ namespace DrunkiBoy
                 radio.Update(gameTime);
                 if (radio.DetectPixelCollision(player))
                 {
-                    player.LoseHealth(20, radio.pos);
+                    player.LoseHealth(20, radio.pos, radio.srcRect.Width);
                     break;
                 }
 
