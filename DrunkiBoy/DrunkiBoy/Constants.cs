@@ -19,7 +19,8 @@ namespace DrunkiBoy
         public static int health_painkiller = 10;
         public static int score_pant = 20;
         public static int score_money = 20;
-        
+
+        public static int player_defaultHealth = 200;
         public static void LoadContent(ContentManager content)
         {
             FONT = content.Load<SpriteFont>("Font");

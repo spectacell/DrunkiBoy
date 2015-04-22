@@ -97,9 +97,6 @@ namespace DrunkiBoy
             pizzaParticles.Add(content.Load<Texture2D>("Particles/pizza_particles"));
             bottleparticles = new List<Texture2D>();
             bottleparticles.Add(content.Load<Texture2D>("Particles/bottle_particles"));
-
-            
-            //smokeParticles.Add(content.Load<Texture2D>("Particles/smoke_particle2"));
         }
     }
 }

@@ -31,7 +31,7 @@ namespace DrunkiBoy
         private const int playerSpeed = 80;
         public static int livesLeft;        
         private int defaultLives = 3;
-        public static int healthLeft, defaultHealth = 200;
+        public static int healthLeft;
         private int targetHealth;
         public static int score = 0;
         private int targetScore, realScore; //realScore för att score-räknare inte hann med att räkna upp om man tog många poäng på en gång
@@ -58,7 +58,6 @@ namespace DrunkiBoy
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
-            //ResetSpawnTimer();
         }
         public override void Update(GameTime gameTime)
         {
@@ -96,7 +95,7 @@ namespace DrunkiBoy
             if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
             {
                 activePowerUp = 0;
-                activePowerUpTimer = 15;
+                //activePowerUpTimer = 15;
             }
             base.Update(gameTime);
             AnimateLowerBody();
@@ -161,8 +160,6 @@ namespace DrunkiBoy
                 }
             }
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
-
-            //pos.X = MathHelper.Clamp(pos.X, -(Game1.windowWidth / 2), Level.currentLevel.levelLength - srcRect.Width);
         }
         /// <summary>
         /// Ser till att player vänder sig så fort man trycker vänster eller höger piltangent även om timeTilNextFrame inte hunnit bli noll.
@@ -345,14 +342,14 @@ namespace DrunkiBoy
         /// <param name="amountToAdd">Hur mycket hälsa man vill öka med</param>
         public void AddHealth(int amountToAdd)
         {
-            if (healthLeft + amountToAdd < defaultHealth) //Kollar så att man inte får mer health än max, vilket är defaultHealth
+            if (healthLeft + amountToAdd < Constants.player_defaultHealth) //Kollar så att man inte får mer health än max, vilket är defaultHealth
             {
                 targetHealth = healthLeft + amountToAdd;
                 GUI.healthBarBlinking = true;
             }
             else
             {
-                targetHealth = defaultHealth;
+                targetHealth = Constants.player_defaultHealth;
                 GUI.healthBarBlinking = true;
             }
         }
@@ -627,7 +624,7 @@ namespace DrunkiBoy
         /// </summary>
         private void ResetHealth()
         {
-            healthLeft = targetHealth = defaultHealth;
+            healthLeft = targetHealth = Constants.player_defaultHealth;
         }
         #endregion
            

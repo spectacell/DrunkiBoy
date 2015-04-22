@@ -286,7 +286,6 @@ namespace DrunkiBoy
                 //Varje lager är en eller flera bakgrunder som rör sig med hastighet specificerat i Vector2
                 new BackgroundLayer(camera) { Parallax = new Vector2(0.2f, 1.0f) },
                 new BackgroundLayer(camera) { Parallax = new Vector2(0.6f, 1.0f) },
-                //new BackgroundLayer(camera) { Parallax = new Vector2(0.4f, 1.0f) }
             };
             // En bakgrund läggs till till varje lager här, går att lägga till flera
             layers[0].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.levelBackgrounds[Game1.currentLevel][0].Height), Textures.levelBackgrounds[Game1.currentLevel][0]));
@@ -302,5 +301,4 @@ namespace DrunkiBoy
             }
         }
     }
-    
 }
