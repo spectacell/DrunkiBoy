@@ -64,7 +64,7 @@ namespace DrunkiBoy
             vodka = content.Load<Texture2D>("Items/Vodka");
             painkiller = content.Load<Texture2D>("Items/painkiller");
             jagerbomb = content.Load<Texture2D>("Items/jagerbomb");
-            teleport = content.Load<Texture2D>("Items/teleport2");
+            teleport = content.Load<Texture2D>("garbagecan");
             AktivTeleport = content.Load<Texture2D>("Items/TeleportAktiv");
             healthBarGreen = content.Load<Texture2D>("GUI/healthBarGreen");
             healthBarRed = content.Load<Texture2D>("GUI/healthBarRed");

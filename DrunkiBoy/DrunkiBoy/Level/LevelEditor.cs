@@ -236,11 +236,11 @@ namespace DrunkiBoy
                     case items.Teleport:
                         if (intersectingPlatform != null)
                         {
-                            objects.Add(new Teleport(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.teleport, new Rectangle(0, 0, 200, 267), true, 1, 50));
+                            objects.Add(new Teleport(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.teleport, new Rectangle(0, 0, 98, 120), true, 1, 50));
                         }
                         else
                         {
-                            objects.Add(new Teleport(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.teleport, new Rectangle(0, 0, 200, 267), true, 1, 50));
+                            objects.Add(new Teleport(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.teleport, new Rectangle(0, 0, 98, 120), true, 1, 50));
                         }
                         break;
                     case items.Money:
@@ -450,7 +450,7 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.F))
             {
                 selectedItem = items.Teleport;
-                selectedObject = new Teleport(new Vector2(mouseState.X, mouseState.Y), Textures.teleport, new Rectangle(0, 0, 200, 267), true, 1, 50);
+                selectedObject = new Teleport(new Vector2(mouseState.X, mouseState.Y), Textures.teleport, new Rectangle(0, 0, 98, 120), true, 1, 50);
             }
             if (KeyMouseReader.KeyPressed(Keys.M))
             {
