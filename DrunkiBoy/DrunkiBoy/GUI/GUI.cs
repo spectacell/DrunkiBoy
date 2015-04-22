@@ -58,7 +58,7 @@ namespace DrunkiBoy
             }
             //Health bar
             spriteBatch.Draw(healthBarTex, healthBarPos, Color.White);
-            float greenBarWidth = ((float)Player.healthLeft / (float)Player.defaultHealth) * Textures.healthBarGreen.Width;
+            float greenBarWidth = ((float)Player.healthLeft / (float)Constants.player_defaultHealth) * Textures.healthBarGreen.Width;
             spriteBatch.Draw(Textures.healthBarGreen, new Vector2(healthBarPos.X + 3, healthBarPos.Y + 3), new Rectangle(0, 0, (int)greenBarWidth, Textures.healthBarGreen.Height), Color.White);
             //Aktiv powerup
             activePowerUp.Draw(spriteBatch);
