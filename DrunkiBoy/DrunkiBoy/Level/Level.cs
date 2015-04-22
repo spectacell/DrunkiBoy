@@ -34,7 +34,6 @@ namespace DrunkiBoy
         string died = "I'M AFRAID YOU HAVE DIED, SIR";
         string outOfTime = "I'M AFRAID YOU HAVE RUN OUT OF TIME";
         string spaceToRestart = "PRESS <SPACE> TO RESTART";
-        
 
         public Level(GraphicsDevice gd, String levelTextFilePath, ContentManager content)
         {
@@ -42,6 +41,16 @@ namespace DrunkiBoy
             this.gd = gd;
             //Allt om kameran här: http://www.david-gouveia.com/portfolio/2d-camera-with-parallax-scrolling-in-xna/
             camera = new Camera(gd.Viewport) { Limits = new Rectangle(0, 0, levelWidth, levelHeight) }; // Rektangeln begränsar kameran.
+            CreateBackgroundLayers();
+
+            #endregion
+            LoadContent(levelTextFilePath);
+            timeLeft = defaultTime;
+            currentLevelState = levelState.running;
+        }
+
+        private void CreateBackgroundLayers()
+        {
             layers = new List<BackgroundLayer>
             {
                 //Varje lager är en eller flera bakgrunder som rör sig med hastighet specificerat i Vector2
@@ -52,12 +61,6 @@ namespace DrunkiBoy
             // En bakgrund läggs till till varje lager här, går att lägga till flera
             layers[0].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.levelBackgrounds[Game1.currentLevel][0].Height), Textures.levelBackgrounds[Game1.currentLevel][0]));
             layers[1].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.levelBackgrounds[Game1.currentLevel][1].Height), Textures.levelBackgrounds[Game1.currentLevel][1]));
-
-            //layers[2].ListOfBackgrounds.Add(new ParallaxBackgroundImage(new Vector2(0, levelHeight - TextureManager.background3.Height), TextureManager.background3));
-            #endregion
-            LoadContent(levelTextFilePath);
-            timeLeft = defaultTime;
-            currentLevelState = levelState.running;
         }
         
         public virtual void Update(GameTime gameTime)
@@ -178,6 +181,7 @@ namespace DrunkiBoy
 
         public void LoadContent(String textFile)
         {
+            CreateBackgroundLayers();
             objects = new List<GameObject>();
 
             sr = new StreamReader(textFile);

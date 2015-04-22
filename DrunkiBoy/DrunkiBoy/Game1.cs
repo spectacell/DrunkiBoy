@@ -74,15 +74,6 @@ namespace DrunkiBoy
                 currentGameState = gameState.levelEditor;
             }
 
-            //TESTING METOD
-            if (KeyMouseReader.KeyPressed(Keys.A))
-            {
-                Player.activePowerUp = 1;
-                gui.ShowPowerUpCounter(1);
-                gui.BlinkHealthBar();
-            }
-            //---------------
-
             KeyMouseReader.Update();
             switch (currentGameState)
             {

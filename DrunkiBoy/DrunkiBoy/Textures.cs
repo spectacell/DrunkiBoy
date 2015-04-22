@@ -19,6 +19,8 @@ namespace DrunkiBoy
         public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles, painkillerParticles, burgerParticles, pizzaParticles, bottleparticles;
 
         private static List<Texture2D> backgroundsLevel1 = new List<Texture2D>();
+        private static List<Texture2D> backgroundsLevel2 = new List<Texture2D>();
+
         public static List<List<Texture2D>> levelBackgrounds = new List<List<Texture2D>>();
         
         public static void LoadContent(ContentManager content)
@@ -39,9 +41,15 @@ namespace DrunkiBoy
             radio = content.Load<Texture2D>("Enemies/Radio");
             deleteCursor = content.Load<Texture2D>("deleteCursor");
 
+            //Bakgrunder för level 1
             backgroundsLevel1.Add(content.Load<Texture2D>("Level/space"));
             backgroundsLevel1.Add(content.Load<Texture2D>("Level/bg2"));
             levelBackgrounds.Add(backgroundsLevel1);
+
+            //Lägg in bakgrunder för Level 2 här
+            backgroundsLevel2.Add(content.Load<Texture2D>("Level/space"));
+            backgroundsLevel2.Add(content.Load<Texture2D>("Level/bg2"));
+            levelBackgrounds.Add(backgroundsLevel2);
 
             torchTex = content.Load<Texture2D>("Items/Torch4");
             Key = content.Load<Texture2D>("Items/Key");

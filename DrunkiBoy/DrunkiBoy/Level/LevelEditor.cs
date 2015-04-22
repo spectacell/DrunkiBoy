@@ -83,22 +83,17 @@ namespace DrunkiBoy
 
             CountDownDrawLevelSavedTimer(gameTime);
 
-
             if (KeyMouseReader.KeyPressed(Keys.D1))
             {
-                editingLevel = 0;
+                Game1.currentLevel = editingLevel = 0;
                 LoadContent(Constants.LEVELS[editingLevel]);
             }
             if (KeyMouseReader.KeyPressed(Keys.D2))
             {
-                editingLevel = 1;
+                Game1.currentLevel = editingLevel = 1;
                 LoadContent(Constants.LEVELS[editingLevel]);
             }
-            if (KeyMouseReader.KeyPressed(Keys.D3))
-            {
-                editingLevel = 2;
-                LoadContent(Constants.LEVELS[editingLevel]);
-            }
+            //osv när om vi har fler levels
         }
 
         private void CountDownDrawLevelSavedTimer(GameTime gameTime)
