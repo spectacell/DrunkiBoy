@@ -14,26 +14,24 @@ namespace DrunkiBoy
         public List<Radio> radios = new List<Radio>();
         public static ParticleEngine particleEngine = new ParticleEngine();
 
-        public void AddEnemy(Enemy enemy)
-        {
-            enemies.Add(enemy);
-        }
-        public void AddFlashlight(Flashlight flashlight)
-        {
-            flashlights.Add(flashlight);
-        }
-
-        public void AddRadio(Radio radio)
-        {
-            radios.Add(radio);
-        }
-
         public void Update(GameTime gameTime, Player player)
         {
             UpdateFlashlights(gameTime, player);
             UpdateRadios(gameTime, player);
         }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Flashlight flashlight in flashlights)
+            {
+                flashlight.Draw(spriteBatch);
+            }
 
+            foreach (Radio radio in radios)
+            {
+                radio.Draw(spriteBatch);
+            }
+            particleEngine.Draw(spriteBatch);
+        }
         private void UpdateFlashlights(GameTime gameTime, Player player)
         {
 
@@ -57,21 +55,17 @@ namespace DrunkiBoy
                 {
                     if (flashlight.DetectPixelCollision(bullet))
                     {
-                        particleEngine.Textures = Textures.pizzaParticles;
-                        particleEngine.CreateParticlesInCircleRange(bullet.pos);
+                        GenerateParticleEngine(bullet);
                         flashlight.LoseHealth();
                         bullet.isActive = false;
-                    }
-                    
+                    }  
                 }
-                
             }
             particleEngine.Update();
         }
 
         private void UpdateRadios(GameTime gameTime, Player player)
         {
-
             foreach (Radio radio in radios)
             {
                 radio.Update(gameTime);
@@ -91,8 +85,7 @@ namespace DrunkiBoy
                 {
                     if (radio.DetectPixelCollision(bullet))
                     {
-                        particleEngine.Textures = Textures.pizzaParticles;
-                        particleEngine.CreateParticlesInCircleRange(bullet.pos);
+                        GenerateParticleEngine(bullet);
                         radio.LoseHealth();
                         bullet.isActive = false;
                     }
@@ -101,18 +94,41 @@ namespace DrunkiBoy
             particleEngine.Update();
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        private static void GenerateParticleEngine(Bullet bullet)
         {
-            foreach (Flashlight flashlight in flashlights)
+            if (bullet is PizzaWeapon)
             {
-                flashlight.Draw(spriteBatch);
+                particleEngine.Textures = Textures.pizzaParticles;
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
             }
+            if (bullet is HamburgareVapen)
+            {
+                particleEngine.Textures = Textures.burgerParticles;
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
+            }
+            if (bullet is BottleWeapon)
+            {
+                particleEngine.Textures = Textures.bottleparticles;
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
+            }
+            if (bullet is MolotovWeapon)
+            {
+                particleEngine.Textures = Textures.bottleparticles;
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
+            }
+        }
+        public void AddEnemy(Enemy enemy)
+        {
+            enemies.Add(enemy);
+        }
+        public void AddFlashlight(Flashlight flashlight)
+        {
+            flashlights.Add(flashlight);
+        }
 
-            foreach (Radio radio in radios)
-            {
-                radio.Draw(spriteBatch);
-            }
-            particleEngine.Draw(spriteBatch);
+        public void AddRadio(Radio radio)
+        {
+            radios.Add(radio);
         }
     }
 }

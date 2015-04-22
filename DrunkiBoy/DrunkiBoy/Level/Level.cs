@@ -50,8 +50,8 @@ namespace DrunkiBoy
                 //new BackgroundLayer(camera) { Parallax = new Vector2(0.4f, 1.0f) }
             };
             // En bakgrund läggs till till varje lager här, går att lägga till flera
-            layers[0].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.background1.Height), Textures.background1));
-            layers[1].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.background2.Height), Textures.background2));
+            layers[0].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.background_level1_1.Height), Textures.background_level1_1));
+            layers[1].AddBackground(new BackgroundImage(new Vector2(0, levelHeight - Textures.background_level1_2.Height), Textures.background_level1_2));
 
             //layers[2].ListOfBackgrounds.Add(new ParallaxBackgroundImage(new Vector2(0, levelHeight - TextureManager.background3.Height), TextureManager.background3));
             #endregion

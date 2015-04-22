@@ -75,7 +75,7 @@ namespace DrunkiBoy
             float size = (float)random.NextDouble();
             int ttl = 1 + random.Next(20);
 
-            return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
+            return new Particle(texture, position, velocity, angle, angularVelocity, Color.White, size, ttl);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -101,8 +101,12 @@ namespace DrunkiBoy
             float size = (float)(random.NextDouble() * 0.5);
             int ttl = 40 + random.Next(40);
 
-            return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
+            return new Particle(texture, position, velocity, angle, angularVelocity, Color.White, size, ttl);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
         internal void CreateParticlesInCircleRange(Vector2 position)
         {
             int total = 100;
