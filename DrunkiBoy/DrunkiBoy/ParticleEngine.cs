@@ -98,7 +98,7 @@ namespace DrunkiBoy
                     (float)random.NextDouble(),
                     (float)random.NextDouble(),
                     (float)random.NextDouble());
-            float size = (float)(random.NextDouble() * 0.5);
+            float size = (float)(random.NextDouble() * 1);
             int ttl = 40 + random.Next(40);
 
             return new Particle(texture, position, velocity, angle, angularVelocity, Color.White, size, ttl);
@@ -109,7 +109,7 @@ namespace DrunkiBoy
         /// <param name="position"></param>
         internal void CreateParticlesInCircleRange(Vector2 position)
         {
-            int total = 100;
+            int total = 50;
             EmitterLocation = position;
 
             for (int i = 0; i < total; i++)
