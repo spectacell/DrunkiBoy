@@ -20,6 +20,7 @@ namespace DrunkiBoy
         {
             UpdateFlashlights(gameTime, player);
             UpdateRadios(gameTime, player);
+            UpdateAngryNeighbours(gameTime, player);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -43,7 +44,6 @@ namespace DrunkiBoy
         {
             foreach (AngryNeighbour an in angryNeighbours)
             {
-
                 an.Update(gameTime);
                 if (an.DetectPixelCollision(player))
                 {

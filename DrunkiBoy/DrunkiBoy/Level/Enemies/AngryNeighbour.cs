@@ -9,7 +9,7 @@ namespace DrunkiBoy
 {
     class AngryNeighbour : Enemy
     {
-        private int speed = 70;
+        private int speed = 80;
 
         public AngryNeighbour(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -21,6 +21,12 @@ namespace DrunkiBoy
         public override void Update(GameTime gameTime)
         {
             pos.X += (float)gameTime.ElapsedGameTime.TotalSeconds * speed;
+            if (activePlatform != null && pos.X >= activePlatform.pos.X)
+            {
+                speed -= -1;
+            }
+            base.Update(gameTime);
+            AddGravity();
         }      
     }
 }

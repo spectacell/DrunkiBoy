@@ -59,7 +59,7 @@ namespace DrunkiBoy
                     {
                         currentLevelState = levelState.lostLife;
                     }
-                    itemManager.Update(gameTime, player);
+                    itemManager.Update(gameTime, player, enemyManager.angryNeighbours);
                     enemyManager.Update(gameTime, player);
                     BulletManager.Update(gameTime, player);
                     CountingDownTime(gameTime);

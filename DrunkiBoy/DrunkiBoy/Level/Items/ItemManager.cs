@@ -10,7 +10,6 @@ namespace DrunkiBoy
     class ItemManager
     {
         public List<Platform> platforms = new List<Platform>();
-        public List<Enemy> enemies = new List<Enemy>();
         public List<Torch> torches = new List<Torch>();
         public List<Key> keys = new List<Key>();
         public List<Wallet> wallets = new List<Wallet>();
@@ -103,9 +102,9 @@ namespace DrunkiBoy
             vodkas.Add(vodka);
         }
         #endregion
-        public void Update(GameTime gameTime, Player player)
+        public void Update(GameTime gameTime, Player player, List<AngryNeighbour> angryNeighbours)
         {
-            UpdatePlatforms(player);
+            UpdatePlatforms(player, angryNeighbours);
             UpdateTorches(gameTime, player);
             UpdateKeys(gameTime, player);
             UpdateWallets(gameTime, player);
@@ -427,7 +426,7 @@ namespace DrunkiBoy
                 vodka.Draw(spriteBatch);
             }
         }
-        private void UpdatePlatforms(Player player)
+        private void UpdatePlatforms(Player player, List<AngryNeighbour> angryNeighbours)
         {
             foreach (Platform platform in platforms)
             {
@@ -441,20 +440,19 @@ namespace DrunkiBoy
                     }
                 }
 
-                //foreach (Enemy enemy in enemies)
-                //{
-                //    if (enemy.activePlatform == null)
-                //    {
-                //        if (enemy.BoundingBox.Intersects(platform.BoundingBox))// && !enemy.isKilled)
-                //        {
-                //            enemy.activePlatform = platform; //Sets the activate platform
-                //            enemy.pos.Y = platform.BoundingBox.Top - enemy.BoundingBox.Height + 1; //+1 to maintain the Intersection
-                //            enemy.isOnGround = true;
-                //            //enemy.hasJumped = false;
-                //            enemy.movement.Y = 0;
-                //        }
-                //    }
-                //}               
+                foreach (AngryNeighbour an in angryNeighbours)
+                {
+                    if (an.activePlatform == null)
+                    {
+                        if (an.BottomBoundingBox.Intersects(platform.TopBoundingBox))// && !enemy.isKilled)
+                        {
+                            an.activePlatform = platform; //Sets the activate platform
+                            an.pos.Y = platform.BoundingBox.Top - an.BoundingBox.Height + 1; //+1 to maintain the Intersection
+                            an.isOnGround = true;
+                            an.movement.Y = 0;
+                        }
+                    }
+                }
             }
         }
     }
