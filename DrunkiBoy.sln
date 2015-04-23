@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrunkiBoy", "DrunkiBoy\DrunkiBoy\DrunkiBoy.csproj", "{BBC79A51-A0EA-48F2-BDAA-BB9A2ACC910A}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "DrunkiBoyContent", "DrunkiBoy\DrunkiBoyContent\DrunkiBoyContent.contentproj", "{B269CD7C-F33C-4F34-808C-27FAEE266BFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrunkiBoyContent", "DrunkiBoy\DrunkiBoyContent\DrunkiBoyContent.contentproj", "{B269CD7C-F33C-4F34-808C-27FAEE266BFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
