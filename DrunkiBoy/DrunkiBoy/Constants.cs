@@ -19,9 +19,9 @@ namespace DrunkiBoy
         public static int health_painkiller = 10;
         public static int score_pant = 20;
         public static int score_money = 20;
-        public static int hitpoints_angryNeightbour = 4;
-        public static int hitpoints_flashlight = 2;
-        public static int hitpoints_radio = 3;
+        public static int health_angryNeightbour = 4;
+        public static int health_flashlight = 2;
+        public static int health_radio = 3;
         public static int damage_angryNeighbour = 10;
         public static int damage_flashlight = 10;
         public static int damage_radio = 20;

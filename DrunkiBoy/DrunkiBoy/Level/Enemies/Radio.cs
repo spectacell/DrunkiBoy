@@ -16,7 +16,7 @@ namespace DrunkiBoy
             this.type = "radio";
             //pE = new ParticleEngine2(Textures.radio, new Vector2(pos.X, pos.Y), Textures.radio, true);
 
-            health = Constants.hitpoints_radio;
+            health = Constants.health_radio;
         }
         public override void Update(GameTime gameTime)
         {

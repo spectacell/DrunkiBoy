@@ -18,7 +18,7 @@ namespace DrunkiBoy
         {
             this.type = "angryNeighbour";
 
-            health = Constants.hitpoints_angryNeightbour;
+            health = Constants.health_angryNeightbour;
             movement.X = 1;
             movement.Y = 0;
             healthBarTex = Textures.angry_neighbour_HB_red;
@@ -41,8 +41,8 @@ namespace DrunkiBoy
             //Health bar
             Vector2 healthBarPos = new Vector2(pos.X, pos.Y - 25);
             spriteBatch.Draw(healthBarTex, healthBarPos, Color.White);
-            float greenBarWidth = (health / (float)Constants.hitpoints_angryNeightbour) * Textures.angry_neighbour_HB_green.Width;
-            spriteBatch.Draw(Textures.angry_neighbour_HB_green, new Vector2(healthBarPos.X + 3, healthBarPos.Y + 3), new Rectangle(0, 0, (int)greenBarWidth, Textures.angry_neighbour_HB_green.Height), Color.White);
+            float greenBarWidth = (health / (float)Constants.health_angryNeightbour) * Textures.angry_neighbour_HB_green.Width;
+            spriteBatch.Draw(Textures.angry_neighbour_HB_green, new Vector2(healthBarPos.X + 2, healthBarPos.Y + 2), new Rectangle(0, 0, (int)greenBarWidth, Textures.angry_neighbour_HB_green.Height), Color.White);
             
             base.Draw(spriteBatch);
         }
