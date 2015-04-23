@@ -134,6 +134,10 @@ namespace DrunkiBoy
                     player.SetSpawnPosition(toilet.pos);
                     toilet.tex = Textures.toilet_open;
                     toilet.isActivated = true;
+                    foreach (Toilet t in toilets)
+                    {
+                        t.isCurrentSpawn = false; //Tar bort currentSpawn från alla andra toaletter så att bara en är det åt gången
+                    }
                     toilet.isCurrentSpawn = true;
                     break;
                 }

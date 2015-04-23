@@ -22,9 +22,7 @@ namespace DrunkiBoy
             if (isCurrentSpawn && player.spawning)
             {
                 particleEngine.isActive = true;
-                
-                particleEngine.height += (float)Math.Pow(0.1,2);
-                //particleEngine.width += 0.1f;
+                particleEngine.height += (float)Math.Pow(0.1, 2);
             }
             else
             {
