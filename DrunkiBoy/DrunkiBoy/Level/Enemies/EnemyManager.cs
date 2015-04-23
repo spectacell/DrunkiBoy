@@ -47,7 +47,7 @@ namespace DrunkiBoy
                 an.Update(gameTime);
                 if (!player.spawning && an.DetectPixelCollision(player))
                 {
-                    player.LoseHealth(10, an.pos, an.srcRect.Width);
+                    player.LoseHealth(Constants.damage_angryNeighbour, an.pos, an.srcRect.Width);
                     break;
                 }
 
@@ -77,7 +77,7 @@ namespace DrunkiBoy
                 flashlight.Update(gameTime);
                 if (flashlight.DetectPixelCollision(player))
                 {
-                    player.LoseHealth(10, flashlight.pos, flashlight.srcRect.Width);
+                    player.LoseHealth(Constants.damage_flashlight, flashlight.pos, flashlight.srcRect.Width);
                     break;
                 }
 
@@ -107,7 +107,7 @@ namespace DrunkiBoy
                 radio.Update(gameTime);
                 if (radio.DetectPixelCollision(player))
                 {
-                    player.LoseHealth(20, radio.pos, radio.srcRect.Width);
+                    player.LoseHealth(Constants.damage_radio, radio.pos, radio.srcRect.Width);
                     break;
                 }
 
