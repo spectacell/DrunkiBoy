@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, Kebab, Toilet, Vodka}; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -54,7 +54,7 @@ namespace DrunkiBoy
             menuEntries.Add("A: Kebab");
             menuEntries.Add("I: Toilet");
             menuEntries.Add("D: Vodka");
-
+            menuEntries.Add("G: AngryNeighbour"); 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
             selectedItem = items.Platform;
@@ -356,6 +356,16 @@ namespace DrunkiBoy
                             objects.Add(new Vodka(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.vodka, true));
                         }
                         break;
+                    case items.AngryNeighbour:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new AngryNeighbour(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.angry_neighbour, new Rectangle(0, 0, 95, 146), true, 1, 80));
+                        }
+                        else
+                        {
+                            objects.Add(new AngryNeighbour(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.angry_neighbour, new Rectangle(0, 0, 95, 146), true, 1, 80));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -506,6 +516,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Vodka;
                 selectedObject = new Vodka(new Vector2(mouseState.X, mouseState.Y), Textures.vodka, true);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.G))
+            {
+                selectedItem = items.AngryNeighbour;
+                selectedObject = new AngryNeighbour(new Vector2(mouseState.X, mouseState.Y), Textures.angry_neighbour, new Rectangle(0, 0, 95, 146), true, 1, 80);
             }
         }
 

@@ -276,6 +276,11 @@ namespace DrunkiBoy
                     itemManager.AddVodka(new Vodka(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.vodka, true));
                     objects.Add(new Vodka(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.vodka, true));
                 }
+                else if (temp[0] == "angryNeighbour")
+                {
+                    enemyManager.AddAngryNeighbour(new AngryNeighbour(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.angry_neighbour, new Rectangle(0, 0, 95, 146), true, 8, 80));
+                    objects.Add(new AngryNeighbour(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.angry_neighbour, new Rectangle(0, 0, 95, 146), true, 8, 80));
+                }
             }
             sr.Close();
         }

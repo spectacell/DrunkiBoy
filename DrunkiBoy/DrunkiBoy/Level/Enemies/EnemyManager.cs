@@ -12,6 +12,8 @@ namespace DrunkiBoy
         public List<Enemy> enemies = new List<Enemy>();
         public List<Flashlight> flashlights = new List<Flashlight>();
         public List<Radio> radios = new List<Radio>();
+        public List<AngryNeighbour> angryNeighbours = new List<AngryNeighbour>();
+
         public static ParticleEngine particleEngine = new ParticleEngine();
 
         public void Update(GameTime gameTime, Player player)
@@ -30,11 +32,45 @@ namespace DrunkiBoy
             {
                 radio.Draw(spriteBatch);
             }
+            foreach (AngryNeighbour angryNeighbour in angryNeighbours)
+            {
+                angryNeighbour.Draw(spriteBatch);
+            }
             particleEngine.Draw(spriteBatch);
+        }
+
+        private void UpdateAngryNeighbours(GameTime gameTime, Player player)
+        {
+            foreach (AngryNeighbour an in angryNeighbours)
+            {
+
+                an.Update(gameTime);
+                if (an.DetectPixelCollision(player))
+                {
+                    player.LoseHealth(10, an.pos, an.srcRect.Width);
+                    break;
+                }
+
+                if (an.isActive == false)
+                {
+                    angryNeighbours.Remove(an);
+                    break;
+                }
+
+                foreach (Bullet bullet in BulletManager.bullets)
+                {
+                    if (an.DetectPixelCollision(bullet))
+                    {
+                        GenerateParticleEngine(bullet);
+                        an.LoseHealth();
+                        bullet.isActive = false;
+                    }  
+                }
+            }
+            particleEngine.Update();
         }
         private void UpdateFlashlights(GameTime gameTime, Player player)
         {
-
             foreach (Flashlight flashlight in flashlights)
             {
               
@@ -134,6 +170,11 @@ namespace DrunkiBoy
         public void AddRadio(Radio radio)
         {
             radios.Add(radio);
+        }
+
+        public void AddAngryNeighbour(AngryNeighbour an)
+        {
+            angryNeighbours.Add(an);
         }
     }
 }
