@@ -45,7 +45,7 @@ namespace DrunkiBoy
             foreach (AngryNeighbour an in angryNeighbours)
             {
                 an.Update(gameTime);
-                if (an.DetectPixelCollision(player))
+                if (!player.spawning && an.DetectPixelCollision(player))
                 {
                     player.LoseHealth(10, an.pos, an.srcRect.Width);
                     break;

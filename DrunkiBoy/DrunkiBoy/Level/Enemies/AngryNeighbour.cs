@@ -31,6 +31,11 @@ namespace DrunkiBoy
             base.Update(gameTime);
             AddGravity();
             CheckIfOnPlatform();
+            SwitchFacing();
+        }
+
+        private void SwitchFacing()
+        {
             if (facingRight)
             {
                 facing = 0;
