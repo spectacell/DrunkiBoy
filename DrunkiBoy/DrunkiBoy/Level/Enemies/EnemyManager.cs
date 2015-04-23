@@ -63,6 +63,7 @@ namespace DrunkiBoy
                     {
                         GenerateParticleEngine(bullet);
                         an.LoseHealth();
+                        an.ChangeDirection();
                         bullet.isActive = false;
                     }  
                 }

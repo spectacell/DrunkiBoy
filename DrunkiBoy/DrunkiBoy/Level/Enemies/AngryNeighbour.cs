@@ -25,13 +25,18 @@ namespace DrunkiBoy
             pos += (float)gameTime.ElapsedGameTime.TotalSeconds * movement * speed;
             if (activePlatform != null && (pos.X >= activePlatform.pos.X + activePlatform.BoundingBox.Width - 57 || pos.X <= activePlatform.pos.X))
             {
-                movement.X *= -1;
-                facingRight = !facingRight;
+                ChangeDirection();
             }
             base.Update(gameTime);
             AddGravity();
             CheckIfOnPlatform();
             SwitchFacing();
+        }
+
+        public void ChangeDirection()
+        {
+            movement.X *= -1;
+            facingRight = !facingRight;
         }
 
         private void SwitchFacing()
