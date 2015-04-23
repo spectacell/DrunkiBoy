@@ -27,13 +27,5 @@ namespace DrunkiBoy
                 isActive = false;
             }
         }
-
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-            if (isActive)
-            {
-                spriteBatch.Draw(tex, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
-            }
-        }
     }
 }

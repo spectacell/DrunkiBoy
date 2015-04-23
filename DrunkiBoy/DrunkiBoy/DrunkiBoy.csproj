@@ -72,6 +72,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Level\Enemies\AngryNeighbour.cs" />
     <Compile Include="Level\Items\Cellphone.cs" />
     <Compile Include="Level\Bullets\KebabWeapon.cs" />
     <Compile Include="Level\Enemies\Flashlight.cs" />

@@ -12,7 +12,7 @@ namespace DrunkiBoy
         public static Texture2D player, player_lower_body, player_upper_body, player_upper_body_hurt, player_burger, player_shooting, player_pizza, player_bottle, player_bottle_molotov, player_kebab, player_head;
 
         public static Texture2D platform, deleteCursor, torchTex, Key, Wallet, Cellphone, heart, bottle, bottle_molotov, hamburgare, pizza, kebab, painkiller, jagerbomb, 
-            bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed;
+            bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, angry_neighbour;
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant, vodka;
         public static Texture2D flashlight, radio;
         public static Texture2D gameOverScreen;
@@ -26,6 +26,7 @@ namespace DrunkiBoy
         public static void LoadContent(ContentManager content)
         {
             player = content.Load<Texture2D>("Player/player-animation");
+            angry_neighbour = content.Load<Texture2D>("Enemies/angry_neighbour-animation");
             player_upper_body = content.Load<Texture2D>("Player/player-animation_upper_body");
             player_upper_body_hurt = content.Load<Texture2D>("Player/player-animation_upper_body_hurt");
             player_lower_body = content.Load<Texture2D>("Player/player-animation_lower_body");
