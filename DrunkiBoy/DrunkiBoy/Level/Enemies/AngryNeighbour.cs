@@ -16,7 +16,7 @@ namespace DrunkiBoy
         {
             this.type = "angryNeighbour";
 
-            health = 2;
+            health = Constants.health_angryNeightbour;
             movement.X = 1;
             movement.Y = 0;
         }

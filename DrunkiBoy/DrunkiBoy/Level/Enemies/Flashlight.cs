@@ -14,7 +14,7 @@ namespace DrunkiBoy
         {
             this.type = "flashlight";
 
-            health = 2;
+            health = Constants.health_flashlight;
         }
     }
 }
