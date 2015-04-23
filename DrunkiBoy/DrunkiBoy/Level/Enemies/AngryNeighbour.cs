@@ -9,6 +9,8 @@ namespace DrunkiBoy
 {
     class AngryNeighbour : Enemy
     {
+        private Texture2D healthBarTex;
+        private double healthBarBlinkTimer, healthBarBlinkTimerDefault = 150;
         private int speed = 100;
         private bool facingRight;
         public AngryNeighbour(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
@@ -19,6 +21,7 @@ namespace DrunkiBoy
             health = Constants.hitpoints_angryNeightbour;
             movement.X = 1;
             movement.Y = 0;
+            healthBarTex = Textures.angry_neighbour_HB_red;
         }
         public override void Update(GameTime gameTime)
         {
@@ -31,8 +34,18 @@ namespace DrunkiBoy
             AddGravity();
             CheckIfOnPlatform();
             SwitchFacing();
+            HealthBarBlinking(gameTime);
         }
-
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            //Health bar
+            Vector2 healthBarPos = new Vector2(pos.X, pos.Y - 25);
+            spriteBatch.Draw(healthBarTex, healthBarPos, Color.White);
+            float greenBarWidth = (health / (float)Constants.hitpoints_angryNeightbour) * Textures.angry_neighbour_HB_green.Width;
+            spriteBatch.Draw(Textures.angry_neighbour_HB_green, new Vector2(healthBarPos.X + 3, healthBarPos.Y + 3), new Rectangle(0, 0, (int)greenBarWidth, Textures.angry_neighbour_HB_green.Height), Color.White);
+            
+            base.Draw(spriteBatch);
+        }
         public void ChangeDirection()
         {
             movement.X *= -1;
@@ -59,6 +72,29 @@ namespace DrunkiBoy
                     activePlatform = null;
                 }
             }
+        }
+        /// <summary>
+        /// Ändrar healthBar-texturen om healthBarBlinkTimer är >= 0 så att det ser ut som att den blinkar till
+        /// </summary>
+        /// <param name="gameTime"></param>
+        private void HealthBarBlinking(GameTime gameTime)
+        {
+            if (healthBarBlinkTimer >= 0)
+            {
+                healthBarTex = Textures.angry_neighbour_HB_blink;
+            }
+            else
+            {
+                healthBarTex = Textures.angry_neighbour_HB_red;
+            }
+            healthBarBlinkTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+        }
+        /// <summary>
+        /// I Player klassen så sätts healthBarBlinking till true när player ökar/minskar health. Det aktiverar timern här så att healthBar blinkar till
+        /// </summary>
+        public void BlinkHealthBar()
+        {
+            healthBarBlinkTimer = healthBarBlinkTimerDefault;
         }
     }
 }

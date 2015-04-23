@@ -12,7 +12,8 @@ namespace DrunkiBoy
         public static Texture2D player, player_lower_body, player_upper_body, player_upper_body_hurt, player_burger, player_shooting, player_pizza, player_bottle, player_bottle_molotov, player_kebab, player_head;
 
         public static Texture2D platform, deleteCursor, torchTex, Key, Wallet, Cellphone, heart, bottle, bottle_molotov, hamburgare, pizza, kebab, painkiller, jagerbomb, 
-            bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, angry_neighbour;
+            bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, angry_neighbour,
+            angry_neighbour_HB_red, angry_neighbour_HB_green, angry_neighbour_HB_blink;
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant, vodka;
         public static Texture2D flashlight, radio;
         public static Texture2D gameOverScreen;
@@ -26,7 +27,6 @@ namespace DrunkiBoy
         public static void LoadContent(ContentManager content)
         {
             player = content.Load<Texture2D>("Player/player-animation");
-            angry_neighbour = content.Load<Texture2D>("Enemies/angry_neighbour-animation");
             player_upper_body = content.Load<Texture2D>("Player/player-animation_upper_body");
             player_upper_body_hurt = content.Load<Texture2D>("Player/player-animation_upper_body_hurt");
             player_lower_body = content.Load<Texture2D>("Player/player-animation_lower_body");
@@ -37,6 +37,11 @@ namespace DrunkiBoy
             player_bottle_molotov = content.Load<Texture2D>("Player/player-animation_bottle_molotov_ub");
             player_kebab = content.Load<Texture2D>("Player/player-animation_kebab_ub");
             player_head = content.Load<Texture2D>("Player/player-animation_head");
+            angry_neighbour = content.Load<Texture2D>("Enemies/angry_neighbour-animation");
+            angry_neighbour_HB_red = content.Load<Texture2D>("Enemies/angry_neighbour-HB_red");
+            angry_neighbour_HB_green = content.Load<Texture2D>("Enemies/angry_neighbour-HB_green");
+            angry_neighbour_HB_blink = content.Load<Texture2D>("Enemies/angry_neighbour-HB_blink");
+
             platform = content.Load<Texture2D>("Level/platform");
             flashlight = content.Load<Texture2D>("Enemies/Flashlight(Animation)");
             radio = content.Load<Texture2D>("Enemies/Radio");

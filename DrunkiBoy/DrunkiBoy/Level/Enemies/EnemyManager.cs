@@ -65,6 +65,7 @@ namespace DrunkiBoy
                         an.LoseHealth();
                         an.ChangeDirection();
                         bullet.isActive = false;
+                        an.BlinkHealthBar();
                     }  
                 }
             }
