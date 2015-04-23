@@ -10,8 +10,6 @@ namespace DrunkiBoy
 {
     class Player : AnimatedObject
     {
-        private ParticleEngine2 particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, 2, 1, Textures.bubble_particle, false);
-
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
         private Vector2 targetPos;
         public bool movingBack, weaponThrown;
@@ -44,7 +42,7 @@ namespace DrunkiBoy
         public Vector2 currentSpawnPos;
         public bool isDead {get; private set;}
         private double spawnTimer, spawnTimerDefault = 1750;
-        private bool spawning;
+        public bool spawning;
         private Rectangle srcRectSpawnHead;
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -104,7 +102,6 @@ namespace DrunkiBoy
             CountDownShotDelay(gameTime);
             AnimatingScore();
             SpawnAnimation(gameTime);
-            particleEngine.Update();
         }
         /// <summary>
         /// Två Draw() här, en för underkroppen och en för överkroppen.
@@ -124,10 +121,6 @@ namespace DrunkiBoy
             else
             {
                 spriteBatch.Draw(Textures.player_head, new Vector2(pos.X+2, pos.Y+50), srcRectSpawnHead, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
-            }
-            if (particleEngine.isActive)
-            {
-                particleEngine.Draw(spriteBatch);
             }
         }
                
@@ -289,7 +282,6 @@ namespace DrunkiBoy
         {
             if (spawnTimer > 0)
             {
-                particleEngine.isActive = true;
                 spawning = true;
                 spawnTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
 
@@ -305,7 +297,6 @@ namespace DrunkiBoy
             else
             {
                 spawning = false;
-                particleEngine.isActive = false;
             } 
         }
         /// <summary>
@@ -315,7 +306,6 @@ namespace DrunkiBoy
         {
             spawning = true;
             spawnTimer = spawnTimerDefault;
-            particleEngine = new ParticleEngine2(Textures.bubble_particle, new Vector2(currentSpawnPos.X + 42, currentSpawnPos.Y+srcRect.Height-45), 10, 1, Textures.water_texture, true);
         }
         /// <summary>
         /// Sätter players spawnposition. Körs från Toilet när player rör vid den.
@@ -387,18 +377,15 @@ namespace DrunkiBoy
                 if (pos.X > targetPos.X)
                 {
                     pos.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
-                    //particleEngine.Update(new Vector2(pos.X+srcRect.Width, pos.Y + srcRect.Height / 2));
                 }
                 if (pos.X < targetPos.X)
                 {
                     pos.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
-                    //particleEngine.Update(new Vector2(pos.X, pos.Y + srcRect.Height / 2));
                 }
                 if (Math.Abs(targetPos.X - pos.X) < 10)
                 {
                     weaponThrown = false;
                     movingBack = false;
-                    particleEngine.isActive = false;
                     texUpperBody = prevTexUpperBody;
                 }
             }
@@ -406,7 +393,6 @@ namespace DrunkiBoy
         private void MovePlayerBack(Vector2 enemyPos, int enemyWidth)
         {
             movingBack = true;
-            //particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, Textures.flashlight, true);
             if (pos.X < enemyPos.X)
             {
                 targetPos.X = enemyPos.X - 150;

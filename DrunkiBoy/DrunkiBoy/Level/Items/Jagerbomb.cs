@@ -14,7 +14,7 @@ namespace DrunkiBoy
                 : base(pos, tex, isActive)
         {
             this.type = "jagerbomb"; 
-            pE = new ParticleEngine2(Textures.bubble_particle, new Vector2(pos.X + 10, pos.Y + 15), 4, 3, Textures.jagerbomb, true);
+            pE = new ParticleEngine2(Textures.bubble_particle, new Vector2(pos.X + 10, pos.Y + 15), 4, 0.7f, Textures.jagerbomb, true);
         }
         public void Update(GameTime gameTime)
         {

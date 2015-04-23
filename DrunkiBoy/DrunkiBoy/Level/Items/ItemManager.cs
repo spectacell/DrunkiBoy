@@ -128,11 +128,13 @@ namespace DrunkiBoy
         {
             foreach (Toilet toilet in toilets)
             {
+                toilet.Update(player);
                 if (!toilet.isActivated && toilet.DetectPixelCollision(player))
                 {
                     player.SetSpawnPosition(toilet.pos);
                     toilet.tex = Textures.toilet_open;
                     toilet.isActivated = true;
+                    toilet.isCurrentSpawn = true;
                     break;
                 }
             }
