@@ -25,10 +25,9 @@ namespace DrunkiBoy
         public virtual void Update(GameTime gameTime)
         {                        
             pos += velocity;
-            pos.Y += 0.6f; //gravitation...
+            velocity.Y += 0.1f; //gravitation...
             rotation += 0.1f;
             shotRange = shotRange - velocity.Length();
-           
             
             if (shotRange <= 0)
             {

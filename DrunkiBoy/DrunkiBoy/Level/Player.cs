@@ -14,7 +14,7 @@ namespace DrunkiBoy
 
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
         private Vector2 targetPos;
-        private bool movingBack, weaponThrown;
+        public bool movingBack, weaponThrown;
 
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
         double timeTilNextFrameLB = 0; 
@@ -518,7 +518,7 @@ namespace DrunkiBoy
                     case weaponType.pizza:
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
-                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
+                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false));
                         prevTexUpperBody = Textures.player_upper_body;                        
                         currentWeapon = weaponType.none;
                     break;
@@ -547,7 +547,7 @@ namespace DrunkiBoy
         {
             if (!weaponThrown)
             {
-                Vector2 bulletPos, bulletVelocity = new Vector2(0, -10);
+                Vector2 bulletPos, bulletVelocity = new Vector2(0, -5);
                 if (facing == 0)  //vänster
                 {
                     bulletPos = new Vector2(pos.X + 20, pos.Y);
@@ -563,7 +563,7 @@ namespace DrunkiBoy
                         weaponThrown = true;
                         break;
                     case weaponType.pizza:
-                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity));
+                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, true));
                         weaponThrown = true;
                         break;
                     case weaponType.kebab:

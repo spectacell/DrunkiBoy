@@ -30,7 +30,7 @@ namespace DrunkiBoy
 
                 bullet.Update(gameTime);
 
-                if (!player.animateShooting && bullet is PizzaWeapon)
+                if (!player.animateShooting && !player.weaponThrown && bullet is PizzaWeapon)
                 {
                     if (bullet.DetectPixelCollision(player))
                     {
