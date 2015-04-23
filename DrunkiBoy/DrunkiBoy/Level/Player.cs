@@ -43,6 +43,7 @@ namespace DrunkiBoy
         public bool isDead {get; private set;}
         private double spawnTimer, spawnTimerDefault = 1750;
         public bool spawning;
+        private bool hasJumped;
         private Rectangle srcRectSpawnHead;
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -283,6 +284,7 @@ namespace DrunkiBoy
             if (spawnTimer > 0)
             {
                 spawning = true;
+                hasJumped = false;
                 spawnTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 if (spawnTimer <= spawnTimerDefault / 2)
@@ -297,6 +299,12 @@ namespace DrunkiBoy
             else
             {
                 spawning = false;
+                if (!hasJumped)
+                {
+                    movement.Y += -jumpHeight;
+                    activePlatform = null;
+                    hasJumped = true;
+                }
             } 
         }
         /// <summary>

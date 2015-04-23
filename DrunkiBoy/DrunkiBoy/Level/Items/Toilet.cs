@@ -15,7 +15,7 @@ namespace DrunkiBoy
             : base(pos, tex, isActive)
         {
             this.type = "toilet";
-            particleEngine = new ParticleEngine2(Textures.bubble_particle, new Vector2(pos.X + 32, pos.Y + srcRect.Height - 45), 10, 1, Textures.water_texture, false);
+            particleEngine = new ParticleEngine2(Textures.bubble_particle, new Vector2(pos.X + srcRect.Width/2, pos.Y + srcRect.Height - 45), 10, 1, Textures.water_texture, false);
         }
         public void Update(Player player)
         {
@@ -24,7 +24,7 @@ namespace DrunkiBoy
                 particleEngine.isActive = true;
                 
                 particleEngine.height += (float)Math.Pow(0.1,2);
-                particleEngine.width += 0.1f;
+                //particleEngine.width += 0.1f;
             }
             else
             {
