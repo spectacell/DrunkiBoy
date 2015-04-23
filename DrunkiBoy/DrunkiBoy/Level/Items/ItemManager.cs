@@ -442,7 +442,7 @@ namespace DrunkiBoy
 
                 foreach (AngryNeighbour an in angryNeighbours)
                 {
-                    if (an.activePlatform == null)
+                    if (an.movement.Y > 0)
                     {
                         if (an.BottomBoundingBox.Intersects(platform.TopBoundingBox))// && !enemy.isKilled)
                         {

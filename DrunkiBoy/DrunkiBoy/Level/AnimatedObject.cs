@@ -48,18 +48,5 @@ namespace DrunkiBoy
         {
             movement.Y += 0.6f;
         }
-        
-        /// <summary>
-        /// Returns true when object is outside of the visible screen
-        /// </summary>
-        /// <returns></returns>
-        //public bool OutOfBounds()
-        //{
-        //    if (pos.X < -(Game1.windowWidth / 2) + srcRect.Width || pos.X > Level.currentLevel.levelLength - srcRect.Width || pos.Y > Game1.windowHeight / 2) //Level ännu inte skapad
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
     }
 }
