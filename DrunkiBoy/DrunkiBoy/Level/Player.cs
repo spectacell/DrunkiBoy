@@ -175,7 +175,7 @@ namespace DrunkiBoy
         }
         private void PlayerJumping()
         {
-            if (KeyMouseReader.KeyPressed(Keys.Up) && activePlatform != null)
+            if (!spawning && KeyMouseReader.KeyPressed(Keys.Up) && activePlatform != null)
             {
                 movement.Y += -jumpHeight;
                 activePlatform = null;
