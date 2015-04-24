@@ -90,7 +90,7 @@ namespace DrunkiBoy
                     PlayerJumping();
                     Shooting();
                     SetDeadFallingOffPlatform();
-                    CheckIfPlayerIsOnPlatform();
+                    //CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
                     activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
 
