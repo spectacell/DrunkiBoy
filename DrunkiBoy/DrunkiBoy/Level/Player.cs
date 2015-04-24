@@ -619,6 +619,7 @@ namespace DrunkiBoy
         {
             currentWeapon = weaponType.none;
             PickUpWeapon(weaponType.none);
+            BulletManager.bullets.Clear();
         }
         /// <summary>
         /// Återställer hälsan till defaultHealth
