@@ -23,7 +23,7 @@ namespace DrunkiBoy
             strItemsLeft = "ITEMS LEFT ";
             strTime = "TIME ";
             strTitle = "DRUNKIBOY ADVENTURES ";
-            strTitleVersion = "V 1.0";
+            strTitleVersion = "V 2.0";
             int crntLevel = Game1.currentLevel + 1; //Första leveln är 0 så måste plussa på en för att visa rätt
             strCurrentLevel = crntLevel.ToString();
 
@@ -33,7 +33,7 @@ namespace DrunkiBoy
             scorePosY = 57;
             strItemsLeftPos = new Vector2(920, 16);
             strTimePos = new Vector2(1032, 57);
-            strTitlePos = new Vector2(843, 698);
+            strTitlePos = new Vector2(833, 698);
             
             powerUpPos = new Vector2(Textures.healthBarRed.Width+25, strLivesPos.Y + 3);
             activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0,0,63,63), false, 13, 1000, 0);
