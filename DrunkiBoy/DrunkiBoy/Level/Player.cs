@@ -34,7 +34,9 @@ namespace DrunkiBoy
         private int targetScore, realScore; //realScore för att score-räknare inte hann med att räkna upp om man tog många poäng på en gång
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
-        private double activePowerUpTimer = 10;
+        private double powerUpTimer = 16;
+        private double activePowerUpTimer;
+        
         public enum weaponType { none, burger, pizza, kebab, bottle, molotovCocktail };
         public weaponType currentWeapon;
 
@@ -56,6 +58,7 @@ namespace DrunkiBoy
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
+            activePowerUpTimer = powerUpTimer;
         }
         public override void Update(GameTime gameTime)
         {
@@ -93,13 +96,12 @@ namespace DrunkiBoy
                     //CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
                     activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
-
                 break;
             }
             if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
             {
                 activePowerUp = 0;
-                //activePowerUpTimer = 15;
+                activePowerUpTimer = powerUpTimer;
             }
             base.Update(gameTime);
             AnimateLowerBody();
@@ -512,30 +514,30 @@ namespace DrunkiBoy
                     case weaponType.burger:
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
-                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity));
+                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity, true));
                         
                     break;
                     case weaponType.pizza:
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
-                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false));
+                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false, true));
                         prevTexUpperBody = Textures.player_upper_body;                        
                         currentWeapon = weaponType.none;
                     break;
                     case weaponType.kebab:
                     texUpperBody = Textures.player_shooting;
                     animateShooting = true;
-                    BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity));
+                    BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity, true));
                     break;
                     case weaponType.bottle:     
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
-                        BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity));
+                        BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity, true));
                     break;
                     case weaponType.molotovCocktail:
                         texUpperBody = Textures.player_shooting;
                         animateShooting = true;
-                        BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity));
+                        BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity, true));
                     break;
                 }  
             }
@@ -559,23 +561,23 @@ namespace DrunkiBoy
                 switch (currentWeapon)
                 {
                     case weaponType.burger:
-                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity));
+                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity, false));
                         weaponThrown = true;
                         break;
                     case weaponType.pizza:
-                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, true));
+                        BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, true, false));
                         weaponThrown = true;
                         break;
                     case weaponType.kebab:
-                        BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity));
+                        BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity, false));
                         weaponThrown = true;
                         break;
                     case weaponType.bottle:
-                        BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity));
+                        BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity, false));
                         weaponThrown = true;
                         break;
                     case weaponType.molotovCocktail:
-                        BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity));
+                        BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity, false));
                         weaponThrown = true;
                         break;
                 }

@@ -16,6 +16,7 @@ namespace DrunkiBoy
         public Rectangle srcRect; //Rektangeln i spritesheeten där bilden är.
         public float drawLayer; // För spriteBatch.Draw så att vi kan styra vad som ritas ut ovanför vad.
         protected Color[] colorData; //För pixelkollision
+        
         public GameObject(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive)
         {
             this.pos = pos;

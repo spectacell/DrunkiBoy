@@ -15,12 +15,14 @@ namespace DrunkiBoy
         protected Vector2 velocity, origin;
         protected float shotRange, rotation;
         ParticleEngine particleEngine;
+        public bool lethal;
         public Bullet(Vector2 pos,Vector2 velocity, Texture2D tex, bool isActive, float shotRange) : 
             base(pos, tex, isActive)
         {
             this.velocity = velocity;
             this.shotRange = shotRange;
             this.origin = new Vector2(tex.Width / 2, tex.Height / 2);
+            lethal = true;
         }
         public virtual void Update(GameTime gameTime)
         {                        

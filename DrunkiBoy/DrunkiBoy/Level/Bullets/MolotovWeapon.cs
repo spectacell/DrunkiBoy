@@ -8,10 +8,10 @@ namespace DrunkiBoy
 {
     class MolotovWeapon : Bullet
     {
-        public MolotovWeapon(Vector2 pos, Vector2 velocity)
+        public MolotovWeapon(Vector2 pos, Vector2 velocity, bool lethal)
             : base(pos, velocity, Textures.bottle_molotov, true, 400)
         {
-            
+            this.lethal = lethal;
         } 
     }
 }

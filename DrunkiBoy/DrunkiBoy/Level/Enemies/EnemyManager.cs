@@ -62,6 +62,7 @@ namespace DrunkiBoy
                     if (an.DetectPixelCollision(bullet))
                     {
                         GenerateParticleEngine(bullet);
+                        if (bullet.lethal)
                         an.LoseHealth();
                         an.ChangeDirection();
                         bullet.isActive = false;
@@ -94,6 +95,7 @@ namespace DrunkiBoy
                     if (flashlight.DetectPixelCollision(bullet))
                     {
                         GenerateParticleEngine(bullet);
+                        if (bullet.lethal)
                         flashlight.LoseHealth();
                         bullet.isActive = false;
                     }  
@@ -124,6 +126,7 @@ namespace DrunkiBoy
                     if (radio.DetectPixelCollision(bullet))
                     {
                         GenerateParticleEngine(bullet);
+                        if (bullet.lethal)
                         radio.LoseHealth();
                         bullet.isActive = false;
                     }

@@ -9,10 +9,10 @@ namespace DrunkiBoy
 {
     class KebabWeapon : Bullet
     {
-        public KebabWeapon(Vector2 pos, Vector2 velocity)
+        public KebabWeapon(Vector2 pos, Vector2 velocity, bool lethal)
             : base(pos, velocity, Textures.kebab, true, 400)
         {
-
+            this.lethal = lethal;
         }
     }
 }
