@@ -11,10 +11,10 @@ namespace DrunkiBoy
     {
         public static Texture2D player, player_lower_body, player_upper_body, player_upper_body_hurt, player_burger, player_shooting, player_pizza, player_bottle, player_bottle_molotov, player_kebab, player_head;
 
-        public static Texture2D platform, deleteCursor, torchTex, Key, Wallet, Cellphone, heart, bottle, bottle_molotov, hamburgare, pizza, kebab, painkiller, jagerbomb, 
+        public static Texture2D platform, deleteCursor, torchTex, Key, Wallet, Cellphone, heart, bottle, bottle_molotov, hamburgare, pizza, kebab, painkiller, jagerbomb, redbullVodka, 
             bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, angry_neighbour,
             angry_neighbour_HB_red, angry_neighbour_HB_green, angry_neighbour_HB_blink;
-        public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, money, pant, vodka;
+        public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, testPowerUp, vodkaPowerup, redbullVodkaPowerup, money, pant, vodka;
         public static Texture2D flashlight, radio;
         public static Texture2D gameOverScreen;
         public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles, painkillerParticles, burgerParticles, pizzaParticles, bottleparticles, kebabParticles;
@@ -68,6 +68,7 @@ namespace DrunkiBoy
             pizza = content.Load<Texture2D>("Items/Pizza");
             kebab = content.Load<Texture2D>("Items/kebab");
             vodka = content.Load<Texture2D>("Items/Vodka");
+            redbullVodka = content.Load<Texture2D>("Items/RedbullVodka");
             painkiller = content.Load<Texture2D>("Items/painkiller");
             jagerbomb = content.Load<Texture2D>("Items/jagerbomb");
             teleport = content.Load<Texture2D>("garbagecan");
@@ -76,6 +77,8 @@ namespace DrunkiBoy
             healthBarRed = content.Load<Texture2D>("GUI/healthBarRed");
             healthBarRedBlink = content.Load<Texture2D>("GUI/healthBarRed_blink");
             powerUpTimer = content.Load<Texture2D>("GUI/powerUpTimerAnimation");
+            vodkaPowerup = content.Load<Texture2D>("Items/Vodka");
+            redbullVodkaPowerup = content.Load<Texture2D>("Items/RedbullVodka");
             testPowerUp = content.Load<Texture2D>("GUI/testPowerUp");
             money = content.Load<Texture2D>("Items/Money");
             pant = content.Load<Texture2D>("Items/Pant");

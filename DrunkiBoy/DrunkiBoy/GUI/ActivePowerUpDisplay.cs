@@ -11,7 +11,7 @@ namespace DrunkiBoy
     {
         private double timeTilNextFrame, frameInterval;
         private int frame, nrFrames, frameWidth;
-        private Texture2D powerUpTexture;
+        private Texture2D powerUpTexture, vodkaPowerup, redbullVodkaPowerup;
         public ActivePowerUpDisplay(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval, int powerUpToDisplay)
             : base(pos, tex, srcRect, isActive)
         {
@@ -23,9 +23,10 @@ namespace DrunkiBoy
             switch (powerUpToDisplay)
             {
                 case 1: //Odödlighet
-                    powerUpTexture = Textures.testPowerUp;
+                    powerUpTexture = Textures.vodkaPowerup;
                     break;
                 case 2: //Flygförmåga
+                    powerUpTexture = Textures.redbullVodka;
                     break;
             }
         }

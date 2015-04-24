@@ -85,9 +85,15 @@ namespace DrunkiBoy
                 break;
 
                 case 2: //Flygförmåga
+                    PlayerMovement(gameTime);
+                    AddFriction(facing);
+                    PlayerJumping();
                     Shooting();
                     SetDeadFallingOffPlatform();
+                    CheckIfPlayerIsOnPlatform();
+                    AnimateWhenInAir(gameTime);
                     activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
+
                 break;
             }
             if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut

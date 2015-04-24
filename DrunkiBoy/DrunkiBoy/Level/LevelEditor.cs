@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka}; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka, RedbullVodka}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -34,27 +34,28 @@ namespace DrunkiBoy
         public LevelEditor(GraphicsDevice gd, String levelTextFilePath, ContentManager content) :
             base(gd, levelTextFilePath, content)
         {
-            menuEntries.Add("P: Platform");
-            menuEntries.Add("Y: Player");
-            menuEntries.Add("T: Torch");
-            menuEntries.Add("K: Key");
-            menuEntries.Add("W: Wallet");
-            menuEntries.Add("C: Cellphone");
-            menuEntries.Add("H: Heart");
-            menuEntries.Add("S: Painkiller");
-            menuEntries.Add("F: Teleport");
-            menuEntries.Add("M: Money");
-            menuEntries.Add("E: Pant");
-            menuEntries.Add("B: Burger");
-            menuEntries.Add("V: Pizza");
-            menuEntries.Add("O: Bottle");
-            menuEntries.Add("J: Jagerbomb");
-            menuEntries.Add("L: Flashlight");
-            menuEntries.Add("R: Radio");
             menuEntries.Add("A: Kebab");
-            menuEntries.Add("I: Toilet");
+            menuEntries.Add("B: Burger");
+            menuEntries.Add("C: Cellphone");
             menuEntries.Add("D: Vodka");
-            menuEntries.Add("G: AngryNeighbour"); 
+            menuEntries.Add("E: Pant");
+            menuEntries.Add("F: Teleport");
+            menuEntries.Add("G: AngryNeighbour");
+            menuEntries.Add("H: Heart");
+            menuEntries.Add("I: Toilet");
+            menuEntries.Add("J: Jagerbomb");
+            menuEntries.Add("K: Key");
+            menuEntries.Add("L: Flashlight");
+            menuEntries.Add("M: Money");
+            menuEntries.Add("O: Bottle");
+            menuEntries.Add("P: Platform");
+            menuEntries.Add("R: Radio");
+            menuEntries.Add("S: Painkiller");
+            menuEntries.Add("T: Torch");
+            menuEntries.Add("U: RedbullVodka");
+            menuEntries.Add("V: Pizza");
+            menuEntries.Add("W: Wallet");
+            menuEntries.Add("Y: Player");
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
             selectedItem = items.Platform;
@@ -366,6 +367,16 @@ namespace DrunkiBoy
                             objects.Add(new AngryNeighbour(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.angry_neighbour, new Rectangle(0, 0, 95, 146), true, 1, 80));
                         }
                         break;
+                    case items.RedbullVodka:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new RedbullVodka(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.redbullVodka, true));
+                        }
+                        else
+                        {
+                            objects.Add(new RedbullVodka(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.redbullVodka, true));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -521,6 +532,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.AngryNeighbour;
                 selectedObject = new AngryNeighbour(new Vector2(mouseState.X, mouseState.Y), Textures.angry_neighbour, new Rectangle(0, 0, 95, 146), true, 1, 80);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.U))
+            {
+                selectedItem = items.RedbullVodka;
+                selectedObject = new RedbullVodka(new Vector2(mouseState.X, mouseState.Y), Textures.redbullVodka, true);
             }
         }
 

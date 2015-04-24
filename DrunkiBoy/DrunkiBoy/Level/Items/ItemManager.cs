@@ -26,6 +26,7 @@ namespace DrunkiBoy
         public List<Jagerbomb> jagerbombs = new List<Jagerbomb>();
         public List<Toilet> toilets = new List<Toilet>();
         public List<Vodka> vodkas = new List<Vodka>();
+        public List<RedbullVodka> redbullVodkas = new List<RedbullVodka>();
         public static ParticleEngine particleEngine;
 
         public ItemManager()
@@ -101,6 +102,10 @@ namespace DrunkiBoy
         {
             vodkas.Add(vodka);
         }
+        public void AddRedbullVodka(RedbullVodka redbullVodka)
+        {
+            redbullVodkas.Add(redbullVodka);
+        }
         #endregion
         public void Update(GameTime gameTime, Player player, List<AngryNeighbour> angryNeighbours)
         {
@@ -121,6 +126,7 @@ namespace DrunkiBoy
             UpdateKebabs(gameTime, player);
             UpdateToilets(gameTime, player);
             UpdateVodkas(gameTime, player);
+            UpdateRedbullVodkas(gameTime, player);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
         }
         private void UpdateToilets(GameTime gameTime, Player player)
@@ -350,6 +356,18 @@ namespace DrunkiBoy
                 }
             }
         }
+        private void UpdateRedbullVodkas(GameTime gameTime, Player player)
+        {
+            foreach (RedbullVodka redbullVodka in redbullVodkas)
+            {
+                if (redbullVodka.DetectPixelCollision(player))
+                {
+                    redbullVodkas.Remove(redbullVodka);
+                    player.ActivatePowerUp(2);
+                    break;
+                }
+            }
+        }
         public int ItemsLeftToCollect()
         {
             return keys.Count() + wallets.Count() + cellphones.Count();
@@ -424,6 +442,10 @@ namespace DrunkiBoy
             foreach (Vodka vodka in vodkas)
             {
                 vodka.Draw(spriteBatch);
+            }
+            foreach (RedbullVodka redbullVodka in redbullVodkas)
+            {
+                redbullVodka.Draw(spriteBatch);
             }
         }
         private void UpdatePlatforms(Player player, List<AngryNeighbour> angryNeighbours)

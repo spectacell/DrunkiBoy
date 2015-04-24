@@ -476,8 +476,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Items\VodkaRedbull.png">
-      <Name>VodkaRedbull</Name>
+    <Compile Include="Items\RedbullVodka.png">
+      <Name>RedbullVodka</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

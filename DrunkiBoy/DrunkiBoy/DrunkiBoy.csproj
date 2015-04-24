@@ -99,6 +99,7 @@
     <Compile Include="Level\Background\BackgroundLayer.cs" />
     <Compile Include="Level\Items\ItemManager.cs" />
     <Compile Include="KeyMouseReader.cs" />
+    <Compile Include="Level\Items\RedbullVodka.cs" />
     <Compile Include="Level\Items\Vodka.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\LevelEditor.cs" />
