@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+namespace DrunkiBoy
 {
     class RedbullVodka : GameObject
     {
@@ -15,4 +16,3 @@ using System.Text;
         }
     }
 }
-
