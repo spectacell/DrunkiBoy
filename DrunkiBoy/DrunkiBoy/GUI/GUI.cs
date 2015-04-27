@@ -81,9 +81,8 @@ namespace DrunkiBoy
             spriteBatch.DrawString(Constants.FONT, strTitleVersion, new Vector2(strTitlePos.X + Constants.FONT.MeasureString(strTitle).X, strTitlePos.Y), Constants.fontColor2);
             spriteBatch.End();
         }
-        public void ShowPowerUpCounter(int powerUp) //Skickar nog in ett powerUp-objekt här sen istället. Tänker att tiden poweruppen ska vara aktiv finns i varje powerup-objekt
+        public void ShowPowerUpCounter(int powerUp, double time)
         {
-            double time = 15000; //Fås från powerup sen
             int frameInterval = (int)(time / 12); //tiden i ms delat med antal frames
             activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0, 0, 63, 63), true, 13, frameInterval, powerUp);
         }
@@ -113,6 +112,10 @@ namespace DrunkiBoy
                 healthBarBlinkTimer = healthBarBlinkTimerDefault;
                 healthBarBlinking = false;
             }
+        }
+        public void ResetPowerUp()
+        {
+            activePowerUp.isActive = false;
         }
     }
 }

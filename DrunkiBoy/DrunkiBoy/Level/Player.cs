@@ -34,7 +34,6 @@ namespace DrunkiBoy
         private int targetScore, realScore; //realScore för att score-räknare inte hann med att räkna upp om man tog många poäng på en gång
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
-        private double powerUpTimer = 16;
         private double activePowerUpTimer;
         
         public enum weaponType { none, burger, pizza, kebab, bottle, molotovCocktail };
@@ -58,7 +57,6 @@ namespace DrunkiBoy
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
-            activePowerUpTimer = powerUpTimer;
         }
         public override void Update(GameTime gameTime)
         {
@@ -84,25 +82,18 @@ namespace DrunkiBoy
                     CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
                     SetDeadFallingOffPlatform();
-                    activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
                 break;
 
                 case 2: //Flygförmåga
-                    PlayerMovement(gameTime);
+                    PlayerFlying(gameTime);
                     AddFriction(facing);
-                    PlayerJumping();
                     Shooting();
                     SetDeadFallingOffPlatform();
-                    //CheckIfPlayerIsOnPlatform();
+                    CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
-                    activePowerUpTimer -= gameTime.ElapsedGameTime.TotalSeconds;
                 break;
             }
-            if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
-            {
-                activePowerUp = 0;
-                activePowerUpTimer = powerUpTimer;
-            }
+            
             base.Update(gameTime);
             AnimateLowerBody();
             AnimateShooting(gameTime);
@@ -111,7 +102,9 @@ namespace DrunkiBoy
             CountDownShotDelay(gameTime);
             AnimatingScore();
             SpawnAnimation(gameTime);
+            PowerUpTimerAandDeactivation(gameTime);
         }
+        
         /// <summary>
         /// Två Draw() här, en för underkroppen och en för överkroppen.
         /// </summary>
@@ -132,11 +125,43 @@ namespace DrunkiBoy
                 spriteBatch.Draw(Textures.player_head, new Vector2(pos.X+2, pos.Y+50), srcRectSpawnHead, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             }
         }
-               
+        /// <summary>
+        /// Flygförmåga efter intag av Redbull vodka
+        /// </summary>
+        private void PlayerFlying(GameTime gameTime)
+        {
+            if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
+            {
+                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                movement.X -= 1;
+                facing = 0;
+                ForceFrameChange();
+            }
+            if (KeyMouseReader.keyState.IsKeyDown(Keys.Right))
+            {
+                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                movement.X += 1;
+                facing = 1;
+                ForceFrameChange();
+            }
+            if (activePowerUpTimer >= 0 && KeyMouseReader.keyState.IsKeyDown(Keys.Up))
+            {
+                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+
+                movement.Y -= 0.5f;
+            }
+            pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
+            AddGravity(0.2f);
+            movement.Y -= movement.Y * 0.05f;
+        }
         /// <summary>
         /// Räknar ner timeTilNextFrameLB och timeTilNextFrame när man styr player
         /// </summary>
-        /// <param name="gameTime"></param>
         private void PlayerMovement(GameTime gameTime)
         {
             if (!isDead && !movingBack && !spawning)
@@ -161,6 +186,7 @@ namespace DrunkiBoy
                 }
             }
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
+            AddGravity(0.6f);
         }
         /// <summary>
         /// Ser till att player vänder sig så fort man trycker vänster eller höger piltangent även om timeTilNextFrame inte hunnit bli noll.
@@ -268,6 +294,7 @@ namespace DrunkiBoy
                 isDead = true; //Level ändrar automatiskt levelState i Level till lostLife när player.isDead == true
                 livesLeft--;
                 ResetHealth();
+                Game1.gui.ResetPowerUp();
             }
         }
         /// <summary>
@@ -334,12 +361,38 @@ namespace DrunkiBoy
         /// <summary>
         /// Körs när man tar en PowerUp. Switch/case satsen i Update() avgör vad som händer med player när poweruppen är aktiv
         /// </summary>
-        /// <param name="powerUp"></param>
-        public void ActivatePowerUp(int powerUp) //Skickar nog in ett powerUp-objekt här sen istället. Tänker att tiden poweruppen ska vara aktiv finns i varje powerup-objekt
+        /// <param name="powerUp">1: Odödlighet, 2: Flygförmåga</param>
+        /// <param name="time">Tid i ms för hur länge powerup är aktiv</param>
+        public void ActivatePowerUp(int powerUp, double time) 
         {
             activePowerUp = powerUp;
-            //activePowerUpTimer = powerUp.timer; //Nåt i den här stilen sen
-            Game1.gui.ShowPowerUpCounter(powerUp);
+            activePowerUpTimer = time;
+            Game1.gui.ShowPowerUpCounter(powerUp, time);
+        }
+        /// <summary>
+        /// Räknar ner activePowerUpTimer och avaktiverar powerup när tiden gått ut
+        /// </summary>
+        private void PowerUpTimerAandDeactivation(GameTime gameTime)
+        {
+            if (activePowerUpTimer >= 0)
+            {
+                activePowerUpTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+            else if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
+            {
+                if (activePowerUp == 2 && activePlatform == null)
+                {
+                    AddGravity(0.2f);//Om man är uppe i luften när tiden går ut så fortsätt med 0.2 gravitation tills man är tillbaka på en plattform. Annars riskerar man att falla för snabbt och rakt igenom en plattform
+                }
+                if (activePowerUp == 2 && activePlatform != null)
+                {
+                    activePowerUp = 0; //Avaktiverar flygförmågan när man är på fast mark igen
+                }
+                if (activePowerUp != 2) //Om det inte är flygförmåga man har så avaktivera powerup direkt tiden gått ut
+                {
+                    activePowerUp = 0;
+                }
+            }
         }
         /// <summary>
         /// Körs när man tar ett föremål som ger hälsa

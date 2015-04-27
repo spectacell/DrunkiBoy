@@ -31,7 +31,7 @@ namespace DrunkiBoy
                 ChangeDirection();
             }
             base.Update(gameTime);
-            AddGravity();
+            AddGravity(0.6f);
             CheckIfOnPlatform();
             SwitchFacing();
             HealthBarBlinking(gameTime);

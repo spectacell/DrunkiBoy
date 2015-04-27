@@ -41,12 +41,12 @@ namespace DrunkiBoy
                 frame++;
                 srcRect.X = facingSrcRects[facing].X + (frame % nrFrames) * frameWidth; //Väljer nästa frame. facingSrcRects[facing] som skapades i constructorn ser till att rätt animation körs. En för vänster och en för höger.
             }
-            AddGravity();
+            
         }
 
-        protected void AddGravity()
+        protected void AddGravity(float amount)
         {
-            movement.Y += 0.6f;
+            movement.Y += amount;
         }
     }
 }
