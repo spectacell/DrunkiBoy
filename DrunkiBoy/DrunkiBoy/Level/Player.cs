@@ -36,6 +36,8 @@ namespace DrunkiBoy
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
         private Random rnd = new Random();
+        private ParticleEngine2 particleEngine;
+        private Vector2 particleEngingePos;
         public enum weaponType { none, burger, pizza, kebab, bottle, molotovCocktail };
         public weaponType currentWeapon;
 
@@ -57,6 +59,7 @@ namespace DrunkiBoy
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
+            particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, 2, 2, Textures.explosionTexture, false);
         }
         public override void Update(GameTime gameTime)
         {
@@ -90,6 +93,7 @@ namespace DrunkiBoy
                     Shooting();
                     SetDeadFallingOffPlatform();
                     CheckIfPlayerIsOnPlatform();
+                    particleEngine.Update(particleEngingePos, true);
                 break;
             }
             
@@ -119,6 +123,7 @@ namespace DrunkiBoy
                 if (activePowerUp == 2) //Om player har flygförmåga så ritas textur med jetpack
                 {
                     spriteBatch.Draw(Textures.player_jetpack, pos, new Rectangle(0, 0, 95, 146), Color.White, rotation, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+                    particleEngine.Draw(spriteBatch);
                 }
                 else //Annars de vanliga texturerna för under- och överkropp
                 {
@@ -143,6 +148,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
             {
+                particleEngingePos = new Vector2(pos.X + 19, pos.Y + 115);
                 if (activePlatform != null)
                 {
                     rotation = 0f;
@@ -159,6 +165,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Right))
             {
+                particleEngingePos = new Vector2(pos.X + 10, pos.Y + 115);
                 if (activePlatform != null)
                 {
                     rotation = 0f;
@@ -175,11 +182,13 @@ namespace DrunkiBoy
             }
             if (activePowerUpTimer >= 0 && KeyMouseReader.keyState.IsKeyDown(Keys.Up))
             {
-                frameLB = 0;
                 movement.Y -= 0.5f;
+                particleEngine.height = 10;
             }
             if (!(KeyMouseReader.keyState.IsKeyDown(Keys.Left) || KeyMouseReader.keyState.IsKeyDown(Keys.Right))) //Rätar ut player när man inte rör sig framåt eller bakåt
             {
+                particleEngine.height = 2;
+                particleEngingePos = new Vector2(pos.X + 13, pos.Y + 120);
                 rotation = 0f;
             }
             
@@ -398,6 +407,10 @@ namespace DrunkiBoy
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
+            if (powerUp == 2)
+            {
+                particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, 2, 2, Textures.explosionTexture, true);
+            }
         }
         /// <summary>
         /// Räknar ner activePowerUpTimer och avaktiverar powerup när tiden gått ut

@@ -47,12 +47,20 @@ namespace DrunkiBoy
             colors = new Color[colorTexture.Width * colorTexture.Height];
             colorTexture.GetData(colors);
         }
-        private Particle GenerateNewParticle()
+        private Particle GenerateNewParticle(bool down)
         {
             Texture2D texture = textures[random.Next(textures.Count)];
             Vector2 position = new Vector2(EmitterLocation.X + width * (float)(random.NextDouble() * 2 - 1), EmitterLocation.Y);
-            Vector2 velocity = new Vector2((float)(random.NextDouble() * 2 - 1)/3, -Math.Abs((float)(random.NextDouble() * 2 - 1)*height));
-            velocity.Y += -0.3f;
+            Vector2 velocity;
+            if (down) 
+            { 
+                velocity = new Vector2((float)(random.NextDouble() * 2 - 1)/3, (float)(random.NextDouble() * height));
+            }
+            else
+            {
+                velocity = new Vector2((float)(random.NextDouble() * 2 - 1) / 3, - Math.Abs((float)(random.NextDouble() * 2 - 1) * height));
+                velocity.Y += -0.3f;
+            }
             float angle = 0;
             float angularVelocity = 0.1f * (float)(random.NextDouble() * 2 - 1);
             Color color = colors[(random.Next(0, colorTexture.Height) * colorTexture.Width) +
@@ -70,7 +78,7 @@ namespace DrunkiBoy
 
                 for (int i = 0; i < total; i++)
                 {
-                    particles.Add(GenerateNewParticle());                  
+                    particles.Add(GenerateNewParticle(false));                  
                 }
             }
                 for (int particle = 0; particle < particles.Count; particle++)
@@ -83,16 +91,16 @@ namespace DrunkiBoy
                     }
                 }
         }
-        public void Update(Vector2 pos)
+        public void Update(Vector2 pos, bool down)
         {
             if (isActive)
             {
                 EmitterLocation = pos;
-                int total = 20;
+                int total = 10;
 
                 for (int i = 0; i < total; i++)
                 {
-                    particles.Add(GenerateNewParticle());
+                    particles.Add(GenerateNewParticle(down));
                 }
             }
             for (int particle = 0; particle < particles.Count; particle++)
@@ -112,5 +120,6 @@ namespace DrunkiBoy
 			    particles[index].Draw(spriteBatch);
 			}
         }
+
     }
 }
