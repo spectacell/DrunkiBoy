@@ -84,7 +84,7 @@ namespace DrunkiBoy
         public void ShowPowerUpCounter(int powerUp, double time)
         {
             int frameInterval = (int)(time / 12); //tiden i ms delat med antal frames
-            activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0, 0, 63, 63), true, 13, frameInterval, powerUp);
+            activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0, 0, 63, 63), true, 12, frameInterval, powerUp);
         }
         /// <summary>
         /// Ändrar healthBar-texturen om healthBarBlinkTimer är >= 0 så att det ser ut som att den blinkar till

@@ -182,9 +182,11 @@ namespace DrunkiBoy
             {
                 rotation = 0f;
             }
-            pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
+            
             AddGravity(0.2f);
             movement.Y -= movement.Y * 0.05f;
+            pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
+            pos.X = MathHelper.Clamp(pos.X, 0, Level.levelWidth-srcRect.Width); //Hindrar player från att flyga utanför skärmen
         }
         /// <summary>
         /// Räknar ner timeTilNextFrameLB och timeTilNextFrame när man styr player
@@ -212,8 +214,9 @@ namespace DrunkiBoy
                     ForceFrameChange();
                 }
             }
-            pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
             AddGravity(0.6f);
+            pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
+            pos.X = MathHelper.Clamp(pos.X, 0, Level.levelWidth - srcRect.Width); //Hindrar player från att gå utanför skärmen
         }
         /// <summary>
         /// Ser till att player vänder sig så fort man trycker vänster eller höger piltangent även om timeTilNextFrame inte hunnit bli noll.
@@ -295,7 +298,7 @@ namespace DrunkiBoy
         }
         private void SetDeadFallingOffPlatform()
         {
-            if (pos.Y > 2000) //Bättre sätt?
+            if (pos.Y > Level.levelHeight)
             {
                 LooseALife();
             }
