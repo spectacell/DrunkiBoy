@@ -363,7 +363,7 @@ namespace DrunkiBoy
                 if (redbullVodka.DetectPixelCollision(player))
                 {
                     redbullVodkas.Remove(redbullVodka);
-                    player.ActivatePowerUp(2, 3000);
+                    player.ActivatePowerUp(2, 30000);
                     break;
                 }
             }

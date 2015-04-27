@@ -18,7 +18,7 @@ namespace DrunkiBoy
         double timeTilNextFrameLB = 0; 
         private int frameLB;
         private Rectangle srcRectLB;
-
+        private float rotation = 0;
         public bool animateShooting;
         private bool shootingLeft;
         private double shotDelay, shotDelayDefault = 300;
@@ -35,7 +35,7 @@ namespace DrunkiBoy
 
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
-        
+        private Random rnd = new Random();
         public enum weaponType { none, burger, pizza, kebab, bottle, molotovCocktail };
         public weaponType currentWeapon;
 
@@ -90,7 +90,6 @@ namespace DrunkiBoy
                     Shooting();
                     SetDeadFallingOffPlatform();
                     CheckIfPlayerIsOnPlatform();
-                    AnimateWhenInAir(gameTime);
                 break;
             }
             
@@ -115,12 +114,19 @@ namespace DrunkiBoy
             { 
                 srcRectLB = srcRect;
             }
-            
-            if (!spawning) { 
-                spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
-                spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+            if (!spawning) 
+            {
+                if (activePowerUp == 2) //Om player har flygförmåga så ritas textur med jetpack
+                {
+                    spriteBatch.Draw(Textures.player_jetpack, pos, new Rectangle(0, 0, 95, 146), Color.White, rotation, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+                }
+                else //Annars de vanliga texturerna för under- och överkropp
+                {
+                    spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+                }
             }
-            else
+            else //När player spawnas så ritas bara huvududet ut
             {
                 spriteBatch.Draw(Textures.player_head, new Vector2(pos.X+2, pos.Y+50), srcRectSpawnHead, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             }
@@ -130,30 +136,52 @@ namespace DrunkiBoy
         /// </summary>
         private void PlayerFlying(GameTime gameTime)
         {
+            if (activePlatform != null && activePowerUpTimer >= 0) //Simulera jetpack motor
+            {
+                movement.Y -= (float)rnd.NextDouble()*3;
+            }
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
             {
-                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (activePlatform != null)
+                {
+                    rotation = 0f;
+                    timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
 
                 movement.X -= 1;
                 facing = 0;
                 ForceFrameChange();
+                if (activePlatform == null)
+                {
+                    rotation = -0.1f;
+                }
             }
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Right))
             {
-                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (activePlatform != null)
+                {
+                    rotation = 0f;
+                    timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                }
 
                 movement.X += 1;
                 facing = 1;
                 ForceFrameChange();
+                if (activePlatform == null)
+                {
+                    rotation = +0.1f;
+                }
             }
             if (activePowerUpTimer >= 0 && KeyMouseReader.keyState.IsKeyDown(Keys.Up))
             {
-                timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
-
+                frameLB = 0;
                 movement.Y -= 0.5f;
+            }
+            if (!(KeyMouseReader.keyState.IsKeyDown(Keys.Left) || KeyMouseReader.keyState.IsKeyDown(Keys.Right))) //Rätar ut player när man inte rör sig framåt eller bakåt
+            {
+                rotation = 0f;
             }
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
             AddGravity(0.2f);
@@ -380,6 +408,7 @@ namespace DrunkiBoy
             }
             else if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
             {
+                rotation = 0f;
                 if (activePowerUp == 2 && activePlatform == null)
                 {
                     AddGravity(0.2f);//Om man är uppe i luften när tiden går ut så fortsätt med 0.2 gravitation tills man är tillbaka på en plattform. Annars riskerar man att falla för snabbt och rakt igenom en plattform
