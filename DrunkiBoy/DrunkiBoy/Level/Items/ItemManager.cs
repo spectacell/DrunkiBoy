@@ -466,13 +466,17 @@ namespace DrunkiBoy
                 {
                     if (an.movement.Y > 0)
                     {
-                        if (an.BottomBoundingBox.Intersects(platform.TopBoundingBox))// && !enemy.isKilled)
+                        if (an.BottomBoundingBox.Intersects(platform.TopBoundingBox))
                         {
                             an.activePlatform = platform; //Sets the activate platform
                             an.pos.Y = platform.BoundingBox.Top - an.BoundingBox.Height + 1; //+1 to maintain the Intersection
                             an.isOnGround = true;
                             an.movement.Y = 0;
                         }
+                    }
+                    if (an.activePlatform == player.activePlatform && an.facing == player.facing)
+                    {
+                        an.ChangeDirection();
                     }
                 }
             }
