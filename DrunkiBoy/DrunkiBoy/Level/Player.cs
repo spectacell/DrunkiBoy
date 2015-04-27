@@ -321,7 +321,7 @@ namespace DrunkiBoy
                 isDead = true; //Level ändrar automatiskt levelState i Level till lostLife när player.isDead == true
                 livesLeft--;
                 ResetHealth();
-                Game1.gui.ResetPowerUp();
+                ResetPowerUp();
             }
         }
         /// <summary>
@@ -708,6 +708,14 @@ namespace DrunkiBoy
         private void ResetHealth()
         {
             healthLeft = targetHealth = Constants.player_defaultHealth;
+        }
+        /// <summary>
+        /// Avaktiverar eventuell powerup
+        /// </summary>
+        private void ResetPowerUp()
+        {
+            activePowerUp = 0;
+            Game1.gui.ResetPowerUp();
         }
         #endregion
            
