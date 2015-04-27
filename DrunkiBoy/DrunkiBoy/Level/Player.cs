@@ -136,6 +136,7 @@ namespace DrunkiBoy
         /// </summary>
         private void PlayerFlying(GameTime gameTime)
         {
+            facing = 1;
             if (activePlatform != null && activePowerUpTimer >= 0) //Simulera jetpack motor
             {
                 movement.Y -= (float)rnd.NextDouble()*3;
@@ -150,7 +151,6 @@ namespace DrunkiBoy
                 }
 
                 movement.X -= 1;
-                facing = 0;
                 ForceFrameChange();
                 if (activePlatform == null)
                 {
@@ -167,7 +167,6 @@ namespace DrunkiBoy
                 }
 
                 movement.X += 1;
-                facing = 1;
                 ForceFrameChange();
                 if (activePlatform == null)
                 {
