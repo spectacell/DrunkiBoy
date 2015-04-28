@@ -25,10 +25,10 @@ namespace DrunkiBoy
             switch (powerUpToDisplay)
             {
                 case 1: //Odödlighet
-                    powerUpTexture = Textures.vodkaPowerup;
+                    powerUpTexture = Textures.vodka_gui;
                     break;
                 case 2: //Flygförmåga
-                    powerUpTexture = Textures.redbullVodka;
+                    powerUpTexture = Textures.redbullVodka_gui;
                     break;
             }
         }
@@ -53,11 +53,7 @@ namespace DrunkiBoy
         {
             if (isActive)
             {
-                if (powerUpTexture == Textures.redbullVodka)
-                    spriteBatch.Draw(powerUpTexture, pos, Color.White);
-                
-                if (powerUpTexture == Textures.vodka)
-                    spriteBatch.Draw(powerUpTexture, vodkaPos, Color.White);
+                spriteBatch.Draw(powerUpTexture, pos, Color.White);
             }
             base.Draw(spriteBatch);
         }

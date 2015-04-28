@@ -168,13 +168,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\testPowerUp.png">
-      <Name>testPowerUp</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="GUI\healthBarRed_blink.png">
       <Name>healthBarRed_blink</Name>
       <Importer>TextureImporter</Importer>
@@ -502,6 +495,20 @@
   <ItemGroup>
     <Compile Include="Player\player-animation_jetpack.png">
       <Name>player-animation_jetpack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI\RedbullVodka.png">
+      <Name>RedbullVodka</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI\Vodka.png">
+      <Name>Vodka</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

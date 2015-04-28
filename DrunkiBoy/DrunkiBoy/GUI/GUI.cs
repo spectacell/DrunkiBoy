@@ -81,6 +81,11 @@ namespace DrunkiBoy
             spriteBatch.DrawString(Constants.FONT, strTitleVersion, new Vector2(strTitlePos.X + Constants.FONT.MeasureString(strTitle).X, strTitlePos.Y), Constants.fontColor2);
             spriteBatch.End();
         }
+        /// <summary>
+        /// Den där bilden som täcker poweruppen
+        /// </summary>
+        /// <param name="powerUp"></param>
+        /// <param name="time"></param>
         public void ShowPowerUpCounter(int powerUp, double time)
         {
             int frameInterval = (int)(time / 12); //tiden i ms delat med antal frames
