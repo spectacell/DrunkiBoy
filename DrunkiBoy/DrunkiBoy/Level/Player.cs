@@ -183,11 +183,9 @@ namespace DrunkiBoy
             if (activePowerUpTimer >= 0 && KeyMouseReader.keyState.IsKeyDown(Keys.Up))
             {
                 movement.Y -= 0.5f;
-                particleEngine.height = 10;
             }
             if (!(KeyMouseReader.keyState.IsKeyDown(Keys.Left) || KeyMouseReader.keyState.IsKeyDown(Keys.Right))) //Rätar ut player när man inte rör sig framåt eller bakåt
             {
-                particleEngine.height = 2;
                 particleEngingePos = new Vector2(pos.X + 13, pos.Y + 120);
                 rotation = 0f;
             }
@@ -407,9 +405,9 @@ namespace DrunkiBoy
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
-            if (powerUp == 2)
+            if (powerUp == 2) //Skapa en partikelmotor om det är flyga som gäller...
             {
-                particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, 2, 2, Textures.explosionTexture, true);
+                particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, 6, 100, Textures.explosionTexture, true);
             }
         }
         /// <summary>

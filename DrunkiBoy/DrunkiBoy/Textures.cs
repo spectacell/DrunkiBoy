@@ -101,6 +101,7 @@ namespace DrunkiBoy
             pantParticles.Add(content.Load<Texture2D>("Particles/pant_Particle"));
             smokeParticles = new List<Texture2D>();
             smokeParticles.Add(content.Load<Texture2D>("Particles/smoke_particle"));
+            //smokeParticles.Add(content.Load<Texture2D>("Particles/smoke_particle2"));
             painkillerParticles = new List<Texture2D>();
             painkillerParticles.Add(content.Load<Texture2D>("Particles/Painkiller_Particle"));
             burgerParticles = new List<Texture2D>();
