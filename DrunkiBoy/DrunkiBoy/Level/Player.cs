@@ -10,11 +10,11 @@ namespace DrunkiBoy
 {
     class Player : AnimatedObject
     {
-        private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
         private Vector2 targetPos;
         public bool movingBack, weaponThrown;
 
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
+        private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
         double timeTilNextFrameLB = 0; 
         private int frameLB;
         private Rectangle srcRectLB;
@@ -36,7 +36,7 @@ namespace DrunkiBoy
         public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
         private double activePowerUpTimer;
         private Random rnd = new Random();
-        private ParticleEngine2 particleEngine;
+        public ParticleEngine2 particleEngine;
         private Vector2 particleEngingePos;
         public enum weaponType { none, burger, pizza, kebab, bottle, molotovCocktail };
         public weaponType currentWeapon;
@@ -148,7 +148,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
             {
-                particleEngingePos = new Vector2(pos.X + 19, pos.Y + 115);
+                particleEngingePos = new Vector2(pos.X + 20, pos.Y + 115);
                 if (activePlatform != null)
                 {
                     rotation = 0f;
@@ -165,7 +165,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Right))
             {
-                particleEngingePos = new Vector2(pos.X + 10, pos.Y + 115);
+                particleEngingePos = new Vector2(pos.X + 11, pos.Y + 115);
                 if (activePlatform != null)
                 {
                     rotation = 0f;
@@ -186,7 +186,7 @@ namespace DrunkiBoy
             }
             if (!(KeyMouseReader.keyState.IsKeyDown(Keys.Left) || KeyMouseReader.keyState.IsKeyDown(Keys.Right))) //Rätar ut player när man inte rör sig framåt eller bakåt
             {
-                particleEngingePos = new Vector2(pos.X + 13, pos.Y + 120);
+                particleEngingePos = new Vector2(pos.X + 14, pos.Y + 120);
                 rotation = 0f;
             }
             

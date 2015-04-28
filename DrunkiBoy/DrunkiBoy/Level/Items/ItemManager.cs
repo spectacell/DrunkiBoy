@@ -27,6 +27,8 @@ namespace DrunkiBoy
         public List<Toilet> toilets = new List<Toilet>();
         public List<Vodka> vodkas = new List<Vodka>();
         public List<RedbullVodka> redbullVodkas = new List<RedbullVodka>();
+
+        private Random rnd = new Random();
         public static ParticleEngine particleEngine;
 
         public ItemManager()
@@ -461,7 +463,15 @@ namespace DrunkiBoy
                         player.movement.Y = 0;
                     }
                 }
-
+                //Försöker få det att se ut som att partiklarna tar emot plattformen och sprider sig längs med istället. Blev inte riktigt bra, antar att det är för att de är mindre än 1 pixel stora.
+                foreach (Particle p in player.particleEngine.particles) 
+                {
+                    if (p.BoundingBox.Intersects(platform.BoundingBox))
+                    {
+                        p.Velocity.Y = 0;
+                        p.Velocity.X += rnd.Next(-3,3);
+                    }
+                }
                 foreach (AngryNeighbour an in angryNeighbours)
                 {
                     if (an.movement.Y > 0)
@@ -470,7 +480,6 @@ namespace DrunkiBoy
                         {
                             an.activePlatform = platform; //Sets the activate platform
                             an.pos.Y = platform.BoundingBox.Top - an.BoundingBox.Height + 1; //+1 to maintain the Intersection
-                            an.isOnGround = true;
                             an.movement.Y = 0;
                         }
                     }

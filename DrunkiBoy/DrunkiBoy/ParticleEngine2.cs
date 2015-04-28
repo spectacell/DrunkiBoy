@@ -16,7 +16,7 @@ namespace DrunkiBoy
         Color[] colors;
         private Random random; // random number generator
         public Vector2 EmitterLocation { get; set; } // changing the location there the particles will be generating
-        private List<Particle> particles;
+        public List<Particle> particles;
         private List<Texture2D> textures;
         public ParticleEngine2(List<Texture2D> textures, Vector2 location, float width, float height, Texture2D colorTexture, bool isActive)
         {
@@ -69,7 +69,6 @@ namespace DrunkiBoy
             Color color = colors[(random.Next(0, colorTexture.Height) * colorTexture.Width) +
                                   random.Next(0, colorTexture.Width)]; //Slumpar fram en färg från colorTexture
             float size = (float)random.NextDouble()/5;
-            
             return new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl);
         }
        

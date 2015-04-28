@@ -12,7 +12,7 @@ namespace DrunkiBoy
     {
         public Texture2D Texture { get; set; }        // The texture that will be drawn to represent the particle
         public Vector2 Position { get; set; }        // The current position of the particle        
-        public Vector2 Velocity { get; set; }        // The speed of the particle at the current instance
+        public Vector2 Velocity;       // The speed of the particle at the current instance
         public float Angle { get; set; }            // The current angle of rotation of the particle
         public float AngularVelocity { get; set; }    // The speed that the angle is changing
         public Color Color { get; set; }            // The color of the particle
@@ -44,6 +44,13 @@ namespace DrunkiBoy
 
             spriteBatch.Draw(Texture, Position, sourceRectangle, Color,
                 Angle, origin, Size, SpriteEffects.None, 0f);
+        }
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle((int)Position.X, (int)Position.Y, (int)Size, (int)Size);
+            }
         }
     }
 }

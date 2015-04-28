@@ -66,6 +66,7 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.F2))
             {
                 level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
+                gui = new GUI();
                 currentGameState = gameState.inGame;
             }
             if (KeyMouseReader.KeyPressed(Keys.F3))
@@ -83,7 +84,6 @@ namespace DrunkiBoy
                     break;
 
                 case gameState.levelEditor:
-                    
                     levelEditor.Update(gameTime);
                     break;
                 case gameState.levelComplete:
