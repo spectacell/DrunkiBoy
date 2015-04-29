@@ -68,7 +68,7 @@ namespace DrunkiBoy
                 case 0: //Vanlig
                     PlayerMovement(gameTime);
                     AddFriction(facing);
-                    invincible = false;
+                    //invincible = false;
                     PlayerJumping();
                     Shooting();
                     CheckIfPlayerIsOnPlatform();
@@ -79,7 +79,7 @@ namespace DrunkiBoy
                 case 1: //Odödlig
                     PlayerMovement(gameTime);
                     AddFriction(facing);
-                    invincible = true;
+                    //invincible = true;
                     PlayerJumping();
                     Shooting();
                     CheckIfPlayerIsOnPlatform();
@@ -407,13 +407,14 @@ namespace DrunkiBoy
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
-            if (powerUp == 1) //Skapa en partikelmotor för odödlighet...
+            if (powerUp == 1) //Odödlighet...
             {
+                invincible = true;
                 particleEngine = new ParticleEngine2(Textures.smokeParticles, new Vector2(pos.X+srcRect.Width/2, pos.Y+srcRect.Height), 1, 10, Textures.water_texture, false);
                 prevTexUpperBody = texUpperBody;
                 texUpperBody = Textures.player_invincible;
             }
-            else if (powerUp == 2) //Skapa en partikelmotor för flygning...
+            else if (powerUp == 2) //Flygning...
             {
                 particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, 6, 100, Textures.explosionTexture, true);
             }
@@ -429,7 +430,6 @@ namespace DrunkiBoy
             }
             else if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
             {
-                
                 rotation = 0f;
                 if (activePowerUp == 2 && activePlatform == null)
                 {
@@ -442,6 +442,7 @@ namespace DrunkiBoy
                 }
                 if (activePowerUp != 2) //Om det inte är flygförmåga man har så avaktivera powerup direkt tiden gått ut
                 {
+                    invincible = false;
                     activePowerUp = 0;
                     texUpperBody = prevTexUpperBody;
                 }
