@@ -23,7 +23,7 @@ namespace DrunkiBoy
         private bool shootingLeft;
         private double shotDelay, shotDelayDefault = 300;
 
-        public bool invincible;
+        private bool invincible;
 
         private const int playerSpeed = 80;
         public static int livesLeft;        
@@ -33,7 +33,7 @@ namespace DrunkiBoy
         public static int score = 0;
         private int targetScore, realScore; //realScore för att score-räknare inte hann med att räkna upp om man tog många poäng på en gång
 
-        public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, 3: nånting och så "0" för ingenting
+        public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, osv och så "0" för ingenting
         private double activePowerUpTimer;
         private Random rnd = new Random();
         public ParticleEngine2 particleEngine;
@@ -68,7 +68,6 @@ namespace DrunkiBoy
                 case 0: //Vanlig
                     PlayerMovement(gameTime);
                     AddFriction(facing);
-                    //invincible = false;
                     PlayerJumping();
                     Shooting();
                     CheckIfPlayerIsOnPlatform();
@@ -79,7 +78,6 @@ namespace DrunkiBoy
                 case 1: //Odödlig
                     PlayerMovement(gameTime);
                     AddFriction(facing);
-                    //invincible = true;
                     PlayerJumping();
                     Shooting();
                     CheckIfPlayerIsOnPlatform();
@@ -127,7 +125,7 @@ namespace DrunkiBoy
                 }
                 else //Annars de vanliga texturerna för under- och överkropp
                 {
-                    spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
                     spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
                 }
             }
