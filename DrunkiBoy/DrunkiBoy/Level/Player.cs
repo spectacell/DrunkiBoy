@@ -403,6 +403,7 @@ namespace DrunkiBoy
         /// <param name="time">Tid i ms för hur länge powerup är aktiv</param>
         public void ActivatePowerUp(int powerUp, double time) 
         {
+            ResetPowerUp();
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
@@ -738,6 +739,7 @@ namespace DrunkiBoy
         /// </summary>
         private void ResetPowerUp()
         {
+            invincible = false;
             activePowerUp = 0;
             Game1.gui.ResetPowerUp();
         }
