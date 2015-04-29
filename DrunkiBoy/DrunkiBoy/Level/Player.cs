@@ -85,6 +85,7 @@ namespace DrunkiBoy
                     CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
                     SetDeadFallingOffPlatform();
+                    particleEngine.Update(particleEngingePos, false);
                 break;
 
                 case 2: //Flygförmåga
@@ -123,7 +124,6 @@ namespace DrunkiBoy
                 if (activePowerUp == 2) //Om player har flygförmåga så ritas textur med jetpack
                 {
                     spriteBatch.Draw(Textures.player_jetpack, pos, new Rectangle(0, 0, 95, 146), Color.White, rotation, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
-                    particleEngine.Draw(spriteBatch);
                 }
                 else //Annars de vanliga texturerna för under- och överkropp
                 {
@@ -135,6 +135,7 @@ namespace DrunkiBoy
             {
                 spriteBatch.Draw(Textures.player_head, new Vector2(pos.X+2, pos.Y+50), srcRectSpawnHead, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             }
+            particleEngine.Draw(spriteBatch);
         }
         /// <summary>
         /// Flygförmåga efter intag av Redbull vodka
@@ -148,7 +149,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
             {
-                particleEngingePos = new Vector2(pos.X + 20, pos.Y + 115);
+                particleEngingePos = new Vector2(pos.X + 20, pos.Y + 110);
                 if (activePlatform != null)
                 {
                     rotation = 0f;
@@ -165,7 +166,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Right))
             {
-                particleEngingePos = new Vector2(pos.X + 11, pos.Y + 115);
+                particleEngingePos = new Vector2(pos.X + 11, pos.Y + 110);
                 if (activePlatform != null)
                 {
                     rotation = 0f;
@@ -186,7 +187,7 @@ namespace DrunkiBoy
             }
             if (!(KeyMouseReader.keyState.IsKeyDown(Keys.Left) || KeyMouseReader.keyState.IsKeyDown(Keys.Right))) //Rätar ut player när man inte rör sig framåt eller bakåt
             {
-                particleEngingePos = new Vector2(pos.X + 14, pos.Y + 120);
+                particleEngingePos = new Vector2(pos.X + 14, pos.Y + 115);
                 rotation = 0f;
             }
             
@@ -224,6 +225,7 @@ namespace DrunkiBoy
             AddGravity(0.6f);
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
             pos.X = MathHelper.Clamp(pos.X, 0, Level.levelWidth - srcRect.Width); //Hindrar player från att gå utanför skärmen
+            particleEngingePos = new Vector2(pos.X + srcRect.Width / 2, pos.Y + srcRect.Height / 2);
         }
         /// <summary>
         /// Ser till att player vänder sig så fort man trycker vänster eller höger piltangent även om timeTilNextFrame inte hunnit bli noll.
@@ -405,7 +407,11 @@ namespace DrunkiBoy
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
-            if (powerUp == 2) //Skapa en partikelmotor om det är flyga som gäller...
+            if (powerUp == 1) //Skapa en partikelmotor för odödlighet...
+            {
+                particleEngine = new ParticleEngine2(Textures.smokeParticles, new Vector2(pos.X+srcRect.Width/2, pos.Y+srcRect.Height/2), 6, 10, Textures.water_texture, true);
+            }
+            else if (powerUp == 2) //Skapa en partikelmotor för flygning...
             {
                 particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, 6, 100, Textures.explosionTexture, true);
             }

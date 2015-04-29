@@ -27,6 +27,10 @@ namespace DrunkiBoy
         public static int damage_radio = 20;
         public static int player_defaultHealth = 200;
 
+        //Tiden respektive powerup är aktiv i millisekunder
+        public static int powerUpTimeVodka = 30000; 
+        public static int powerUpTimeRedbullVodka = 30000;
+
         public static void LoadContent(ContentManager content)
         {
             FONT = content.Load<SpriteFont>("Font");

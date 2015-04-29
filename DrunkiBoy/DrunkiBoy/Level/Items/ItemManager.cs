@@ -353,7 +353,7 @@ namespace DrunkiBoy
                 if (vodka.DetectPixelCollision(player))
                 {
                     vodkas.Remove(vodka);
-                    player.ActivatePowerUp(1, 3000);
+                    player.ActivatePowerUp(1, Constants.powerUpTimeVodka);
                     break;
                 }
             }
@@ -365,7 +365,7 @@ namespace DrunkiBoy
                 if (redbullVodka.DetectPixelCollision(player))
                 {
                     redbullVodkas.Remove(redbullVodka);
-                    player.ActivatePowerUp(2, 30000);
+                    player.ActivatePowerUp(2, Constants.powerUpTimeRedbullVodka);
                     break;
                 }
             }
