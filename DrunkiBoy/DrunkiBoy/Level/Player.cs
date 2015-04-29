@@ -192,7 +192,7 @@ namespace DrunkiBoy
             }
             
             AddGravity(0.2f);
-            movement.Y -= movement.Y * 0.05f;
+            movement.Y -= movement.Y * 0.05f; //Lite "friktion" i Y-led så att man inte flyger för snabbt
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
             pos.X = MathHelper.Clamp(pos.X, 0, Level.levelWidth-srcRect.Width); //Hindrar player från att flyga utanför skärmen
         }
@@ -225,7 +225,6 @@ namespace DrunkiBoy
             AddGravity(0.6f);
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
             pos.X = MathHelper.Clamp(pos.X, 0, Level.levelWidth - srcRect.Width); //Hindrar player från att gå utanför skärmen
-            particleEngingePos = new Vector2(pos.X + srcRect.Width / 2, pos.Y + srcRect.Height / 2);
         }
         /// <summary>
         /// Ser till att player vänder sig så fort man trycker vänster eller höger piltangent även om timeTilNextFrame inte hunnit bli noll.
@@ -409,7 +408,9 @@ namespace DrunkiBoy
             Game1.gui.ShowPowerUpCounter(powerUp, time);
             if (powerUp == 1) //Skapa en partikelmotor för odödlighet...
             {
-                particleEngine = new ParticleEngine2(Textures.smokeParticles, new Vector2(pos.X+srcRect.Width/2, pos.Y+srcRect.Height/2), 6, 10, Textures.water_texture, true);
+                particleEngine = new ParticleEngine2(Textures.smokeParticles, new Vector2(pos.X+srcRect.Width/2, pos.Y+srcRect.Height), 1, 10, Textures.water_texture, false);
+                prevTexUpperBody = texUpperBody;
+                texUpperBody = Textures.player_invincible;
             }
             else if (powerUp == 2) //Skapa en partikelmotor för flygning...
             {
@@ -427,6 +428,7 @@ namespace DrunkiBoy
             }
             else if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
             {
+                
                 rotation = 0f;
                 if (activePowerUp == 2 && activePlatform == null)
                 {
@@ -435,10 +437,12 @@ namespace DrunkiBoy
                 if (activePowerUp == 2 && activePlatform != null)
                 {
                     activePowerUp = 0; //Avaktiverar flygförmågan när man är på fast mark igen
+                    particleEngine.isActive = false;
                 }
                 if (activePowerUp != 2) //Om det inte är flygförmåga man har så avaktivera powerup direkt tiden gått ut
                 {
                     activePowerUp = 0;
+                    texUpperBody = prevTexUpperBody;
                 }
             }
         }

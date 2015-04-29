@@ -117,10 +117,13 @@ namespace DrunkiBoy
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int index = 0; index < particles.Count; index++)
-			{
-			    particles[index].Draw(spriteBatch);
-			}
+            if (isActive) 
+            { 
+                for (int index = 0; index < particles.Count; index++)
+			    {
+			        particles[index].Draw(spriteBatch);
+			    }
+            }
         }
 
     }
