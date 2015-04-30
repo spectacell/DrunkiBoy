@@ -27,7 +27,6 @@ namespace DrunkiBoy
 
         private const int playerSpeed = 80;
         public static int livesLeft;        
-        private int defaultLives = 3;
         public static int healthLeft;
         private int targetHealth;
         public static int score = 0;
@@ -314,7 +313,7 @@ namespace DrunkiBoy
         /// </summary>
         public void AddALife()
         {
-            if (livesLeft < defaultLives)
+            if (livesLeft < Constants.player_defaultLives)
             {
                 livesLeft++;
             }
