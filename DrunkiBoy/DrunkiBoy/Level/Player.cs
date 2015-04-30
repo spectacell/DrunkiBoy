@@ -46,7 +46,7 @@ namespace DrunkiBoy
         public Vector2 currentSpawnPos;
         private double spawnTimer, spawnTimerDefault = 1750;
         public bool spawning;
-        private bool hasJumped;
+        private bool hasJumpedAfterSpawn;
         private Rectangle srcRectSpawnHead;
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -67,7 +67,7 @@ namespace DrunkiBoy
             {
                 case 0: //Vanlig
                     PlayerMovement(gameTime);
-                    AddFriction(facing);
+                    AddFriction();
                     PlayerJumping();
                     Shooting();
                     CheckIfPlayerIsOnPlatform();
@@ -77,7 +77,7 @@ namespace DrunkiBoy
                 break;
                 case 1: //Odödlig
                     PlayerMovement(gameTime);
-                    AddFriction(facing);
+                    AddFriction();
                     PlayerJumping();
                     Shooting();
                     CheckIfPlayerIsOnPlatform();
@@ -89,7 +89,7 @@ namespace DrunkiBoy
 
                 case 2: //Flygförmåga
                     PlayerFlying(gameTime);
-                    AddFriction(facing);
+                    AddFriction();
                     Shooting();
                     SetDeadFallingOffPlatform();
                     CheckIfPlayerIsOnPlatform();
@@ -141,6 +141,7 @@ namespace DrunkiBoy
         private void PlayerFlying(GameTime gameTime)
         {
             facing = 1;
+            
             particleEngingePos = new Vector2(pos.X + 14, pos.Y + 115);
             rotation = 0f;
             if (!isMorphing)
@@ -176,7 +177,7 @@ namespace DrunkiBoy
         /// </summary>
         private void PlayerMovement(GameTime gameTime)
         {
-            if (!isDead && !movingBack && !spawning)
+            if (!movingBack && !spawning)
             { 
                 if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
                 {
@@ -202,15 +203,15 @@ namespace DrunkiBoy
             pos.X = MathHelper.Clamp(pos.X, 0, Level.levelWidth - srcRect.Width); //Hindrar player från att gå utanför skärmen
         }
         /// <summary>
-        /// Ser till att player vänder sig så fort man trycker vänster eller höger piltangent även om timeTilNextFrame inte hunnit bli noll.
-        /// Undviker "skridskoeffekten" som fanns innnan.
+        /// Tvingar fram uppdatering av frame även om timeTilNextFrame inte hunnit bli noll.
+        /// Undviker bl a "skridskoeffekten" som fanns innnan.
         /// </summary>
         private void ForceFrameChange()
         {
             srcRectLB.X = facingSrcRects[facing].X + (frameLB % nrFrames) * frameWidth;
             srcRect.X = facingSrcRects[facing].X + (frame % nrFrames) * frameWidth;
         }
-        private void AddFriction(int facing)
+        private void AddFriction()
         {
             movement.X -= movement.X * 0.2f;
         }
@@ -275,7 +276,7 @@ namespace DrunkiBoy
                 isDead = true; //Level ändrar automatiskt levelState i Level till lostLife när player.isDead == true
                 livesLeft--;
                 ResetHealth();
-                ResetPowerUp();
+                DeactivatePowerUp();
             }
         }
         /// <summary>
@@ -300,7 +301,7 @@ namespace DrunkiBoy
             if (spawnTimer > 0)
             {
                 spawning = true;
-                hasJumped = false;
+                hasJumpedAfterSpawn = false;
                 spawnTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
 
                 if (spawnTimer <= spawnTimerDefault / 2)
@@ -315,11 +316,12 @@ namespace DrunkiBoy
             else
             {
                 spawning = false;
-                if (!hasJumped)
+                ForceFrameChange();
+                if (!hasJumpedAfterSpawn)
                 {
                     movement.Y += -jumpHeight;
                     activePlatform = null;
-                    hasJumped = true;
+                    hasJumpedAfterSpawn = true;
                 }
             } 
         }
@@ -347,11 +349,11 @@ namespace DrunkiBoy
         public void ActivatePowerUp(int powerUp, double time) 
         {
             isMorphing = true;
-            ResetPowerUp();
+            DeactivatePowerUp();
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
-            if(activePowerUp == 0)
+            if (activePowerUp == 0)
                 prevTexUpperBody = texUpperBody;
             
             //Ser till att frame sätts till första framen i animationen
@@ -400,16 +402,9 @@ namespace DrunkiBoy
                 {
                     AddGravity(0.2f);//Om man är uppe i luften när tiden går ut så fortsätt med 0.2 gravitation tills man är tillbaka på en plattform. Annars riskerar man att falla för snabbt och rakt igenom en plattform
                 }
-                if (activePowerUp == 2 && activePlatform != null)
+                else //Annars avaktivera direkt
                 {
-                    activePowerUp = 0; //Avaktiverar flygförmågan när man är på fast mark igen
-                    particleEngine.isActive = false;
-                }
-                if (activePowerUp != 2) //Om det inte är flygförmåga man har så avaktivera powerup direkt tiden gått ut
-                {
-                    invincible = false;
-                    activePowerUp = 0;
-                    texUpperBody = prevTexUpperBody;
+                    DeactivatePowerUp();
                 }
             }
         }
@@ -740,13 +735,14 @@ namespace DrunkiBoy
         /// <summary>
         /// Avaktiverar eventuell powerup
         /// </summary>
-        private void ResetPowerUp()
+        private void DeactivatePowerUp()
         {
             rotation = 0;
             particleEngine.isActive = false;
             invincible = false;
             activePowerUp = 0;
             Game1.gui.ResetPowerUp();
+            texUpperBody = prevTexUpperBody;
         }
         #endregion
            
