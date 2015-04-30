@@ -93,9 +93,12 @@ namespace DrunkiBoy
                     Shooting();
                     SetDeadFallingOffPlatform();
                     CheckIfPlayerIsOnPlatform();
-                    particleEngine.Update(particleEngingePos, true);
-                    if (!isMorphing)
+
+                    if (!isMorphing) 
+                    { 
                         texUpperBody = Textures.player_jetpack;
+                        particleEngine.Update(particleEngingePos, true);
+                    }
                 break;
             }
             
@@ -138,7 +141,7 @@ namespace DrunkiBoy
         private void PlayerFlying(GameTime gameTime)
         {
             facing = 1;
-            if (activePlatform != null && activePowerUpTimer >= 0) //Simulera jetpack motor
+            if (activePlatform != null && activePowerUpTimer >= 0 && !isMorphing) //Simulera jetpack motor
             {
                 movement.Y -= (float)rnd.NextDouble()*3;
             }
@@ -382,6 +385,7 @@ namespace DrunkiBoy
             {
                 frame = 0;
             }
+            ForceFrameChange();
             if (powerUp == 1) //Odödlighet...
             {
                 invincible = true;
