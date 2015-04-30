@@ -599,7 +599,7 @@ namespace DrunkiBoy
         /// </summary>
         public void Shooting()
         {
-            if (!movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space))
+            if (currentWeapon != weaponType.none && !movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space))
             {
                 shotDelay = shotDelayDefault;
                 Vector2 bulletPos, bulletVelocity;
