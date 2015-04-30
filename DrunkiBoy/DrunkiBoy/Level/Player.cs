@@ -141,6 +141,8 @@ namespace DrunkiBoy
         private void PlayerFlying(GameTime gameTime)
         {
             facing = 1;
+            particleEngingePos = new Vector2(pos.X + 14, pos.Y + 115);
+            rotation = 0f;
             if (activePlatform != null && activePowerUpTimer >= 0 && !isMorphing) //Simulera jetpack motor
             {
                 movement.Y -= (float)rnd.NextDouble()*3;
@@ -148,45 +150,18 @@ namespace DrunkiBoy
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
             {
                 particleEngingePos = new Vector2(pos.X + 20, pos.Y + 110);
-                if (activePlatform != null)
-                {
-                    rotation = 0f;
-                    timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                }
-
+                rotation = -0.1f;
                 movement.X -= 1;
-                ForceFrameChange();
-                if (activePlatform == null)
-                {
-                    rotation = -0.1f;
-                }
             }
             if (KeyMouseReader.keyState.IsKeyDown(Keys.Right))
             {
                 particleEngingePos = new Vector2(pos.X + 11, pos.Y + 110);
-                if (activePlatform != null)
-                {
-                    rotation = 0f;
-                    timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                }
-
+                rotation = +0.1f;
                 movement.X += 1;
-                ForceFrameChange();
-                if (activePlatform == null)
-                {
-                    rotation = +0.1f;
-                }
             }
-            if (activePowerUpTimer >= 0 && KeyMouseReader.keyState.IsKeyDown(Keys.Up))
+            if (activePowerUpTimer >= 0 && KeyMouseReader.keyState.IsKeyDown(Keys.Up) && !isMorphing)
             {
                 movement.Y -= 0.5f;
-            }
-            if (!(KeyMouseReader.keyState.IsKeyDown(Keys.Left) || KeyMouseReader.keyState.IsKeyDown(Keys.Right))) //Rätar ut player när man inte rör sig framåt eller bakåt
-            {
-                particleEngingePos = new Vector2(pos.X + 14, pos.Y + 115);
-                rotation = 0f;
             }
             
             AddGravity(0.2f);
