@@ -33,7 +33,7 @@ namespace DrunkiBoy
         public static int score = 0;
         private int targetScore, realScore; //realScore för att score-räknare inte hann med att räkna upp om man tog många poäng på en gång
 
-        public static int activePowerUp; //Tänker mig numrerade powerups, typ 1: odödlig, 2: flygförmåga, osv och så "0" för ingenting
+        public static int activePowerUp; //1: odödlig, 2: flygförmåga, osv och "0" för ingenting
         private double activePowerUpTimer;
         private Random rnd = new Random();
         public ParticleEngine2 particleEngine;
@@ -54,7 +54,7 @@ namespace DrunkiBoy
             score = 0;
             currentSpawnPos = pos;
             srcRectLB = srcRect;
-            livesLeft = 2;
+            livesLeft = Constants.player_defaultLives;
             Reset();
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
