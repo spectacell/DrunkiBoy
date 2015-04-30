@@ -425,7 +425,7 @@ namespace DrunkiBoy
             {
                 activePowerUpTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
             }
-            else if (activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
+            else if (activePowerUp != 0 && activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
             {
                 rotation = 0f;
                 if (activePowerUp == 2 && activePlatform == null)
