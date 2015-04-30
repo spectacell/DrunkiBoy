@@ -15,14 +15,15 @@ namespace DrunkiBoy
 
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
-        double timeTilNextFrameLB = 0; 
+        private double timeTilNextFrameLB = 0; 
         private int frameLB;
         private Rectangle srcRectLB;
         private float rotation = 0;
+        private bool isMorphing;
         public bool animateShooting;
         private bool shootingLeft;
         private double shotDelay, shotDelayDefault = 300;
-
+        private int prevFacing;
         private bool invincible;
 
         private const int playerSpeed = 80;
@@ -41,8 +42,8 @@ namespace DrunkiBoy
         public weaponType currentWeapon;
 
         public int jumpHeight = 12;
-        public Vector2 currentSpawnPos;
         public bool isDead {get; private set;}
+        public Vector2 currentSpawnPos;
         private double spawnTimer, spawnTimerDefault = 1750;
         public bool spawning;
         private bool hasJumped;
@@ -82,7 +83,8 @@ namespace DrunkiBoy
                     CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
                     SetDeadFallingOffPlatform();
-                    particleEngine.Update(particleEngingePos, false);
+                    if (!isMorphing)
+                        texUpperBody = Textures.player_invincible;
                 break;
 
                 case 2: //Flygförmåga
@@ -92,6 +94,8 @@ namespace DrunkiBoy
                     SetDeadFallingOffPlatform();
                     CheckIfPlayerIsOnPlatform();
                     particleEngine.Update(particleEngingePos, true);
+                    if (!isMorphing)
+                        texUpperBody = Textures.player_jetpack;
                 break;
             }
             
@@ -104,6 +108,7 @@ namespace DrunkiBoy
             AnimatingScore();
             SpawnAnimation(gameTime);
             PowerUpTimerAandDeactivation(gameTime);
+            prevFacing = facing;
         }
         
         /// <summary>
@@ -112,21 +117,14 @@ namespace DrunkiBoy
         /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (!animateShooting)//Borde kunna få in den här någon annanstans men kommer inte på nåt bra nu. srcRect är samma om man inte skjuter
+            if (!animateShooting && !isMorphing)//Borde kunna få in den här någon annanstans men kommer inte på nåt bra nu. srcRect är samma om man inte skjuter
             { 
                 srcRectLB = srcRect;
             }
             if (!spawning) 
             {
-                if (activePowerUp == 2) //Om player har flygförmåga så ritas textur med jetpack
-                {
-                    spriteBatch.Draw(Textures.player_jetpack, pos, new Rectangle(0, 0, 95, 146), Color.White, rotation, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
-                }
-                else //Annars de vanliga texturerna för under- och överkropp
-                {
-                    spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
-                    spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
-                }
+                spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, rotation, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+                spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, rotation, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             }
             else //När player spawnas så ritas bara huvududet ut
             {
@@ -268,39 +266,7 @@ namespace DrunkiBoy
                 srcRectLB.X = facingSrcRects[facing].X + (frameLB % nrFrames) * frameWidth;
             }
         }
-        /// <summary>
-        /// Räknar ner shotDelay variablen som styr hur snabbt player kan skjuta.
-        /// </summary>
-        private void CountDownShotDelay(GameTime gameTime)
-        {
-            if(shotDelay >= 0)
-                shotDelay -= gameTime.ElapsedGameTime.TotalMilliseconds;
-        }
-        /// <summary>
-        /// Räknar ner timeTilNextFrame när animateShooting == true så att överkroppen animeras då
-        /// </summary>
-        /// <param name="gameTime"></param>
-        private void AnimateShooting(GameTime gameTime)
-        {
-            if (animateShooting)
-            {
-                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (facing == 1 && frame == 7)
-                {
-                    animateShooting = false;
-                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
-                }
-                if (facing == 0 && frame == 15)
-                {
-                    animateShooting = false;
-                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
-                }
-                if ((shootingLeft && facing == 1) || (!shootingLeft && facing == 0)) //Slutar animera skottanimationen om player vänder sig om
-                {
-                    animateShooting = false;
-                }
-            }
-        }
+        
         private void SetDeadFallingOffPlatform()
         {
             if (pos.Y > Level.levelHeight)
@@ -400,19 +366,30 @@ namespace DrunkiBoy
         /// <param name="time">Tid i ms för hur länge powerup är aktiv</param>
         public void ActivatePowerUp(int powerUp, double time) 
         {
+            isMorphing = true;
             ResetPowerUp();
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
+            prevTexUpperBody = texUpperBody;
+            
+            //Ser till att frame sätts till första framen i animationen
+            if (facing == 0) //Vänd åt vänster
+            {
+                frame = 8;
+            }
+            else //Vänd åt höger
+            {
+                frame = 0;
+            }
             if (powerUp == 1) //Odödlighet...
             {
                 invincible = true;
-                particleEngine = new ParticleEngine2(Textures.smokeParticles, new Vector2(pos.X+srcRect.Width/2, pos.Y+srcRect.Height), 1, 10, Textures.water_texture, false);
-                prevTexUpperBody = texUpperBody;
-                texUpperBody = Textures.player_invincible;
+                texUpperBody = Textures.player_invincible_morph;
             }
             else if (powerUp == 2) //Flygning...
             {
+                texUpperBody = Textures.player_jetpack_morph;
                 particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, 6, 100, Textures.explosionTexture, true);
             }
         }
@@ -421,8 +398,17 @@ namespace DrunkiBoy
         /// </summary>
         private void PowerUpTimerAandDeactivation(GameTime gameTime)
         {
-            if (activePowerUpTimer >= 0)
+            if (activePowerUpTimer >= 0) //Om powerup är aktiv
             {
+                if (isMorphing)
+                {
+                    timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                    //Byter textur när man når sista framen i animationen eller player vänder sig om
+                    if ((facing == 1 && frame == 7) || (facing == 0 && frame == 15) || (facing != prevFacing))
+                    {
+                        SwitchTextureAfterMorphing();
+                    }
+                }
                 activePowerUpTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
             }
             else if (activePowerUp != 0 && activePowerUpTimer <= 0) //Avaktiverar poweruppen när tiden gått ut
@@ -443,6 +429,22 @@ namespace DrunkiBoy
                     activePowerUp = 0;
                     texUpperBody = prevTexUpperBody;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Byter till aktuell powerup textur efter att morph-animationen körts färdigt
+        /// </summary>
+        private void SwitchTextureAfterMorphing()
+        {
+            isMorphing = false;
+            if (activePowerUp == 1)
+            {
+                texUpperBody = Textures.player_invincible;
+            }
+            else if (activePowerUp == 2)
+            {
+                texUpperBody = Textures.player_jetpack;
             }
         }
         /// <summary>
@@ -568,7 +570,9 @@ namespace DrunkiBoy
                     currentWeapon = weaponType.none;
                     break;
                 case weaponType.burger:
-                    texUpperBody = prevTexUpperBody = Textures.player_burger;
+                    prevTexUpperBody = Textures.player_burger;
+                    if (activePowerUp == 0)
+                        texUpperBody = prevTexUpperBody;
                     currentWeapon = weaponType.burger;
                     break;
                 case weaponType.pizza:
@@ -599,6 +603,8 @@ namespace DrunkiBoy
             {
                 shotDelay = shotDelayDefault;
                 Vector2 bulletPos, bulletVelocity;
+                texUpperBody = Textures.player_shooting;
+                animateShooting = true;
                 if (facing == 0)  // Skjuter vänster
                 {
                     shootingLeft = true;
@@ -616,34 +622,51 @@ namespace DrunkiBoy
                 switch (currentWeapon)
                 {
                     case weaponType.burger:
-                        texUpperBody = Textures.player_shooting;
-                        animateShooting = true;
-                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity, true));
-                        
+                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity, true));     
                     break;
+
                     case weaponType.pizza:
-                        texUpperBody = Textures.player_shooting;
-                        animateShooting = true;
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false, true));
                         prevTexUpperBody = Textures.player_upper_body;                        
                         currentWeapon = weaponType.none;
                     break;
+
                     case weaponType.kebab:
-                    texUpperBody = Textures.player_shooting;
-                    animateShooting = true;
-                    BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity, true));
+                        BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity, true));
                     break;
+
                     case weaponType.bottle:     
-                        texUpperBody = Textures.player_shooting;
-                        animateShooting = true;
                         BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity, true));
                     break;
+
                     case weaponType.molotovCocktail:
-                        texUpperBody = Textures.player_shooting;
-                        animateShooting = true;
                         BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity, true));
                     break;
                 }  
+            }
+        }
+        /// <summary>
+        /// Räknar ner shotDelay variablen som styr hur snabbt player kan skjuta.
+        /// </summary>
+        private void CountDownShotDelay(GameTime gameTime)
+        {
+            if (shotDelay >= 0)
+                shotDelay -= gameTime.ElapsedGameTime.TotalMilliseconds;
+        }
+        /// <summary>
+        /// Räknar ner timeTilNextFrame när animateShooting == true så att överkroppen animeras då
+        /// </summary>
+        /// <param name="gameTime"></param>
+        private void AnimateShooting(GameTime gameTime)
+        {
+            if (animateShooting)
+            {
+                timeTilNextFrame -= gameTime.ElapsedGameTime.TotalMilliseconds;
+                if ((facing == 1 && frame == 7) || (facing == 0 && frame == 15) || (facing != prevFacing))
+                {
+                    animateShooting = false;
+                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
+                }
             }
         }
         /// <summary>

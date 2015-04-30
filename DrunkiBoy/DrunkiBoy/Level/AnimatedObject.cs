@@ -17,7 +17,6 @@ namespace DrunkiBoy
 
         public Vector2 movement;
         public Platform activePlatform;
-        public bool isOnGround;
 
         public AnimatedObject(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval) :
             base(pos, tex, srcRect, isActive)
