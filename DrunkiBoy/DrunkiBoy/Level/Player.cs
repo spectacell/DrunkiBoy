@@ -21,7 +21,6 @@ namespace DrunkiBoy
         private float rotation = 0;
         private bool isMorphing;
         public bool animateShooting;
-        private bool shootingLeft;
         private double shotDelay, shotDelayDefault = 700;
         private int prevFacing;
         private bool invincible;
@@ -619,14 +618,12 @@ namespace DrunkiBoy
                 animateShooting = true;
                 if (facing == 0)  // Skjuter vänster
                 {
-                    //shootingLeft = true;
                     bulletPos = new Vector2(pos.X, pos.Y + 60);
                     bulletVelocity = new Vector2(-10, 0);
                     frame = 8;
                 }
                 else //Skjuter höger
                 {
-                    //shootingLeft = false;
                     bulletPos = new Vector2(pos.X + 60, pos.Y + 60);
                     bulletVelocity = new Vector2(10, 0);
                     frame = 0;
@@ -639,7 +636,8 @@ namespace DrunkiBoy
 
                     case weaponType.pizza:
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false, true));
-                        prevTexUpperBody = Textures.player_upper_body;                 
+                        if (activePowerUp == 0)
+                            prevTexUpperBody = Textures.player_upper_body;                 
                         currentWeapon = weaponType.none;
                     break;
 
