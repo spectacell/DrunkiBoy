@@ -14,7 +14,7 @@ namespace DrunkiBoy
         public bool movingBack, weaponThrown;
 
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
-        private Texture2D texUpperBody, texLowerBody, prevTexUpperBody;
+        private Texture2D texUpperBody, texLowerBody, prevTexUpperBody, prevTexUpperBodyPU;
         private double timeTilNextFrameLB = 0; 
         private int frameLB;
         private Rectangle srcRectLB;
@@ -22,7 +22,7 @@ namespace DrunkiBoy
         private bool isMorphing;
         public bool animateShooting;
         private bool shootingLeft;
-        private double shotDelay, shotDelayDefault = 300;
+        private double shotDelay, shotDelayDefault = 700;
         private int prevFacing;
         private bool invincible;
 
@@ -83,8 +83,7 @@ namespace DrunkiBoy
                     CheckIfPlayerIsOnPlatform();
                     AnimateWhenInAir(gameTime);
                     SetDeadFallingOffPlatform();
-                    if (!isMorphing)
-                        texUpperBody = Textures.player_invincible;
+
                 break;
 
                 case 2: //Flygförmåga
@@ -94,11 +93,11 @@ namespace DrunkiBoy
                     SetDeadFallingOffPlatform();
                     CheckIfPlayerIsOnPlatform();
 
-                    if (!isMorphing) 
-                    { 
-                        texUpperBody = Textures.player_jetpack;
+                    if (!isMorphing)
+                    {
                         particleEngine.Update(particleEngingePos, true);
                     }
+                    
                 break;
             }
             
@@ -353,8 +352,8 @@ namespace DrunkiBoy
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
-            if (activePowerUp == 0)
-                prevTexUpperBody = texUpperBody;
+            //if (activePowerUp == 0)
+            prevTexUpperBodyPU = texUpperBody;
             
             //Ser till att frame sätts till första framen i animationen
             if (facing == 0) //Vänd åt vänster
@@ -543,29 +542,51 @@ namespace DrunkiBoy
             switch (type)
             {
                 case weaponType.none:
-                    texUpperBody = prevTexUpperBody = Textures.player_upper_body;
+                    prevTexUpperBody = Textures.player_upper_body;
+                    if (activePowerUp == 0)
+                    {
+                        texUpperBody = prevTexUpperBody;
+                    }
                     currentWeapon = weaponType.none;
                     break;
                 case weaponType.burger:
                     prevTexUpperBody = Textures.player_burger;
                     if (activePowerUp == 0)
+                    {
                         texUpperBody = prevTexUpperBody;
+                    }
                     currentWeapon = weaponType.burger;
                     break;
                 case weaponType.pizza:
-                    texUpperBody = prevTexUpperBody = Textures.player_pizza;
+                    prevTexUpperBody = Textures.player_pizza;
+                    if (activePowerUp == 0)
+                    {
+                        texUpperBody = prevTexUpperBody;
+                    }
                     currentWeapon = weaponType.pizza;
                     break;
                 case weaponType.kebab:
-                    texUpperBody = prevTexUpperBody = Textures.player_kebab;
+                    prevTexUpperBody = Textures.player_kebab;
+                    if (activePowerUp == 0)
+                    {
+                        texUpperBody = prevTexUpperBody;
+                    }
                     currentWeapon = weaponType.kebab;
                     break;
                 case weaponType.bottle:
-                    texUpperBody = prevTexUpperBody = Textures.player_bottle;
+                    prevTexUpperBody = Textures.player_bottle;
+                    if (activePowerUp == 0)
+                    {
+                        texUpperBody = prevTexUpperBody;
+                    }
                     currentWeapon = weaponType.bottle;
                     break;
                 case weaponType.molotovCocktail:
-                    texUpperBody = prevTexUpperBody = Textures.player_bottle_molotov;
+                    prevTexUpperBody = Textures.player_bottle_molotov;
+                    if (activePowerUp == 0)
+                    {
+                        texUpperBody = prevTexUpperBody;
+                    }
                     currentWeapon = weaponType.molotovCocktail;
                     break;
             }
@@ -580,18 +601,32 @@ namespace DrunkiBoy
             {
                 shotDelay = shotDelayDefault;
                 Vector2 bulletPos, bulletVelocity;
-                texUpperBody = Textures.player_shooting;
+                prevTexUpperBody = texUpperBody;
+                switch (activePowerUp)
+                {
+                    case 0:
+                        texUpperBody = Textures.player_shooting;
+                        break;
+
+                    case 1:
+                        texUpperBody = Textures.player_invincible_shooting;
+                        break;
+
+                    case 2:
+
+                        break;
+                }
                 animateShooting = true;
                 if (facing == 0)  // Skjuter vänster
                 {
-                    shootingLeft = true;
+                    //shootingLeft = true;
                     bulletPos = new Vector2(pos.X, pos.Y + 60);
                     bulletVelocity = new Vector2(-10, 0);
                     frame = 8;
                 }
                 else //Skjuter höger
                 {
-                    shootingLeft = false;
+                    //shootingLeft = false;
                     bulletPos = new Vector2(pos.X + 60, pos.Y + 60);
                     bulletVelocity = new Vector2(10, 0);
                     frame = 0;
@@ -604,7 +639,7 @@ namespace DrunkiBoy
 
                     case weaponType.pizza:
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false, true));
-                        prevTexUpperBody = Textures.player_upper_body;                        
+                        prevTexUpperBody = Textures.player_upper_body;                 
                         currentWeapon = weaponType.none;
                     break;
 
@@ -737,12 +772,14 @@ namespace DrunkiBoy
         /// </summary>
         private void DeactivatePowerUp()
         {
-            rotation = 0;
-            particleEngine.isActive = false;
-            invincible = false;
-            activePowerUp = 0;
-            Game1.gui.ResetPowerUp();
-            texUpperBody = prevTexUpperBody;
+            if (activePowerUp != 0) { 
+                rotation = 0;
+                particleEngine.isActive = false;
+                invincible = false;
+                activePowerUp = 0;
+                Game1.gui.ResetPowerUp();
+                texUpperBody = prevTexUpperBodyPU;
+            }
         }
         #endregion
            
