@@ -111,7 +111,6 @@
     <Compile Include="Level\Items\Painkiller.cs" />
     <Compile Include="Level\Items\Pant.cs" />
     <Compile Include="Level\Items\Toilet.cs" />
-    <Compile Include="MovingPlattform.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="ParticleEngine2.cs" />
     <Compile Include="ParticleEngine.cs" />
