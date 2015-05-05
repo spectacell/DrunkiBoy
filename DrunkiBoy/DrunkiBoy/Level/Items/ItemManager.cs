@@ -150,7 +150,11 @@ namespace DrunkiBoy
                         an.LoseHealth(0.01f);
                     }
                 }
-                
+                if (fire.isActive == false)
+                {
+                    fires.Remove(fire);
+                    break;
+                }
             }
         }
         private void UpdateToilets(GameTime gameTime, Player player)
