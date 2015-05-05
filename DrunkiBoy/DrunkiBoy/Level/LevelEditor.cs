@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka, RedbullVodka}; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka, RedbullVodka, MovingPlatform}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -47,6 +47,7 @@ namespace DrunkiBoy
             menuEntries.Add("K: Key");
             menuEntries.Add("L: Flashlight");
             menuEntries.Add("M: Money");
+            menuEntries.Add("N: MovingPlatform");
             menuEntries.Add("O: Bottle");
             menuEntries.Add("P: Platform");
             menuEntries.Add("R: Radio");
@@ -56,6 +57,7 @@ namespace DrunkiBoy
             menuEntries.Add("V: Pizza");
             menuEntries.Add("W: Wallet");
             menuEntries.Add("Y: Player");
+            
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
             selectedItem = items.Platform;
@@ -159,6 +161,24 @@ namespace DrunkiBoy
                         else
                         {
                             objects.Add(new Platform(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.platform, true));
+                        }
+                        break;
+
+                    case items.MovingPlatform:
+                         if (intersectingPlatform != null)
+                        {
+                            if (mouseIsAt.X < intersectingPlatform.pos.X - selectedObject.BoundingBox.Width / 2) //Snap to left or right of exisisting platform
+                            {
+                                objects.Add(new MovingPlatform(new Vector2(intersectingPlatform.BoundingBox.Left - selectedObject.BoundingBox.Width, intersectingPlatform.pos.Y), Textures.platform, true));
+                            }
+                            else
+                            {
+                                objects.Add(new MovingPlatform(new Vector2(intersectingPlatform.BoundingBox.Right, intersectingPlatform.pos.Y), Textures.platform, true));
+                            }
+                        }
+                        else
+                        {
+                            objects.Add(new MovingPlatform(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.platform, true));
                         }
                         break;
 
@@ -538,6 +558,12 @@ namespace DrunkiBoy
                 selectedItem = items.RedbullVodka;
                 selectedObject = new RedbullVodka(new Vector2(mouseState.X, mouseState.Y), Textures.redbullVodka, true);
             }
+            if (KeyMouseReader.KeyPressed(Keys.N))
+            {
+                selectedItem = items.MovingPlatform;
+                selectedObject = new MovingPlatform(new Vector2(mouseState.X, mouseState.Y), Textures.platform, true);
+            }
+
         }
 
         private void MoveCamera()

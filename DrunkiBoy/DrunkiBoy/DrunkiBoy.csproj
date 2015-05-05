@@ -86,7 +86,6 @@
     <Compile Include="GUI\ActivePowerUpDisplay.cs" />
     <Compile Include="Level\Bullets\HamburgareVapen.cs" />
     <Compile Include="Level\Items\Burger.cs" />
-    <Compile Include="Level\Items\FireOnGround.cs" />
     <Compile Include="Level\Items\Heart.cs" />
     <Compile Include="Level\Items\Jagerbomb.cs" />
     <Compile Include="Level\Items\Kebab.cs" />
@@ -112,6 +111,7 @@
     <Compile Include="Level\Items\Painkiller.cs" />
     <Compile Include="Level\Items\Pant.cs" />
     <Compile Include="Level\Items\Toilet.cs" />
+    <Compile Include="MovingPlatform.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="ParticleEngine2.cs" />
     <Compile Include="ParticleEngine.cs" />
