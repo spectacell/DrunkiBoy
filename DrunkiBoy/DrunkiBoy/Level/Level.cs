@@ -181,6 +181,10 @@ namespace DrunkiBoy
                     itemManager.AddPlatform(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.platform, true));
                     objects.Add(new Platform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.platform, true)); //För leveleditorn
                 }
+                else if (temp[0] == "movingplatform")
+                {
+                    itemManager.AddPlatform(new MovingPlatform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.platform, true));
+                }
                 else if (temp[0] == "player")
                 {
                     player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.player, new Rectangle(0, 0, 95, 146), true, 8, 80);

@@ -10,6 +10,7 @@ namespace DrunkiBoy
     class ItemManager
     {
         public List<Platform> platforms = new List<Platform>();
+        public List<MovingPlatform> movingplatforms = new List<MovingPlatform>();
         public List<Torch> torches = new List<Torch>();
         public List<Key> keys = new List<Key>();
         public List<Wallet> wallets = new List<Wallet>();
@@ -484,6 +485,12 @@ namespace DrunkiBoy
         {
             foreach (Platform platform in platforms)
             {
+                if (platform is MovingPlatform)
+                {
+
+                    ((MovingPlatform)platform).Update(player);
+                }
+
                 if (player.movement.Y > 0) //Going down
                 {
                     if (player.BottomBoundingBox.Intersects(platform.TopBoundingBox))
