@@ -668,7 +668,7 @@ namespace DrunkiBoy
                         BulletManager.ammo.Remove(pizzaWeapon);
                         if (activePowerUp == 0)
                             prevTexUpperBody = Textures.player_upper_body;                 
-                        currentWeapon = weaponType.none;
+                        //currentWeapon = weaponType.none;
                     break;
 
                     case weaponType.kebab:
