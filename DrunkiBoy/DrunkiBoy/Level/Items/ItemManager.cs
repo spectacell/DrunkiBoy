@@ -10,6 +10,7 @@ namespace DrunkiBoy
     class ItemManager
     {
         public List<Platform> platforms = new List<Platform>();
+        public List<MovingPlattform> movingplatform = new List<MovingPlattform>();
         public List<Torch> torches = new List<Torch>();
         public List<Key> keys = new List<Key>();
         public List<Wallet> wallets = new List<Wallet>();
@@ -449,11 +450,17 @@ namespace DrunkiBoy
             {
                 redbullVodka.Draw(spriteBatch);
             }
+            
         }
         private void UpdatePlatforms(Player player, List<AngryNeighbour> angryNeighbours)
         {
             foreach (Platform platform in platforms)
             {
+                if (platform is MovingPlattform)
+                {
+                    
+                    ((MovingPlattform)platform).Update(player);
+                }
                 if (player.movement.Y > 0) //Going down
                 {
                     if (player.BottomBoundingBox.Intersects(platform.TopBoundingBox))
@@ -489,6 +496,6 @@ namespace DrunkiBoy
                     }
                 }
             }
-        }
+        }        
     }
 }

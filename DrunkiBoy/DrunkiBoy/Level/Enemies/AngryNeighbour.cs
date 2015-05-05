@@ -26,7 +26,7 @@ namespace DrunkiBoy
         public override void Update(GameTime gameTime)
         {
             pos += (float)gameTime.ElapsedGameTime.TotalSeconds * movement * speed;
-            if (activePlatform != null && (pos.X >= activePlatform.pos.X + activePlatform.BoundingBox.Width - 57 || pos.X <= activePlatform.pos.X))
+            if (activePlatform != null && (pos.X >= activePlatform.pos.X + activePlatform.BoundingBox.Width - 67 || pos.X <= activePlatform.pos.X))
             {
                 ChangeDirection();
             }
