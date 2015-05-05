@@ -11,11 +11,9 @@ namespace DrunkiBoy
 {
     static class BulletManager
     {
-        public static Texture2D tex;
         public static List<Bullet> bullets = new List<Bullet>();
         public static List<Bullet> ammo = new List<Bullet>();
         public static ParticleEngine particleEngine = new ParticleEngine();
-        public static Vector2 pos;
 
         public static void AddBullet(Bullet bullet)
         {
@@ -34,9 +32,9 @@ namespace DrunkiBoy
 
                 bullet.Update(gameTime);
 
-                if (!player.animateShooting && !player.weaponThrown && bullet is PizzaWeapon)
+                if (!player.animateShooting && !player.weaponThrown && bullet is PizzaWeapon) 
                 {
-                    if (bullet.DetectPixelCollision(player))
+                    if (bullet.DetectPixelCollision(player)) //Så att player kan plocka upp pizzan igen efter att ha kastat iväg den
                     {
                         ammo.Add(bullet);
                         bullets.Remove(bullet);

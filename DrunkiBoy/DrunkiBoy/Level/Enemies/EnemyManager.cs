@@ -63,7 +63,7 @@ namespace DrunkiBoy
                     {
                         GenerateParticleEngine(bullet);
                         if (bullet.lethal)
-                            an.LoseHealth();
+                            an.LoseHealth(1);
                         an.ChangeDirection();
                         bullet.isActive = false;
                         an.BlinkHealthBar();
@@ -96,7 +96,7 @@ namespace DrunkiBoy
                     {
                         GenerateParticleEngine(bullet);
                         if (bullet.lethal)
-                            flashlight.LoseHealth();
+                            flashlight.LoseHealth(1);
                         bullet.isActive = false;
                     }  
                 }
@@ -127,7 +127,7 @@ namespace DrunkiBoy
                     {
                         GenerateParticleEngine(bullet);
                         if (bullet.lethal)
-                            radio.LoseHealth();
+                            radio.LoseHealth(1);
                         bullet.isActive = false;
                     }
                 }

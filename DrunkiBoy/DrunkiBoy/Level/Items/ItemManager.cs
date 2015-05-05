@@ -27,6 +27,7 @@ namespace DrunkiBoy
         public List<Toilet> toilets = new List<Toilet>();
         public List<Vodka> vodkas = new List<Vodka>();
         public List<RedbullVodka> redbullVodkas = new List<RedbullVodka>();
+        public List<FireOnGround> fires = new List<FireOnGround>();
 
         HamburgareVapen hamburgareVapen;
         BottleWeapon bottleWeapon;
@@ -133,7 +134,24 @@ namespace DrunkiBoy
             UpdateToilets(gameTime, player);
             UpdateVodkas(gameTime, player);
             UpdateRedbullVodkas(gameTime, player);
+            UpdateFires(gameTime, angryNeighbours);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
+        }
+
+        private void UpdateFires(GameTime gameTime, List<AngryNeighbour> angryNeighbours)
+        {
+            foreach (FireOnGround fire in fires)
+            {
+                fire.Update(gameTime);
+                foreach (AngryNeighbour an in angryNeighbours)
+                {
+                    if (fire.DetectPixelCollision(an))
+                    {
+                        an.LoseHealth(0.01f);
+                    }
+                }
+                
+            }
         }
         private void UpdateToilets(GameTime gameTime, Player player)
         {
@@ -457,6 +475,10 @@ namespace DrunkiBoy
             {
                 redbullVodka.Draw(spriteBatch);
             }
+            foreach (FireOnGround fire in fires)
+            {
+                fire.Draw(spriteBatch);
+            }
         }
         private void UpdatePlatforms(Player player, List<AngryNeighbour> angryNeighbours)
         {
@@ -471,13 +493,22 @@ namespace DrunkiBoy
                         player.movement.Y = 0;
                     }
                 }
-                //Försöker få det att se ut som att partiklarna tar emot plattformen och sprider sig längs med istället. Blev inte riktigt bra, antar att det är för att de är mindre än 1 pixel stora.
+                //Försöker få det att se ut som att partiklarna från jet-motorn när player flyger tar emot plattformen och sprider sig längs med. 
+                //Blev inte riktigt bra, antar att det är för att de är mindre än 1 pixel stora.
                 foreach (Particle p in player.particleEngine.particles) 
                 {
                     if (p.BoundingBox.Intersects(platform.BoundingBox))
                     {
                         p.Velocity.Y = 0;
                         p.Velocity.X += rnd.Next(-3,3);
+                    }
+                }
+                foreach (Bullet b in BulletManager.bullets)
+                {
+                    if (b is MolotovWeapon && b.DetectPixelCollision(platform))
+                    {
+                        fires.Add(new FireOnGround(new Vector2(platform.pos.X+20, platform.pos.Y-Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180));
+                        b.isActive = false;
                     }
                 }
                 foreach (AngryNeighbour an in angryNeighbours)

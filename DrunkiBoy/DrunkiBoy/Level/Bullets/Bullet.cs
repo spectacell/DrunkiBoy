@@ -39,7 +39,7 @@ namespace DrunkiBoy
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, pos+origin, srcRect, Color.White, rotation, origin, 1f, SpriteEffects.None, drawLayer);
+            spriteBatch.Draw(tex, pos + origin, srcRect, Color.White, rotation, origin, 1f, SpriteEffects.None, drawLayer);
         }
     }
 }
