@@ -10,7 +10,6 @@ namespace DrunkiBoy
     class ItemManager
     {
         public List<Platform> platforms = new List<Platform>();
-        public List<MovingPlatform> movingPlatform = new List<MovingPlatform>();
         public List<Torch> torches = new List<Torch>();
         public List<Key> keys = new List<Key>();
         public List<Wallet> wallets = new List<Wallet>();
@@ -28,7 +27,12 @@ namespace DrunkiBoy
         public List<Toilet> toilets = new List<Toilet>();
         public List<Vodka> vodkas = new List<Vodka>();
         public List<RedbullVodka> redbullVodkas = new List<RedbullVodka>();
+        public List<FireOnGround> fires = new List<FireOnGround>();
 
+        HamburgareVapen hamburgareVapen;
+        BottleWeapon bottleWeapon;
+        KebabWeapon kebabWeapon;
+        PizzaWeapon pizzaWeapon;
         private Random rnd = new Random();
         public static ParticleEngine particleEngine;
 
@@ -130,7 +134,24 @@ namespace DrunkiBoy
             UpdateToilets(gameTime, player);
             UpdateVodkas(gameTime, player);
             UpdateRedbullVodkas(gameTime, player);
+            UpdateFires(gameTime, angryNeighbours);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
+        }
+
+        private void UpdateFires(GameTime gameTime, List<AngryNeighbour> angryNeighbours)
+        {
+            foreach (FireOnGround fire in fires)
+            {
+                fire.Update(gameTime);
+                foreach (AngryNeighbour an in angryNeighbours)
+                {
+                    if (fire.DetectPixelCollision(an))
+                    {
+                        an.LoseHealth(0.01f);
+                    }
+                }
+                
+            }
         }
         private void UpdateToilets(GameTime gameTime, Player player)
         {
@@ -157,6 +178,7 @@ namespace DrunkiBoy
             {
                 if (kebab.DetectPixelCollision(player))
                 {
+                    BulletManager.ammo.Add(kebabWeapon);
                     kebabs.Remove(kebab);
                     player.PickUpWeapon(Player.weaponType.kebab);
                     break;
@@ -182,6 +204,7 @@ namespace DrunkiBoy
             {
                 if (bottle.DetectPixelCollision(player))
                 {
+                    BulletManager.AddAmmo(bottleWeapon);
                     bottles.Remove(bottle);
                     player.PickUpWeapon(Player.weaponType.bottle);
                     break;
@@ -196,6 +219,7 @@ namespace DrunkiBoy
 
                 if (pizza.DetectPixelCollision(player))
                 {
+                    BulletManager.AddAmmo(pizzaWeapon);
                     pizzas.Remove(pizza);
                     player.PickUpWeapon(Player.weaponType.pizza);
                     break;
@@ -341,6 +365,7 @@ namespace DrunkiBoy
             {
                 if (burger.DetectPixelCollision(player))
                 {
+                    BulletManager.AddAmmo(hamburgareVapen);
                     burgers.Remove(burger);
                     player.PickUpWeapon(Player.weaponType.burger);
                     break;
@@ -450,17 +475,15 @@ namespace DrunkiBoy
             {
                 redbullVodka.Draw(spriteBatch);
             }
+            foreach (FireOnGround fire in fires)
+            {
+                fire.Draw(spriteBatch);
+            }
         }
         private void UpdatePlatforms(Player player, List<AngryNeighbour> angryNeighbours)
         {
             foreach (Platform platform in platforms)
             {
-                if (platform is MovingPlatform)
-                {
-
-                    ((MovingPlatform)platform).Update(player);
-                }
-
                 if (player.movement.Y > 0) //Going down
                 {
                     if (player.BottomBoundingBox.Intersects(platform.TopBoundingBox))
@@ -470,13 +493,22 @@ namespace DrunkiBoy
                         player.movement.Y = 0;
                     }
                 }
-                //Försöker få det att se ut som att partiklarna tar emot plattformen och sprider sig längs med istället. Blev inte riktigt bra, antar att det är för att de är mindre än 1 pixel stora.
+                //Försöker få det att se ut som att partiklarna från jet-motorn när player flyger tar emot plattformen och sprider sig längs med. 
+                //Blev inte riktigt bra, antar att det är för att de är mindre än 1 pixel stora.
                 foreach (Particle p in player.particleEngine.particles) 
                 {
                     if (p.BoundingBox.Intersects(platform.BoundingBox))
                     {
                         p.Velocity.Y = 0;
                         p.Velocity.X += rnd.Next(-3,3);
+                    }
+                }
+                foreach (Bullet b in BulletManager.bullets)
+                {
+                    if (b is MolotovWeapon && b.DetectPixelCollision(platform))
+                    {
+                        fires.Add(new FireOnGround(new Vector2(platform.pos.X+20, platform.pos.Y-Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180));
+                        b.isActive = false;
                     }
                 }
                 foreach (AngryNeighbour an in angryNeighbours)
