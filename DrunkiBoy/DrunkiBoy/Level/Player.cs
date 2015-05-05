@@ -47,6 +47,13 @@ namespace DrunkiBoy
         public bool spawning;
         private bool hasJumpedAfterSpawn;
         private Rectangle srcRectSpawnHead;
+
+        int activeWeapon;
+        HamburgareVapen burgerWeapon;
+        BottleWeapon bottleWeapon;
+        PizzaWeapon pizzaWeapon;
+        KebabWeapon kebabWeapon;
+
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
@@ -98,7 +105,28 @@ namespace DrunkiBoy
                     }
                     
                 break;
+
+
             }
+
+                if (BulletManager.ammo.Count <= 0)
+                    PickUpWeapon(Player.weaponType.none);
+
+            //for (int i = 0; i < BulletManager.ammo.Count; i++)
+            //{
+            //    if (BulletManager.ammo[i] == bottleWeapon)
+            //        PickUpWeapon(Player.weaponType.bottle);
+
+            //    else if (BulletManager.ammo[i] == burgerWeapon)
+            //        PickUpWeapon(Player.weaponType.burger);
+
+            //    else if (BulletManager.ammo[i] == pizzaWeapon)
+            //        PickUpWeapon(Player.weaponType.pizza);
+
+            //    else if (BulletManager.ammo[i] == kebabWeapon)
+            //        PickUpWeapon(Player.weaponType.kebab);
+            //}
+                 
             
             base.Update(gameTime);
             AnimateLowerBody();
@@ -596,7 +624,7 @@ namespace DrunkiBoy
         /// </summary>
         public void Shooting()
         {
-            if (currentWeapon != weaponType.none && !movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space))
+            if (currentWeapon != weaponType.none && !movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space) && BulletManager.ammo.Count > 0)
             {
                 shotDelay = shotDelayDefault;
                 Vector2 bulletPos, bulletVelocity;
@@ -631,11 +659,13 @@ namespace DrunkiBoy
                 switch (currentWeapon)
                 {
                     case weaponType.burger:
-                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity, true));     
+                        BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity, true));
+                        BulletManager.ammo.Remove(burgerWeapon);
                     break;
 
                     case weaponType.pizza:
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false, true));
+                        BulletManager.ammo.Remove(pizzaWeapon);
                         if (activePowerUp == 0)
                             prevTexUpperBody = Textures.player_upper_body;                 
                         currentWeapon = weaponType.none;
@@ -643,16 +673,19 @@ namespace DrunkiBoy
 
                     case weaponType.kebab:
                         BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity, true));
+                        BulletManager.ammo.Remove(kebabWeapon);
                     break;
 
                     case weaponType.bottle:     
                         BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity, true));
+                        BulletManager.ammo.Remove(bottleWeapon);
                     break;
 
                     case weaponType.molotovCocktail:
                         BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity, true));
+                        BulletManager.ammo.Remove(bottleWeapon);
                     break;
-                }  
+                }
             }
         }
         /// <summary>
@@ -734,6 +767,8 @@ namespace DrunkiBoy
             BringToLife();
             ResetWeapon();
             ResetHealth();
+            activePowerUp = 0;
+            BulletManager.ammo.Clear();
         }
         /// <summary>
         /// Sätter isDead = false

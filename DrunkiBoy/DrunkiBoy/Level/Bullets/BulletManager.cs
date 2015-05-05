@@ -13,13 +13,17 @@ namespace DrunkiBoy
     {
         public static Texture2D tex;
         public static List<Bullet> bullets = new List<Bullet>();
+        public static List<Bullet> ammo = new List<Bullet>();
         public static ParticleEngine particleEngine = new ParticleEngine();
         public static Vector2 pos;
 
         public static void AddBullet(Bullet bullet)
         {
-
             bullets.Add(bullet);
+        }
+        public static void AddAmmo(Bullet bullet)
+        {
+            ammo.Add(bullet);
         }
         public static void Update(GameTime gameTime, Player player)
         {
@@ -34,6 +38,7 @@ namespace DrunkiBoy
                 {
                     if (bullet.DetectPixelCollision(player))
                     {
+                        ammo.Add(bullet);
                         bullets.Remove(bullet);
                         player.PickUpWeapon(Player.weaponType.pizza);
                         break;
@@ -59,5 +64,10 @@ namespace DrunkiBoy
                 b.Draw(spriteBatch);
             }
         }
+
+        //public void AddBurgerAmmo
+        //{
+
+        //}
     }
 }

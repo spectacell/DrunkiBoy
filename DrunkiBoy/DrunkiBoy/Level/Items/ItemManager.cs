@@ -28,6 +28,10 @@ namespace DrunkiBoy
         public List<Vodka> vodkas = new List<Vodka>();
         public List<RedbullVodka> redbullVodkas = new List<RedbullVodka>();
 
+        HamburgareVapen hamburgareVapen;
+        BottleWeapon bottleWeapon;
+        KebabWeapon kebabWeapon;
+        PizzaWeapon pizzaWeapon;
         private Random rnd = new Random();
         public static ParticleEngine particleEngine;
 
@@ -156,6 +160,7 @@ namespace DrunkiBoy
             {
                 if (kebab.DetectPixelCollision(player))
                 {
+                    BulletManager.ammo.Add(kebabWeapon);
                     kebabs.Remove(kebab);
                     player.PickUpWeapon(Player.weaponType.kebab);
                     break;
@@ -181,6 +186,7 @@ namespace DrunkiBoy
             {
                 if (bottle.DetectPixelCollision(player))
                 {
+                    BulletManager.AddAmmo(bottleWeapon);
                     bottles.Remove(bottle);
                     player.PickUpWeapon(Player.weaponType.bottle);
                     break;
@@ -195,6 +201,7 @@ namespace DrunkiBoy
 
                 if (pizza.DetectPixelCollision(player))
                 {
+                    BulletManager.AddAmmo(pizzaWeapon);
                     pizzas.Remove(pizza);
                     player.PickUpWeapon(Player.weaponType.pizza);
                     break;
@@ -340,6 +347,7 @@ namespace DrunkiBoy
             {
                 if (burger.DetectPixelCollision(player))
                 {
+                    BulletManager.AddAmmo(hamburgareVapen);
                     burgers.Remove(burger);
                     player.PickUpWeapon(Player.weaponType.burger);
                     break;
