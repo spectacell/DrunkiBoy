@@ -17,8 +17,8 @@ namespace DrunkiBoy
         public static bool healthBarBlinking;
         public static int itemsLeftToCollect;
 
-        private float burgerOpacity, kebabOpacity, bottleOpacity, PizzaOpacity;
-        private Color burgerColor, kebabColor, bottleColor, pizzaColor;
+        private float burgerOpacity = 0.5f, kebabOpacity = 0.5f, bottleOpacity = 0.5f, pizzaOpacity = 0.5f;
+        private Color burgerColor = Color.White, kebabColor = Color.White, bottleColor = Color.White, pizzaColor = Color.White;
 
         public GUI()
         {
@@ -51,6 +51,7 @@ namespace DrunkiBoy
             activePowerUp.Update(gameTime);
             HealthBarBlinking(gameTime);
             BlinkHealthBar();
+            SelectAmmo();
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
@@ -85,25 +86,27 @@ namespace DrunkiBoy
             spriteBatch.DrawString(Constants.FONT, strTitle, strTitlePos, Constants.fontColor);
             spriteBatch.DrawString(Constants.FONT, strTitleVersion, new Vector2(strTitlePos.X + Constants.FONT.MeasureString(strTitle).X, strTitlePos.Y), Constants.fontColor2);
             //Ammo
-            spriteBatch.DrawString(Constants.FONT, "1", new Vector2(330, 20), Color.Gold);
-            spriteBatch.Draw(Textures.hamburgare, new Vector2(340, 20), Color.White);
-            spriteBatch.DrawString(Constants.FONT_MEDIUM, "3", new Vector2(370, 16), Color.White);
+            spriteBatch.DrawString(Constants.FONT, "1", new Vector2(15, 80), burgerColor * burgerOpacity);
+            spriteBatch.Draw(Textures.hamburgare, new Vector2(25, 80), Color.White * burgerOpacity);
+            spriteBatch.DrawString(Constants.FONT_MEDIUM, Player.burgerWeapons.ToString(), new Vector2(55, 76), burgerColor * burgerOpacity);
 
-            spriteBatch.DrawString(Constants.FONT, "2", new Vector2(450, 20), Constants.fontColor);
-            spriteBatch.Draw(Textures.kebab, new Vector2(470, 17), Color.White * 0.5f);
-            spriteBatch.DrawString(Constants.FONT_MEDIUM, "3", new Vector2(497, 16), Color.White * 0.5f);
+            spriteBatch.DrawString(Constants.FONT, "2", new Vector2(150, 80), kebabColor * kebabOpacity);
+            spriteBatch.Draw(Textures.kebab, new Vector2(170, 75), Color.White * kebabOpacity);
+            spriteBatch.DrawString(Constants.FONT_MEDIUM, Player.kebabWeapons.ToString(), new Vector2(197, 76), kebabColor * kebabOpacity);
 
-            spriteBatch.DrawString(Constants.FONT, "3", new Vector2(330, 60), Constants.fontColor);
-            spriteBatch.Draw(Textures.bottle, new Vector2(340, 40), Color.White * 0.5f);
-            spriteBatch.DrawString(Constants.FONT_MEDIUM, "0", new Vector2(370, 56), Color.Red * 0.5f);
+            spriteBatch.DrawString(Constants.FONT, "3", new Vector2(15, 120), bottleColor * bottleOpacity);
+            spriteBatch.Draw(Textures.bottle, new Vector2(25, 100), Color.White * bottleOpacity);
+            spriteBatch.DrawString(Constants.FONT_MEDIUM, Player.bottleWeapons.ToString(), new Vector2(55, 116), bottleColor * bottleOpacity);
 
-            spriteBatch.DrawString(Constants.FONT, "4", new Vector2(450, 60), Constants.fontColor);
-            spriteBatch.Draw(Textures.GUIPizza, new Vector2(470, 55), Color.White * 0.5f);
-            spriteBatch.DrawString(Constants.FONT_MEDIUM, "1", new Vector2(497, 56), Color.White * 0.5f);
+            spriteBatch.DrawString(Constants.FONT, "4", new Vector2(150, 120), pizzaColor * pizzaOpacity);
+            spriteBatch.Draw(Textures.GUIPizza, new Vector2(170, 115), Color.White * pizzaOpacity);
+            spriteBatch.DrawString(Constants.FONT_MEDIUM, Player.pizzaWeapons.ToString(), new Vector2(197, 116), pizzaColor * pizzaOpacity);
 
             spriteBatch.End();
         }
+        public void SelectAmmo()
         {
+            switch (Player.currentWeapon)
             {
                 case Player.weaponType.burger:
                     burgerColor = Color.Gold;
@@ -113,16 +116,37 @@ namespace DrunkiBoy
                     bottleColor = Color.White;
                     bottleOpacity = 0.5f;
                     pizzaColor = Color.White;
-                    PizzaOpacity = 0.5f;
+                    pizzaOpacity = 0.5f;
                     break;
                 case Player.weaponType.kebab:
-
+                    burgerColor = Color.White;
+                    burgerOpacity = 0.5f;
+                    kebabColor = Color.Gold;
+                    kebabOpacity = 1f;
+                    bottleColor = Color.White;
+                    bottleOpacity = 0.5f;
+                    pizzaColor = Color.White;
+                    pizzaOpacity = 0.5f;
                     break;
                 case Player.weaponType.bottle:
-
+                    burgerColor = Color.Gold;
+                    burgerOpacity = 1f;
+                    kebabColor = Color.White;
+                    kebabOpacity = 0.5f;
+                    bottleColor = Color.White;
+                    bottleOpacity = 0.5f;
+                    pizzaColor = Color.White;
+                    pizzaOpacity = 0.5f;
                     break;
                 case Player.weaponType.pizza:
-
+                    burgerColor = Color.Gold;
+                    burgerOpacity = 1f;
+                    kebabColor = Color.White;
+                    kebabOpacity = 0.5f;
+                    bottleColor = Color.White;
+                    bottleOpacity = 0.5f;
+                    pizzaColor = Color.White;
+                    pizzaOpacity = 0.5f;
                     break;
             }
         }

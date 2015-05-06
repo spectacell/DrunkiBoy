@@ -54,7 +54,7 @@ namespace DrunkiBoy
         PizzaWeapon pizzaWeapon;
         KebabWeapon kebabWeapon;
 
-        public int burgerWeapons, bottleWeapons, kebabWeapons, pizzaWeapons;
+        public static int burgerWeapons, bottleWeapons, kebabWeapons, pizzaWeapons;
         bool gotBurgers, gotBottles, gotKebab, gotPizza;
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)

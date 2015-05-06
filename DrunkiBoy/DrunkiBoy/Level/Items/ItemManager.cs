@@ -212,7 +212,7 @@ namespace DrunkiBoy
             {
                 if (bottle.DetectPixelCollision(player))
                 {
-                    player.bottleWeapons++;
+                    Player.bottleWeapons++;
                     //BulletManager.AddAmmo(bottleWeapon);
                     bottles.Remove(bottle);
                     player.PickUpWeapon(Player.weaponType.bottle);
@@ -226,7 +226,7 @@ namespace DrunkiBoy
             {
                 if (kebab.DetectPixelCollision(player))
                 {
-                    player.kebabWeapons++;
+                    Player.kebabWeapons++;
                     //BulletManager.ammo.Add(kebabWeapon);
                     kebabs.Remove(kebab);
                     player.PickUpWeapon(Player.weaponType.kebab);
@@ -242,7 +242,7 @@ namespace DrunkiBoy
 
                 if (pizza.DetectPixelCollision(player))
                 {
-                    player.pizzaWeapons++;
+                    Player.pizzaWeapons++;
                     //BulletManager.AddAmmo(pizzaWeapon);
                     pizzas.Remove(pizza);
                     player.PickUpWeapon(Player.weaponType.pizza);
@@ -257,7 +257,7 @@ namespace DrunkiBoy
             {
                 if (burger.DetectPixelCollision(player))
                 {
-                    player.burgerWeapons++;
+                    Player.burgerWeapons++;
                     //BulletManager.AddAmmo(hamburgareVapen);
                     burgers.Remove(burger);
                     player.PickUpWeapon(Player.weaponType.burger);
