@@ -16,7 +16,7 @@ namespace DrunkiBoy
             bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, angry_neighbour,
             angry_neighbour_HB_red, angry_neighbour_HB_green, angry_neighbour_HB_blink, fire;
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, vodkaPowerup, redbullVodkaPowerup, money, pant, vodka;
-        public static Texture2D flashlight, radio, redbullVodka_gui, vodka_gui;
+        public static Texture2D flashlight, radio, redbullVodka_gui, vodka_gui, GUIPizza;
         public static Texture2D gameOverScreen;
         public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles, painkillerParticles, burgerParticles, pizzaParticles, bottleparticles, kebabParticles;
 
@@ -119,6 +119,7 @@ namespace DrunkiBoy
             bottleparticles.Add(content.Load<Texture2D>("Particles/bottle_particles"));
             kebabParticles = new List<Texture2D>();
             kebabParticles.Add(content.Load<Texture2D>("Particles/Kebab_particles"));
+            GUIPizza = content.Load<Texture2D>("Particles/pizza_particles");
         }
     }
 }

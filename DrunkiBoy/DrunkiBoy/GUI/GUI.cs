@@ -79,6 +79,23 @@ namespace DrunkiBoy
             //Spelets titel
             spriteBatch.DrawString(Constants.FONT, strTitle, strTitlePos, Constants.fontColor);
             spriteBatch.DrawString(Constants.FONT, strTitleVersion, new Vector2(strTitlePos.X + Constants.FONT.MeasureString(strTitle).X, strTitlePos.Y), Constants.fontColor2);
+            //Ammo
+            spriteBatch.DrawString(Constants.FONT, "1", new Vector2(330, 20), Color.Gold);
+            spriteBatch.Draw(Textures.hamburgare, new Vector2(340, 20), Color.White);
+            spriteBatch.DrawString(Constants.FONT_MEDIUM, "3", new Vector2(370, 16), Color.White);
+
+            spriteBatch.DrawString(Constants.FONT, "2", new Vector2(450, 20), Constants.fontColor);
+            spriteBatch.Draw(Textures.kebab, new Vector2(470, 17), Color.White * 0.5f);
+            spriteBatch.DrawString(Constants.FONT_MEDIUM, "3", new Vector2(497, 16), Color.White * 0.5f);
+
+            spriteBatch.DrawString(Constants.FONT, "3", new Vector2(330, 60), Constants.fontColor);
+            spriteBatch.Draw(Textures.bottle, new Vector2(340, 40), Color.White * 0.5f);
+            spriteBatch.DrawString(Constants.FONT_MEDIUM, "0", new Vector2(370, 56), Color.Red * 0.5f);
+
+            spriteBatch.DrawString(Constants.FONT, "4", new Vector2(450, 60), Constants.fontColor);
+            spriteBatch.Draw(Textures.GUIPizza, new Vector2(470, 55), Color.White * 0.5f);
+            spriteBatch.DrawString(Constants.FONT_MEDIUM, "1", new Vector2(497, 56), Color.White * 0.5f);
+
             spriteBatch.End();
         }
         /// <summary>
