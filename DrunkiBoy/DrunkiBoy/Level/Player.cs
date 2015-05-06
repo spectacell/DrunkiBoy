@@ -71,6 +71,7 @@ namespace DrunkiBoy
             prevTexUpperBody = texUpperBody;
             particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, 2, 2, Textures.explosionTexture, false);
         }
+        
         public override void Update(GameTime gameTime)
         {
             switch (activePowerUp)
@@ -115,8 +116,7 @@ namespace DrunkiBoy
 
             if (KeyMouseReader.KeyPressed(Keys.D1) && burgerWeapons > 0)
             {
-                currentWeapon = weaponType.burger;
-                //PickUpAmmo(weaponType.burger);
+                SwitchWeapons(weaponType.burger);
                 //gotBurgers = true;
                 //gotKebab = false;
                 //gotBottles = false;
@@ -124,7 +124,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.KeyPressed(Keys.D2) && kebabWeapons > 0)
             {
-                currentWeapon = weaponType.kebab;
+                SwitchWeapons(weaponType.kebab);
                 //gotBurgers = false;
                 //gotKebab = true;
                 //gotBottles = false;
@@ -132,7 +132,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.KeyPressed(Keys.D3) && bottleWeapons > 0)
             {
-                currentWeapon = weaponType.bottle;
+                SwitchWeapons(weaponType.bottle);
                 //gotBurgers = false;
                 //gotKebab = false;
                 //gotBottles = true;
@@ -140,7 +140,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.KeyPressed(Keys.D4) && pizzaWeapons > 0)
             {
-                currentWeapon = weaponType.pizza;
+                SwitchWeapons(weaponType.pizza);
                 //gotBurgers = false;
                 //gotKebab = false;
                 //gotBottles = false;
@@ -215,6 +215,56 @@ namespace DrunkiBoy
                 spriteBatch.Draw(Textures.player_head, new Vector2(pos.X + 2, pos.Y + 50), srcRectSpawnHead, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             }
             particleEngine.Draw(spriteBatch);
+        }
+        private void SwitchWeapons(weaponType weapon)
+        {
+            switch (weapon)
+            {
+                case weaponType.burger:
+                    currentWeapon = weaponType.burger;
+                    if (activePowerUp == 0)
+                    {
+                        texUpperBody = Textures.player_burger;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_burger;
+                    }
+                    break;
+                case weaponType.kebab:
+                    currentWeapon = weaponType.kebab;
+                    if (activePowerUp == 0)
+                    {
+                        texUpperBody = Textures.player_kebab;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_kebab;
+                    }
+                    break;
+                case weaponType.bottle:
+                    currentWeapon = weaponType.bottle;
+                    if (activePowerUp == 0)
+                    {
+                        texUpperBody = Textures.player_bottle;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_bottle;
+                    }
+                    break;
+                case weaponType.pizza:
+                    currentWeapon = weaponType.pizza;
+                    if (activePowerUp == 0)
+                    {
+                        texUpperBody = Textures.player_pizza;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_pizza;
+                    }
+                    break;
+            }
         }
         /// <summary>
         /// Flygförmåga efter intag av Redbull vodka
