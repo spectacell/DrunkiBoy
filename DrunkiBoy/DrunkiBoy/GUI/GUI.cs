@@ -43,7 +43,6 @@ namespace DrunkiBoy
             activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0,0,63,63), false, 13, 1000, 0);
 
             healthBarTex = Textures.healthBarRed;
-
         }
 
         public virtual void Update(GameTime gameTime)
@@ -109,42 +108,22 @@ namespace DrunkiBoy
             switch (Player.currentWeapon)
             {
                 case Player.weaponType.burger:
+                    ResetColorsAndOpacity();
                     burgerColor = Color.Gold;
                     burgerOpacity = 1f;
-                    kebabColor = Color.White;
-                    kebabOpacity = 0.5f;
-                    bottleColor = Color.White;
-                    bottleOpacity = 0.5f;
-                    pizzaColor = Color.White;
-                    pizzaOpacity = 0.5f;
                     break;
                 case Player.weaponType.kebab:
-                    burgerColor = Color.White;
-                    burgerOpacity = 0.5f;
+                    ResetColorsAndOpacity();
                     kebabColor = Color.Gold;
                     kebabOpacity = 1f;
-                    bottleColor = Color.White;
-                    bottleOpacity = 0.5f;
-                    pizzaColor = Color.White;
-                    pizzaOpacity = 0.5f;
                     break;
                 case Player.weaponType.bottle:
-                    burgerColor = Color.White;
-                    burgerOpacity = 0.5f;
-                    kebabColor = Color.White;
-                    kebabOpacity = 0.5f;
+                    ResetColorsAndOpacity();
                     bottleColor = Color.Gold;
                     bottleOpacity = 1f;
-                    pizzaColor = Color.White;
-                    pizzaOpacity = 0.5f;
                     break;
                 case Player.weaponType.pizza:
-                    burgerColor = Color.White;
-                    burgerOpacity = 0.5f;
-                    kebabColor = Color.White;
-                    kebabOpacity = 0.5f;
-                    bottleColor = Color.White;
-                    bottleOpacity = 0.5f;
+                    ResetColorsAndOpacity();
                     pizzaColor = Color.Gold;
                     pizzaOpacity = 1f;
                     break;
@@ -152,19 +131,34 @@ namespace DrunkiBoy
             if (Player.burgerWeapons == 0)
             {
                 burgerColor = Color.DarkRed;
+                burgerOpacity = 0.5f;
             }
             if (Player.kebabWeapons == 0)
             {
                 kebabColor = Color.DarkRed;
+                kebabOpacity = 0.5f;
             }
             if (Player.bottleWeapons == 0)
             {
                 bottleColor = Color.DarkRed;
+                bottleOpacity = 0.5f;
             }
             if (Player.pizzaWeapons == 0)
             {
                 pizzaColor = Color.DarkRed;
+                pizzaOpacity = 0.5f;
             }
+        }
+        private void ResetColorsAndOpacity()
+        {
+            burgerColor = Color.White;
+            burgerOpacity = 0.5f;
+            kebabColor = Color.White;
+            kebabOpacity = 0.5f;
+            bottleColor = Color.White;
+            bottleOpacity = 0.5f;
+            pizzaColor = Color.White;
+            pizzaOpacity = 0.5f;
         }
         /// <summary>
         /// Den där bilden som täcker poweruppen
