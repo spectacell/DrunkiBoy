@@ -12,16 +12,11 @@ namespace DrunkiBoy
     static class BulletManager
     {
         public static List<Bullet> bullets = new List<Bullet>();
-        public static List<Bullet> ammo = new List<Bullet>();
         public static ParticleEngine particleEngine = new ParticleEngine();
 
         public static void AddBullet(Bullet bullet)
         {
             bullets.Add(bullet);
-        }
-        public static void AddAmmo(Bullet bullet)
-        {
-            ammo.Add(bullet);
         }
         public static void Update(GameTime gameTime, Player player)
         {
@@ -36,7 +31,6 @@ namespace DrunkiBoy
                 {
                     if (bullet.DetectPixelCollision(player)) //Så att player kan plocka upp pizzan igen efter att ha kastat iväg den
                     {
-                        ammo.Add(bullet);
                         bullets.Remove(bullet);
                         player.PickUpWeapon(Player.weaponType.pizza);
                         break;

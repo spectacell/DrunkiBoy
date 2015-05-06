@@ -860,7 +860,6 @@ namespace DrunkiBoy
             pizzaWeapons = 0;
             kebabWeapons = 0;
             bottleWeapons = 0;
-            BulletManager.ammo.Clear();
         }
         /// <summary>
         /// Sätter isDead = false
