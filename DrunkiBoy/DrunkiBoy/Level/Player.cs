@@ -68,6 +68,7 @@ namespace DrunkiBoy
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
+            prevTexUpperBody = texUpperBody;
             particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, 2, 2, Textures.explosionTexture, false);
 
         }
