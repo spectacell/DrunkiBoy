@@ -691,62 +691,26 @@ namespace DrunkiBoy
                     break;
                 case weaponType.burger:
                     burgerWeapons++;
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_burger;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_burger;
-                    }
-                    currentWeapon = weaponType.burger;
+                    if(currentWeapon == weaponType.none)
+                        SwitchWeapons(weaponType.burger);
                     break;
                 case weaponType.pizza:
                     pizzaWeapons++;
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_pizza;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_pizza;
-                    }
-                    currentWeapon = weaponType.pizza;
+                    if (currentWeapon == weaponType.none)
+                        SwitchWeapons(weaponType.pizza);
                     break;
                 case weaponType.kebab:
                     kebabWeapons++;
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_kebab;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_bottle;
-                    }
-                    currentWeapon = weaponType.kebab;
+                    if (currentWeapon == weaponType.none)
+                        SwitchWeapons(weaponType.kebab);
                     break;
                 case weaponType.bottle:
                     bottleWeapons++;
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_bottle;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_bottle;
-                    }
-                    currentWeapon = weaponType.bottle;
+                    if (currentWeapon == weaponType.none)
+                        SwitchWeapons(weaponType.bottle);
                     break;
                 case weaponType.molotovCocktail:
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_bottle_molotov;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_bottle_molotov;
-                    }
-                    currentWeapon = weaponType.molotovCocktail;
+                        SwitchWeapons(weaponType.molotovCocktail);
                     break;
             }
         }
