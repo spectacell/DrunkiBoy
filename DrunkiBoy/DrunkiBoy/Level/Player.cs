@@ -15,7 +15,7 @@ namespace DrunkiBoy
 
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
         private Texture2D texUpperBody, texLowerBody, prevTexUpperBody, texUpperBodyWithoutPowerUp;
-        private double timeTilNextFrameLB = 0; 
+        private double timeTilNextFrameLB = 0;
         private int frameLB;
         private Rectangle srcRectLB;
         private float rotation = 0;
@@ -26,7 +26,7 @@ namespace DrunkiBoy
         private bool invincible;
 
         private const int playerSpeed = 80;
-        public static int livesLeft;        
+        public static int livesLeft;
         public static int healthLeft;
         private int targetHealth;
         public static int score = 0;
@@ -41,7 +41,7 @@ namespace DrunkiBoy
         public weaponType currentWeapon;
 
         public int jumpHeight = 12;
-        public bool isDead {get; private set;}
+        public bool isDead { get; private set; }
         public Vector2 currentSpawnPos;
         private double spawnTimer, spawnTimerDefault = 1750;
         public bool spawning;
@@ -54,12 +54,8 @@ namespace DrunkiBoy
         PizzaWeapon pizzaWeapon;
         KebabWeapon kebabWeapon;
 
-        public int burgerWeapons;
-        public int bottleWeapons;
-        public int kebabWeapons;
-        public int pizzaWeapons;
-        public int weaponCount;
-
+        public int burgerWeapons, bottleWeapons, kebabWeapons, pizzaWeapons;
+        bool gotBurgers, gotBottles, gotKebab, gotPizza;
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -73,7 +69,7 @@ namespace DrunkiBoy
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
             particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, 2, 2, Textures.explosionTexture, false);
-            
+
         }
         public override void Update(GameTime gameTime)
         {
@@ -88,7 +84,7 @@ namespace DrunkiBoy
                     AnimateWhenInAir(gameTime);
 
                     SetDeadFallingOffPlatform();
-                break;
+                    break;
                 case 1: //Odödlig
                     PlayerMovement(gameTime);
                     AddFriction();
@@ -98,7 +94,7 @@ namespace DrunkiBoy
                     AnimateWhenInAir(gameTime);
                     SetDeadFallingOffPlatform();
 
-                break;
+                    break;
 
                 case 2: //Flygförmåga
                     PlayerFlying(gameTime);
@@ -111,40 +107,80 @@ namespace DrunkiBoy
                     {
                         particleEngine.Update(particleEngingePos, true);
                     }
-                    
-                break;
+
+                    break;
 
 
             }
 
-            if (KeyMouseReader.KeyPressed(Keys.D1))
+            if (KeyMouseReader.KeyPressed(Keys.D1) && burgerWeapons > 0)
             {
                 PickUpWeapon(weaponType.burger);
+                //gotBurgers = true;
+                //gotKebab = false;
+                //gotBottles = false;
+                //gotPizza = false;
             }
-            if (KeyMouseReader.KeyPressed(Keys.D2))
+            if (KeyMouseReader.KeyPressed(Keys.D2) && kebabWeapons > 0)
             {
                 PickUpWeapon(weaponType.kebab);
+                //gotBurgers = false;
+                //gotKebab = true;
+                //gotBottles = false;
+                //gotPizza = false;
             }
-            if (KeyMouseReader.KeyPressed(Keys.D3))
+            if (KeyMouseReader.KeyPressed(Keys.D3) && bottleWeapons > 0)
             {
                 PickUpWeapon(weaponType.bottle);
+                //gotBurgers = false;
+                //gotKebab = false;
+                //gotBottles = true;
+                //gotPizza = false;
             }
-            if (KeyMouseReader.KeyPressed(Keys.D4))
+            if (KeyMouseReader.KeyPressed(Keys.D4) && pizzaWeapons > 0)
             {
                 PickUpWeapon(weaponType.pizza);
+                //gotBurgers = false;
+                //gotKebab = false;
+                //gotBottles = false;
+                //gotPizza = true;
             }
 
-            weaponCount = pizzaWeapons + burgerWeapons + bottleWeapons + kebabWeapons;
-            Console.WriteLine(weaponCount);
-                if (weaponCount <= 0)
-                    PickUpWeapon(Player.weaponType.none);
-                //else if ()
-                {
+            if (burgerWeapons > 0)
+                gotBurgers = true;
+            else if (burgerWeapons <= 0)
+                gotBurgers = false;
 
-                }
+            if (kebabWeapons > 0)
+                gotKebab = true;
+            else
+                gotKebab = false;
 
-                 
-            
+            if (bottleWeapons > 0)
+                gotBottles = true;
+            else
+                gotBottles = false;
+
+            if (pizzaWeapons > 0)
+                gotPizza = true;
+            else
+                gotPizza = false;
+
+            Console.WriteLine("burgare" + burgerWeapons);
+            Console.WriteLine("flaskor" + bottleWeapons);
+            //switch (currentWeapon)
+            //{
+            //    case weaponType.burger:
+            //        if (burgerWeapons <= 0)
+            //        {
+            //            gotBurgers = false;
+            //            PickUpWeapon(weaponType.none);
+            //            currentWeapon = weaponType.none;
+            //        }
+            //        break;
+            //}
+
+
             base.Update(gameTime);
             AnimateLowerBody();
             AnimateShooting(gameTime);
@@ -156,7 +192,7 @@ namespace DrunkiBoy
             PowerUpTimerAandDeactivation(gameTime);
             prevFacing = facing;
         }
-        
+
         /// <summary>
         /// Två Draw() här, en för underkroppen och en för överkroppen.
         /// </summary>
@@ -164,17 +200,17 @@ namespace DrunkiBoy
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (!animateShooting && !isMorphing)//Borde kunna få in den här någon annanstans men kommer inte på nåt bra nu. srcRect är samma om man inte skjuter
-            { 
+            {
                 srcRectLB = srcRect;
             }
-            if (!spawning) 
+            if (!spawning)
             {
                 spriteBatch.Draw(texLowerBody, pos, srcRectLB, Color.White, rotation, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
                 spriteBatch.Draw(texUpperBody, pos, srcRect, Color.White, rotation, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             }
             else //När player spawnas så ritas bara huvududet ut
             {
-                spriteBatch.Draw(Textures.player_head, new Vector2(pos.X+2, pos.Y+50), srcRectSpawnHead, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
+                spriteBatch.Draw(Textures.player_head, new Vector2(pos.X + 2, pos.Y + 50), srcRectSpawnHead, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, drawLayer);
             }
             particleEngine.Draw(spriteBatch);
         }
@@ -184,7 +220,7 @@ namespace DrunkiBoy
         private void PlayerFlying(GameTime gameTime)
         {
             facing = 1;
-            
+
             particleEngingePos = new Vector2(pos.X + 14, pos.Y + 115);
             rotation = 0f;
             if (!isMorphing)
@@ -213,7 +249,7 @@ namespace DrunkiBoy
             AddGravity(0.2f);
             movement.Y -= movement.Y * 0.05f; //Lite "friktion" i Y-led så att man inte flyger för snabbt
             pos += movement * (float)gameTime.ElapsedGameTime.TotalSeconds * playerSpeed;
-            pos.X = MathHelper.Clamp(pos.X, 0, Level.levelWidth-srcRect.Width); //Hindrar player från att flyga utanför skärmen
+            pos.X = MathHelper.Clamp(pos.X, 0, Level.levelWidth - srcRect.Width); //Hindrar player från att flyga utanför skärmen
         }
         /// <summary>
         /// Räknar ner timeTilNextFrameLB och timeTilNextFrame när man styr player
@@ -221,7 +257,7 @@ namespace DrunkiBoy
         private void PlayerMovement(GameTime gameTime)
         {
             if (!movingBack && !spawning)
-            { 
+            {
                 if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
                 {
                     timeTilNextFrameLB -= gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -290,7 +326,7 @@ namespace DrunkiBoy
                 srcRectLB.X = facingSrcRects[facing].X + (frameLB % nrFrames) * frameWidth;
             }
         }
-        
+
         private void SetDeadFallingOffPlatform()
         {
             if (pos.Y > Level.levelHeight)
@@ -307,7 +343,7 @@ namespace DrunkiBoy
             {
                 livesLeft++;
             }
-        } 
+        }
         /// <summary>
         /// När livet tar slut eller om man ramlar av plattform
         /// </summary>
@@ -366,7 +402,7 @@ namespace DrunkiBoy
                     activePlatform = null;
                     hasJumpedAfterSpawn = true;
                 }
-            } 
+            }
         }
         /// <summary>
         /// Sätter Spawntimern till defaultvärdet så att timern börjar räkna ner
@@ -382,14 +418,14 @@ namespace DrunkiBoy
         /// <param name="pos">Players position</param>
         public void SetSpawnPosition(Vector2 pos)
         {
-            currentSpawnPos = new Vector2(pos.X-15, pos.Y - srcRect.Height + Textures.toilet_open.Height);
+            currentSpawnPos = new Vector2(pos.X - 15, pos.Y - srcRect.Height + Textures.toilet_open.Height);
         }
         /// <summary>
         /// Körs när man tar en PowerUp. Switch/case satsen i Update() avgör vad som händer med player när poweruppen är aktiv
         /// </summary>
         /// <param name="powerUp">1: Odödlighet, 2: Flygförmåga</param>
         /// <param name="time">Tid i ms för hur länge powerup är aktiv</param>
-        public void ActivatePowerUp(int powerUp, double time) 
+        public void ActivatePowerUp(int powerUp, double time)
         {
             tex = texUpperBody;
             isMorphing = true;
@@ -397,7 +433,7 @@ namespace DrunkiBoy
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
-            
+
             //Ser till att frame sätts till första framen i animationen
             if (facing == 0) //Vänd åt vänster
             {
@@ -490,7 +526,7 @@ namespace DrunkiBoy
         /// /// <param name="enemyPos">Position att ugå från när players nya targetPos sätts</param>
         public void LoseHealth(int amountToLose, Vector2 enemyPos, int enemyWidth)
         {
-            if (healthLeft - amountToLose > 0) 
+            if (healthLeft - amountToLose > 0)
             {
                 if (!invincible)
                 {
@@ -512,7 +548,7 @@ namespace DrunkiBoy
         /// <param name="gameTime"></param>
         private void MoveBackWhenEnemyContact(GameTime gameTime)
         {
-            if (movingBack) 
+            if (movingBack)
             {
                 texUpperBody = Textures.player_upper_body_hurt;
                 if (pos.X > targetPos.X)
@@ -658,7 +694,7 @@ namespace DrunkiBoy
         /// </summary>
         public void Shooting()
         {
-            if (currentWeapon != weaponType.none && !movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space) && weaponCount > 0)
+            if (currentWeapon != weaponType.none && !movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space) && (gotBurgers || gotKebab || gotBottles || gotPizza))
             {
                 shotDelay = shotDelayDefault;
                 Vector2 bulletPos, bulletVelocity;
@@ -692,30 +728,50 @@ namespace DrunkiBoy
                     case weaponType.burger:
                         BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity, true));
                         burgerWeapons--;
-                    break;
+                        if (burgerWeapons <= 0)
+                        {
+                            PickUpWeapon(weaponType.none);
+                        }
+                        break;
 
                     case weaponType.pizza:
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false, true));
                         pizzaWeapons--;
+                        if (pizzaWeapons <= 0)
+                        {
+                            PickUpWeapon(weaponType.none);
+                        }
                         if (activePowerUp == 0)
-                            prevTexUpperBody = Textures.player_upper_body;                 
+                            prevTexUpperBody = Textures.player_upper_body;
                         //currentWeapon = weaponType.none;
-                    break;
+                        break;
 
                     case weaponType.kebab:
                         BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity, true));
                         kebabWeapons--;
-                    break;
+                        if (kebabWeapons <= 0)
+                        {
+                            PickUpWeapon(weaponType.none);
+                        }
+                        break;
 
-                    case weaponType.bottle:     
+                    case weaponType.bottle:
                         BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity, true));
                         bottleWeapons--;
-                    break;
+                        if (bottleWeapons <= 0)
+                        {
+                            PickUpWeapon(weaponType.none);
+                        }
+                        break;
 
                     case weaponType.molotovCocktail:
                         BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity, true));
                         bottleWeapons--;
-                    break;
+                        if (bottleWeapons <= 0)
+                        {
+                            PickUpWeapon(weaponType.none);
+                        }
+                        break;
                 }
             }
         }
@@ -836,7 +892,8 @@ namespace DrunkiBoy
         /// </summary>
         private void DeactivatePowerUp()
         {
-            if (activePowerUp != 0) { 
+            if (activePowerUp != 0)
+            {
                 rotation = 0;
                 particleEngine.isActive = false;
                 invincible = false;
@@ -846,6 +903,6 @@ namespace DrunkiBoy
             }
         }
         #endregion
-           
+
     }
 }
