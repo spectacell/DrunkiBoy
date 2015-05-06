@@ -187,7 +187,7 @@ namespace DrunkiBoy
             {
                 if (wall.DetectPixelCollision(player))
                 {
-
+                    player.MovePlayerBack(wall.pos, wall.srcRect.Width);
                     break;
                 }
             }
