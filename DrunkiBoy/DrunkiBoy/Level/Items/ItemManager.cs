@@ -373,7 +373,7 @@ namespace DrunkiBoy
         {
             foreach (Torch torch in torches)
             {
-                if (player.currentWeapon == Player.weaponType.bottle && player.DetectPixelCollision(torch))
+                if (Player.currentWeapon == Player.weaponType.bottle && player.DetectPixelCollision(torch))
                 {
                     player.PickUpWeapon(Player.weaponType.molotovCocktail);
                 }

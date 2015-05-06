@@ -38,7 +38,7 @@ namespace DrunkiBoy
         public ParticleEngine2 particleEngine;
         private Vector2 particleEngingePos;
         public enum weaponType { none, burger, pizza, kebab, bottle, molotovCocktail };
-        public weaponType currentWeapon;
+        public static weaponType currentWeapon;
 
         public int jumpHeight = 12;
         public bool isDead { get; private set; }
@@ -145,6 +145,7 @@ namespace DrunkiBoy
                 //gotBottles = false;
                 //gotPizza = true;
             }
+
 
             if (burgerWeapons > 0)
                 gotBurgers = true;
@@ -567,7 +568,7 @@ namespace DrunkiBoy
                 }
             }
         }
-        private void MovePlayerBack(Vector2 enemyPos, int enemyWidth)
+        public void MovePlayerBack(Vector2 enemyPos, int enemyWidth)
         {
             movingBack = true;
             if (pos.X < enemyPos.X)

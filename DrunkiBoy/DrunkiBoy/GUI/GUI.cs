@@ -16,6 +16,10 @@ namespace DrunkiBoy
         private double healthBarBlinkTimer, healthBarBlinkTimerDefault = 250;
         public static bool healthBarBlinking;
         public static int itemsLeftToCollect;
+
+        private float burgerOpacity, kebabOpacity, bottleOpacity, PizzaOpacity;
+        private Color burgerColor, kebabColor, bottleColor, pizzaColor;
+
         public GUI()
         {
             strLives = "LIVES ";
@@ -39,6 +43,7 @@ namespace DrunkiBoy
             activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0,0,63,63), false, 13, 1000, 0);
 
             healthBarTex = Textures.healthBarRed;
+
         }
 
         public virtual void Update(GameTime gameTime)
@@ -97,6 +102,29 @@ namespace DrunkiBoy
             spriteBatch.DrawString(Constants.FONT_MEDIUM, "1", new Vector2(497, 56), Color.White * 0.5f);
 
             spriteBatch.End();
+        }
+        {
+            {
+                case Player.weaponType.burger:
+                    burgerColor = Color.Gold;
+                    burgerOpacity = 1f;
+                    kebabColor = Color.White;
+                    kebabOpacity = 0.5f;
+                    bottleColor = Color.White;
+                    bottleOpacity = 0.5f;
+                    pizzaColor = Color.White;
+                    PizzaOpacity = 0.5f;
+                    break;
+                case Player.weaponType.kebab:
+
+                    break;
+                case Player.weaponType.bottle:
+
+                    break;
+                case Player.weaponType.pizza:
+
+                    break;
+            }
         }
         /// <summary>
         /// Den där bilden som täcker poweruppen
