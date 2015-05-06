@@ -47,6 +47,7 @@ namespace DrunkiBoy
             LoadContent(levelTextFilePath);
             timeLeft = defaultTime;
             currentLevelState = levelState.running;
+            player.ResetAmmo();
         }
 
         public virtual void Update(GameTime gameTime)

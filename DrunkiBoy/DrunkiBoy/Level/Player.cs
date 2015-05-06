@@ -65,6 +65,7 @@ namespace DrunkiBoy
             srcRectLB = srcRect;
             livesLeft = Constants.player_defaultLives;
             Reset();
+            ResetAmmo();
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
@@ -916,6 +917,10 @@ namespace DrunkiBoy
             ResetWeapon();
             ResetHealth();
             activePowerUp = 0;
+        }
+
+        public void ResetAmmo()
+        {
             burgerWeapons = 0;
             pizzaWeapons = 0;
             kebabWeapons = 0;
