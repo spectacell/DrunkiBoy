@@ -54,6 +54,13 @@ namespace DrunkiBoy
         PizzaWeapon pizzaWeapon;
         KebabWeapon kebabWeapon;
 
+        public int burgerWeapons;
+        public int bottleWeapons;
+        public int kebabWeapons;
+        public int pizzaWeapons;
+        public int weaponCount;
+
+
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
@@ -66,6 +73,7 @@ namespace DrunkiBoy
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
             particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, 2, 2, Textures.explosionTexture, false);
+            
         }
         public override void Update(GameTime gameTime)
         {
@@ -109,23 +117,32 @@ namespace DrunkiBoy
 
             }
 
-                if (BulletManager.ammo.Count <= 0)
+            if (KeyMouseReader.KeyPressed(Keys.D1))
+            {
+                PickUpWeapon(weaponType.burger);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.D2))
+            {
+                PickUpWeapon(weaponType.kebab);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.D3))
+            {
+                PickUpWeapon(weaponType.bottle);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.D4))
+            {
+                PickUpWeapon(weaponType.pizza);
+            }
+
+            weaponCount = pizzaWeapons + burgerWeapons + bottleWeapons + kebabWeapons;
+            Console.WriteLine(weaponCount);
+                if (weaponCount <= 0)
                     PickUpWeapon(Player.weaponType.none);
+                //else if ()
+                {
 
-            //for (int i = 0; i < BulletManager.ammo.Count; i++)
-            //{
-            //    if (BulletManager.ammo[i] == bottleWeapon)
-            //        PickUpWeapon(Player.weaponType.bottle);
+                }
 
-            //    else if (BulletManager.ammo[i] == burgerWeapon)
-            //        PickUpWeapon(Player.weaponType.burger);
-
-            //    else if (BulletManager.ammo[i] == pizzaWeapon)
-            //        PickUpWeapon(Player.weaponType.pizza);
-
-            //    else if (BulletManager.ammo[i] == kebabWeapon)
-            //        PickUpWeapon(Player.weaponType.kebab);
-            //}
                  
             
             base.Update(gameTime);
@@ -624,7 +641,7 @@ namespace DrunkiBoy
         /// </summary>
         public void Shooting()
         {
-            if (currentWeapon != weaponType.none && !movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space) && BulletManager.ammo.Count > 0)
+            if (currentWeapon != weaponType.none && !movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space) && weaponCount > 0)
             {
                 shotDelay = shotDelayDefault;
                 Vector2 bulletPos, bulletVelocity;
@@ -656,16 +673,17 @@ namespace DrunkiBoy
                     bulletVelocity = new Vector2(10, 0);
                     frame = 0;
                 }
+
                 switch (currentWeapon)
                 {
                     case weaponType.burger:
                         BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity, true));
-                        BulletManager.ammo.Remove(burgerWeapon);
+                        burgerWeapons--;
                     break;
 
                     case weaponType.pizza:
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false, true));
-                        BulletManager.ammo.Remove(pizzaWeapon);
+                        pizzaWeapons--;
                         if (activePowerUp == 0)
                             prevTexUpperBody = Textures.player_upper_body;                 
                         currentWeapon = weaponType.none;
@@ -673,17 +691,17 @@ namespace DrunkiBoy
 
                     case weaponType.kebab:
                         BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity, true));
-                        BulletManager.ammo.Remove(kebabWeapon);
+                        kebabWeapons--;
                     break;
 
                     case weaponType.bottle:     
                         BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity, true));
-                        BulletManager.ammo.Remove(bottleWeapon);
+                        bottleWeapons--;
                     break;
 
                     case weaponType.molotovCocktail:
                         BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity, true));
-                        BulletManager.ammo.Remove(bottleWeapon);
+                        bottleWeapons--;
                     break;
                 }
             }

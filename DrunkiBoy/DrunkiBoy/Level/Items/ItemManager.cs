@@ -173,19 +173,6 @@ namespace DrunkiBoy
                 }
             }
         }
-        private void UpdateKebabs(GameTime gameTime, Player player)
-        {
-            foreach (Kebab kebab in kebabs)
-            {
-                if (kebab.DetectPixelCollision(player))
-                {
-                    BulletManager.ammo.Add(kebabWeapon);
-                    kebabs.Remove(kebab);
-                    player.PickUpWeapon(Player.weaponType.kebab);
-                    break;
-                }
-            }
-        }
         private void UpdateJagerbombs(GameTime gameTime, Player player)
         {
             foreach (Jagerbomb jagerbomb in jagerbombs)
@@ -205,9 +192,24 @@ namespace DrunkiBoy
             {
                 if (bottle.DetectPixelCollision(player))
                 {
-                    BulletManager.AddAmmo(bottleWeapon);
+                    player.bottleWeapons++;
+                    //BulletManager.AddAmmo(bottleWeapon);
                     bottles.Remove(bottle);
                     player.PickUpWeapon(Player.weaponType.bottle);
+                    break;
+                }
+            }
+        }
+        private void UpdateKebabs(GameTime gameTime, Player player)
+        {
+            foreach (Kebab kebab in kebabs)
+            {
+                if (kebab.DetectPixelCollision(player))
+                {
+                    player.kebabWeapons++;
+                    //BulletManager.ammo.Add(kebabWeapon);
+                    kebabs.Remove(kebab);
+                    player.PickUpWeapon(Player.weaponType.kebab);
                     break;
                 }
             }
@@ -220,12 +222,27 @@ namespace DrunkiBoy
 
                 if (pizza.DetectPixelCollision(player))
                 {
-                    BulletManager.AddAmmo(pizzaWeapon);
+                    player.pizzaWeapons++;
+                    //BulletManager.AddAmmo(pizzaWeapon);
                     pizzas.Remove(pizza);
                     player.PickUpWeapon(Player.weaponType.pizza);
                     break;
                 }
                 
+            }
+        }
+        private void UpdateBurgers(GameTime gameTime, Player player)
+        {
+            foreach (Burger burger in burgers)
+            {
+                if (burger.DetectPixelCollision(player))
+                {
+                    player.burgerWeapons++;
+                    //BulletManager.AddAmmo(hamburgareVapen);
+                    burgers.Remove(burger);
+                    player.PickUpWeapon(Player.weaponType.burger);
+                    break;
+                }
             }
         }
         private void UpdatePant(GameTime gameTime, Player player)
@@ -356,19 +373,6 @@ namespace DrunkiBoy
                 {
                     player.AddALife();
                     hearts.Remove(heart);
-                    break;
-                }
-            }
-        }
-        private void UpdateBurgers(GameTime gameTime, Player player)
-        {
-            foreach (Burger burger in burgers)
-            {
-                if (burger.DetectPixelCollision(player))
-                {
-                    BulletManager.AddAmmo(hamburgareVapen);
-                    burgers.Remove(burger);
-                    player.PickUpWeapon(Player.weaponType.burger);
                     break;
                 }
             }
