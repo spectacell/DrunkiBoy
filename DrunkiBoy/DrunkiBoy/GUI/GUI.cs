@@ -85,19 +85,19 @@ namespace DrunkiBoy
             spriteBatch.DrawString(Constants.FONT, strTitle, strTitlePos, Constants.fontColor);
             spriteBatch.DrawString(Constants.FONT, strTitleVersion, new Vector2(strTitlePos.X + Constants.FONT.MeasureString(strTitle).X, strTitlePos.Y), Constants.fontColor2);
             //Ammo
-            spriteBatch.DrawString(Constants.FONT, "1", new Vector2(15, 80), burgerColor * burgerOpacity);
+            spriteBatch.DrawString(Constants.FONT, "1", new Vector2(15, 80), Constants.fontColor * burgerOpacity);
             spriteBatch.Draw(Textures.hamburgare, new Vector2(25, 80), Color.White * burgerOpacity);
             spriteBatch.DrawString(Constants.FONT_MEDIUM, Player.burgerWeapons.ToString(), new Vector2(55, 76), burgerColor * burgerOpacity);
 
-            spriteBatch.DrawString(Constants.FONT, "2", new Vector2(150, 80), kebabColor * kebabOpacity);
+            spriteBatch.DrawString(Constants.FONT, "2", new Vector2(150, 80), Constants.fontColor * kebabOpacity);
             spriteBatch.Draw(Textures.kebab, new Vector2(170, 75), Color.White * kebabOpacity);
             spriteBatch.DrawString(Constants.FONT_MEDIUM, Player.kebabWeapons.ToString(), new Vector2(197, 76), kebabColor * kebabOpacity);
 
-            spriteBatch.DrawString(Constants.FONT, "3", new Vector2(15, 120), bottleColor * bottleOpacity);
+            spriteBatch.DrawString(Constants.FONT, "3", new Vector2(15, 120), Constants.fontColor * bottleOpacity);
             spriteBatch.Draw(Textures.bottle, new Vector2(25, 100), Color.White * bottleOpacity);
             spriteBatch.DrawString(Constants.FONT_MEDIUM, Player.bottleWeapons.ToString(), new Vector2(55, 116), bottleColor * bottleOpacity);
 
-            spriteBatch.DrawString(Constants.FONT, "4", new Vector2(150, 120), pizzaColor * pizzaOpacity);
+            spriteBatch.DrawString(Constants.FONT, "4", new Vector2(150, 120), Constants.fontColor * pizzaOpacity);
             spriteBatch.Draw(Textures.GUIPizza, new Vector2(170, 115), Color.White * pizzaOpacity);
             spriteBatch.DrawString(Constants.FONT_MEDIUM, Player.pizzaWeapons.ToString(), new Vector2(197, 116), pizzaColor * pizzaOpacity);
 
