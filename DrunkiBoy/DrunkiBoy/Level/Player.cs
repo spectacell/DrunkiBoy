@@ -856,6 +856,10 @@ namespace DrunkiBoy
             ResetWeapon();
             ResetHealth();
             activePowerUp = 0;
+            burgerWeapons = 0;
+            pizzaWeapons = 0;
+            kebabWeapons = 0;
+            bottleWeapons = 0;
             BulletManager.ammo.Clear();
         }
         /// <summary>
