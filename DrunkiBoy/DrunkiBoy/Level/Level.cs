@@ -290,6 +290,12 @@ namespace DrunkiBoy
                     itemManager.AddRedbullVodka(new RedbullVodka(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.redbullVodka, true));
                     objects.Add(new RedbullVodka(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.redbullVodka, true));
                 }
+                else if (temp[0] == "wall")
+                {
+                    itemManager.AddWall(new Wall(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.wall, true));
+                    objects.Add(new Wall(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.wall, true));
+                }
+
             }
             sr.Close();
         }

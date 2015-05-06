@@ -29,6 +29,8 @@ namespace DrunkiBoy
         public List<Vodka> vodkas = new List<Vodka>();
         public List<RedbullVodka> redbullVodkas = new List<RedbullVodka>();
         public List<FireOnGround> fires = new List<FireOnGround>();
+        public List<Wall> walls = new List<Wall>();
+
 
         HamburgareVapen hamburgareVapen;
         BottleWeapon bottleWeapon;
@@ -114,6 +116,11 @@ namespace DrunkiBoy
         {
             redbullVodkas.Add(redbullVodka);
         }
+        public void AddWall(Wall wall)
+        {
+            walls.Add(wall);
+        }
+
         #endregion
         public void Update(GameTime gameTime, Player player, List<AngryNeighbour> angryNeighbours)
         {
@@ -135,6 +142,7 @@ namespace DrunkiBoy
             UpdateToilets(gameTime, player);
             UpdateVodkas(gameTime, player);
             UpdateRedbullVodkas(gameTime, player);
+            UpdateWalls(gameTime, player);
             UpdateFires(gameTime, angryNeighbours);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
         }
@@ -173,6 +181,18 @@ namespace DrunkiBoy
                 }
             }
         }
+        private void UpdateWalls(GameTime gameTime, Player player)
+        {
+            foreach (Wall wall in walls)
+            {
+                if (wall.DetectPixelCollision(player))
+                {
+
+                    break;
+                }
+            }
+        }
+
         private void UpdateJagerbombs(GameTime gameTime, Player player)
         {
             foreach (Jagerbomb jagerbomb in jagerbombs)
@@ -484,6 +504,11 @@ namespace DrunkiBoy
             {
                 fire.Draw(spriteBatch);
             }
+            foreach (Wall wall in walls)
+            {
+                wall.Draw(spriteBatch);
+            }
+
         }
         private void UpdatePlatforms(Player player, List<AngryNeighbour> angryNeighbours)
         {

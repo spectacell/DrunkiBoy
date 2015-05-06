@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka, RedbullVodka, MovingPlatform}; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka, RedbullVodka, MovingPlatform, Wall}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -57,6 +57,8 @@ namespace DrunkiBoy
             menuEntries.Add("V: Pizza");
             menuEntries.Add("W: Wallet");
             menuEntries.Add("Y: Player");
+            menuEntries.Add("X: Wall");
+
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
             selectedItem = items.Platform;
@@ -386,6 +388,19 @@ namespace DrunkiBoy
                             objects.Add(new AngryNeighbour(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.angry_neighbour, new Rectangle(0, 0, 95, 146), true, 1, 80));
                         }
                         break;
+                    case items.Wall:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Wall(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.wall, true));
+                        }
+                        else
+                        {
+                            objects.Add(new Wall(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.wall, true));
+                        }
+
+                        break;
+
+
                     case items.RedbullVodka:
                         if (intersectingPlatform != null)
                         {
@@ -562,6 +577,12 @@ namespace DrunkiBoy
                 selectedItem = items.MovingPlatform;
                 selectedObject = new MovingPlatform(new Vector2(mouseState.X, mouseState.Y), Textures.MovingplatfFöreditor, true);
             }
+            if (KeyMouseReader.KeyPressed(Keys.X))
+            {
+                selectedItem = items.Wall;
+                selectedObject = new Wall(new Vector2(mouseState.X, mouseState.Y), Textures.wall, true);
+            }
+
         }
 
         private void MoveCamera()

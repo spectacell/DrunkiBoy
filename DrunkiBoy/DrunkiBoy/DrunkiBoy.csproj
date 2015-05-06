@@ -127,6 +127,7 @@
     <Compile Include="Textures.cs" />
     <Compile Include="Level\Items\Torch.cs" />
     <Compile Include="Level\Items\Wallet.cs" />
+    <Compile Include="Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
