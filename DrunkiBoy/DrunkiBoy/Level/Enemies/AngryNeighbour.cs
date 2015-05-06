@@ -13,6 +13,7 @@ namespace DrunkiBoy
         private double healthBarBlinkTimer, healthBarBlinkTimerDefault = 150;
         private int speed = 100;
         private bool facingRight;
+        private double turnDelay, turnDelayDefault = 300;
         public AngryNeighbour(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {
@@ -26,7 +27,7 @@ namespace DrunkiBoy
         public override void Update(GameTime gameTime)
         {
             pos += (float)gameTime.ElapsedGameTime.TotalSeconds * movement * speed;
-            if (activePlatform != null && (pos.X >= activePlatform.pos.X + activePlatform.BoundingBox.Width - 57 || pos.X <= activePlatform.pos.X))
+            if (activePlatform != null && (pos.X >= activePlatform.pos.X + activePlatform.BoundingBox.Width-srcRect.Width || pos.X <= activePlatform.pos.X))
             {
                 ChangeDirection();
             }
@@ -35,6 +36,8 @@ namespace DrunkiBoy
             CheckIfOnPlatform();
             SwitchFacing();
             HealthBarBlinking(gameTime);
+            if (turnDelay >= 0)
+                turnDelay -= gameTime.ElapsedGameTime.TotalMilliseconds;
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -48,8 +51,12 @@ namespace DrunkiBoy
         }
         public void ChangeDirection()
         {
-            movement.X *= -1;
-            facingRight = !facingRight;
+            if (turnDelay <= 0) 
+            { 
+                movement.X *= -1;
+                facingRight = !facingRight;
+                turnDelay = turnDelayDefault;
+            }
         }
 
         private void SwitchFacing()
