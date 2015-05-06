@@ -17,7 +17,7 @@ namespace DrunkiBoy
             : base(pos, tex, isActive)
         {
             startpos.X = pos.X;
-            endpos.X = startpos.X + 100;
+            endpos.X = startpos.X + 350;
             this.type = "movingplatform"; //Bokstav eller namn som identifierar objektet i textfilen som läser in banan
         }
         public void Update(Player player)
