@@ -32,7 +32,7 @@ namespace DrunkiBoy
                     if (bullet.DetectPixelCollision(player)) //Så att player kan plocka upp pizzan igen efter att ha kastat iväg den
                     {
                         bullets.Remove(bullet);
-                        player.PickUpWeapon(Player.weaponType.pizza);
+                        player.PickUpAmmo(Player.weaponType.pizza);
                         break;
                     }
                 }

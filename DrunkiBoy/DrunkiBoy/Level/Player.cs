@@ -70,7 +70,6 @@ namespace DrunkiBoy
             texLowerBody = Textures.player_lower_body;
             prevTexUpperBody = texUpperBody;
             particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, 2, 2, Textures.explosionTexture, false);
-
         }
         public override void Update(GameTime gameTime)
         {
@@ -116,7 +115,8 @@ namespace DrunkiBoy
 
             if (KeyMouseReader.KeyPressed(Keys.D1) && burgerWeapons > 0)
             {
-                PickUpWeapon(weaponType.burger);
+                currentWeapon = weaponType.burger;
+                //PickUpAmmo(weaponType.burger);
                 //gotBurgers = true;
                 //gotKebab = false;
                 //gotBottles = false;
@@ -124,7 +124,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.KeyPressed(Keys.D2) && kebabWeapons > 0)
             {
-                PickUpWeapon(weaponType.kebab);
+                currentWeapon = weaponType.kebab;
                 //gotBurgers = false;
                 //gotKebab = true;
                 //gotBottles = false;
@@ -132,7 +132,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.KeyPressed(Keys.D3) && bottleWeapons > 0)
             {
-                PickUpWeapon(weaponType.bottle);
+                currentWeapon = weaponType.bottle;
                 //gotBurgers = false;
                 //gotKebab = false;
                 //gotBottles = true;
@@ -140,7 +140,7 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.KeyPressed(Keys.D4) && pizzaWeapons > 0)
             {
-                PickUpWeapon(weaponType.pizza);
+                currentWeapon = weaponType.pizza;
                 //gotBurgers = false;
                 //gotKebab = false;
                 //gotBottles = false;
@@ -571,14 +571,18 @@ namespace DrunkiBoy
         }
         public void MovePlayerBack(Vector2 enemyPos, int enemyWidth)
         {
-            movingBack = true;
-            if (pos.X < enemyPos.X)
+            if (!movingBack) 
             {
-                targetPos.X = enemyPos.X - 150;
-            }
-            else
-            {
-                targetPos.X = enemyPos.X + 50 + enemyWidth;
+                prevTexUpperBody = texUpperBody;
+                movingBack = true;
+                if (pos.X < enemyPos.X)
+                {
+                    targetPos.X = enemyPos.X - 150;
+                }
+                else
+                {
+                    targetPos.X = enemyPos.X + 50 + enemyWidth;
+                }
             }
         }
         /// <summary>
@@ -618,7 +622,7 @@ namespace DrunkiBoy
         /// Körs från ItemManager när player tar upp ett vapen. Ändrar players textur och currentWeapon-variabel så att rätt skott skjuts
         /// </summary>
         /// <param name="type">Vapentyp</param>
-        public void PickUpWeapon(weaponType type)
+        public void PickUpAmmo(weaponType type)
         {
             switch (type)
             {
@@ -634,6 +638,7 @@ namespace DrunkiBoy
                     currentWeapon = weaponType.none;
                     break;
                 case weaponType.burger:
+                    burgerWeapons++;
                     if (activePowerUp == 0)
                     {
                         texUpperBody = Textures.player_burger;
@@ -645,6 +650,7 @@ namespace DrunkiBoy
                     currentWeapon = weaponType.burger;
                     break;
                 case weaponType.pizza:
+                    pizzaWeapons++;
                     if (activePowerUp == 0)
                     {
                         texUpperBody = Textures.player_pizza;
@@ -656,6 +662,7 @@ namespace DrunkiBoy
                     currentWeapon = weaponType.pizza;
                     break;
                 case weaponType.kebab:
+                    kebabWeapons++;
                     if (activePowerUp == 0)
                     {
                         texUpperBody = Textures.player_kebab;
@@ -667,6 +674,7 @@ namespace DrunkiBoy
                     currentWeapon = weaponType.kebab;
                     break;
                 case weaponType.bottle:
+                    bottleWeapons++;
                     if (activePowerUp == 0)
                     {
                         texUpperBody = Textures.player_bottle;
@@ -732,7 +740,7 @@ namespace DrunkiBoy
                         burgerWeapons--;
                         if (burgerWeapons <= 0)
                         {
-                            PickUpWeapon(weaponType.none);
+                            PickUpAmmo(weaponType.none);
                         }
                         break;
 
@@ -741,7 +749,7 @@ namespace DrunkiBoy
                         pizzaWeapons--;
                         if (pizzaWeapons <= 0)
                         {
-                            PickUpWeapon(weaponType.none);
+                            PickUpAmmo(weaponType.none);
                         }
                         if (activePowerUp == 0)
                             prevTexUpperBody = Textures.player_upper_body;
@@ -753,7 +761,7 @@ namespace DrunkiBoy
                         kebabWeapons--;
                         if (kebabWeapons <= 0)
                         {
-                            PickUpWeapon(weaponType.none);
+                            PickUpAmmo(weaponType.none);
                         }
                         break;
 
@@ -762,7 +770,7 @@ namespace DrunkiBoy
                         bottleWeapons--;
                         if (bottleWeapons <= 0)
                         {
-                            PickUpWeapon(weaponType.none);
+                            PickUpAmmo(weaponType.none);
                         }
                         break;
 
@@ -771,7 +779,7 @@ namespace DrunkiBoy
                         bottleWeapons--;
                         if (bottleWeapons <= 0)
                         {
-                            PickUpWeapon(weaponType.none);
+                            PickUpAmmo(weaponType.none);
                         }
                         break;
                 }
@@ -882,7 +890,7 @@ namespace DrunkiBoy
         private void ResetWeapon()
         {
             currentWeapon = weaponType.none;
-            PickUpWeapon(weaponType.none);
+            PickUpAmmo(weaponType.none);
             BulletManager.bullets.Clear();
         }
         /// <summary>

@@ -129,25 +129,41 @@ namespace DrunkiBoy
                     pizzaOpacity = 0.5f;
                     break;
                 case Player.weaponType.bottle:
-                    burgerColor = Color.Gold;
-                    burgerOpacity = 1f;
+                    burgerColor = Color.White;
+                    burgerOpacity = 0.5f;
                     kebabColor = Color.White;
                     kebabOpacity = 0.5f;
-                    bottleColor = Color.White;
-                    bottleOpacity = 0.5f;
+                    bottleColor = Color.Gold;
+                    bottleOpacity = 1f;
                     pizzaColor = Color.White;
                     pizzaOpacity = 0.5f;
                     break;
                 case Player.weaponType.pizza:
-                    burgerColor = Color.Gold;
-                    burgerOpacity = 1f;
+                    burgerColor = Color.White;
+                    burgerOpacity = 0.5f;
                     kebabColor = Color.White;
                     kebabOpacity = 0.5f;
                     bottleColor = Color.White;
                     bottleOpacity = 0.5f;
-                    pizzaColor = Color.White;
-                    pizzaOpacity = 0.5f;
+                    pizzaColor = Color.Gold;
+                    pizzaOpacity = 1f;
                     break;
+            }
+            if (Player.burgerWeapons == 0)
+            {
+                burgerColor = Color.DarkRed;
+            }
+            if (Player.kebabWeapons == 0)
+            {
+                kebabColor = Color.DarkRed;
+            }
+            if (Player.bottleWeapons == 0)
+            {
+                bottleColor = Color.DarkRed;
+            }
+            if (Player.pizzaWeapons == 0)
+            {
+                pizzaColor = Color.DarkRed;
             }
         }
         /// <summary>

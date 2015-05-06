@@ -212,10 +212,8 @@ namespace DrunkiBoy
             {
                 if (bottle.DetectPixelCollision(player))
                 {
-                    Player.bottleWeapons++;
-                    //BulletManager.AddAmmo(bottleWeapon);
                     bottles.Remove(bottle);
-                    player.PickUpWeapon(Player.weaponType.bottle);
+                    player.PickUpAmmo(Player.weaponType.bottle);
                     break;
                 }
             }
@@ -226,10 +224,8 @@ namespace DrunkiBoy
             {
                 if (kebab.DetectPixelCollision(player))
                 {
-                    Player.kebabWeapons++;
-                    //BulletManager.ammo.Add(kebabWeapon);
                     kebabs.Remove(kebab);
-                    player.PickUpWeapon(Player.weaponType.kebab);
+                    player.PickUpAmmo(Player.weaponType.kebab);
                     break;
                 }
             }
@@ -242,10 +238,8 @@ namespace DrunkiBoy
 
                 if (pizza.DetectPixelCollision(player))
                 {
-                    Player.pizzaWeapons++;
-                    //BulletManager.AddAmmo(pizzaWeapon);
                     pizzas.Remove(pizza);
-                    player.PickUpWeapon(Player.weaponType.pizza);
+                    player.PickUpAmmo(Player.weaponType.pizza);
                     break;
                 }
                 
@@ -257,10 +251,8 @@ namespace DrunkiBoy
             {
                 if (burger.DetectPixelCollision(player))
                 {
-                    Player.burgerWeapons++;
-                    //BulletManager.AddAmmo(hamburgareVapen);
                     burgers.Remove(burger);
-                    player.PickUpWeapon(Player.weaponType.burger);
+                    player.PickUpAmmo(Player.weaponType.burger);
                     break;
                 }
             }
@@ -375,7 +367,7 @@ namespace DrunkiBoy
             {
                 if (Player.currentWeapon == Player.weaponType.bottle && player.DetectPixelCollision(torch))
                 {
-                    player.PickUpWeapon(Player.weaponType.molotovCocktail);
+                    player.PickUpAmmo(Player.weaponType.molotovCocktail);
                 }
                 torch.Update(gameTime);
             }
