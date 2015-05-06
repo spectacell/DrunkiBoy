@@ -479,7 +479,8 @@ namespace DrunkiBoy
         /// <param name="time">Tid i ms för hur länge powerup är aktiv</param>
         public void ActivatePowerUp(int powerUp, double time)
         {
-            tex = texUpperBody;
+            //tex = texUpperBody;
+            texUpperBodyWithoutPowerUp = texUpperBody;
             isMorphing = true;
             DeactivatePowerUp();
             activePowerUp = powerUp;
