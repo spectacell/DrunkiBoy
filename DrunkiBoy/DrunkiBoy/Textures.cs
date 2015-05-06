@@ -9,8 +9,8 @@ namespace DrunkiBoy
 {
     class Textures
     {
-        public static Texture2D player, player_lower_body, player_upper_body, player_upper_body_hurt, player_burger, player_shooting, player_pizza, player_bottle, Door, MovingplatfFöreditor, wall,
-            player_bottle_molotov, player_kebab, player_head, player_jetpack, player_jetpack_morph, player_invincible, player_invincible_morph, player_invincible_shooting;
+        public static Texture2D player, player_lower_body, player_upper_body, player_upper_body_hurt, player_burger, player_shooting, player_pizza, player_bottle, DoorOpened, MovingplatfFöreditor, wall,
+            player_bottle_molotov, player_kebab, player_head, player_jetpack, player_jetpack_morph, player_invincible, player_invincible_morph, player_invincible_shooting, DoorClosed;
 
         public static Texture2D platform, deleteCursor, torchTex, Key, Wallet, Cellphone, heart, bottle, bottle_molotov, hamburgare, pizza, kebab, painkiller, jagerbomb, redbullVodka, 
             bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, angry_neighbour,
@@ -75,6 +75,8 @@ namespace DrunkiBoy
             hamburgare = content.Load<Texture2D>("Items/burgare");
             pizza = content.Load<Texture2D>("Items/Pizza");
             wall = content.Load<Texture2D>("wall");
+            DoorClosed = content.Load<Texture2D>("doorClosed");
+            DoorOpened = content.Load<Texture2D>("Dooropened")
             kebab = content.Load<Texture2D>("Items/kebab");
             vodka = content.Load<Texture2D>("Items/Vodka");
             vodka_gui = content.Load<Texture2D>("GUI/Vodka");
