@@ -14,7 +14,7 @@ namespace DrunkiBoy
         public bool movingBack, weaponThrown;
 
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
-        private Texture2D texUpperBody, texLowerBody, prevTexUpperBody, prevTexUpperBodyPU;
+        private Texture2D texUpperBody, texLowerBody, prevTexUpperBody, texUpperBodyWithoutPowerUp;
         private double timeTilNextFrameLB = 0; 
         private int frameLB;
         private Rectangle srcRectLB;
@@ -391,13 +391,12 @@ namespace DrunkiBoy
         /// <param name="time">Tid i ms för hur länge powerup är aktiv</param>
         public void ActivatePowerUp(int powerUp, double time) 
         {
+            tex = texUpperBody;
             isMorphing = true;
             DeactivatePowerUp();
             activePowerUp = powerUp;
             activePowerUpTimer = time;
             Game1.gui.ShowPowerUpCounter(powerUp, time);
-            //if (activePowerUp == 0)
-            prevTexUpperBodyPU = texUpperBody;
             
             //Ser till att frame sätts till första framen i animationen
             if (facing == 0) //Vänd åt vänster
@@ -586,50 +585,68 @@ namespace DrunkiBoy
             switch (type)
             {
                 case weaponType.none:
-                    prevTexUpperBody = Textures.player_upper_body;
                     if (activePowerUp == 0)
                     {
-                        texUpperBody = prevTexUpperBody;
+                        texUpperBody = Textures.player_upper_body;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_upper_body;
                     }
                     currentWeapon = weaponType.none;
                     break;
                 case weaponType.burger:
-                    prevTexUpperBody = Textures.player_burger;
                     if (activePowerUp == 0)
                     {
-                        texUpperBody = prevTexUpperBody;
+                        texUpperBody = Textures.player_burger;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_burger;
                     }
                     currentWeapon = weaponType.burger;
                     break;
                 case weaponType.pizza:
-                    prevTexUpperBody = Textures.player_pizza;
                     if (activePowerUp == 0)
                     {
-                        texUpperBody = prevTexUpperBody;
+                        texUpperBody = Textures.player_pizza;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_pizza;
                     }
                     currentWeapon = weaponType.pizza;
                     break;
                 case weaponType.kebab:
-                    prevTexUpperBody = Textures.player_kebab;
                     if (activePowerUp == 0)
                     {
-                        texUpperBody = prevTexUpperBody;
+                        texUpperBody = Textures.player_kebab;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_bottle;
                     }
                     currentWeapon = weaponType.kebab;
                     break;
                 case weaponType.bottle:
-                    prevTexUpperBody = Textures.player_bottle;
                     if (activePowerUp == 0)
                     {
-                        texUpperBody = prevTexUpperBody;
+                        texUpperBody = Textures.player_bottle;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_bottle;
                     }
                     currentWeapon = weaponType.bottle;
                     break;
                 case weaponType.molotovCocktail:
-                    prevTexUpperBody = Textures.player_bottle_molotov;
                     if (activePowerUp == 0)
                     {
-                        texUpperBody = prevTexUpperBody;
+                        texUpperBody = Textures.player_bottle_molotov;
+                    }
+                    else
+                    {
+                        texUpperBodyWithoutPowerUp = Textures.player_bottle_molotov;
                     }
                     currentWeapon = weaponType.molotovCocktail;
                     break;
@@ -654,10 +671,6 @@ namespace DrunkiBoy
 
                     case 1:
                         texUpperBody = Textures.player_invincible_shooting;
-                        break;
-
-                    case 2:
-
                         break;
                 }
                 animateShooting = true;
@@ -686,7 +699,7 @@ namespace DrunkiBoy
                         pizzaWeapons--;
                         if (activePowerUp == 0)
                             prevTexUpperBody = Textures.player_upper_body;                 
-                        currentWeapon = weaponType.none;
+                        //currentWeapon = weaponType.none;
                     break;
 
                     case weaponType.kebab:
@@ -829,7 +842,7 @@ namespace DrunkiBoy
                 invincible = false;
                 activePowerUp = 0;
                 Game1.gui.ResetPowerUp();
-                texUpperBody = prevTexUpperBodyPU;
+                texUpperBody = texUpperBodyWithoutPowerUp;
             }
         }
         #endregion
