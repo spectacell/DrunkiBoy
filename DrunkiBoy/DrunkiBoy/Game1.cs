@@ -20,8 +20,9 @@ namespace DrunkiBoy
         public static int currentLevel = 0; //0 är level 1
         private Level level;
         private LevelEditor levelEditor;
+        Menu menu;
 
-        public enum gameState { inGame, levelComplete, gameOver, levelEditor };
+        public enum gameState { inGame, levelComplete, gameOver, levelEditor, menu, options };
         public static gameState currentGameState = gameState.levelEditor;
 
         public Game1()
@@ -47,7 +48,7 @@ namespace DrunkiBoy
 
             Textures.LoadContent(Content);
             Constants.LoadContent(Content);
-
+            menu = new Menu(menu.pos, menu.tex, menu.srcRect, menu.isActive);
             level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             levelEditor = new LevelEditor(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             gui = new GUI();
@@ -78,6 +79,10 @@ namespace DrunkiBoy
             KeyMouseReader.Update();
             switch (currentGameState)
             {
+                case gameState.menu:
+                    menu.Update(gameTime);
+                    break;
+
                 case gameState.inGame:
                     level.Update(gameTime);
                     gui.Update(gameTime);
@@ -103,6 +108,10 @@ namespace DrunkiBoy
 
             switch (currentGameState)
             {
+                case gameState.menu:
+                    menu.Draw(spriteBatch);
+                    break;
+
                 case gameState.inGame:
                     level.Draw(spriteBatch);
                     gui.Draw(spriteBatch);                    
