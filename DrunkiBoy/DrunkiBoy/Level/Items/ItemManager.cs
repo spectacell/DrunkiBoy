@@ -223,6 +223,10 @@ namespace DrunkiBoy
                         GenerateParticleEngine(bullet);
                         bullet.isActive = false;
                     }
+                    if (door.isActivated)
+                    {
+                        
+                    }
                 }
             }
         }
