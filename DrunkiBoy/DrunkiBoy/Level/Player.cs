@@ -496,14 +496,15 @@ namespace DrunkiBoy
         private void SwitchTextureAfterMorphing()
         {
             isMorphing = false;
-            if (activePowerUp == 1)
-            {
-                texUpperBody = Textures.player_invincible;
-            }
-            else if (activePowerUp == 2)
-            {
-                texUpperBody = Textures.player_jetpack;
-            }
+            SetPlayerTextureBasedOnCurrentState();
+            //if (activePowerUp == 1)
+            //{
+            //    texUpperBody = Textures.player_invincible;
+            //}
+            //else if (activePowerUp == 2)
+            //{
+            //    texUpperBody = Textures.player_jetpack;
+            //}
         }
         /// <summary>
         /// Körs när man tar ett föremål som ger hälsa
@@ -564,9 +565,45 @@ namespace DrunkiBoy
                 {
                     weaponThrown = false;
                     movingBack = false;
-                    texUpperBody = prevTexUpperBody;
+                    SetPlayerTextureBasedOnCurrentState();
                 }
             }
+        }
+        private void SetPlayerTextureBasedOnCurrentState()
+        {
+            if (activePowerUp == 0)
+            {
+                switch (currentWeapon)
+                {
+                    case weaponType.none:
+                        texUpperBody = Textures.player_upper_body;
+                        break;
+                    case weaponType.bottle:
+                        texUpperBody = Textures.player_bottle;
+                        break;
+                    case weaponType.molotovCocktail:
+                        texUpperBody = Textures.player_bottle_molotov;
+                        break;
+                    case weaponType.burger:
+                        texUpperBody = Textures.player_burger;
+                        break;
+                    case weaponType.kebab:
+                        texUpperBody = Textures.player_kebab;
+                        break;
+                    case weaponType.pizza:
+                        texUpperBody = Textures.player_pizza;
+                        break;
+                }
+            }
+            else if (activePowerUp == 1)
+            {
+                texUpperBody = Textures.player_invincible;
+            }
+            else if (activePowerUp == 2)
+            {
+                texUpperBody = Textures.player_jetpack;
+            }
+
         }
         /// <summary>
         /// Sätter ny targetPos för Player baserat på position på det den springer in i
