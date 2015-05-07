@@ -656,6 +656,10 @@ namespace DrunkiBoy
                     currentWeapon = weaponType.pizza;
                     SwitchTexUpperBody(Textures.player_pizza);
                     break;
+                case weaponType.molotovCocktail:
+                    currentWeapon = weaponType.molotovCocktail;
+                    SwitchTexUpperBody(Textures.player_bottle_molotov);
+                    break;
             }
         }
         /// <summary>
