@@ -76,7 +76,7 @@ namespace DrunkiBoy
             pizza = content.Load<Texture2D>("Items/Pizza");
             wall = content.Load<Texture2D>("wall");
             DoorClosed = content.Load<Texture2D>("doorClosed");
-            DoorOpened = content.Load<Texture2D>("Dooropened")
+            DoorOpened = content.Load<Texture2D>("Dooropened");
             kebab = content.Load<Texture2D>("Items/kebab");
             vodka = content.Load<Texture2D>("Items/Vodka");
             vodka_gui = content.Load<Texture2D>("GUI/Vodka");

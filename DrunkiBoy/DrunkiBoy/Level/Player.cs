@@ -169,8 +169,8 @@ namespace DrunkiBoy
             else
                 gotPizza = false;
 
-            Console.WriteLine("burgare" + burgerWeapons);
-            Console.WriteLine("flaskor" + bottleWeapons);
+            //Console.WriteLine("burgare" + burgerWeapons);
+            //Console.WriteLine("flaskor" + bottleWeapons);
             //switch (currentWeapon)
             //{
             //    case weaponType.burger:
@@ -188,7 +188,7 @@ namespace DrunkiBoy
             AnimateLowerBody();
             AnimateShooting(gameTime);
             AnimateHealthBar();
-            MoveBackWhenEnemyContact(gameTime);
+            MovingBackOnContact(gameTime);
             CountDownShotDelay(gameTime);
             AnimatingScore();
             SpawnAnimation(gameTime);
@@ -217,56 +217,6 @@ namespace DrunkiBoy
             }
             particleEngine.Draw(spriteBatch);
         }
-        private void SwitchWeapons(weaponType weapon)
-        {
-            switch (weapon)
-            {
-                case weaponType.burger:
-                    currentWeapon = weaponType.burger;
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_burger;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_burger;
-                    }
-                    break;
-                case weaponType.kebab:
-                    currentWeapon = weaponType.kebab;
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_kebab;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_kebab;
-                    }
-                    break;
-                case weaponType.bottle:
-                    currentWeapon = weaponType.bottle;
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_bottle;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_bottle;
-                    }
-                    break;
-                case weaponType.pizza:
-                    currentWeapon = weaponType.pizza;
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_pizza;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_pizza;
-                    }
-                    break;
-            }
-        }
         /// <summary>
         /// Flygförmåga efter intag av Redbull vodka
         /// </summary>
@@ -276,7 +226,7 @@ namespace DrunkiBoy
 
             particleEngingePos = new Vector2(pos.X + 14, pos.Y + 115);
             rotation = 0f;
-            if (!isMorphing)
+            if (!isMorphing && !movingBack)
             {
                 if (KeyMouseReader.keyState.IsKeyDown(Keys.Left))
                 {
@@ -480,7 +430,6 @@ namespace DrunkiBoy
         /// <param name="time">Tid i ms för hur länge powerup är aktiv</param>
         public void ActivatePowerUp(int powerUp, double time)
         {
-            //tex = texUpperBody;
             texUpperBodyWithoutPowerUp = texUpperBody;
             isMorphing = true;
             DeactivatePowerUp();
@@ -597,14 +546,16 @@ namespace DrunkiBoy
             }
         }
         /// <summary>
-        /// Flyttar players pos gradvis bakåt vid kontakt med Enemy
+        /// Flyttar players pos gradvis bakåt vid kontakt med Enemy eller vägg
         /// </summary>
-        /// <param name="gameTime"></param>
-        private void MoveBackWhenEnemyContact(GameTime gameTime)
+        private void MovingBackOnContact(GameTime gameTime)
         {
             if (movingBack)
             {
-                texUpperBody = Textures.player_upper_body_hurt;
+                if (activePowerUp == 0)
+                {
+                    texUpperBody = Textures.player_upper_body_hurt;
+                }
                 if (pos.X > targetPos.X)
                 {
                     pos.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
@@ -617,23 +568,30 @@ namespace DrunkiBoy
                 {
                     weaponThrown = false;
                     movingBack = false;
-                    texUpperBody = prevTexUpperBody;
+                    if (activePowerUp == 0)
+                        texUpperBody = prevTexUpperBody;
                 }
             }
         }
-        public void MovePlayerBack(Vector2 enemyPos, int enemyWidth)
+        /// <summary>
+        /// Sätter ny targetPos för Player baserat på position på det den springer in i
+        /// </summary>
+        /// <param name="obstaclePos">Position det player springer in i har</param>
+        /// <param name="obstacleWidth">Bredden på det player springer in i</param>
+        public void MovePlayerBack(Vector2 obstaclePos, int obstacleWidth)
         {
             if (!movingBack) 
             {
-                prevTexUpperBody = texUpperBody;
+                if (activePowerUp == 0)
+                    prevTexUpperBody = texUpperBody;
                 movingBack = true;
-                if (pos.X < enemyPos.X)
+                if (pos.X < obstaclePos.X)
                 {
-                    targetPos.X = enemyPos.X - 150;
+                    targetPos.X = obstaclePos.X - 150;
                 }
                 else
                 {
-                    targetPos.X = enemyPos.X + 50 + enemyWidth;
+                    targetPos.X = obstaclePos.X + 50 + obstacleWidth;
                 }
             }
         }
@@ -671,6 +629,36 @@ namespace DrunkiBoy
             }
         }
         /// <summary>
+        /// Byter currentWeaon variablen och ändrar textur.
+        /// </summary>
+        /// <param name="weapon">Vapentyp</param>
+        private void SwitchWeapons(weaponType weapon)
+        {
+            switch (weapon)
+            {
+                case weaponType.none:
+                    currentWeapon = weaponType.none;
+                    SwitchTexUpperBody(Textures.player_upper_body);
+                    break;
+                case weaponType.burger:
+                    currentWeapon = weaponType.burger;
+                    SwitchTexUpperBody(Textures.player_burger);
+                    break;
+                case weaponType.kebab:
+                    currentWeapon = weaponType.kebab;
+                    SwitchTexUpperBody(Textures.player_kebab);
+                    break;
+                case weaponType.bottle:
+                    currentWeapon = weaponType.bottle;
+                    SwitchTexUpperBody(Textures.player_bottle);
+                    break;
+                case weaponType.pizza:
+                    currentWeapon = weaponType.pizza;
+                    SwitchTexUpperBody(Textures.player_pizza);
+                    break;
+            }
+        }
+        /// <summary>
         /// Körs från ItemManager när player tar upp ett vapen. Ändrar players textur och currentWeapon-variabel så att rätt skott skjuts
         /// </summary>
         /// <param name="type">Vapentyp</param>
@@ -679,15 +667,7 @@ namespace DrunkiBoy
             switch (type)
             {
                 case weaponType.none:
-                    if (activePowerUp == 0)
-                    {
-                        texUpperBody = Textures.player_upper_body;
-                    }
-                    else
-                    {
-                        texUpperBodyWithoutPowerUp = Textures.player_upper_body;
-                    }
-                    currentWeapon = weaponType.none;
+                    SwitchWeapons(weaponType.none);
                     break;
                 case weaponType.burger:
                     burgerWeapons++;
@@ -754,49 +734,26 @@ namespace DrunkiBoy
                     case weaponType.burger:
                         BulletManager.AddBullet(new HamburgareVapen(bulletPos, bulletVelocity, true));
                         burgerWeapons--;
-                        if (burgerWeapons <= 0)
-                        {
-                            PickUpAmmo(weaponType.none);
-                        }
                         break;
 
                     case weaponType.pizza:
                         BulletManager.AddBullet(new PizzaWeapon(bulletPos, bulletVelocity, false, true));
                         pizzaWeapons--;
-                        if (pizzaWeapons <= 0)
-                        {
-                            PickUpAmmo(weaponType.none);
-                        }
-                        if (activePowerUp == 0)
-                            prevTexUpperBody = Textures.player_upper_body;
-                        //currentWeapon = weaponType.none;
                         break;
 
                     case weaponType.kebab:
                         BulletManager.AddBullet(new KebabWeapon(bulletPos, bulletVelocity, true));
                         kebabWeapons--;
-                        if (kebabWeapons <= 0)
-                        {
-                            PickUpAmmo(weaponType.none);
-                        }
                         break;
 
                     case weaponType.bottle:
                         BulletManager.AddBullet(new BottleWeapon(bulletPos, bulletVelocity, true));
                         bottleWeapons--;
-                        if (bottleWeapons <= 0)
-                        {
-                            PickUpAmmo(weaponType.none);
-                        }
                         break;
 
                     case weaponType.molotovCocktail:
                         BulletManager.AddBullet(new MolotovWeapon(bulletPos, bulletVelocity, true));
                         bottleWeapons--;
-                        if (bottleWeapons <= 0)
-                        {
-                            PickUpAmmo(weaponType.none);
-                        }
                         break;
                 }
             }
@@ -821,8 +778,56 @@ namespace DrunkiBoy
                 if ((facing == 1 && frame == 7) || (facing == 0 && frame == 15) || (facing != prevFacing))
                 {
                     animateShooting = false;
-                    texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
+                    if (OutOfAmmo(currentWeapon))
+                    {
+                        ChangeWeaponIfAmmo();
+                    }
+                    else
+                    {
+                        texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
+                    }
                 }
+            }
+        }
+        
+        /// <summary>
+        /// Returnerar true om man får slut på ammunition på aktivt vapen. Sätter då också currentWeapon till weaponType.None
+        /// </summary>
+        /// <returns></returns>
+        private bool OutOfAmmo(weaponType currentWeapon)
+        {
+            if (currentWeapon == weaponType.burger && burgerWeapons > 0)
+                return false;
+            else if (currentWeapon == weaponType.kebab && kebabWeapons > 0)
+                return false;
+            else if (currentWeapon == weaponType.bottle && bottleWeapons > 0)
+                return false;
+            else if (currentWeapon == weaponType.pizza && pizzaWeapons > 0)
+                return false;
+            else
+                return true;
+        }
+        private void ChangeWeaponIfAmmo()
+        {
+            if (burgerWeapons > 0)
+            {
+                SwitchWeapons(weaponType.burger);
+            }
+            else if (kebabWeapons > 0)
+            {
+                SwitchWeapons(weaponType.kebab);
+            }
+            else if (bottleWeapons > 0)
+            {
+                SwitchWeapons(weaponType.bottle);
+            }
+            else if (pizzaWeapons > 0)
+            {
+                SwitchWeapons(weaponType.pizza);
+            }
+            else
+            {
+                SwitchWeapons(weaponType.none);
             }
         }
         /// <summary>
@@ -866,7 +871,17 @@ namespace DrunkiBoy
                 }
             }
         }
-
+        private void SwitchTexUpperBody(Texture2D tex)
+        {
+            if (activePowerUp == 0)
+            {
+                prevTexUpperBody = texUpperBody = tex;
+            }
+            else
+            {
+                texUpperBodyWithoutPowerUp = tex;
+            }
+        }
         #region Reset metoder
         /// <summary>
         /// Återstället position, hälsa och sätter vapentyp till none

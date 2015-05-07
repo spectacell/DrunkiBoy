@@ -14,7 +14,6 @@ namespace DrunkiBoy
         public PizzaWeapon(Vector2 pos, Vector2 velocity, bool thrownInAir, bool lethal)
             : base(pos, velocity, Textures.pizza, true, 400)
         {
-            //this.velocity.Y = -2; //Så att går lite snett uppåt
             this.thrownInAir = thrownInAir;
             this.lethal = lethal;
         }
