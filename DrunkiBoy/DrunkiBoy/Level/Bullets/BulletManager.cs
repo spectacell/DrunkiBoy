@@ -24,7 +24,6 @@ namespace DrunkiBoy
             // Update loopa genom Bullet listor
             foreach (Bullet bullet in bullets)
             {
-
                 bullet.Update(gameTime);
 
                 if (!player.animateShooting && !player.weaponThrown && bullet is PizzaWeapon) 

@@ -37,7 +37,7 @@ namespace DrunkiBoy
         KebabWeapon kebabWeapon;
         PizzaWeapon pizzaWeapon;
         private Random rnd = new Random();
-        public static ParticleEngine particleEngine;
+        public static ParticleEngine particleEngine = new ParticleEngine();
 
         public ItemManager()
         {
@@ -145,6 +145,7 @@ namespace DrunkiBoy
             UpdateWalls(gameTime, player);
             UpdateFires(gameTime, angryNeighbours);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
+            particleEngine.Update();
         }
 
         private void UpdateFires(GameTime gameTime, List<AngryNeighbour> angryNeighbours)
@@ -189,6 +190,14 @@ namespace DrunkiBoy
                 {
                     player.MovePlayerBack(wall.pos, wall.srcRect.Width);
                     break;
+                }
+                foreach (Bullet bullet in BulletManager.bullets)
+                {
+                    if (wall.DetectPixelCollision(bullet))
+                    {
+                        GenerateParticleEngine(bullet);
+                        bullet.isActive = false;
+                    }
                 }
             }
         }
@@ -500,7 +509,7 @@ namespace DrunkiBoy
             {
                 wall.Draw(spriteBatch);
             }
-
+            particleEngine.Draw(spriteBatch);
         }
         private void UpdatePlatforms(Player player, List<AngryNeighbour> angryNeighbours)
         {
@@ -555,6 +564,34 @@ namespace DrunkiBoy
                         an.ChangeDirection();
                     }
                 }
+            }
+        }
+        private void GenerateParticleEngine(Bullet bullet)
+        {
+            if (bullet is PizzaWeapon)
+            {
+                particleEngine.Textures = Textures.pizzaParticles;
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
+            }
+            if (bullet is HamburgareVapen)
+            {
+                particleEngine.Textures = Textures.burgerParticles;
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
+            }
+            if (bullet is BottleWeapon)
+            {
+                particleEngine.Textures = Textures.bottleparticles;
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
+            }
+            if (bullet is MolotovWeapon)
+            {
+                particleEngine.Textures = Textures.bottleparticles;
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
+            }
+            if (bullet is KebabWeapon)
+            {
+                particleEngine.Textures = Textures.kebabParticles;
+                particleEngine.CreateParticlesInCircleRange(bullet.pos);
             }
         }
     }
