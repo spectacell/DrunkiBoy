@@ -48,7 +48,7 @@ namespace DrunkiBoy
 
             Textures.LoadContent(Content);
             Constants.LoadContent(Content);
-            menu = new Menu(menu.pos, menu.tex, menu.srcRect, menu.isActive);
+            //menu = new Menu(menu.pos, menu.tex, menu.srcRect, menu.isActive);
             level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             levelEditor = new LevelEditor(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             gui = new GUI();

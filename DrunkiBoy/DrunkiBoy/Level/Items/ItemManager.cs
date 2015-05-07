@@ -30,6 +30,7 @@ namespace DrunkiBoy
         public List<RedbullVodka> redbullVodkas = new List<RedbullVodka>();
         public List<FireOnGround> fires = new List<FireOnGround>();
         public List<Wall> walls = new List<Wall>();
+        public List<Door> doors = new List<Door>();
 
 
         HamburgareVapen hamburgareVapen;
@@ -47,6 +48,10 @@ namespace DrunkiBoy
         public void AddToilet(Toilet toilet)
         {
             toilets.Add(toilet);
+        }
+        public void AddDoor(Door door)
+        {
+            doors.Add(door);
         }
         public void AddKebab(Kebab kebab)
         {
@@ -144,6 +149,7 @@ namespace DrunkiBoy
             UpdateRedbullVodkas(gameTime, player);
             UpdateWalls(gameTime, player);
             UpdateFires(gameTime, angryNeighbours);
+            UpdateDoors(gameTime, player);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
             particleEngine.Update();
         }
@@ -194,6 +200,25 @@ namespace DrunkiBoy
                 foreach (Bullet bullet in BulletManager.bullets)
                 {
                     if (wall.DetectPixelCollision(bullet))
+                    {
+                        GenerateParticleEngine(bullet);
+                        bullet.isActive = false;
+                    }
+                }
+            }
+        }
+        private void UpdateDoors(GameTime gameTime, Player player)
+        {
+            foreach (Door door in doors)
+            {
+                if (door.DetectPixelCollision(player))
+                {
+                    player.MovePlayerBack(door.pos, door.srcRect.Width);
+                    break;
+                }
+                foreach (Bullet bullet in BulletManager.bullets)
+                {
+                    if (door.DetectPixelCollision(bullet))
                     {
                         GenerateParticleEngine(bullet);
                         bullet.isActive = false;
@@ -508,6 +533,10 @@ namespace DrunkiBoy
             foreach (Wall wall in walls)
             {
                 wall.Draw(spriteBatch);
+            }
+            foreach (Door door in doors)
+            {
+                door.Draw(spriteBatch);
             }
             particleEngine.Draw(spriteBatch);
         }
