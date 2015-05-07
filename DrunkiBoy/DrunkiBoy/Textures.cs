@@ -10,7 +10,8 @@ namespace DrunkiBoy
     class Textures
     {
         public static Texture2D player, player_lower_body, player_upper_body, player_upper_body_hurt, player_burger, player_shooting, player_pizza, player_bottle, DoorOpened, MovingplatfFöreditor, wall,
-            player_bottle_molotov, player_kebab, player_head, player_jetpack, player_jetpack_morph, player_invincible, player_invincible_morph, player_invincible_shooting, DoorClosed;
+            player_bottle_molotov, player_kebab, player_head, player_jetpack, player_jetpack_morph, player_invincible, player_invincible_morph, player_invincible_shooting, player_invincible_collision,
+            DoorClosed;
 
         public static Texture2D platform, deleteCursor, torchTex, Key, Wallet, Cellphone, heart, bottle, bottle_molotov, hamburgare, pizza, kebab, painkiller, jagerbomb, redbullVodka, 
             bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, angry_neighbour,
@@ -43,6 +44,7 @@ namespace DrunkiBoy
             player_invincible = content.Load<Texture2D>("Player/player-animation_invincible");
             player_invincible_morph = content.Load<Texture2D>("Player/player-animation_invincible_morph");
             player_invincible_shooting = content.Load<Texture2D>("Player/player-animation_invincible_shooting");
+            player_invincible_collision = content.Load<Texture2D>("Player/player-animation_invincible_collision");
             angry_neighbour = content.Load<Texture2D>("Enemies/angry_neighbour-animation");
             angry_neighbour_HB_red = content.Load<Texture2D>("Enemies/angry_neighbour-HB_red");
             angry_neighbour_HB_green = content.Load<Texture2D>("Enemies/angry_neighbour-HB_green");

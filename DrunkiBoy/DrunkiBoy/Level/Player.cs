@@ -552,10 +552,6 @@ namespace DrunkiBoy
         {
             if (movingBack)
             {
-                if (activePowerUp == 0)
-                {
-                    texUpperBody = Textures.player_upper_body_hurt;
-                }
                 if (pos.X > targetPos.X)
                 {
                     pos.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 350;
@@ -568,8 +564,7 @@ namespace DrunkiBoy
                 {
                     weaponThrown = false;
                     movingBack = false;
-                    if (activePowerUp == 0)
-                        texUpperBody = prevTexUpperBody;
+                    texUpperBody = prevTexUpperBody;
                 }
             }
         }
@@ -582,8 +577,15 @@ namespace DrunkiBoy
         {
             if (!movingBack) 
             {
+                prevTexUpperBody = texUpperBody;
                 if (activePowerUp == 0)
-                    prevTexUpperBody = texUpperBody;
+                {
+                    texUpperBody = Textures.player_upper_body_hurt;
+                }
+                else if (activePowerUp == 1)
+                {
+                    texUpperBody = Textures.player_invincible_collision;
+                }
                 movingBack = true;
                 if (pos.X < obstaclePos.X)
                 {
