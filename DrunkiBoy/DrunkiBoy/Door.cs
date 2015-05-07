@@ -9,6 +9,7 @@ namespace DrunkiBoy
 {
     class Door : GameObject
     {
+        public enum doortype { DoorClosed, DoorOpened };
         private doortype currentDoor;
         public bool isActivated;
         public Door(Vector2 pos, Texture2D tex, bool isActive)
@@ -19,6 +20,7 @@ namespace DrunkiBoy
         public void activate()
         {
             isActivated = true;
+            tex = Textures.DoorOpened;
         }
     }
 }
