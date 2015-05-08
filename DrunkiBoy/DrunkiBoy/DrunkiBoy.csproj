@@ -79,6 +79,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="Level\Enemies\AngryNeighbour.cs" />
     <Compile Include="Level\Items\Cellphone.cs" />

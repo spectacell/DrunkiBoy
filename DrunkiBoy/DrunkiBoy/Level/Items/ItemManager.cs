@@ -31,6 +31,7 @@ namespace DrunkiBoy
         public List<FireOnGround> fires = new List<FireOnGround>();
         public List<Wall> walls = new List<Wall>();
         public List<Door> doors = new List<Door>();
+        public List<Button> buttons = new List<Button>();
 
 
         HamburgareVapen hamburgareVapen;
@@ -48,6 +49,10 @@ namespace DrunkiBoy
         public void AddToilet(Toilet toilet)
         {
             toilets.Add(toilet);
+        }
+        public void AddButton(Button button)
+        {
+            buttons.Add(button);
         }
         public void AddDoor(Door door)
         {
@@ -228,6 +233,30 @@ namespace DrunkiBoy
                         
                     }
                 }
+            }
+        }
+
+        private void UpdateButton(GameTime gameTime, Player player)
+        {
+            foreach (Button button in buttons)
+            {
+                //if (button.DetectPixelCollision(player))
+                //{
+                //    player.MovePlayerBack(button.pos, button.srcRect.Width);
+                //    break;
+                //}
+                //foreach (Bullet bullet in BulletManager.bullets)
+                //{
+                //    if (button.DetectPixelCollision(bullet))
+                //    {
+                //        GenerateParticleEngine(bullet);
+                //        bullet.isActive = false;
+                //    }
+                //    if (button.isActivated)
+                //    {
+
+                //    }
+                //}
             }
         }
 
@@ -541,6 +570,10 @@ namespace DrunkiBoy
             foreach (Door door in doors)
             {
                 door.Draw(spriteBatch);
+            }
+            foreach (Button button in buttons)
+            {
+                button.Draw(spriteBatch);
             }
             particleEngine.Draw(spriteBatch);
         }

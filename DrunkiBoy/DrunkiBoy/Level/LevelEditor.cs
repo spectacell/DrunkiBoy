@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka, RedbullVodka, MovingPlatform, Wall, Door}; //osv...
+        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka, RedbullVodka, MovingPlatform, Wall, Door, Button}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -49,6 +49,7 @@ namespace DrunkiBoy
             menuEntries.Add("M: Money");
             menuEntries.Add("N: MovingPlatform");
             menuEntries.Add("O: Bottle");
+            menuEntries.Add("U: Button");
             menuEntries.Add("P: Platform");
             menuEntries.Add("Q: Door");
             menuEntries.Add("R: Radio");
@@ -400,6 +401,18 @@ namespace DrunkiBoy
                         }
 
                         break;
+
+                    case items.Button:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Button(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.Button, true));
+                        }
+                        else
+                        {
+                            objects.Add(new Button(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.Button, true));
+                        }
+
+                        break;
                     case items.Wall:
                         if (intersectingPlatform != null)
                         {
@@ -596,8 +609,13 @@ namespace DrunkiBoy
             }
             if (KeyMouseReader.KeyPressed(Keys.Q))
             {
+                selectedItem = items.Button;
+                selectedObject = new Button(new Vector2(mouseState.X, mouseState.Y), Textures.DoorClosed, true);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.U))
+            {
                 selectedItem = items.Door;
-                selectedObject = new Door(new Vector2(mouseState.X, mouseState.Y), Textures.DoorClosed, true);
+                selectedObject = new Door(new Vector2(mouseState.X, mouseState.Y), Textures.Button, true);
             }
 
         }

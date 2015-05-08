@@ -301,6 +301,11 @@ namespace DrunkiBoy
                     itemManager.AddDoor(new Door(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.DoorClosed, true));
                     objects.Add(new Door(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.DoorClosed, true));
                 }
+                else if (temp[0] == "button")
+                {
+                    itemManager.AddButton(new Button(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Button, true));
+                    objects.Add(new Button(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Button, true));
+                }
 
             }
             sr.Close();
