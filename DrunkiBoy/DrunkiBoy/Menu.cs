@@ -17,13 +17,8 @@ namespace DrunkiBoy
             base (pos, tex, isActive)
         {
             startButton = new MenuButton(new Vector2(100, 100), Textures.startButton, new Rectangle(0, 0, 600, 255), true);
-            //startButton.tex = Textures.startButton;
-            //optionsButton.tex = Textures.optionsButton;
-            //exitButton.tex = Textures.exitButton;
-
-            //startButton = new MenuButton(pos, tex, srcRect, isActive);
-            //optionsButton = new MenuButton(pos, tex, srcRect, isActive);
-            //exitButton = new MenuButton(pos, tex, srcRect, isActive);
+            optionsButton = new MenuButton(new Vector2(200, 100), Textures.optionsButton, new Rectangle(0, 0, 600, 255), true);
+            exitButton = new MenuButton(new Vector2(300, 100), Textures.exitButton, new Rectangle(0, 0, 600, 255), true);
         }
 
         public void Update(GameTime gameTime)
@@ -35,35 +30,26 @@ namespace DrunkiBoy
         {
             spriteBatch.Begin();
             startButton.Draw(spriteBatch);
-            //optionsButton.Draw(spriteBatch);
-            //exitButton.Draw(spriteBatch);
+            optionsButton.Draw(spriteBatch);
+            exitButton.Draw(spriteBatch);
             spriteBatch.End();
         }
 
         public void CheckButtons()
         {
-            //if (startButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y) || optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y)
-            //    || exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
-            //{
-            //    //isActive = true; 
-            //}
-            //else
-            //{
-            //    //isActive = false; //Om isActive är false så ritas objektet inte ut. Ligger en if-sats i GameObject-klassens Draw() metod
-            //}
 
             if (KeyMouseReader.LeftClick() && startButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
             {
                 Game1.currentGameState = Game1.gameState.inGame;
             }
-            //else if (KeyMouseReader.LeftClick() && isActive == true && optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
-            //{
-
-            //}
-            //else if (KeyMouseReader.LeftClick() && isActive == true && exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
-            //{
+            if (KeyMouseReader.LeftClick() && optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            {
+                Game1.currentGameState = Game1.gameState.options;
+            }
+            if (KeyMouseReader.LeftClick() && exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            {
                 
-            //}
+            }
         }
         
     }
