@@ -26,19 +26,45 @@ namespace DrunkiBoy
             {
                 bullet.Update(gameTime);
 
-                if (!player.animateShooting && !player.weaponThrown && bullet is PizzaWeapon) 
+                if (!player.animateShooting && !player.weaponThrown) 
+                {
+                    if (bullet.DetectPixelCollision(player)) //Så att player kan plocka upp pizzan igen efter att ha kastat iväg den
+                    {
+                        if (bullet is PizzaWeapon)
+                        {
+                            player.PickUpAmmo(Player.weaponType.pizza);
+                        }
+                        else if (bullet is HamburgareVapen)
+                        {
+                            player.PickUpAmmo(Player.weaponType.burger);
+                        }
+                        else if (bullet is KebabWeapon)
+                        {
+                            player.PickUpAmmo(Player.weaponType.kebab);
+                        }
+                        else if (bullet is BottleWeapon)
+                        {
+                            player.PickUpAmmo(Player.weaponType.bottle);
+                        }
+                        else if (bullet is MolotovWeapon)
+                        {
+                            player.PickUpAmmo(Player.weaponType.molotovCocktail);
+                        }
+                        bullets.Remove(bullet);
+                        break;
+                    }
+                }
+                if (!player.animateShooting && !player.weaponThrown && bullet is HamburgareVapen)
                 {
                     if (bullet.DetectPixelCollision(player)) //Så att player kan plocka upp pizzan igen efter att ha kastat iväg den
                     {
                         bullets.Remove(bullet);
-                        player.PickUpAmmo(Player.weaponType.pizza);
+                        player.PickUpAmmo(Player.weaponType.burger);
                         break;
                     }
                 }
-
                 if (bullet.isActive == false)
                 {
-
                     bullets.Remove(bullet);
                     break;
                 }
