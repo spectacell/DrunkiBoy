@@ -93,6 +93,7 @@ namespace DrunkiBoy
                     break;
 
                 case gameState.levelEditor:
+                    IsMouseVisible = false;
                     levelEditor.Update(gameTime);
                     break;
                 case gameState.levelComplete:
