@@ -9,19 +9,15 @@ namespace DrunkiBoy
 {
     class MenuButton : GameObject
     {
-
         public MenuButton(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive) :
             base(pos, tex, srcRect, isActive)
         {
-            this.pos = pos;
-            this.tex = tex;
-            this.srcRect = srcRect;
-            this.isActive = isActive;
+           
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(tex, pos, srcRect, Color.White);
-        }
+        //public override void Draw(SpriteBatch spriteBatch)
+        //{
+        //    spriteBatch.Draw(tex, pos, srcRect, Color.White);
+        //}
     }
 }

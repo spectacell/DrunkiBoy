@@ -13,58 +13,57 @@ namespace DrunkiBoy
         public MenuButton optionsButton;
         public MenuButton exitButton;
      
-        public Menu(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive) :
-            base (pos, tex, srcRect, isActive)
+        public Menu(Vector2 pos, Texture2D tex, bool isActive) :
+            base (pos, tex, isActive)
         {
-            this.pos = pos;
-            this.tex = tex;
-            this.srcRect = srcRect;
-            this.isActive = isActive;
+            startButton = new MenuButton(new Vector2(100, 100), Textures.startButton, new Rectangle(0, 0, 600, 255), true);
+            //startButton.tex = Textures.startButton;
+            //optionsButton.tex = Textures.optionsButton;
+            //exitButton.tex = Textures.exitButton;
 
-            startButton.tex = Textures.startButton;
-            optionsButton.tex = Textures.optionsButton;
-            exitButton.tex = Textures.exitButton;
-
-            startButton = new MenuButton(pos, tex, srcRect, isActive);
-            optionsButton = new MenuButton(pos, tex, srcRect, isActive);
-            exitButton = new MenuButton(pos, tex, srcRect, isActive);
+            //startButton = new MenuButton(pos, tex, srcRect, isActive);
+            //optionsButton = new MenuButton(pos, tex, srcRect, isActive);
+            //exitButton = new MenuButton(pos, tex, srcRect, isActive);
         }
 
         public void Update(GameTime gameTime)
         {
-            KeyMouseReader.Update();
             CheckButtons();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
             startButton.Draw(spriteBatch);
-            optionsButton.Draw(spriteBatch);
-            exitButton.Draw(spriteBatch);
+            //optionsButton.Draw(spriteBatch);
+            //exitButton.Draw(spriteBatch);
+            spriteBatch.End();
         }
 
         public void CheckButtons()
         {
-            if (startButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.X) || optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.X)
-                || exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.X))
-            {
-                isActive = true;
-            }
-            else
-                isActive = false;
+            //if (startButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y) || optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y)
+            //    || exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            //{
+            //    //isActive = true; 
+            //}
+            //else
+            //{
+            //    //isActive = false; //Om isActive är false så ritas objektet inte ut. Ligger en if-sats i GameObject-klassens Draw() metod
+            //}
 
-            if(KeyMouseReader.LeftClick() && isActive == true && startButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.X))
+            if (KeyMouseReader.LeftClick() && startButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
             {
                 Game1.currentGameState = Game1.gameState.inGame;
             }
-            else if (KeyMouseReader.LeftClick() && isActive == true && optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.X))
-            {
+            //else if (KeyMouseReader.LeftClick() && isActive == true && optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            //{
 
-            }
-            else if (KeyMouseReader.LeftClick() && isActive == true && exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.X))
-            {
+            //}
+            //else if (KeyMouseReader.LeftClick() && isActive == true && exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            //{
                 
-            }
+            //}
         }
         
     }

@@ -49,9 +49,11 @@ namespace DrunkiBoy
             Textures.LoadContent(Content);
             Constants.LoadContent(Content);
             //menu = new Menu(menu.pos, menu.tex, menu.srcRect, menu.isActive);
+            menu = new Menu(Vector2.Zero, Textures.menuBackground, true);
             level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             levelEditor = new LevelEditor(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             gui = new GUI();
+            currentGameState = gameState.menu;
         }
 
         protected override void UnloadContent()
@@ -80,10 +82,12 @@ namespace DrunkiBoy
             switch (currentGameState)
             {
                 case gameState.menu:
+                    IsMouseVisible = true;
                     menu.Update(gameTime);
                     break;
 
                 case gameState.inGame:
+                    IsMouseVisible = false;
                     level.Update(gameTime);
                     gui.Update(gameTime);
                     break;
