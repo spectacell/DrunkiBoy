@@ -48,14 +48,7 @@ namespace DrunkiBoy
         private bool hasJumpedAfterSpawn;
         private Rectangle srcRectSpawnHead;
 
-        int activeWeapon;
-        HamburgareVapen burgerWeapon;
-        BottleWeapon bottleWeapon;
-        PizzaWeapon pizzaWeapon;
-        KebabWeapon kebabWeapon;
-
         public static int burgerWeapons, bottleWeapons, kebabWeapons, pizzaWeapons;
-        bool gotBurgers, gotBottles, gotKebab, gotPizza;
 
         public Player(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -107,76 +100,7 @@ namespace DrunkiBoy
                     }
                     break;
             }
-            
-            if (KeyMouseReader.KeyPressed(Keys.D1) && burgerWeapons > 0)
-            {
-                SwitchWeaponsAndTexture(weaponType.burger);
-                //gotBurgers = true;
-                //gotKebab = false;
-                //gotBottles = false;
-                //gotPizza = false;
-            }
-            if (KeyMouseReader.KeyPressed(Keys.D2) && kebabWeapons > 0)
-            {
-                SwitchWeaponsAndTexture(weaponType.kebab);
-                //gotBurgers = false;
-                //gotKebab = true;
-                //gotBottles = false;
-                //gotPizza = false;
-            }
-            if (KeyMouseReader.KeyPressed(Keys.D3) && bottleWeapons > 0)
-            {
-                SwitchWeaponsAndTexture(weaponType.bottle);
-                //gotBurgers = false;
-                //gotKebab = false;
-                //gotBottles = true;
-                //gotPizza = false;
-            }
-            if (KeyMouseReader.KeyPressed(Keys.D4) && pizzaWeapons > 0)
-            {
-                SwitchWeaponsAndTexture(weaponType.pizza);
-                //gotBurgers = false;
-                //gotKebab = false;
-                //gotBottles = false;
-                //gotPizza = true;
-            }
-
-
-            if (burgerWeapons > 0)
-                gotBurgers = true;
-            else if (burgerWeapons <= 0)
-                gotBurgers = false;
-
-            if (kebabWeapons > 0)
-                gotKebab = true;
-            else
-                gotKebab = false;
-
-            if (bottleWeapons > 0)
-                gotBottles = true;
-            else
-                gotBottles = false;
-
-            if (pizzaWeapons > 0)
-                gotPizza = true;
-            else
-                gotPizza = false;
-
-            //Console.WriteLine("burgare" + burgerWeapons);
-            //Console.WriteLine("flaskor" + bottleWeapons);
-            //switch (currentWeapon)
-            //{
-            //    case weaponType.burger:
-            //        if (burgerWeapons <= 0)
-            //        {
-            //            gotBurgers = false;
-            //            PickUpWeapon(weaponType.none);
-            //            currentWeapon = weaponType.none;
-            //        }
-            //        break;
-            //}
-
-
+            SelectWeaponOnKeyboardInput();
             base.Update(gameTime);
             AnimateLowerBody();
             AnimateShooting(gameTime);
@@ -868,6 +792,25 @@ namespace DrunkiBoy
                 SwitchWeaponsAndTexture(weaponType.none);
             }
         }
+        private void SelectWeaponOnKeyboardInput()
+        {
+            if (KeyMouseReader.KeyPressed(Keys.D1) && burgerWeapons > 0)
+            {
+                SwitchWeaponsAndTexture(weaponType.burger);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.D2) && kebabWeapons > 0)
+            {
+                SwitchWeaponsAndTexture(weaponType.kebab);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.D3) && bottleWeapons > 0)
+            {
+                SwitchWeaponsAndTexture(weaponType.bottle);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.D4) && pizzaWeapons > 0)
+            {
+                SwitchWeaponsAndTexture(weaponType.pizza);
+            }
+        }
         private void SwitchTexUpperBody(Texture2D tex)
         {
             if (activePowerUp == 0)
@@ -979,6 +922,5 @@ namespace DrunkiBoy
             }
         }
         #endregion
-
     }
 }
