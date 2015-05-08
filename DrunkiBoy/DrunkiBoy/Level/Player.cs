@@ -14,7 +14,7 @@ namespace DrunkiBoy
         public bool movingBack, weaponThrown;
 
         //LB = Lower Body. För att kunna animera benen för sig så att player inte springer på stället när man kör skjutanimationen
-        private Texture2D texUpperBody, texLowerBody, prevTexUpperBody, texUpperBodyWithoutPowerUp;
+        private Texture2D texUpperBody, texLowerBody;
         private double timeTilNextFrameLB = 0;
         private int frameLB;
         private Rectangle srcRectLB;
@@ -69,7 +69,6 @@ namespace DrunkiBoy
             this.type = "player";
             texUpperBody = Textures.player_upper_body;
             texLowerBody = Textures.player_lower_body;
-            prevTexUpperBody = texUpperBody;
             particleEngine = new ParticleEngine2(Textures.smokeParticles, Vector2.Zero, 2, 2, Textures.explosionTexture, false);
         }
         
@@ -430,7 +429,6 @@ namespace DrunkiBoy
         /// <param name="time">Tid i ms för hur länge powerup är aktiv</param>
         public void ActivatePowerUp(int powerUp, double time)
         {
-            texUpperBodyWithoutPowerUp = texUpperBody;
             isMorphing = true;
             DeactivatePowerUp();
             activePowerUp = powerUp;
@@ -497,14 +495,6 @@ namespace DrunkiBoy
         {
             isMorphing = false;
             SetPlayerTextureBasedOnCurrentState();
-            //if (activePowerUp == 1)
-            //{
-            //    texUpperBody = Textures.player_invincible;
-            //}
-            //else if (activePowerUp == 2)
-            //{
-            //    texUpperBody = Textures.player_jetpack;
-            //}
         }
         /// <summary>
         /// Körs när man tar ett föremål som ger hälsa
@@ -569,42 +559,6 @@ namespace DrunkiBoy
                 }
             }
         }
-        private void SetPlayerTextureBasedOnCurrentState()
-        {
-            if (activePowerUp == 0)
-            {
-                switch (currentWeapon)
-                {
-                    case weaponType.none:
-                        texUpperBody = Textures.player_upper_body;
-                        break;
-                    case weaponType.bottle:
-                        texUpperBody = Textures.player_bottle;
-                        break;
-                    case weaponType.molotovCocktail:
-                        texUpperBody = Textures.player_bottle_molotov;
-                        break;
-                    case weaponType.burger:
-                        texUpperBody = Textures.player_burger;
-                        break;
-                    case weaponType.kebab:
-                        texUpperBody = Textures.player_kebab;
-                        break;
-                    case weaponType.pizza:
-                        texUpperBody = Textures.player_pizza;
-                        break;
-                }
-            }
-            else if (activePowerUp == 1)
-            {
-                texUpperBody = Textures.player_invincible;
-            }
-            else if (activePowerUp == 2)
-            {
-                texUpperBody = Textures.player_jetpack;
-            }
-
-        }
         /// <summary>
         /// Sätter ny targetPos för Player baserat på position på det den springer in i
         /// </summary>
@@ -614,7 +568,6 @@ namespace DrunkiBoy
         {
             if (!movingBack) 
             {
-                prevTexUpperBody = texUpperBody;
                 if (activePowerUp == 0)
                 {
                     texUpperBody = Textures.player_upper_body_hurt;
@@ -747,7 +700,6 @@ namespace DrunkiBoy
             {
                 shotDelay = shotDelayDefault;
                 Vector2 bulletPos, bulletVelocity;
-                prevTexUpperBody = texUpperBody;
                 switch (activePowerUp)
                 {
                     case 0:
@@ -827,7 +779,7 @@ namespace DrunkiBoy
                     }
                     else
                     {
-                        texUpperBody = prevTexUpperBody; //Byter tillbaka till föregående textur så att skottanimationen bara körs en gång per skott
+                        SetPlayerTextureBasedOnCurrentState();//Byter tillbaka till aktuell textur efter skottanimationen
                     }
                 }
             }
@@ -918,11 +870,7 @@ namespace DrunkiBoy
         {
             if (activePowerUp == 0)
             {
-                prevTexUpperBody = texUpperBody = tex;
-            }
-            else
-            {
-                texUpperBodyWithoutPowerUp = tex;
+                texUpperBody = tex;
             }
         }
         #region Reset metoder
@@ -939,6 +887,7 @@ namespace DrunkiBoy
             ResetWeapon();
             ResetHealth();
             activePowerUp = 0;
+            ChangeWeaponIfAmmo();
         }
 
         public void ResetAmmo()
@@ -990,7 +939,42 @@ namespace DrunkiBoy
                 invincible = false;
                 activePowerUp = 0;
                 Game1.gui.ResetPowerUp();
-                texUpperBody = texUpperBodyWithoutPowerUp;
+                SetPlayerTextureBasedOnCurrentState();
+            }
+        }
+        private void SetPlayerTextureBasedOnCurrentState()
+        {
+            if (activePowerUp == 0)
+            {
+                switch (currentWeapon)
+                {
+                    case weaponType.none:
+                        texUpperBody = Textures.player_upper_body;
+                        break;
+                    case weaponType.bottle:
+                        texUpperBody = Textures.player_bottle;
+                        break;
+                    case weaponType.molotovCocktail:
+                        texUpperBody = Textures.player_bottle_molotov;
+                        break;
+                    case weaponType.burger:
+                        texUpperBody = Textures.player_burger;
+                        break;
+                    case weaponType.kebab:
+                        texUpperBody = Textures.player_kebab;
+                        break;
+                    case weaponType.pizza:
+                        texUpperBody = Textures.player_pizza;
+                        break;
+                }
+            }
+            else if (activePowerUp == 1)
+            {
+                texUpperBody = Textures.player_invincible;
+            }
+            else if (activePowerUp == 2)
+            {
+                texUpperBody = Textures.player_jetpack;
             }
         }
         #endregion
