@@ -610,12 +610,12 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.Q))
             {
                 selectedItem = items.Button;
-                selectedObject = new Button(new Vector2(mouseState.X, mouseState.Y), Textures.Button, true);
+                selectedObject = new Button(new Vector2(mouseState.X, mouseState.Y), Textures.DoorClosed, true);
             }
             if (KeyMouseReader.KeyPressed(Keys.U))
             {
                 selectedItem = items.Door;
-                selectedObject = new Door(new Vector2(mouseState.X, mouseState.Y), Textures.DoorClosed, true);
+                selectedObject = new Door(new Vector2(mouseState.X, mouseState.Y), Textures.Button, true);
             }
 
         }
