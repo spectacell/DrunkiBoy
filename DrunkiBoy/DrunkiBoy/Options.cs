@@ -10,10 +10,10 @@ namespace DrunkiBoy
 {
     class Options
     {
-        AudioEngine audioEngine;
-        SoundBank soundBank;
-        WaveBank waveBank;
-        AudioCategory musicCategory;
+        //AudioEngine audioEngine;
+        //SoundBank soundBank;
+        //WaveBank waveBank;
+        //AudioCategory musicCategory;
 
         public Options()
         {
@@ -22,7 +22,7 @@ namespace DrunkiBoy
 
         public void Update(GameTime gametime)
         {
-            audioEngine.Update();
+           // audioEngine.Update();
         }
 
 
