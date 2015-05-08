@@ -21,7 +21,7 @@ namespace DrunkiBoy
         private Level level;
         private LevelEditor levelEditor;
         Menu menu;
-        Options options;
+        //Options options;
 
         public enum gameState { inGame, levelComplete, gameOver, levelEditor, menu, options };
         public static gameState currentGameState = gameState.levelEditor;
@@ -87,10 +87,10 @@ namespace DrunkiBoy
                     menu.Update(gameTime);
                     break;
 
-                case gameState.options:
-                    IsMouseVisible = true;
-                    options.Update(gameTime);
-                    break;
+                //case gameState.options:
+                //    IsMouseVisible = true;
+                //    options.Update(gameTime);
+                //    break;
 
                 case gameState.inGame:
                     IsMouseVisible = false;

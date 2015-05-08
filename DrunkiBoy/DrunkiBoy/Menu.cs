@@ -42,10 +42,10 @@ namespace DrunkiBoy
             {
                 Game1.currentGameState = Game1.gameState.inGame;
             }
-            if (KeyMouseReader.LeftClick() && optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
-            {
-                Game1.currentGameState = Game1.gameState.options;
-            }
+            //if (KeyMouseReader.LeftClick() && optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            //{
+            //    Game1.currentGameState = Game1.gameState.options;
+            //}
             if (KeyMouseReader.LeftClick() && exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
             {
                 
