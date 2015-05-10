@@ -240,23 +240,12 @@ namespace DrunkiBoy
         {
             foreach (Button button in buttons)
             {
-                //if (button.DetectPixelCollision(player))
+                //if (button.DetectPixelCollision(player) && )
                 //{
-                //    player.MovePlayerBack(button.pos, button.srcRect.Width);
+
                 //    break;
                 //}
-                //foreach (Bullet bullet in BulletManager.bullets)
-                //{
-                //    if (button.DetectPixelCollision(bullet))
-                //    {
-                //        GenerateParticleEngine(bullet);
-                //        bullet.isActive = false;
-                //    }
-                //    if (button.isActivated)
-                //    {
-
-                //    }
-                //}
+                
             }
         }
 
