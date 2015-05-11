@@ -243,7 +243,7 @@ namespace DrunkiBoy
                     }
                     if (door.isActivated)
                     {
-                        
+                        Door.activate();
                     }
                 }
             }
@@ -256,6 +256,7 @@ namespace DrunkiBoy
                 if (button.DetectPixelCollision(player) && KeyMouseReader.KeyPressed(Keys.U))
                 {
                     Door.isActivated = true;
+                    Door.activate();
                     break;
                 }
                 
