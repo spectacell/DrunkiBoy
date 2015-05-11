@@ -156,6 +156,7 @@ namespace DrunkiBoy
             UpdateWalls(gameTime, player, angryNeighbours);
             UpdateFires(gameTime, angryNeighbours);
             UpdateDoors(gameTime, player);
+            UpdateButton(gameTime, player);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
             particleEngine.Update();
         }
@@ -242,25 +243,25 @@ namespace DrunkiBoy
                         bullet.isActive = false;
                     }                    
                 }
-                if (door.isActivated)
-                {
-                    Door.activate();
-                }
+                
             }
         }
 
         private void UpdateButton(GameTime gameTime, Player player)
         {
-            foreach (Button button in buttons)
+            
+            for (int i = 0; i < buttons.Count; i++)
             {
-                if (button.DetectPixelCollision(player) && KeyMouseReader.KeyPressed(Keys.U))
+                if (buttons.ElementAt(i).DetectPixelCollision(player) && KeyMouseReader.KeyPressed(Keys.U))
                 {
-                    Door.isActivated = true;
-                    Door.activate();
+                    if (doors.ElementAt(i) != null)
+                    {
+                        doors.ElementAt(i).activate();
+                    }
                     break;
                 }
-                
             }
+
         }
 
         private void UpdateJagerbombs(GameTime gameTime, Player player)
