@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace DrunkiBoy
         public List<Door> doors = new List<Door>();
         public List<Button> buttons = new List<Button>();
 
-
+        Door Door;
         HamburgareVapen hamburgareVapen;
         BottleWeapon bottleWeapon;
         KebabWeapon kebabWeapon;
@@ -252,11 +253,11 @@ namespace DrunkiBoy
         {
             foreach (Button button in buttons)
             {
-                //if (button.DetectPixelCollision(player) && )
-                //{
-
-                //    break;
-                //}
+                if (button.DetectPixelCollision(player) && KeyMouseReader.KeyPressed(Keys.U))
+                {
+                    Door.isActivated = true;
+                    break;
+                }
                 
             }
         }
