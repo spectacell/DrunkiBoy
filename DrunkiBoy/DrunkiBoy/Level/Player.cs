@@ -318,7 +318,8 @@ namespace DrunkiBoy
                 {
                     targetHealth = healthLeft - amountToLose;
                     GUI.healthBarBlinking = true;
-                    MovePlayerBack(enemyPos, enemyWidth);
+                    if (!movingBack)
+                        MovePlayerBack(enemyPos, enemyWidth);
                 }
             }
             else //Då är man död...

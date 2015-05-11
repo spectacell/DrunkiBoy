@@ -621,10 +621,6 @@ namespace DrunkiBoy
                             an.movement.Y = 0;
                         }
                     }
-                    if (an.activePlatform == player.activePlatform && an.facing == player.facing) //Om de är på samma plattform och tittar åt samma håll
-                    {
-                        an.ChangeDirection();
-                    }
                 }
             }
         }
