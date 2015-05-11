@@ -230,7 +230,7 @@ namespace DrunkiBoy
         {
             foreach (Door door in doors)
             {
-                if (door.DetectPixelCollision(player) && door.isActivated == false)
+                if (door.isActivated ==false && door.DetectPixelCollision(player) )
                 {
                     player.MovePlayerBack(door.pos, door.srcRect.Width);
                     break;
