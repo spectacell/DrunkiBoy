@@ -574,11 +574,21 @@ namespace DrunkiBoy
             targetScore = realScore + scoreToAdd;
             realScore = targetScore;
         }
+        public void LoseScore(int scoreToLose)
+        {
+            targetScore = realScore - scoreToLose;
+            realScore = targetScore;
+        }
         private void AnimatingScore()
         {
-            if (score != targetScore)
+            if (score != targetScore && score < targetScore)
             {
                 score += 1;
+            }
+
+            else if (score != targetScore && score > targetScore)
+            {
+                score -= 1;
             }
         }
         /// <summary>

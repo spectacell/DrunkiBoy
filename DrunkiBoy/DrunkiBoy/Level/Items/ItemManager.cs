@@ -100,7 +100,7 @@ namespace DrunkiBoy
         {
             wallets.Add(wallet);
         }
-        public void AddCellphone (Cellphone cellphone)
+        public void AddCellphone(Cellphone cellphone)
         {
             cellphones.Add(cellphone);
         }
@@ -185,16 +185,52 @@ namespace DrunkiBoy
                         an.LoseHealth(0.01f);
                     }
                 }
-                
+
             }
         }
 
+        int burgerCost = 100,
+            kebabCost = 100,
+            bottleCost = 100;
         private void UpdateBars(GameTime gameTime, Player player)
         {
             foreach (Bar bar in bars)
             {
                 if (bar.DetectPixelCollision(player))
                 {
+                    if (KeyMouseReader.KeyPressed(Keys.Q))
+                    {
+                        if (Player.score >= burgerCost)
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                player.PickUpAmmo(Player.weaponType.burger);
+                            }
+                            player.LoseScore(burgerCost);
+                        }
+                    }
+                    if (KeyMouseReader.KeyPressed(Keys.W))
+                    {
+                        if (Player.score >= kebabCost)
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                player.PickUpAmmo(Player.weaponType.kebab);
+                            }
+                            player.LoseScore(kebabCost);
+                        }
+                    }
+                    if (KeyMouseReader.KeyPressed(Keys.E))
+                    {
+                        if (Player.score >= bottleCost)
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                player.PickUpAmmo(Player.weaponType.bottle);
+                            }
+                            player.LoseScore(bottleCost);
+                        }
+                    }
                     break;
                 }
             }
@@ -248,7 +284,7 @@ namespace DrunkiBoy
         {
             foreach (Door door in doors)
             {
-                if (door.isActivated ==false && door.DetectPixelCollision(player) )
+                if (door.isActivated == false && door.DetectPixelCollision(player))
                 {
                     player.MovePlayerBack(door.pos, door.srcRect.Width);
                     break;
@@ -259,15 +295,15 @@ namespace DrunkiBoy
                     {
                         GenerateParticleEngine(bullet);
                         bullet.isActive = false;
-                    }                    
+                    }
                 }
-                
+
             }
         }
 
         private void UpdateButton(GameTime gameTime, Player player)
         {
-            
+
             for (int i = 0; i < buttons.Count; i++)
             {
                 if (buttons.ElementAt(i).DetectPixelCollision(player) && KeyMouseReader.KeyPressed(Keys.U))
@@ -322,7 +358,7 @@ namespace DrunkiBoy
         }
         private void UpdatePizza(GameTime gameTime, Player player)
         {
-            
+
             foreach (Pizza pizza in pizzas)
             {
 
@@ -332,7 +368,7 @@ namespace DrunkiBoy
                     player.PickUpAmmo(Player.weaponType.pizza);
                     break;
                 }
-                
+
             }
         }
         private void UpdateBurgers(GameTime gameTime, Player player)
@@ -366,19 +402,19 @@ namespace DrunkiBoy
         }
         private void UpdateTeleport(GameTime gameTime, Player player)
         {
-                foreach (Teleport teleport in teleports)
+            foreach (Teleport teleport in teleports)
+            {
+                if (ItemsLeftToCollect() == 0)
                 {
-                    if (ItemsLeftToCollect() == 0)
-                    {
-                        teleport.activate();
-                    }
-                    if (teleport.isActivated && teleport.DetectPixelCollision(player))
-                    {
-                        Player.score += (int)Level.timeLeft;
-                        Game1.currentGameState = Game1.gameState.levelComplete;
-                    }
-                    teleport.Update(gameTime);
+                    teleport.activate();
                 }
+                if (teleport.isActivated && teleport.DetectPixelCollision(player))
+                {
+                    Player.score += (int)Level.timeLeft;
+                    Game1.currentGameState = Game1.gameState.levelComplete;
+                }
+                teleport.Update(gameTime);
+            }
         }
         private void UpdatePainkillers(GameTime gameTime, Player player)
         {
@@ -394,7 +430,7 @@ namespace DrunkiBoy
                     player.AddHealth(Constants.health_painkiller);
                     painkillers.Remove(painkiller);
                     break;
-                }                
+                }
             }
         }
         private void UpdateMoney(GameTime gameTime, Player player)
@@ -414,7 +450,7 @@ namespace DrunkiBoy
                 }
 
             }
-        }           
+        }
         private void UpdateKeys(GameTime gameTime, Player player)
         {
             foreach (Key key in keys)
@@ -441,7 +477,7 @@ namespace DrunkiBoy
         }
         private void UpdateCellphones(GameTime gameTime, Player player)
         {
-            foreach(Cellphone cellphone in cellphones)
+            foreach (Cellphone cellphone in cellphones)
             {
                 if (cellphone.DetectPixelCollision(player))
                 {
@@ -624,19 +660,19 @@ namespace DrunkiBoy
                 }
                 //Försöker få det att se ut som att partiklarna från jet-motorn när player flyger tar emot plattformen och sprider sig längs med. 
                 //Blev inte riktigt bra, antar att det är för att de är mindre än 1 pixel stora.
-                foreach (Particle p in player.particleEngine.particles) 
+                foreach (Particle p in player.particleEngine.particles)
                 {
                     if (p.BoundingBox.Intersects(platform.BoundingBox))
                     {
                         p.Velocity.Y = 0;
-                        p.Velocity.X += rnd.Next(-3,3);
+                        p.Velocity.X += rnd.Next(-3, 3);
                     }
                 }
                 foreach (Bullet b in BulletManager.bullets)
                 {
                     if (b is MolotovWeapon && b.DetectPixelCollision(platform))
                     {
-                        fires.Add(new FireOnGround(new Vector2(platform.pos.X+20, platform.pos.Y-Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180));
+                        fires.Add(new FireOnGround(new Vector2(platform.pos.X + 20, platform.pos.Y - Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180));
                         b.isActive = false;
                     }
                 }
