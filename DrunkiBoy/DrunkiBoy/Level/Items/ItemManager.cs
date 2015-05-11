@@ -152,7 +152,7 @@ namespace DrunkiBoy
             UpdateToilets(gameTime, player);
             UpdateVodkas(gameTime, player);
             UpdateRedbullVodkas(gameTime, player);
-            UpdateWalls(gameTime, player);
+            UpdateWalls(gameTime, player, angryNeighbours);
             UpdateFires(gameTime, angryNeighbours);
             UpdateDoors(gameTime, player);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
@@ -193,7 +193,7 @@ namespace DrunkiBoy
                 }
             }
         }
-        private void UpdateWalls(GameTime gameTime, Player player)
+        private void UpdateWalls(GameTime gameTime, Player player, List<AngryNeighbour> angryNeighbours)
         {
             foreach (Wall wall in walls)
             {
@@ -208,6 +208,13 @@ namespace DrunkiBoy
                     {
                         GenerateParticleEngine(bullet);
                         bullet.isActive = false;
+                    }
+                }
+                foreach (AngryNeighbour an in angryNeighbours)
+                {
+                    if (wall.BoundingBox.Intersects(an.BoundingBox))
+                    {
+                        an.ChangeDirection();
                     }
                 }
             }
