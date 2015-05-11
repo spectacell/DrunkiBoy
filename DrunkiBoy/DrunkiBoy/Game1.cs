@@ -23,7 +23,7 @@ namespace DrunkiBoy
         Menu menu;
         //Options options;
 
-        public enum gameState { inGame, levelComplete, gameOver, levelEditor, menu, options };
+        public enum gameState { inGame, levelComplete, gameOver, levelEditor, menu, options, highScore };
         public static gameState currentGameState = gameState.levelEditor;
 
         public Game1()
@@ -49,7 +49,6 @@ namespace DrunkiBoy
 
             Textures.LoadContent(Content);
             Constants.LoadContent(Content);
-            //menu = new Menu(menu.pos, menu.tex, menu.srcRect, menu.isActive);
             menu = new Menu(Vector2.Zero, Textures.menuBackground, true);
             level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             levelEditor = new LevelEditor(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
@@ -106,7 +105,10 @@ namespace DrunkiBoy
                     currentGameState = gameState.gameOver;
                     break;
                 case gameState.gameOver:
-
+                    currentGameState = gameState.highScore;
+                    break;
+                case gameState.highScore:
+                    Highscore.Update();
                     break;
             }
             base.Update(gameTime);
@@ -135,10 +137,13 @@ namespace DrunkiBoy
                     case gameState.levelComplete:
 
                     break;
-                    case gameState.gameOver:
+                case gameState.gameOver:
                     spriteBatch.Begin();
                     spriteBatch.Draw(Textures.gameOverScreen, Vector2.Zero, Color.White);
                     spriteBatch.End();
+                    break;
+                case gameState.highScore:
+                    Highscore.Draw(spriteBatch);
                     break;
             }
             
