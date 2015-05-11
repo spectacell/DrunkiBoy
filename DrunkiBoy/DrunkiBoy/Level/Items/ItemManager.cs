@@ -354,7 +354,7 @@ namespace DrunkiBoy
                     }
                     if (teleport.isActivated && teleport.DetectPixelCollision(player))
                     {
-                        player.AddScore((int)Level.timeLeft);
+                        Player.score += (int)Level.timeLeft;
                         Game1.currentGameState = Game1.gameState.levelComplete;
                     }
                     teleport.Update(gameTime);
