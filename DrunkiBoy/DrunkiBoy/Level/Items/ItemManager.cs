@@ -230,14 +230,14 @@ namespace DrunkiBoy
         {
             foreach (Door door in doors)
             {
-                if (door.DetectPixelCollision(player))
+                if (door.DetectPixelCollision(player) && door.isActivated == false)
                 {
                     player.MovePlayerBack(door.pos, door.srcRect.Width);
                     break;
                 }
                 foreach (Bullet bullet in BulletManager.bullets)
                 {
-                    if (door.DetectPixelCollision(bullet))
+                    if (door.DetectPixelCollision(bullet) && door.isActivated == false)
                     {
                         GenerateParticleEngine(bullet);
                         bullet.isActive = false;
@@ -257,6 +257,7 @@ namespace DrunkiBoy
                     if (doors.ElementAt(i) != null)
                     {
                         doors.ElementAt(i).activate();
+                        doors.ElementAt(i).isActivated = true;
                     }
                     break;
                 }
