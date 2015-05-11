@@ -164,6 +164,11 @@ namespace DrunkiBoy
             foreach (FireOnGround fire in fires)
             {
                 fire.Update(gameTime);
+                if (fire.isActive == false)
+                {
+                    fires.Remove(fire);
+                    break;
+                }
                 foreach (AngryNeighbour an in angryNeighbours)
                 {
                     if (fire.DetectPixelCollision(an))
@@ -430,7 +435,7 @@ namespace DrunkiBoy
             {
                 if (Player.currentWeapon == Player.weaponType.bottle && player.DetectPixelCollision(torch))
                 {
-                    player.PickUpAmmo(Player.weaponType.molotovCocktail);
+                    player.SwitchWeaponsAndTexture(Player.weaponType.molotovCocktail);
                 }
                 torch.Update(gameTime);
             }

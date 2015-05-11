@@ -720,7 +720,7 @@ namespace DrunkiBoy
         /// Byter currentWeaon variablen och ändrar textur.
         /// </summary>
         /// <param name="weapon">Vapentyp</param>
-        private void SwitchWeaponsAndTexture(weaponType weapon)
+        public void SwitchWeaponsAndTexture(weaponType weapon)
         {
             switch (weapon)
             {
@@ -763,7 +763,7 @@ namespace DrunkiBoy
                 return false;
             else if (currentWeapon == weaponType.kebab && kebabWeapons > 0)
                 return false;
-            else if (currentWeapon == weaponType.bottle && bottleWeapons > 0)
+            else if ((currentWeapon == weaponType.bottle || currentWeapon == weaponType.molotovCocktail) && bottleWeapons > 0)
                 return false;
             else if (currentWeapon == weaponType.pizza && pizzaWeapons > 0)
                 return false;
