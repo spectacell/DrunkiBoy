@@ -45,7 +45,7 @@ namespace DrunkiBoy
                         }
                         else if (bullet is MolotovWeapon)
                         {
-                            player.PickUpAmmo(Player.weaponType.molotovCocktail);
+                            player.PickUpAmmo(Player.weaponType.bottle);
                         }
                         bullets.Remove(bullet);
                         break;
