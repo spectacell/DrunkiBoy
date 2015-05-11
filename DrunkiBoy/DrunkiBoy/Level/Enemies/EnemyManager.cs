@@ -48,6 +48,8 @@ namespace DrunkiBoy
                 if (!player.spawning && an.DetectPixelCollision(player))
                 {
                     player.LoseHealth(Constants.damage_angryNeighbour, an.pos, an.srcRect.Width);
+                    if (player.facing == an.facing)
+                        an.ChangeDirection();
                     break;
                 }
 
@@ -64,7 +66,8 @@ namespace DrunkiBoy
                         GenerateParticleEngine(bullet);
                         if (bullet.lethal)
                             an.LoseHealth(1);
-                        an.ChangeDirection();
+                        if (player.facing == an.facing)
+                            an.ChangeDirection();
                         bullet.isActive = false;
                         an.BlinkHealthBar();
                     }  
