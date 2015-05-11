@@ -33,6 +33,7 @@ namespace DrunkiBoy
         public List<Wall> walls = new List<Wall>();
         public List<Door> doors = new List<Door>();
         public List<Button> buttons = new List<Button>();
+        public List<Bar> bars = new List<Bar>();
 
         Door Door;
         HamburgareVapen hamburgareVapen;
@@ -132,10 +133,16 @@ namespace DrunkiBoy
             walls.Add(wall);
         }
 
+        public void AddBar(Bar bar)
+        {
+            bars.Add(bar);
+        }
+
         #endregion
         public void Update(GameTime gameTime, Player player, List<AngryNeighbour> angryNeighbours)
         {
             UpdatePlatforms(player, angryNeighbours);
+            UpdateBars(gameTime, player);
             UpdateTorches(gameTime, player);
             UpdateKeys(gameTime, player);
             UpdateWallets(gameTime, player);
@@ -179,6 +186,17 @@ namespace DrunkiBoy
                     }
                 }
                 
+            }
+        }
+
+        private void UpdateBars(GameTime gameTime, Player player)
+        {
+            foreach (Bar bar in bars)
+            {
+                if (bar.DetectPixelCollision(player))
+                {
+                    break;
+                }
             }
         }
         private void UpdateToilets(GameTime gameTime, Player player)
@@ -491,7 +509,10 @@ namespace DrunkiBoy
         }
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            
+            foreach (Bar bar in bars)
+            {
+                bar.Draw(spriteBatch);
+            }
             foreach (Platform platform in platforms)
             {
                 platform.Draw(spriteBatch);

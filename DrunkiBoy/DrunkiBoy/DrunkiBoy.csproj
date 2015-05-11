@@ -76,6 +76,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bar.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Door.cs" />
     <Compile Include="Highscore.cs" />

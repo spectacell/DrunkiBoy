@@ -306,6 +306,11 @@ namespace DrunkiBoy
                     itemManager.AddButton(new Button(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Button, true));
                     objects.Add(new Button(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.Button, true));
                 }
+                else if (temp[0] == "bar")
+                {
+                    itemManager.AddBar(new Bar(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.bar, true));
+                    objects.Add(new Bar(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.bar, true));
+                }
 
             }
             sr.Close();

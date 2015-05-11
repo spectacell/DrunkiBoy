@@ -12,7 +12,7 @@ namespace DrunkiBoy
 {
     class LevelEditor : Level
     {
-        enum items { Platform, Player, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka, RedbullVodka, MovingPlatform, Wall, Door, Button}; //osv...
+        enum items { Platform, Player, Bar, RemovingObject, Torch, Key, Wallet, Cellphone, Heart, Painkiller, Teleport, Money, Pant, Burger, Pizza, Bottle, Jagerbomb, Flashlight, Radio, AngryNeighbour, Kebab, Toilet, Vodka, RedbullVodka, MovingPlatform, Wall, Door, Button}; //osv...
         items selectedItem;
 
         private int editingLevel = 0;
@@ -49,17 +49,18 @@ namespace DrunkiBoy
             menuEntries.Add("M: Money");
             menuEntries.Add("N: MovingPlatform");
             menuEntries.Add("O: Bottle");
-            menuEntries.Add("U: Button");
             menuEntries.Add("P: Platform");
             menuEntries.Add("Q: Door");
             menuEntries.Add("R: Radio");
             menuEntries.Add("S: Painkiller");
             menuEntries.Add("T: Torch");
+            menuEntries.Add("U: Button");
             menuEntries.Add("U: RedbullVodka");
             menuEntries.Add("V: Pizza");
             menuEntries.Add("W: Wallet");
             menuEntries.Add("Y: Player");
             menuEntries.Add("X: Wall");
+            menuEntries.Add("Y: Bar");
 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
@@ -436,6 +437,17 @@ namespace DrunkiBoy
                             objects.Add(new RedbullVodka(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.redbullVodka, true));
                         }
                         break;
+
+                    case items.Bar:
+                        if (intersectingPlatform != null)
+                        {
+                            objects.Add(new Bar(new Vector2(mouseIsAt.X, intersectingPlatform.BoundingBox.Top - selectedObject.BoundingBox.Height), Textures.bar, true));
+                        }
+                        else
+                        {
+                            objects.Add(new Bar(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.bar, true));
+                        }
+                        break;
                 }
                 saved = false;
             }
@@ -616,6 +628,11 @@ namespace DrunkiBoy
             {
                 selectedItem = items.Door;
                 selectedObject = new Door(new Vector2(mouseState.X, mouseState.Y), Textures.DoorClosed, true);
+            }
+            if (KeyMouseReader.KeyPressed(Keys.Y))
+            {
+                selectedItem = items.Bar;
+                selectedObject = new Bar(new Vector2(mouseState.X, mouseState.Y), Textures.bar, true);
             }
 
         }
