@@ -15,7 +15,7 @@ namespace DrunkiBoy
 
         public static Texture2D platform, deleteCursor, torchTex, Key, Wallet, Cellphone, heart, bottle, bottle_molotov, hamburgare, pizza, kebab, painkiller, jagerbomb, redbullVodka, 
             bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, angry_neighbour,
-            angry_neighbour_HB_red, angry_neighbour_HB_green, angry_neighbour_HB_blink, fire, bar;
+            angry_neighbour_HB_red, angry_neighbour_HB_green, angry_neighbour_HB_blink, fire, bar, barWithoutBurgers, barWithoutKebab, barWithoutBottles;
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, vodkaPowerup, redbullVodkaPowerup, money, pant, vodka;
         public static Texture2D flashlight, radio, redbullVodka_gui, vodka_gui, GUIPizza;
         public static Texture2D gameOverScreen, startButton, optionsButton, exitButton, menuBackground;
@@ -88,6 +88,9 @@ namespace DrunkiBoy
             vodka = content.Load<Texture2D>("Items/Vodka");
             vodka_gui = content.Load<Texture2D>("GUI/Vodka");
             bar = content.Load<Texture2D>("Items/Bar");
+            barWithoutBurgers = content.Load<Texture2D>("Items/Bar_without_burgers");
+            barWithoutBottles = content.Load<Texture2D>("Items/Bar_without_bottles");
+            barWithoutKebab = content.Load<Texture2D>("Items/Bar_without_kebab");
             redbullVodka = content.Load<Texture2D>("Items/RedbullVodka");
             redbullVodka_gui = content.Load<Texture2D>("GUI/RedbullVodka");
             painkiller = content.Load<Texture2D>("Items/painkiller");

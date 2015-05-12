@@ -40,6 +40,7 @@ namespace DrunkiBoy
         BottleWeapon bottleWeapon;
         KebabWeapon kebabWeapon;
         PizzaWeapon pizzaWeapon;
+        Bar bar;
         private Random rnd = new Random();
         public static ParticleEngine particleEngine = new ParticleEngine();
 
@@ -198,40 +199,49 @@ namespace DrunkiBoy
             {
                 if (bar.DetectPixelCollision(player))
                 {
-                    if (KeyMouseReader.KeyPressed(Keys.Q))
+                    if (!bar.hasBought)
                     {
-                        if (Player.score >= burgerCost)
+                        if (KeyMouseReader.KeyPressed(Keys.Q))
                         {
-                            for (int i = 0; i < 10; i++)
+                            if (Player.score >= burgerCost)
                             {
-                                player.PickUpAmmo(Player.weaponType.burger);
+                                for (int i = 0; i < 10; i++)
+                                {
+                                    player.PickUpAmmo(Player.weaponType.burger);
+                                }
+                                player.LoseScore(burgerCost);
+                                bar.choseBurgers = true;
+                                bar.hasBought = true;
                             }
-                            player.LoseScore(burgerCost);
                         }
-                    }
-                    if (KeyMouseReader.KeyPressed(Keys.W))
-                    {
-                        if (Player.score >= kebabCost)
+                        if (KeyMouseReader.KeyPressed(Keys.W))
                         {
-                            for (int i = 0; i < 10; i++)
+                            if (Player.score >= kebabCost)
                             {
-                                player.PickUpAmmo(Player.weaponType.kebab);
+                                for (int i = 0; i < 10; i++)
+                                {
+                                    player.PickUpAmmo(Player.weaponType.kebab);
+                                }
+                                player.LoseScore(kebabCost);
+                                bar.choseKebab = true;
+                                bar.hasBought = true;
                             }
-                            player.LoseScore(kebabCost);
                         }
-                    }
-                    if (KeyMouseReader.KeyPressed(Keys.E))
-                    {
-                        if (Player.score >= bottleCost)
+                        if (KeyMouseReader.KeyPressed(Keys.E))
                         {
-                            for (int i = 0; i < 10; i++)
+                            if (Player.score >= bottleCost)
                             {
-                                player.PickUpAmmo(Player.weaponType.bottle);
+                                for (int i = 0; i < 10; i++)
+                                {
+                                    player.PickUpAmmo(Player.weaponType.bottle);
+                                }
+                                player.LoseScore(bottleCost);
+                                bar.choseBottles = true;
+                                bar.hasBought = true;
                             }
-                            player.LoseScore(bottleCost);
                         }
+                        break;
                     }
-                    break;
                 }
             }
         }
