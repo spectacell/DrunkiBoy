@@ -50,11 +50,11 @@ namespace DrunkiBoy
             menuEntries.Add("N: MovingPlatform");
             menuEntries.Add("O: Bottle");
             menuEntries.Add("P: Platform");
-            menuEntries.Add("Q: Door");
+            menuEntries.Add("Z: Door");
             menuEntries.Add("R: Radio");
             menuEntries.Add("S: Painkiller");
             menuEntries.Add("T: Torch");
-            menuEntries.Add("U: Button");
+            menuEntries.Add("Q: Button");
             menuEntries.Add("U: RedbullVodka");
             menuEntries.Add("V: Pizza");
             menuEntries.Add("W: Wallet");
@@ -624,7 +624,7 @@ namespace DrunkiBoy
                 selectedItem = items.Button;
                 selectedObject = new Button(new Vector2(mouseState.X, mouseState.Y), Textures.Button, true);
             }
-            if (KeyMouseReader.KeyPressed(Keys.U))
+            if (KeyMouseReader.KeyPressed(Keys.Z))
             {
                 selectedItem = items.Door;
                 selectedObject = new Door(new Vector2(mouseState.X, mouseState.Y), Textures.DoorClosed, true);
