@@ -34,7 +34,7 @@ namespace DrunkiBoy
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferHeight = 780;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.ApplyChanges();
             base.Initialize();
