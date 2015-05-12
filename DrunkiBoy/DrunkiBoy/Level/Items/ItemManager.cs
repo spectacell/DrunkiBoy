@@ -683,7 +683,7 @@ namespace DrunkiBoy
                     if (b.DetectPixelCollision(platform))
                     {
                         if (b is MolotovWeapon) {
-                            fires.Add(new FireOnGround(new Vector2(platform.pos.X + 20, platform.pos.Y - Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180));
+                            fires.Add(new FireOnGround(new Vector2(platform.pos.X + ((Textures.platform.Width-240)/2), platform.pos.Y - Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180));
                             b.isActive = false;
                         }
                         else
