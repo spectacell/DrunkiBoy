@@ -681,7 +681,9 @@ namespace DrunkiBoy
                     else
                     {
                         ChangeWeaponIfOutOfAmmo();
-                        SetPlayerTextureBasedOnCurrentState();//Byter tillbaka till aktuell textur efter skottanimationen
+                        if(currentWeapon == weaponType.molotovCocktail)
+                            SwitchWeaponsAndTexture(weaponType.bottle);
+                        SetPlayerTextureBasedOnCurrentState();//Byter tillbaka textur efter skottanimationen
                     }
                 }
             }

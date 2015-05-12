@@ -680,11 +680,17 @@ namespace DrunkiBoy
                 }
                 foreach (Bullet b in BulletManager.bullets)
                 {
-                    if (b is MolotovWeapon && b.DetectPixelCollision(platform))
+                    if (b.DetectPixelCollision(platform))
                     {
-                        fires.Add(new FireOnGround(new Vector2(platform.pos.X + 20, platform.pos.Y - Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180));
-                        b.isActive = false;
-                    }
+                        if (b is MolotovWeapon) {
+                            fires.Add(new FireOnGround(new Vector2(platform.pos.X + 20, platform.pos.Y - Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180));
+                            b.isActive = false;
+                        }
+                        else
+                        {
+                            b.isActive = false;
+                        }
+                    } 
                 }
                 foreach (AngryNeighbour an in angryNeighbours)
                 {
