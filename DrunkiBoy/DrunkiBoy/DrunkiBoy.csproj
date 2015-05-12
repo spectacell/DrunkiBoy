@@ -135,6 +135,7 @@
     <Compile Include="Level\Background\BackgroundImage.cs" />
     <Compile Include="Level\Teleport.cs" />
     <Compile Include="Level\Enemies\Radio.cs" />
+    <Compile Include="Text.cs" />
     <Compile Include="Textures.cs" />
     <Compile Include="Level\Items\Torch.cs" />
     <Compile Include="Level\Items\Wallet.cs" />

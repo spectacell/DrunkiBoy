@@ -18,12 +18,22 @@ namespace DrunkiBoy
 
         private static string name;
 
-        enum state { show, enteringNewHighScore }
-        static state highScoreState = state.enteringNewHighScore;
+        private static string strGoBack = "Click here to go back to the menu";
+        private static Text textGoBack = new Text(Constants.FONT, strGoBack, new Vector2(20, 650));
+
+        public enum state { show, enteringNewHighScore }
+        public static state highScoreState = state.enteringNewHighScore;
 
         public static void Update()
         {
-            KeyboardInputToName();
+            if (highScoreState == state.enteringNewHighScore)
+            {
+                KeyboardInputToName();
+            }
+            if (textGoBack.IsClicked())
+            {
+                Game1.currentGameState = Game1.gameState.menu;
+            }
         }
 
         /// <summary>
@@ -32,16 +42,14 @@ namespace DrunkiBoy
         public static void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            switch (highScoreState)
+            if (highScoreState == state.enteringNewHighScore)
             {
-                case state.enteringNewHighScore:
-                    ShowHighScore(spriteBatch);
-                    DrawNameAsTyped(spriteBatch);
-                break;
-                case state.show:
-                ShowHighScore(spriteBatch);
-                break;
+                DrawHighScoreEntering(spriteBatch);
+                DrawNameAsTyped(spriteBatch);
             }
+            else
+                DrawHighScore(spriteBatch);
+            textGoBack.DrawClickableText(spriteBatch, Constants.fontColor);
             spriteBatch.End();
         }
         /// <summary>
@@ -49,7 +57,7 @@ namespace DrunkiBoy
         /// </summary>
         private static void KeyboardInputToName()
         {
-            if (ReturnPlaceInHighScore() <= 10)
+            if (ReturnPlaceInHighScore() <= 10 && Player.score > 0)
             {
                 foreach (Keys key in KeyMouseReader.keyState.GetPressedKeys())
                 {
@@ -113,8 +121,8 @@ namespace DrunkiBoy
             while (!sr.EndOfStream)
             {
                 string textString = sr.ReadLine();
-                int score = Convert.ToInt16(textString.Split(' ')[0]);
-                string name = textString.Split(' ')[1];
+                int score = Convert.ToInt16(textString.Split(':')[0]);
+                string name = textString.Split(':')[1];
 
                 listHighscore.Add(new KeyValuePair<int, string>(score, name));
             }
@@ -164,7 +172,7 @@ namespace DrunkiBoy
 
             foreach (KeyValuePair<int, string> s in listHighscore)
             {
-                sw.WriteLine(s.Key + " " + s.Value);
+                sw.WriteLine(s.Key + ":" + s.Value);
             }
             sw.Close();
             name = "";
@@ -172,12 +180,26 @@ namespace DrunkiBoy
         /// <summary>
         /// Sort and then draw the top 10 highscore from highscore.txt
         /// </summary>
-        private static void ShowHighScore(SpriteBatch spriteBatch)
+        private static void DrawHighScore(SpriteBatch spriteBatch)
         {
             AddHighScoreFromTxtToList();
 
             spriteBatch.DrawString(Constants.FONT_BIG, "HIGHSCORE", new Vector2(20, 20), Constants.fontColor);
-            bool highscoreDrawn = false;
+
+
+            for (int i = 0; i < listHighscore.Count; i++)
+            {
+                spriteBatch.DrawString(Constants.FONT, (i + 1).ToString(), new Vector2(20, 100 + (i * 30)), new Color(124, 65, 3)); //# in list
+                spriteBatch.DrawString(Constants.FONT, listHighscore[i].Key.ToString(), new Vector2(60, 100 + (i * 30)), Constants.fontColor); //Score
+                spriteBatch.DrawString(Constants.FONT, listHighscore[i].Value, new Vector2(190, 100 + (i * 30)), Constants.fontColor); //Name
+            }
+        }
+
+        private static void DrawHighScoreEntering(SpriteBatch spriteBatch)
+        {
+            AddHighScoreFromTxtToList();
+
+            spriteBatch.DrawString(Constants.FONT_BIG, "HIGHSCORE", new Vector2(20, 20), Constants.fontColor);
             int offset = 0;
             int numberOfEntriesToShow;
 
@@ -196,20 +218,19 @@ namespace DrunkiBoy
 
             for (int i = 0; i < numberOfEntriesToShow; i++)
             {
-                spriteBatch.DrawString(Constants.FONT, (i+1).ToString(), new Vector2(20, 100 + (i * 30)), new Color(124, 65, 3));
-
-                if (i == ReturnPlaceInHighScore() - 1 && !highscoreDrawn) //Color green and draw current Score if it is a new highscore
+                if (i == ReturnPlaceInHighScore() - 1) //Color green and draw current Score if it is a new highscore
                 {
+                    spriteBatch.DrawString(Constants.FONT, (i + 1).ToString(), new Vector2(20, 100 + (i * 30)), Color.Green); //# in list
                     spriteBatch.DrawString(Constants.FONT, Player.score.ToString(), new Vector2(60, 100 + (i * 30)), Color.Green); //Score
                     if (listHighscore.Count >= 10)
                     {
                         i--; //So that the highscore after the new one gets drawn
                         offset = 30; //To move the other entries down and make room for the new one
                     }
-                    highscoreDrawn = true;
                 }
                 else
                 {
+                    spriteBatch.DrawString(Constants.FONT, (i + 1).ToString(), new Vector2(20, 100 + (i * 30)), new Color(124, 65, 3)); //# in list
                     spriteBatch.DrawString(Constants.FONT, listHighscore[i].Key.ToString(), new Vector2(60, 100 + (i * 30) + offset), Constants.fontColor); //Score
                     spriteBatch.DrawString(Constants.FONT, listHighscore[i].Value, new Vector2(190, 100 + (i * 30) + offset), Constants.fontColor); //Name
                 }
@@ -221,19 +242,21 @@ namespace DrunkiBoy
         /// </summary>
         private static void DrawNameAsTyped(SpriteBatch spriteBatch)
         {
-            if (ReturnPlaceInHighScore() <= 10)
+            if (ReturnPlaceInHighScore() <= 10 && Player.score > 0)
             {
                 if (name != null)
                 {
                     spriteBatch.DrawString(Constants.FONT, name, new Vector2(190, 100 + ((ReturnPlaceInHighScore() - 1) * 30)), Color.Green);
                 }
-                spriteBatch.DrawString(Constants.FONT,
-                    "Type to enter your name\npress enter when you are done.",
-                    new Vector2(20, 440), Color.DarkOrange);
+                else
+                {
+                    spriteBatch.DrawString(Constants.FONT, ".........", new Vector2(190, 100 + ((ReturnPlaceInHighScore() - 1) * 30)), Color.Green);
+                }
+                spriteBatch.DrawString(Constants.FONT, "Type to enter your name\npress enter when you are done.", new Vector2(20, 440), Color.DarkOrange);
             }
             else
             {
-                spriteBatch.DrawString(Constants.FONT, "You died without reaching the highscore...",new Vector2(20, 440), Color.DarkOrange);
+                spriteBatch.DrawString(Constants.FONT, "You did not reach the highscore...",new Vector2(20, 440), Color.DarkOrange);
                 spriteBatch.DrawString(Constants.FONT, "You only got " + Player.score + " points.", new Vector2(20, 470), Constants.fontColor);
                 spriteBatch.DrawString(Constants.FONT, "Better luck next time, punk.", new Vector2(20, 500), Color.DarkOrange);
             }

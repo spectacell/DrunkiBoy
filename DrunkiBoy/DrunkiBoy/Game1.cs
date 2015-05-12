@@ -24,7 +24,7 @@ namespace DrunkiBoy
         //Options options;
 
         public enum gameState { inGame, levelComplete, gameOver, levelEditor, menu, options, highScore };
-        public static gameState currentGameState = gameState.levelEditor;
+        public static gameState currentGameState;
 
         public Game1()
         {
@@ -77,7 +77,11 @@ namespace DrunkiBoy
                 levelEditor = new LevelEditor(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
                 currentGameState = gameState.levelEditor;
             }
-
+            if (KeyMouseReader.KeyPressed(Keys.F4))
+            {
+                Highscore.highScoreState = Highscore.state.show;
+                currentGameState = gameState.highScore;
+            }
             KeyMouseReader.Update();
             switch (currentGameState)
             {
@@ -105,9 +109,11 @@ namespace DrunkiBoy
                     currentGameState = gameState.gameOver;
                     break;
                 case gameState.gameOver:
+                    Highscore.highScoreState = Highscore.state.enteringNewHighScore;
                     currentGameState = gameState.highScore;
                     break;
                 case gameState.highScore:
+                    IsMouseVisible = true;
                     Highscore.Update();
                     break;
             }
