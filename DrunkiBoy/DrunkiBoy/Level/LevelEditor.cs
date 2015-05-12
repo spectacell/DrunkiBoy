@@ -50,17 +50,17 @@ namespace DrunkiBoy
             menuEntries.Add("N: MovingPlatform");
             menuEntries.Add("O: Bottle");
             menuEntries.Add("P: Platform");
-            menuEntries.Add("Z: Door");
+            menuEntries.Add("Q: Button");
             menuEntries.Add("R: Radio");
             menuEntries.Add("S: Painkiller");
             menuEntries.Add("T: Torch");
-            menuEntries.Add("Q: Button");
             menuEntries.Add("U: RedbullVodka");
             menuEntries.Add("V: Pizza");
             menuEntries.Add("W: Wallet");
-            menuEntries.Add("Y: Player");
             menuEntries.Add("X: Wall");
-            menuEntries.Add("Y: Bar");
+            menuEntries.Add("Y: Player");
+            menuEntries.Add("Z: Door");
+            menuEntries.Add("5: Bar");
 
             drawTextTimer = drawTextTimerDefault;
             LoadContent(levelTextFilePath);
@@ -629,7 +629,7 @@ namespace DrunkiBoy
                 selectedItem = items.Door;
                 selectedObject = new Door(new Vector2(mouseState.X, mouseState.Y), Textures.DoorClosed, true);
             }
-            if (KeyMouseReader.KeyPressed(Keys.Y))
+            if (KeyMouseReader.KeyPressed(Keys.D5))
             {
                 selectedItem = items.Bar;
                 selectedObject = new Bar(new Vector2(mouseState.X, mouseState.Y), Textures.bar, true);
