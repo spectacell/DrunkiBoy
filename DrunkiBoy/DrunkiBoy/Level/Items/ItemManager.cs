@@ -142,7 +142,7 @@ namespace DrunkiBoy
         #endregion
         public void Update(GameTime gameTime, Player player, List<AngryNeighbour> angryNeighbours)
         {
-            UpdatePlatforms(player, angryNeighbours);
+            UpdatePlatforms(gameTime, player, angryNeighbours);
             UpdateBars(gameTime, player);
             UpdateTorches(gameTime, player);
             UpdateKeys(gameTime, player);
@@ -649,15 +649,11 @@ namespace DrunkiBoy
             }
             particleEngine.Draw(spriteBatch);
         }
-        private void UpdatePlatforms(Player player, List<AngryNeighbour> angryNeighbours)
+        private void UpdatePlatforms(GameTime gameTime, Player player, List<AngryNeighbour> angryNeighbours)
         {
             foreach (Platform platform in platforms)
             {
-                if (platform is MovingPlatform)
-                {
-
-                    ((MovingPlatform)platform).Update(player);
-                }
+                platform.Update(gameTime, player);
 
                 if (player.movement.Y > 0) //Going down
                 {
@@ -680,10 +676,11 @@ namespace DrunkiBoy
                 }
                 foreach (Bullet b in BulletManager.bullets)
                 {
-                    if (b.DetectPixelCollision(platform))
+                    if (b.BoundingBox.Intersects(platform.TopBoundingBox))
                     {
-                        if (b is MolotovWeapon) {
-                            fires.Add(new FireOnGround(new Vector2(platform.pos.X + ((Textures.platform.Width-240)/2), platform.pos.Y - Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180));
+                        if (b is MolotovWeapon) 
+                        {
+                            platform.StartFire();
                             b.isActive = false;
                         }
                         else
