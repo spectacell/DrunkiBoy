@@ -18,14 +18,5 @@ namespace DrunkiBoy
             particleEngine = new ParticleEngine(Textures.burgerParticles, pos, false);
             this.lethal = lethal;
         }
-         //public void shot()
-         //{
-         //    shot = true;
-         //    particleEngine.isActive = true;
-         //}
-        //public void Update(GameTime)
-        //{
-        //    if (Bullet)
-        //}
     }
 }
