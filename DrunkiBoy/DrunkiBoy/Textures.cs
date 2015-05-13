@@ -16,7 +16,8 @@ namespace DrunkiBoy
         public static Texture2D platform, deleteCursor, torchTex, Key, Wallet, Cellphone, heart, bottle, bottle_molotov, hamburgare, pizza, kebab, painkiller, jagerbomb, redbullVodka, 
             bubble_particle, water_texture, teleport, AktivTeleport, smokeTexture, explosionTexture, toilet_open, toilet_closed, angry_neighbour,
             angry_neighbour_HB_red, angry_neighbour_HB_green, angry_neighbour_HB_blink, fire, bar, barWithoutBurgers, barWithoutKebab, barWithoutBottles;
-        public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, vodkaPowerup, redbullVodkaPowerup, money, pant, vodka;
+        public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, vodkaPowerup, redbullVodkaPowerup, money, pant, vodka,
+                                notesOne, notesTwo, notesThree, notesFour;
         public static Texture2D flashlight, radio, redbullVodka_gui, vodka_gui, GUIPizza;
         public static Texture2D gameOverScreen, startButton, optionsButton, exitButton, menuBackground;
         public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles, painkillerParticles, burgerParticles, pizzaParticles, bottleparticles, kebabParticles;
@@ -54,6 +55,10 @@ namespace DrunkiBoy
             MovingplatfFöreditor = content.Load<Texture2D>("Level/movingPlatfLeditor");
             flashlight = content.Load<Texture2D>("Enemies/Flashlight(Animation)");
             radio = content.Load<Texture2D>("Enemies/Radio");
+            notesOne = content.Load<Texture2D>("Enemies/NotesOne");
+            notesTwo = content.Load<Texture2D>("Enemies/NotesTwo");
+            notesThree = content.Load<Texture2D>("Enemies/NotesThree");
+            notesFour = content.Load<Texture2D>("Enemies/NotesFour");
             deleteCursor = content.Load<Texture2D>("deleteCursor");
             //menu texture
             startButton = content.Load<Texture2D>("Start");
