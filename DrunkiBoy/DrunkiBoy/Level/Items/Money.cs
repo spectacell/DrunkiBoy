@@ -11,8 +11,7 @@ namespace DrunkiBoy
     class Money : GameObject
     {
         ParticleEngine particleEngine;
-        bool moving;
-        Vector2 targetpos;
+        bool moving;        
         public Money(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive) : base( pos, tex, isActive)
         {
             this.type = "money";
@@ -20,7 +19,6 @@ namespace DrunkiBoy
         }
         public void PickUp()
         {
-            targetpos.Y = pos.Y - 200;
             moving = true;
             particleEngine.isActive = true;
         }
@@ -29,9 +27,9 @@ namespace DrunkiBoy
             if (moving)
             {
                 particleEngine.Update(pos);
-                if (pos.Y > targetpos.Y)
+                if (pos.Y > -2000)
                 {
-                    pos.Y -= 8;
+                    pos.Y -= 15;
                 }
                 else
                 {

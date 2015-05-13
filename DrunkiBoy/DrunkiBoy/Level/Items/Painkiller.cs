@@ -12,7 +12,7 @@ namespace DrunkiBoy
     {
         ParticleEngine particleEngine;
         bool moving;
-        Vector2 targetpos;
+        
          public Painkiller(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
         {            
@@ -22,7 +22,7 @@ namespace DrunkiBoy
         }
          public void PickUp()
          {
-             targetpos.Y = pos.Y - 200;
+             
              moving = true;
              particleEngine.isActive = true;
          }
@@ -31,9 +31,9 @@ namespace DrunkiBoy
              if (moving)
              {
                  particleEngine.Update(pos);
-                 if (pos.Y > targetpos.Y)
+                 if (pos.Y > -2000)
                  {
-                     pos.Y -= 8;
+                     pos.Y -= 15;
                  }
                  else
                  {

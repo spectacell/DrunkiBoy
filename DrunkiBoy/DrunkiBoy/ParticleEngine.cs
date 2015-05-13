@@ -35,7 +35,7 @@ namespace DrunkiBoy
             {
                 EmitterLocation = pos;
 
-                int total = 10;
+                int total = 15;
 
                 for (int i = 0; i < total; i++)
                 {
