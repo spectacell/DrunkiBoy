@@ -29,8 +29,8 @@ namespace DrunkiBoy
         public static int livesLeft;
         public static int healthLeft;
         private int targetHealth;
-        public static int score = 0;
-        private int targetScore, realScore; //realScore för att score-räknare inte hann med att räkna upp om man tog många poäng på en gång
+        public static int score = 0, targetScore;
+        private int realScore; //realScore för att score-räknare inte hann med att räkna upp om man tog många poäng på en gång
 
         public static int activePowerUp; //1: odödlig, 2: flygförmåga, osv och "0" för ingenting
         private double activePowerUpTimer;
@@ -881,6 +881,7 @@ namespace DrunkiBoy
             ResetHealth();
             activePowerUp = 0;
             ChangeWeaponIfAmmo();
+            
         }
         public void ResetAmmo()
         {

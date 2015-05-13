@@ -16,7 +16,7 @@ namespace DrunkiBoy
         private double healthBarBlinkTimer, healthBarBlinkTimerDefault = 250;
         public static bool healthBarBlinking;
         public static int itemsLeftToCollect;
-
+        int crntLevel;
         private float burgerOpacity = 0.5f, kebabOpacity = 0.5f, bottleOpacity = 0.5f, pizzaOpacity = 0.5f;
         private Color burgerColor = Color.White, kebabColor = Color.White, bottleColor = Color.White, pizzaColor = Color.White;
 
@@ -28,7 +28,7 @@ namespace DrunkiBoy
             strTime = "TIME ";
             strTitle = "DRUNKIBOY ADVENTURES ";
             strTitleVersion = "V 2.0";
-            int crntLevel = Game1.currentLevel + 1; //Första leveln är 0 så måste plussa på en för att visa rätt
+            crntLevel = Game1.currentLevel + 1; //Första leveln är 0 så måste plussa på en för att visa rätt
             strCurrentLevel = crntLevel.ToString();
 
             strLivesPos = new Vector2(16, 16);
@@ -37,7 +37,7 @@ namespace DrunkiBoy
             scorePosY = 57;
             strItemsLeftPos = new Vector2(920, 16);
             strTimePos = new Vector2(1032, 57);
-            strTitlePos = new Vector2(833, 698);
+            strTitlePos = new Vector2(833, 758);
             
             powerUpPos = new Vector2(Textures.healthBarRed.Width+25, strLivesPos.Y + 3);
             activePowerUp = new ActivePowerUpDisplay(powerUpPos, Textures.powerUpTimer, new Rectangle(0,0,63,63), false, 13, 1000, 0);
@@ -47,6 +47,7 @@ namespace DrunkiBoy
 
         public virtual void Update(GameTime gameTime)
         {
+            crntLevel = Game1.currentLevel + 1;
             activePowerUp.Update(gameTime);
             HealthBarBlinking(gameTime);
             BlinkHealthBar();
@@ -68,9 +69,9 @@ namespace DrunkiBoy
             //Aktiv powerup
             activePowerUp.Draw(spriteBatch);
             //Level
-            float centerPosLevel = Game1.windowWidth / 2 - Constants.FONT.MeasureString(strLevel + strCurrentLevel).X / 2;
+            float centerPosLevel = Game1.windowWidth / 2 - Constants.FONT.MeasureString(strLevel + crntLevel).X / 2;
             spriteBatch.DrawString(Constants.FONT, strLevel, new Vector2(centerPosLevel, strLevelPos.Y), Constants.fontColor);
-            spriteBatch.DrawString(Constants.FONT, strCurrentLevel, new Vector2(centerPosLevel + Constants.FONT.MeasureString(strLevel).X, strLevelPos.Y), Constants.fontColor2);
+            spriteBatch.DrawString(Constants.FONT, crntLevel.ToString(), new Vector2(centerPosLevel + Constants.FONT.MeasureString(strLevel).X, strLevelPos.Y), Constants.fontColor2);
             //Poäng
             float centerPosScore = Game1.windowWidth/2-Constants.FONT.MeasureString(Player.score.ToString()).X/2;
             spriteBatch.DrawString(Constants.FONT, Player.score.ToString(), new Vector2(centerPosScore, scorePosY), Constants.fontColor2);

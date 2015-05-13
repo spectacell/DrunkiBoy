@@ -9,7 +9,7 @@ namespace DrunkiBoy
 {
     class Platform : GameObject
     {
-        protected FireOnGround fire;
+        public FireOnGround fire;
         protected int speed = 0;
         public Platform(Vector2 pos, Texture2D tex, bool isActive)
             : base(pos, tex, isActive)

@@ -44,8 +44,7 @@ namespace DrunkiBoy
             CreateBackgroundLayers();
 
             #endregion
-            LoadContent(levelTextFilePath);
-            timeLeft = defaultTime;
+            LoadContent(levelTextFilePath, true);
             currentLevelState = levelState.running;
             player.ResetAmmo();
         }
@@ -166,9 +165,12 @@ namespace DrunkiBoy
             }   
         }
 
-        public void LoadContent(String textFile)
+        public void LoadContent(String textFile, bool createPlayer)
         {
+            timeLeft = defaultTime;
             CreateBackgroundLayers();
+            itemManager = new ItemManager();
+            enemyManager = new EnemyManager();
             objects = new List<GameObject>();
 
             sr = new StreamReader(textFile);
@@ -186,10 +188,15 @@ namespace DrunkiBoy
                 {
                     itemManager.AddPlatform(new MovingPlatform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.platform, true));
                 }
-                else if (temp[0] == "player")
+                else if (temp[0] == "player" && createPlayer)
                 {
                     player = new Player(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.player, new Rectangle(0, 0, 95, 146), true, 8, 80);
                     objects.Add(player);
+                }
+                else if (temp[0] == "player" && !createPlayer)
+                {
+                    player.Reset();
+                    player.pos = new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2]));
                 }
                 else if (temp[0] == "torch")
                 {

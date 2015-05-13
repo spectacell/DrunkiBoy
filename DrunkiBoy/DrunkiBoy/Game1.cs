@@ -43,7 +43,7 @@ namespace DrunkiBoy
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+
             windowHeight = Window.ClientBounds.Height;
             windowWidth = Window.ClientBounds.Width;
 
@@ -68,6 +68,7 @@ namespace DrunkiBoy
 
             if (KeyMouseReader.KeyPressed(Keys.F2))
             {
+                currentLevel = 0;
                 level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
                 gui = new GUI();
                 currentGameState = gameState.inGame;
@@ -106,7 +107,15 @@ namespace DrunkiBoy
                     levelEditor.Update(gameTime);
                     break;
                 case gameState.levelComplete:
-                    currentGameState = gameState.gameOver;
+                    if (currentLevel == 1)
+                    {
+                        currentGameState = gameState.gameOver;
+                        break;
+                    }
+                    currentLevel++;
+                    level.LoadContent(Constants.LEVELS[currentLevel], false);
+                    gui = new GUI();
+                    currentGameState = gameState.inGame;
                     break;
                 case gameState.gameOver:
                     Highscore.highScoreState = Highscore.state.enteringNewHighScore;
@@ -133,14 +142,14 @@ namespace DrunkiBoy
 
                 case gameState.inGame:
                     level.Draw(spriteBatch);
-                    gui.Draw(spriteBatch);                    
+                    gui.Draw(spriteBatch);
                     break;
 
                 case gameState.levelEditor:
-                    
+
                     levelEditor.Draw(spriteBatch);
                     break;
-                    case gameState.levelComplete:
+                case gameState.levelComplete:
 
                     break;
                 case gameState.gameOver:
@@ -152,7 +161,7 @@ namespace DrunkiBoy
                     Highscore.Draw(spriteBatch);
                     break;
             }
-            
+
             base.Draw(gameTime);
         }
     }

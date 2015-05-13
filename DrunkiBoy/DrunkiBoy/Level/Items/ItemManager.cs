@@ -180,14 +180,6 @@ namespace DrunkiBoy
                     fires.Remove(fire);
                     break;
                 }
-                foreach (AngryNeighbour an in angryNeighbours)
-                {
-                    if (fire.DetectPixelCollision(an))
-                    {
-                        an.LoseHealth(0.01f);
-                    }
-                }
-
             }
         }
 
@@ -210,7 +202,8 @@ namespace DrunkiBoy
                                 {
                                     player.PickUpAmmo(Player.weaponType.burger);
                                 }
-                                player.LoseScore(burgerCost);
+                                Player.score -= burgerCost;
+                                Player.targetScore -= burgerCost;
                                 bar.choseBurgers = true;
                                 bar.hasBought = true;
                             }
@@ -223,7 +216,8 @@ namespace DrunkiBoy
                                 {
                                     player.PickUpAmmo(Player.weaponType.kebab);
                                 }
-                                player.LoseScore(kebabCost);
+                                Player.score -= kebabCost;
+                                Player.targetScore -= kebabCost;
                                 bar.choseKebab = true;
                                 bar.hasBought = true;
                             }
@@ -236,7 +230,8 @@ namespace DrunkiBoy
                                 {
                                     player.PickUpAmmo(Player.weaponType.bottle);
                                 }
-                                player.LoseScore(bottleCost);
+                                Player.score -= bottleCost;
+                                Player.targetScore -= bottleCost;
                                 bar.choseBottles = true;
                                 bar.hasBought = true;
                             }
@@ -425,6 +420,7 @@ namespace DrunkiBoy
                 if (teleport.isActivated && teleport.DetectPixelCollision(player))
                 {
                     Player.score += (int)Level.timeLeft;
+                    Player.targetScore += (int)Level.timeLeft;
                     Game1.currentGameState = Game1.gameState.levelComplete;
                 }
                 teleport.Update(gameTime);
@@ -702,6 +698,10 @@ namespace DrunkiBoy
                             an.activePlatform = platform; //Sets the activate platform
                             an.pos.Y = platform.BoundingBox.Top - an.BoundingBox.Height + 1; //+1 to maintain the Intersection
                             an.movement.Y = 0;
+                            if (platform.fire != null && platform.fire.isActive == true)
+                            {
+                                an.LoseHealth(0.01f);
+                            }
                         }
                     }
                 }

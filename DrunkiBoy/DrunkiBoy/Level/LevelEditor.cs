@@ -63,7 +63,7 @@ namespace DrunkiBoy
             menuEntries.Add("5: Bar");
 
             drawTextTimer = drawTextTimerDefault;
-            LoadContent(levelTextFilePath);
+            LoadContent(levelTextFilePath, true);
             selectedItem = items.Platform;
             selectedObject = new Platform(new Vector2(mouseState.X, mouseState.Y), Textures.platform, true);
             camera.Position = new Vector2(0, levelHeight - Game1.windowHeight);
@@ -93,12 +93,12 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.D1))
             {
                 Game1.currentLevel = editingLevel = 0;
-                LoadContent(Constants.LEVELS[editingLevel]);
+                LoadContent(Constants.LEVELS[editingLevel], true);
             }
             if (KeyMouseReader.KeyPressed(Keys.D2))
             {
                 Game1.currentLevel = editingLevel = 1;
-                LoadContent(Constants.LEVELS[editingLevel]);
+                LoadContent(Constants.LEVELS[editingLevel], true);
             }
             //osv när om vi har fler levels
         }
