@@ -35,7 +35,8 @@ namespace DrunkiBoy
         public List<Button> buttons = new List<Button>();
         public List<Bar> bars = new List<Bar>();
 
-        Door Door;
+
+        
         HamburgareVapen hamburgareVapen;
         BottleWeapon bottleWeapon;
         KebabWeapon kebabWeapon;
@@ -318,11 +319,14 @@ namespace DrunkiBoy
             {
                 if (buttons.ElementAt(i).DetectPixelCollision(player) && KeyMouseReader.KeyPressed(Keys.U))
                 {
+                    buttons[i].activate();
                     if (doors.ElementAt(i) != null)
                     {
                         doors.ElementAt(i).activate();
-                        doors.ElementAt(i).isActivated = true;
+                        doors.ElementAt(i).isActivated = true;                        
                     }
+                    
+                    
                     break;
                 }
             }

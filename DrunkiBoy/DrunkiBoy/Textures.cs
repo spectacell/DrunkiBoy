@@ -9,7 +9,7 @@ namespace DrunkiBoy
 {
     class Textures
     {
-        public static Texture2D player, player_lower_body, player_upper_body, player_upper_body_hurt, player_burger, player_shooting, player_pizza, player_bottle, DoorOpened, MovingplatfFöreditor, wall,
+        public static Texture2D player, player_lower_body, player_upper_body, player_upper_body_hurt, player_burger, player_shooting, player_pizza, player_bottle, DoorOpened, MovingplatfFöreditor, wall, ActiveButton,
             player_bottle_molotov, player_kebab, player_head, player_jetpack, player_jetpack_morph, player_invincible, player_invincible_morph, player_invincible_shooting, player_invincible_collision, Button,
             DoorClosed;
 
@@ -82,6 +82,7 @@ namespace DrunkiBoy
             pizza = content.Load<Texture2D>("Items/Pizza");
             wall = content.Load<Texture2D>("wall");
             Button = content.Load<Texture2D>("doorButton");
+            ActiveButton = content.Load<Texture2D>("ActiveButton");
             DoorClosed = content.Load<Texture2D>("SpacedoorClosed");
             DoorOpened = content.Load<Texture2D>("SpaceDoorOpen");
             kebab = content.Load<Texture2D>("Items/kebab");
