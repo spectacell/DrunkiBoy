@@ -11,7 +11,6 @@ namespace DrunkiBoy
     class HamburgareVapen : Bullet
     {
         ParticleEngine particleEngine;
-        bool shot;
         public HamburgareVapen(Vector2 pos, Vector2 velocity, bool lethal)
             : base(pos, velocity, Textures.hamburgare, true, 400)    // sätt texturen till hamburgare , 200 för hur långt det åker
         {
