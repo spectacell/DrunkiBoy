@@ -16,6 +16,7 @@ namespace DrunkiBoy
         int rndTex, rndDir;
         Texture2D noteTex;
         float dir;
+        Vector2 shotSpawnOffset = new Vector2(20, 20);
 
         public Radio(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive, int nrFrames, double frameInterval)
             : base(pos, tex, srcRect, isActive, nrFrames, frameInterval)
@@ -50,7 +51,7 @@ namespace DrunkiBoy
                 else if (rndDir == 1)
                     dir = -3;
 
-                bulletNote = new BulletNote(pos, noteTex, new Rectangle(0, 0, 50, 50), true, new Vector2(dir, 0));
+                bulletNote = new BulletNote(pos + shotSpawnOffset , noteTex, new Rectangle(0, 0, 50, 50), true, new Vector2(dir, 0));
                 ItemManager.AddBulletNotes(bulletNote);
                 shotTimer = resetTimer;
             }

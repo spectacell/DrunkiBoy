@@ -343,6 +343,12 @@ namespace DrunkiBoy
                     player.LoseHealth(Constants.damage_flashlight, bulletNote.pos, bulletNote.srcRect.Width);
                     break;
                 }
+
+                if (!bulletNote.isActive)
+                {
+                    bulletNotes.Remove(bulletNote);
+                    break;
+                }
             }
         }
 
