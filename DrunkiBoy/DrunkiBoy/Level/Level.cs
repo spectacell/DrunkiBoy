@@ -172,6 +172,7 @@ namespace DrunkiBoy
             itemManager = new ItemManager();
             enemyManager = new EnemyManager();
             objects = new List<GameObject>();
+            Player.livesLeft = 1;
 
             sr = new StreamReader(textFile);
 

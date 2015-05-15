@@ -881,8 +881,8 @@ namespace DrunkiBoy
             ResetHealth();
             activePowerUp = 0;
             ChangeWeaponIfAmmo();
-            
         }
+
         public void ResetAmmo()
         {
             burgerWeapons = 0;

@@ -156,6 +156,7 @@ namespace DrunkiBoy
                     spriteBatch.Begin();
                     spriteBatch.Draw(Textures.gameOverScreen, Vector2.Zero, Color.White);
                     spriteBatch.End();
+                    level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
                     break;
                 case gameState.highScore:
                     Highscore.Draw(spriteBatch);
