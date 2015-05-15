@@ -269,7 +269,7 @@ namespace DrunkiBoy
         /// </summary>
         public void AddALife()
         {
-            if (livesLeft < Constants.player_defaultLives)
+            if (livesLeft <= Constants.player_defaultLives)
             {
                 livesLeft++;
             }
