@@ -34,6 +34,7 @@ namespace DrunkiBoy
         public List<Door> doors = new List<Door>();
         public List<Button> buttons = new List<Button>();
         public List<Bar> bars = new List<Bar>();
+        static public List<BulletNote> bulletNotes = new List<BulletNote>();
 
 
         
@@ -53,6 +54,10 @@ namespace DrunkiBoy
         public void AddToilet(Toilet toilet)
         {
             toilets.Add(toilet);
+        }
+        static public void AddBulletNotes(BulletNote bulletNote)
+        {
+            bulletNotes.Add(bulletNote);
         }
         public void AddButton(Button button)
         {
@@ -166,6 +171,7 @@ namespace DrunkiBoy
             UpdateFires(gameTime, angryNeighbours);
             UpdateDoors(gameTime, player);
             UpdateButton(gameTime, player);
+            UpdateBulletNotes(gameTime, player);
             GUI.itemsLeftToCollect = ItemsLeftToCollect();
             particleEngine.Update();
         }
@@ -309,7 +315,6 @@ namespace DrunkiBoy
 
         private void UpdateButton(GameTime gameTime, Player player)
         {
-
             for (int i = 0; i < buttons.Count; i++)
             {
                 if (buttons.ElementAt(i).DetectPixelCollision(player) && KeyMouseReader.KeyPressed(Keys.U))
@@ -325,7 +330,20 @@ namespace DrunkiBoy
                     break;
                 }
             }
+        }
 
+        private void UpdateBulletNotes(GameTime gameTime, Player player)
+        {
+            foreach (BulletNote bulletNote in bulletNotes)
+            {
+                bulletNote.Update(gameTime);
+                if (bulletNote.DetectPixelCollision(player))
+                {
+                    bulletNotes.Remove(bulletNote);
+                    player.LoseHealth(Constants.damage_flashlight, bulletNote.pos, bulletNote.srcRect.Width);
+                    break;
+                }
+            }
         }
 
         private void UpdateJagerbombs(GameTime gameTime, Player player)
@@ -574,6 +592,10 @@ namespace DrunkiBoy
             foreach (Wallet wallet in wallets)
             {
                 wallet.Draw(spriteBatch);
+            }
+            foreach (BulletNote bulletNote in bulletNotes)
+            {
+                bulletNote.Draw(spriteBatch);
             }
             foreach (Cellphone cellphone in cellphones)
             {
