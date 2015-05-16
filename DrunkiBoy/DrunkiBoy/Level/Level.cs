@@ -188,6 +188,7 @@ namespace DrunkiBoy
                 else if (temp[0] == "movingplatform")
                 {
                     itemManager.AddPlatform(new MovingPlatform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.platform, true));
+                    objects.Add(new MovingPlatform(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.MovingplatfForeditor, true));
                 }
                 else if (temp[0] == "player" && createPlayer)
                 {
@@ -242,7 +243,7 @@ namespace DrunkiBoy
                 else if (temp[0] == "pant")
                 {
                     itemManager.AddPant(new Pant(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.pant, new Rectangle(0, 0, 33, 77), true));
-                    objects.Add(new Money(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.money, new Rectangle(0, 0, 33, 77), true));
+                    objects.Add(new Pant(new Vector2(Convert.ToInt16(temp[1]), Convert.ToInt16(temp[2])), Textures.pant, new Rectangle(0, 0, 33, 77), true));
                 }
                 else if (temp[0] == "burger")
                 {

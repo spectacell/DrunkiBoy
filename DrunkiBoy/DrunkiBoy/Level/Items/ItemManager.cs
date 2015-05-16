@@ -317,7 +317,7 @@ namespace DrunkiBoy
         {
             for (int i = 0; i < buttons.Count; i++)
             {
-                if (buttons.ElementAt(i).DetectPixelCollision(player) && KeyMouseReader.KeyPressed(Keys.U))
+                if (buttons.ElementAt(i).DetectPixelCollision(player) && KeyMouseReader.KeyPressed(Keys.E))
                 {
                     buttons[i].activate();
                     if (doors.ElementAt(i) != null)

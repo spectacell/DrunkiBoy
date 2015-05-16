@@ -22,7 +22,7 @@ namespace DrunkiBoy
         MouseState mouseState, oldMouseState;
         protected Int32 scroll;
 
-        private int camSpeed = 4;
+        private int camSpeed = 24;
         private bool saved;
         private bool drawLevelSaved;
         private double drawTextTimer, drawTextTimerDefault = 1000;
@@ -173,16 +173,16 @@ namespace DrunkiBoy
                         {
                             if (mouseIsAt.X < intersectingPlatform.pos.X - selectedObject.BoundingBox.Width / 2) //Snap to left or right of exisisting platform
                             {
-                                objects.Add(new MovingPlatform(new Vector2(intersectingPlatform.BoundingBox.Left - selectedObject.BoundingBox.Width, intersectingPlatform.pos.Y), Textures.MovingplatfFöreditor, true));
+                                objects.Add(new MovingPlatform(new Vector2(intersectingPlatform.BoundingBox.Left - selectedObject.BoundingBox.Width, intersectingPlatform.pos.Y), Textures.MovingplatfForeditor, true));
                             }
                             else
                             {
-                                objects.Add(new MovingPlatform(new Vector2(intersectingPlatform.BoundingBox.Right, intersectingPlatform.pos.Y), Textures.MovingplatfFöreditor, true));
+                                objects.Add(new MovingPlatform(new Vector2(intersectingPlatform.BoundingBox.Right, intersectingPlatform.pos.Y), Textures.MovingplatfForeditor, true));
                             }
                         }
                         else
                         {
-                            objects.Add(new MovingPlatform(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.MovingplatfFöreditor, true));
+                            objects.Add(new MovingPlatform(new Vector2(mouseIsAt.X, mouseIsAt.Y), Textures.MovingplatfForeditor, true));
                         }
                         break;
 
@@ -612,7 +612,7 @@ namespace DrunkiBoy
             if (KeyMouseReader.KeyPressed(Keys.N))
             {
                 selectedItem = items.MovingPlatform;
-                selectedObject = new MovingPlatform(new Vector2(mouseState.X, mouseState.Y), Textures.MovingplatfFöreditor, true);
+                selectedObject = new MovingPlatform(new Vector2(mouseState.X, mouseState.Y), Textures.MovingplatfForeditor, true);
             }
             if (KeyMouseReader.KeyPressed(Keys.X))
             {
