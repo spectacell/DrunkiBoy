@@ -12,45 +12,67 @@ namespace DrunkiBoy
         public MenuButton startButton;
         public MenuButton optionsButton;
         public MenuButton exitButton;
-     
+        public MenuButton instructionsButton;
+        private Instructions instructions;
+        public static bool showInstructions;
+
         public Menu(Vector2 pos, Texture2D tex, bool isActive) :
             base (pos, tex, isActive)
         {
-            startButton = new MenuButton(new Vector2(100, 100), Textures.startButton, new Rectangle(0, 0, 600, 255), true);
-            optionsButton = new MenuButton(new Vector2(200, 100), Textures.optionsButton, new Rectangle(0, 0, 600, 255), true);
-            exitButton = new MenuButton(new Vector2(300, 100), Textures.exitButton, new Rectangle(0, 0, 600, 255), true);
+            startButton = new MenuButton(new Vector2(100, 100), Textures.startButton, true);
+            instructionsButton = new MenuButton(new Vector2(200, 100), Textures.optionsButton, true);
+            //optionsButton = new MenuButton(new Vector2(200, 100), Textures.optionsButton, true);
+            exitButton = new MenuButton(new Vector2(300, 100), Textures.exitButton, true);
+            instructions = new Instructions(Vector2.Zero, Textures.menuInstructionsPage, true);
         }
 
         public void Update(GameTime gameTime)
         {
-            CheckButtons();
+            if (showInstructions)
+            {
+                instructions.Update();
+            }
+            else
+            {
+                CheckButtons();
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            startButton.Draw(spriteBatch);
-            optionsButton.Draw(spriteBatch);
-            exitButton.Draw(spriteBatch);
+            if (showInstructions)
+            {
+                instructions.Draw(spriteBatch);
+            }
+            else 
+            { 
+                startButton.Draw(spriteBatch);
+                instructionsButton.Draw(spriteBatch);
+                //optionsButton.Draw(spriteBatch);
+                exitButton.Draw(spriteBatch);
+            }
             spriteBatch.End();
         }
 
         public void CheckButtons()
         {
-
-            if (KeyMouseReader.LeftClick() && startButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            if (KeyMouseReader.LeftClick() && startButton.BoundingBox.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
             {
                 Game1.currentGameState = Game1.gameState.inGame;
             }
-            //if (KeyMouseReader.LeftClick() && optionsButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            if (KeyMouseReader.LeftClick() && instructionsButton.BoundingBox.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            {
+                showInstructions = true;
+            }
+            //if (KeyMouseReader.LeftClick() && optionsButton.BoundingBox.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
             //{
             //    Game1.currentGameState = Game1.gameState.options;
             //}
-            if (KeyMouseReader.LeftClick() && exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            if (KeyMouseReader.LeftClick() && exitButton.BoundingBox.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
             {
                 Game1.exitgame = true;
             }
-        }
-        
+        } 
     }
 }

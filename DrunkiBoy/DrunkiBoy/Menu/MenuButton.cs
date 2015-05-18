@@ -9,8 +9,8 @@ namespace DrunkiBoy
 {
     class MenuButton : GameObject
     {
-        public MenuButton(Vector2 pos, Texture2D tex, Rectangle srcRect, bool isActive) : 
-            base(pos, tex, srcRect, isActive)
+        public MenuButton(Vector2 pos, Texture2D tex, bool isActive) : 
+            base(pos, tex, isActive)
         {
            
         }
