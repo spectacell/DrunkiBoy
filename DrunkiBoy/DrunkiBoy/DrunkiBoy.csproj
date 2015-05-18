@@ -137,7 +137,7 @@
     <Compile Include="Level\Teleport.cs" />
     <Compile Include="Level\Enemies\Radio.cs" />
     <Compile Include="Level\Bullets\BulletNote.cs" />
-    <Compile Include="Text.cs" />
+    <Compile Include="Menu\Text.cs" />
     <Compile Include="Textures.cs" />
     <Compile Include="Level\Items\Torch.cs" />
     <Compile Include="Level\Items\Wallet.cs" />

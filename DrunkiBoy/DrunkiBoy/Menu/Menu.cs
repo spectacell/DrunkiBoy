@@ -13,6 +13,7 @@ namespace DrunkiBoy
         public MenuButton optionsButton;
         public MenuButton exitButton;
         public MenuButton instructionsButton;
+        public MenuButton highscoreButton;
         private Instructions instructions;
         public static bool showInstructions;
 
@@ -22,7 +23,8 @@ namespace DrunkiBoy
             startButton = new MenuButton(new Vector2(100, 100), Textures.startButton, true);
             instructionsButton = new MenuButton(new Vector2(200, 100), Textures.instructionsButton, true);
             optionsButton = new MenuButton(new Vector2(300, 100), Textures.optionsButton, true);
-            exitButton = new MenuButton(new Vector2(400, 100), Textures.exitButton, true);
+            highscoreButton = new MenuButton(new Vector2(400, 100), Textures.highscoreButton, true);
+            exitButton = new MenuButton(new Vector2(500, 100), Textures.exitButton, true);
             instructions = new Instructions(Vector2.Zero, Textures.menuInstructionsPage, true);
         }
 
@@ -50,6 +52,7 @@ namespace DrunkiBoy
                 startButton.Draw(spriteBatch);
                 instructionsButton.Draw(spriteBatch);
                 optionsButton.Draw(spriteBatch);
+                highscoreButton.Draw(spriteBatch);
                 exitButton.Draw(spriteBatch);
             }
             spriteBatch.End();
@@ -72,6 +75,11 @@ namespace DrunkiBoy
             if (KeyMouseReader.LeftClick() && exitButton.BoundingBox.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
             {
                 Game1.exitgame = true;
+            }
+            if (KeyMouseReader.LeftClick() && highscoreButton.BoundingBox.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
+            {
+                Highscore.highScoreState = Highscore.state.show;
+                Game1.currentGameState = Game1.gameState.highScore;
             }
         } 
     }

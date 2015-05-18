@@ -325,8 +325,6 @@ namespace DrunkiBoy
                         doors.ElementAt(i).activate();
                         doors.ElementAt(i).isActivated = true;                        
                     }
-                    
-                    
                     break;
                 }
             }
