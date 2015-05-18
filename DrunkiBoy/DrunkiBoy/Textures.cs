@@ -85,11 +85,11 @@ namespace DrunkiBoy
             fire = content.Load<Texture2D>("Items/fire");
             hamburgare = content.Load<Texture2D>("Items/burgare");
             pizza = content.Load<Texture2D>("Items/Pizza");
-            wall = content.Load<Texture2D>("wall");
-            Button = content.Load<Texture2D>("doorButton");
-            ActiveButton = content.Load<Texture2D>("ActiveButton");
-            DoorClosed = content.Load<Texture2D>("SpacedoorClosed");
-            DoorOpened = content.Load<Texture2D>("SpaceDoorOpen");
+            wall = content.Load<Texture2D>("Items/wall");
+            Button = content.Load<Texture2D>("Items/doorButton");
+            ActiveButton = content.Load<Texture2D>("Items/ActiveButton");
+            DoorClosed = content.Load<Texture2D>("Items/SpacedoorClosed");
+            DoorOpened = content.Load<Texture2D>("Items/SpaceDoorOpen");
             kebab = content.Load<Texture2D>("Items/kebab");
             vodka = content.Load<Texture2D>("Items/Vodka");
             vodka_gui = content.Load<Texture2D>("GUI/Vodka");

@@ -384,7 +384,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameOver.png">
+    <Compile Include="Menu\GameOver.png">
       <Name>GameOver</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -445,7 +445,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="garbagecan.png">
+    <Compile Include="Items\garbagecan.png">
       <Name>garbagecan</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -556,7 +556,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="wall.png">
+    <Compile Include="Items\wall.png">
       <Name>wall</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -584,17 +584,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exit.png">
+    <Compile Include="Menu\Exit.png">
       <Name>Exit</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Options.png">
+    <Compile Include="Menu\Options.png">
       <Name>Options</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Start.png">
+    <Compile Include="Menu\Start.png">
       <Name>Start</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -629,14 +629,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SpacedoorClosed.png">
+    <Compile Include="Items\SpacedoorClosed.png">
       <Name>SpacedoorClosed</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SpaceDoorOpen.png">
+    <Compile Include="Items\SpaceDoorOpen.png">
       <Name>SpaceDoorOpen</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
