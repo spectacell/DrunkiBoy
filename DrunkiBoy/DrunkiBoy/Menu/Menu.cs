@@ -20,9 +20,9 @@ namespace DrunkiBoy
             base (pos, tex, isActive)
         {
             startButton = new MenuButton(new Vector2(100, 100), Textures.startButton, true);
-            instructionsButton = new MenuButton(new Vector2(200, 100), Textures.optionsButton, true);
-            //optionsButton = new MenuButton(new Vector2(200, 100), Textures.optionsButton, true);
-            exitButton = new MenuButton(new Vector2(300, 100), Textures.exitButton, true);
+            instructionsButton = new MenuButton(new Vector2(200, 100), Textures.instructionsButton, true);
+            optionsButton = new MenuButton(new Vector2(300, 100), Textures.optionsButton, true);
+            exitButton = new MenuButton(new Vector2(400, 100), Textures.exitButton, true);
             instructions = new Instructions(Vector2.Zero, Textures.menuInstructionsPage, true);
         }
 
@@ -49,7 +49,7 @@ namespace DrunkiBoy
             { 
                 startButton.Draw(spriteBatch);
                 instructionsButton.Draw(spriteBatch);
-                //optionsButton.Draw(spriteBatch);
+                optionsButton.Draw(spriteBatch);
                 exitButton.Draw(spriteBatch);
             }
             spriteBatch.End();

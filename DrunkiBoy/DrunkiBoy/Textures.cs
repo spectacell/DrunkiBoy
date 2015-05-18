@@ -19,7 +19,7 @@ namespace DrunkiBoy
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, vodkaPowerup, redbullVodkaPowerup, money, pant, vodka,
                                 notesOne, notesTwo, notesThree, notesFour;
         public static Texture2D flashlight, radio, redbullVodka_gui, vodka_gui, GUIPizza;
-        public static Texture2D gameOverScreen, startButton, optionsButton, exitButton, menuBackground, menuInstructionsPage;
+        public static Texture2D gameOverScreen, startButton, optionsButton, exitButton, menuBackground, instructionsButton, menuInstructionsPage;
         public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles, painkillerParticles, burgerParticles, pizzaParticles, bottleparticles, kebabParticles;
 
         private static List<Texture2D> backgroundsLevel1 = new List<Texture2D>();
@@ -64,6 +64,7 @@ namespace DrunkiBoy
             startButton = content.Load<Texture2D>("Menu/Start");
             optionsButton = content.Load<Texture2D>("Menu/Options");
             exitButton = content.Load<Texture2D>("Menu/Exit");
+            instructionsButton = content.Load<Texture2D>("Menu/instructionsButton");
             menuBackground = content.Load<Texture2D>("Menu/menuBackground");
             menuInstructionsPage = content.Load<Texture2D>("Menu/instructions");
             //Bakgrunder för level 1
