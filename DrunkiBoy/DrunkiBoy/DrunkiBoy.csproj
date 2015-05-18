@@ -120,6 +120,7 @@
     <Compile Include="Level\Items\Painkiller.cs" />
     <Compile Include="Level\Items\Pant.cs" />
     <Compile Include="Level\Items\Toilet.cs" />
+    <Compile Include="Menu\Instructions.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\MenuButton.cs" />
     <Compile Include="Level\MovingPlatform.cs" />

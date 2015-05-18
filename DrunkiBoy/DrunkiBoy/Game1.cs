@@ -64,7 +64,7 @@ namespace DrunkiBoy
         protected override void Update(GameTime gameTime)
         {
             if (KeyMouseReader.KeyPressed(Keys.Escape))
-                this.Exit();
+                currentGameState = gameState.menu;
 
             if (KeyMouseReader.KeyPressed(Keys.F2))
             {

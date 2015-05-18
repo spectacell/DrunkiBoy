@@ -19,7 +19,7 @@ namespace DrunkiBoy
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, vodkaPowerup, redbullVodkaPowerup, money, pant, vodka,
                                 notesOne, notesTwo, notesThree, notesFour;
         public static Texture2D flashlight, radio, redbullVodka_gui, vodka_gui, GUIPizza;
-        public static Texture2D gameOverScreen, startButton, optionsButton, exitButton, menuBackground;
+        public static Texture2D gameOverScreen, startButton, optionsButton, exitButton, menuBackground, menuInstructionsPage;
         public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles, painkillerParticles, burgerParticles, pizzaParticles, bottleparticles, kebabParticles;
 
         private static List<Texture2D> backgroundsLevel1 = new List<Texture2D>();
@@ -61,10 +61,11 @@ namespace DrunkiBoy
             notesFour = content.Load<Texture2D>("Enemies/NotesFour");
             deleteCursor = content.Load<Texture2D>("deleteCursor");
             //menu texture
-            startButton = content.Load<Texture2D>("Start");
-            optionsButton = content.Load<Texture2D>("Options");
-            exitButton = content.Load<Texture2D>("Exit");
+            startButton = content.Load<Texture2D>("Menu/Start");
+            optionsButton = content.Load<Texture2D>("Menu/Options");
+            exitButton = content.Load<Texture2D>("Menu/Exit");
             menuBackground = content.Load<Texture2D>("Menu/menuBackground");
+            menuInstructionsPage = content.Load<Texture2D>("Menu/instructions");
             //Bakgrunder för level 1
             backgroundsLevel1.Add(content.Load<Texture2D>("Level/space"));
             backgroundsLevel1.Add(content.Load<Texture2D>("Level/bg2"));
@@ -101,7 +102,7 @@ namespace DrunkiBoy
             redbullVodka_gui = content.Load<Texture2D>("GUI/RedbullVodka");
             painkiller = content.Load<Texture2D>("Items/painkiller");
             jagerbomb = content.Load<Texture2D>("Items/jagerbomb");
-            teleport = content.Load<Texture2D>("garbagecan");
+            teleport = content.Load<Texture2D>("Items/garbagecan");
             AktivTeleport = content.Load<Texture2D>("Items/TeleportAktiv");
             healthBarGreen = content.Load<Texture2D>("GUI/healthBarGreen");
             healthBarRed = content.Load<Texture2D>("GUI/healthBarRed");
@@ -113,7 +114,7 @@ namespace DrunkiBoy
             pant = content.Load<Texture2D>("Items/Pant");
             toilet_open = content.Load<Texture2D>("Items/toilet_open");
             toilet_closed = content.Load<Texture2D>("Items/toilet_closed");
-            gameOverScreen = content.Load<Texture2D>("GameOver");
+            gameOverScreen = content.Load<Texture2D>("Menu/GameOver");
             bubble_particle = content.Load<Texture2D>("Particles/bubble_particle");
             smokeTexture = content.Load<Texture2D>("Particles/smoke_texture");
             explosionTexture = content.Load<Texture2D>("Particles/explosion_texture");
