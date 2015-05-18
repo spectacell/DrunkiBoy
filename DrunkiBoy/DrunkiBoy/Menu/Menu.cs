@@ -48,7 +48,7 @@ namespace DrunkiBoy
             //}
             if (KeyMouseReader.LeftClick() && exitButton.srcRect.Contains(KeyMouseReader.mouseState.X, KeyMouseReader.mouseState.Y))
             {
-                
+                Game1.exitgame = true;
             }
         }
         

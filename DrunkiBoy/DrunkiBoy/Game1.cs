@@ -21,6 +21,7 @@ namespace DrunkiBoy
         private Level level;
         private LevelEditor levelEditor;
         Menu menu;
+        public static Boolean exitgame = false;
         //Options options;
 
         public enum gameState { inGame, levelComplete, gameOver, levelEditor, menu, options, highScore };
@@ -63,6 +64,8 @@ namespace DrunkiBoy
 
         protected override void Update(GameTime gameTime)
         {
+            if (exitgame) this.Exit();
+
             if (KeyMouseReader.KeyPressed(Keys.Escape))
                 currentGameState = gameState.menu;
 
