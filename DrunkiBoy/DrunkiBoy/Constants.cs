@@ -26,7 +26,7 @@ namespace DrunkiBoy
         public static int damage_flashlight = 10;
         public static int damage_radio = 20;
         public static int player_defaultHealth = 200;
-        public static int player_defaultLives = 1;
+        public static int player_defaultLives = 3;
 
         //Tiden respektive powerup är aktiv i millisekunder
         public static int powerUpTimeVodka = 5000; 
