@@ -76,9 +76,9 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bar.cs" />
-    <Compile Include="Button.cs" />
-    <Compile Include="Door.cs" />
+    <Compile Include="Level\Items\Bar.cs" />
+    <Compile Include="Level\Items\Button.cs" />
+    <Compile Include="Level\Items\Door.cs" />
     <Compile Include="Highscore.cs" />
     <Compile Include="Level\Enemies\AngryNeighbour.cs" />
     <Compile Include="Level\Items\Cellphone.cs" />
@@ -120,13 +120,13 @@
     <Compile Include="Level\Items\Painkiller.cs" />
     <Compile Include="Level\Items\Pant.cs" />
     <Compile Include="Level\Items\Toilet.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="MenuButton.cs" />
-    <Compile Include="MovingPlatform.cs" />
-    <Compile Include="Options.cs" />
-    <Compile Include="Particle.cs" />
-    <Compile Include="ParticleEngine2.cs" />
-    <Compile Include="ParticleEngine.cs" />
+    <Compile Include="Menu\Menu.cs" />
+    <Compile Include="Menu\MenuButton.cs" />
+    <Compile Include="Level\MovingPlatform.cs" />
+    <Compile Include="Menu\Options.cs" />
+    <Compile Include="ParticleEngine\Particle.cs" />
+    <Compile Include="ParticleEngine\ParticleEngine2.cs" />
+    <Compile Include="ParticleEngine\ParticleEngine.cs" />
     <Compile Include="Level\Items\Pizza.cs" />
     <Compile Include="Level\Bullets\PizzaWeapon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,7 +140,7 @@
     <Compile Include="Textures.cs" />
     <Compile Include="Level\Items\Torch.cs" />
     <Compile Include="Level\Items\Wallet.cs" />
-    <Compile Include="Wall.cs" />
+    <Compile Include="Level\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

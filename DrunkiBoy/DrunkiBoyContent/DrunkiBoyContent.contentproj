@@ -570,14 +570,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DoorOpened.png">
+    <Compile Include="Items\DoorOpened.png">
       <Name>DoorOpened</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="doorClosed.png">
+    <Compile Include="Items\doorClosed.png">
       <Name>doorClosed</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -608,7 +608,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="doorButton.png">
+    <Compile Include="Items\doorButton.png">
       <Name>doorButton</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -664,7 +664,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveButton.png">
+    <Compile Include="Items\ActiveButton.png">
       <Name>ActiveButton</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
