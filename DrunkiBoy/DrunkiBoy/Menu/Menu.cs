@@ -20,11 +20,11 @@ namespace DrunkiBoy
         public Menu(Vector2 pos, Texture2D tex, bool isActive) :
             base (pos, tex, isActive)
         {
-            startButton = new MenuButton(new Vector2(100, 100), Textures.startButton, true);
-            instructionsButton = new MenuButton(new Vector2(200, 100), Textures.instructionsButton, true);
-            levelEditorButton = new MenuButton(new Vector2(300, 100), Textures.levelEditorButton, true);
-            highscoreButton = new MenuButton(new Vector2(400, 100), Textures.highscoreButton, true);
-            exitButton = new MenuButton(new Vector2(500, 100), Textures.exitButton, true);
+            startButton = new MenuButton(new Vector2(40, 200), Textures.startButton, true);
+            instructionsButton = new MenuButton(new Vector2(290, 200), Textures.instructionsButton, true);
+            levelEditorButton = new MenuButton(new Vector2(540, 200), Textures.levelEditorButton, true);
+            highscoreButton = new MenuButton(new Vector2(790, 200), Textures.highscoreButton, true);
+            exitButton = new MenuButton(new Vector2(1040, 200), Textures.exitButton, true);
             instructions = new Instructions(Vector2.Zero, Textures.menuInstructionsPage, true);
         }
 
@@ -43,6 +43,7 @@ namespace DrunkiBoy
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
+            base.Draw(spriteBatch);
             if (showInstructions)
             {
                 instructions.Draw(spriteBatch);
