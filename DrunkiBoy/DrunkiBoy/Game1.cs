@@ -22,10 +22,10 @@ namespace DrunkiBoy
         private LevelEditor levelEditor;
         Menu menu;
         public static Boolean exitgame = false;
-        //Options options;
 
         public enum gameState { inGame, levelComplete, gameOver, levelEditor, menu, options, highScore };
         public static gameState currentGameState;
+        private bool isMuted;
 
         public Game1()
         {
@@ -47,7 +47,7 @@ namespace DrunkiBoy
 
             windowHeight = Window.ClientBounds.Height;
             windowWidth = Window.ClientBounds.Width;
-
+            Sound.LoadContent(Content);
             Textures.LoadContent(Content);
             Constants.LoadContent(Content);
             menu = new Menu(Vector2.Zero, Textures.menuBackground, true);
@@ -55,6 +55,7 @@ namespace DrunkiBoy
             levelEditor = new LevelEditor(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
             gui = new GUI();
             currentGameState = gameState.menu;
+            MediaPlayer.IsRepeating = true;
         }
 
         protected override void UnloadContent()
@@ -75,6 +76,7 @@ namespace DrunkiBoy
                 level = new Level(GraphicsDevice, Constants.LEVELS[currentLevel], Content);
                 gui = new GUI();
                 currentGameState = gameState.inGame;
+                MediaPlayer.Play(Sound.song);
             }
             if (KeyMouseReader.KeyPressed(Keys.F3))
             {
@@ -86,6 +88,10 @@ namespace DrunkiBoy
                 Highscore.highScoreState = Highscore.state.show;
                 currentGameState = gameState.highScore;
             }
+            if (KeyMouseReader.KeyPressed(Keys.M))
+            {
+                ToogleMute();
+            }
             KeyMouseReader.Update();
             switch (currentGameState)
             {
@@ -93,11 +99,6 @@ namespace DrunkiBoy
                     IsMouseVisible = true;
                     menu.Update(gameTime);
                     break;
-
-                //case gameState.options:
-                //    IsMouseVisible = true;
-                //    options.Update(gameTime);
-                //    break;
 
                 case gameState.inGame:
                     IsMouseVisible = false;
@@ -121,6 +122,7 @@ namespace DrunkiBoy
                     currentGameState = gameState.inGame;
                     break;
                 case gameState.gameOver:
+                    Sound.gameOver.Play();
                     Highscore.highScoreState = Highscore.state.enteringNewHighScore;
                     currentGameState = gameState.highScore;
                     break;
@@ -131,7 +133,6 @@ namespace DrunkiBoy
             }
             base.Update(gameTime);
         }
-
 
         protected override void Draw(GameTime gameTime)
         {
@@ -167,6 +168,19 @@ namespace DrunkiBoy
             }
 
             base.Draw(gameTime);
+        }
+        private void ToogleMute()
+        {
+            if (!isMuted)
+            {
+                MediaPlayer.IsMuted = true;
+                isMuted = true;
+            }
+            else
+            {
+                MediaPlayer.IsMuted = false;
+                isMuted = false;
+            }
         }
     }
 }

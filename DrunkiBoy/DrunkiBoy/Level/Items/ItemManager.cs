@@ -36,8 +36,6 @@ namespace DrunkiBoy
         public List<Bar> bars = new List<Bar>();
         static public List<BulletNote> bulletNotes = new List<BulletNote>();
 
-
-        
         HamburgareVapen hamburgareVapen;
         BottleWeapon bottleWeapon;
         KebabWeapon kebabWeapon;
@@ -192,6 +190,7 @@ namespace DrunkiBoy
         int burgerCost = 100,
             kebabCost = 100,
             bottleCost = 100;
+        private bool firstSpawnActivated;
         private void UpdateBars(GameTime gameTime, Player player)
         {
             foreach (Bar bar in bars)
@@ -257,6 +256,11 @@ namespace DrunkiBoy
                     player.SetSpawnPosition(toilet.pos);
                     toilet.tex = Textures.toilet_open;
                     toilet.isActivated = true;
+                    if (firstSpawnActivated)
+                    {
+                        Sound.activatingToilet.Play();
+                    }
+                    firstSpawnActivated = true;
                     foreach (Toilet t in toilets)
                     {
                         t.isCurrentSpawn = false; //Tar bort currentSpawn från alla andra toaletter så att bara en är det åt gången
@@ -273,6 +277,7 @@ namespace DrunkiBoy
                 if (wall.DetectPixelCollision(player))
                 {
                     player.MovePlayerBack(wall.pos, wall.srcRect.Width);
+                    
                     break;
                 }
                 foreach (Bullet bullet in BulletManager.bullets)
@@ -357,6 +362,7 @@ namespace DrunkiBoy
                 jagerbomb.Update(gameTime);
                 if (jagerbomb.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     jagerbombs.Remove(jagerbomb);
                     player.AddHealth(Constants.health_jagerbomb);
                     break;
@@ -369,6 +375,7 @@ namespace DrunkiBoy
             {
                 if (bottle.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     bottles.Remove(bottle);
                     player.PickUpAmmo(Player.weaponType.bottle);
                     break;
@@ -381,6 +388,7 @@ namespace DrunkiBoy
             {
                 if (kebab.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     kebabs.Remove(kebab);
                     player.PickUpAmmo(Player.weaponType.kebab);
                     break;
@@ -389,12 +397,11 @@ namespace DrunkiBoy
         }
         private void UpdatePizza(GameTime gameTime, Player player)
         {
-
             foreach (Pizza pizza in pizzas)
             {
-
                 if (pizza.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     pizzas.Remove(pizza);
                     player.PickUpAmmo(Player.weaponType.pizza);
                     break;
@@ -408,6 +415,7 @@ namespace DrunkiBoy
             {
                 if (burger.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     burgers.Remove(burger);
                     player.PickUpAmmo(Player.weaponType.burger);
                     break;
@@ -420,6 +428,7 @@ namespace DrunkiBoy
             {
                 if (pant.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     pant.PickUp();
                 }
                 pant.Update(gameTime);
@@ -454,6 +463,7 @@ namespace DrunkiBoy
             {
                 if (painkiller.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     painkiller.PickUp();
                 }
                 painkiller.Update(gameTime);
@@ -471,6 +481,7 @@ namespace DrunkiBoy
             {
                 if (money.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     money.PickUp();
                 }
                 money.Update(gameTime);
@@ -501,6 +512,7 @@ namespace DrunkiBoy
             {
                 if (wallet.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     wallets.Remove(wallet);
                     break;
                 }
@@ -513,6 +525,7 @@ namespace DrunkiBoy
             {
                 if (cellphone.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     cellphones.Remove(cellphone);
                     break;
                 }
@@ -536,6 +549,7 @@ namespace DrunkiBoy
             {
                 if (heart.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     heart.PickUp();
                 }
                 heart.Update(gameTime);
@@ -553,6 +567,7 @@ namespace DrunkiBoy
             {
                 if (vodka.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     vodkas.Remove(vodka);
                     player.ActivatePowerUp(1, Constants.powerUpTimeVodka);
                     break;
@@ -565,6 +580,7 @@ namespace DrunkiBoy
             {
                 if (redbullVodka.DetectPixelCollision(player))
                 {
+                    Sound.pickUp.Play();
                     redbullVodkas.Remove(redbullVodka);
                     player.ActivatePowerUp(2, Constants.powerUpTimeRedbullVodka);
                     break;
@@ -747,11 +763,13 @@ namespace DrunkiBoy
             }
             if (bullet is BottleWeapon)
             {
+                Sound.bottleCrash.Play();
                 particleEngine.Textures = Textures.bottleparticles;
                 particleEngine.CreateParticlesInCircleRange(bullet.pos);
             }
             if (bullet is MolotovWeapon)
             {
+                Sound.bottleCrash.Play();
                 particleEngine.Textures = Textures.bottleparticles;
                 particleEngine.CreateParticlesInCircleRange(bullet.pos);
             }

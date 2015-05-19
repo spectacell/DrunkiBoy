@@ -219,6 +219,7 @@ namespace DrunkiBoy
             {
                 movement.Y += -jumpHeight;
                 activePlatform = null;
+                Sound.jump.Play();
             }
         }
         /// <summary>
@@ -365,6 +366,7 @@ namespace DrunkiBoy
         /// </summary>
         public void ResetSpawnTimer()
         {
+            Sound.spawning.Play();
             spawning = true;
             spawnTimer = spawnTimerDefault;
         }
@@ -406,6 +408,7 @@ namespace DrunkiBoy
             }
             else if (powerUp == 2) //Flygning...
             {
+                Sound.jetpack.Play();
                 texUpperBody = Textures.player_jetpack_morph;
                 particleEngine = new ParticleEngine2(Textures.smokeParticles, pos, 6, 100, Textures.explosionTexture, true);
             }
@@ -482,6 +485,7 @@ namespace DrunkiBoy
         {
             if (!movingBack) 
             {
+                Sound.walkIntoWall.Play();
                 ThrowWeaponInAir();
                 if (activePowerUp == 0)
                 {
@@ -599,6 +603,7 @@ namespace DrunkiBoy
         {
             if (!movingBack && shotDelay <= 0 && KeyMouseReader.KeyPressed(Keys.Space) && !OutOfAmmo(currentWeapon))
             {
+                Sound.shooting.Play();
                 shotDelay = shotDelayDefault;
                 Vector2 bulletPos, bulletVelocity;
                 switch (activePowerUp)
@@ -933,6 +938,7 @@ namespace DrunkiBoy
                 activePowerUp = 0;
                 Game1.gui.ResetPowerUp();
                 SetPlayerTextureBasedOnCurrentState();
+                Sound.jetpack.Stop();
             }
         }
         #endregion

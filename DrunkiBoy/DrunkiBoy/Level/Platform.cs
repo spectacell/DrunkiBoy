@@ -34,6 +34,7 @@ namespace DrunkiBoy
         }
         public void StartFire()
         {
+            Sound.bottleCrash.Play();
             fire = new FireOnGround(new Vector2(pos.X + ((Textures.platform.Width - 240) / 2), pos.Y - Textures.fire.Height), Textures.fire, new Rectangle(0, 0, 240, 29), true, 4, 180);
         }
     }

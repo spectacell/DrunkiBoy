@@ -63,6 +63,7 @@ namespace DrunkiBoy
                 {
                     if (an.DetectPixelCollision(bullet))
                     {
+                        Sound.hitWithShot.Play();
                         GenerateParticleEngine(bullet);
                         if (bullet.lethal)
                             an.LoseHealth(1);
@@ -79,7 +80,6 @@ namespace DrunkiBoy
         {
             foreach (Flashlight flashlight in flashlights)
             {
-              
                 flashlight.Update(gameTime);
                 if (flashlight.DetectPixelCollision(player))
                 {
@@ -97,6 +97,7 @@ namespace DrunkiBoy
                 {
                     if (flashlight.DetectPixelCollision(bullet))
                     {
+                        Sound.hitWithShot.Play();
                         GenerateParticleEngine(bullet);
                         if (bullet.lethal)
                             flashlight.LoseHealth(1);
@@ -128,6 +129,7 @@ namespace DrunkiBoy
                 {
                     if (radio.DetectPixelCollision(bullet))
                     {
+                        Sound.hitWithShot.Play();
                         GenerateParticleEngine(bullet);
                         if (bullet.lethal)
                             radio.LoseHealth(1);
