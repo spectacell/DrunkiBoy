@@ -19,7 +19,7 @@ namespace DrunkiBoy
         public static Texture2D healthBarGreen, healthBarRed, healthBarRedBlink, powerUpTimer, vodkaPowerup, redbullVodkaPowerup, money, pant, vodka,
                                 notesOne, notesTwo, notesThree, notesFour;
         public static Texture2D flashlight, radio, redbullVodka_gui, vodka_gui, GUIPizza;
-        public static Texture2D gameOverScreen, startButton, optionsButton, exitButton, menuBackground, instructionsButton, menuInstructionsPage, highscoreButton;
+        public static Texture2D gameOverScreen, startButton, exitButton, menuBackground, instructionsButton, menuInstructionsPage, highscoreButton, levelEditorButton;
         public static List<Texture2D> heartParticles, smokeParticles, starParticles, pantParticles, painkillerParticles, burgerParticles, pizzaParticles, bottleparticles, kebabParticles;
 
         private static List<Texture2D> backgroundsLevel1 = new List<Texture2D>();
@@ -62,12 +62,12 @@ namespace DrunkiBoy
             deleteCursor = content.Load<Texture2D>("deleteCursor");
             //menu texture
             startButton = content.Load<Texture2D>("Menu/Start");
-            optionsButton = content.Load<Texture2D>("Menu/Options");
             exitButton = content.Load<Texture2D>("Menu/Exit");
             instructionsButton = content.Load<Texture2D>("Menu/instructionsButton");
             menuBackground = content.Load<Texture2D>("Menu/menuBackground");
             menuInstructionsPage = content.Load<Texture2D>("Menu/instructions");
             highscoreButton = content.Load<Texture2D>("Menu/highscoreButton");
+            levelEditorButton = content.Load<Texture2D>("Menu/levelEditorButton");
             //Bakgrunder för level 1
             backgroundsLevel1.Add(content.Load<Texture2D>("Level/space"));
             backgroundsLevel1.Add(content.Load<Texture2D>("Level/bg2"));
