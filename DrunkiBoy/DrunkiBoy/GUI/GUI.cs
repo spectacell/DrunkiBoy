@@ -27,7 +27,7 @@ namespace DrunkiBoy
             strItemsLeft = "ITEMS LEFT ";
             strTime = "TIME ";
             strTitle = "DRUNKIBOY ADVENTURES ";
-            strTitleVersion = "V 2.0";
+            strTitleVersion = "V 4.0";
             crntLevel = Game1.currentLevel + 1; //Första leveln är 0 så måste plussa på en för att visa rätt
             strCurrentLevel = crntLevel.ToString();
 
